@@ -1,0 +1,154 @@
+.underline {
+  border-bottom: solid 1px #D1D1D1;
+}
+.form {
+  width: 100%;
+  border-top: solid 1px #D1D1D1;
+  border-bottom: solid 1px #D1D1D1;
+}
+.form .row {
+  width: 95%;
+  float: right;
+  height: 114rpx;
+}
+.form .row label {
+  line-height: 114rpx;
+  float: left;
+}
+.form .row input {
+  height: 114rpx;
+  text-align: right;
+  float: right;
+  margin-right: 5%;
+}
+.form .row picker {
+  height: 114rpx;
+  line-height: 114rpx;
+  text-align: right;
+  float: right;
+  margin-right: 5%;
+}
+.logo {
+  margin-top: 20rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 10px;
+}
+.bottom-row {
+  height: 130rpx;
+  line-height: 130rpx;
+  width: 100%;
+  border-top: solid 1px #D1D1D1;
+  position: absolute;
+  bottom: 0;
+  font-size: 35rpx;
+}
+.bottom-row .info {
+  float: left;
+  width: 69%;
+  height: 100%;
+  text-indent: 50rpx;
+}
+.bottom-row .btn {
+  float: right;
+  width: 30%;
+  height: 100%;
+  background-color: #43BB57;
+  text-align: center;
+  color: white;
+}
+.product-list-main .merchant {
+  width: 100%;
+  height: 220rpx;
+}
+.product-list-main .merchant .merchant-logo {
+  margin-left: 15rpx;
+  float: left;
+  width: 220rpx;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.product-list-main .merchant .merchant-profile {
+  margin-top: 20rpx;
+  float: right;
+  width: 500rpx;
+  height: 100%;
+}
+.product-list-main .merchant .merchant-profile #merchant-name {
+  font-size: 35rpx;
+}
+.product-list-main .merchant .merchant-profile #merchant-intro {
+  font-size: 24rpx;
+  color: #979797;
+}
+.product-list-main .merchant .merchant-profile #merchant-address {
+  font-size: 24rpx;
+  color: #979797;
+}
+.product-list-main .merchant .merchant-profile .tags {
+  margin-top: 10rpx;
+}
+.product-list-main .merchant .merchant-profile .tags .tag {
+  margin-right: 10rpx;
+  float: left;
+  border: 1px solid #FFA32C;
+  text-align: center;
+  border-radius: 3px;
+  height: 30rpx;
+  line-height: 30rpx;
+  width: 110rpx;
+  font-size: 24rpx;
+}
+.product-list-main .merchant .merchant-profile .tags .tag text {
+  color: #FFA32C;
+}
+.product-list-main .filter {
+  width: 100%;
+  height: 100rpx;
+}
+.product-list-main .products {
+  height: 780rpx;
+  width: 100%;
+}
+.product-list-main .products .categories {
+  float: left;
+  width: 180rpx;
+  height: 100%;
+  background-color: #F8F8F8;
+  text-align: center;
+}
+.product-list-main .products .categories .category {
+  height: 150rpx;
+  width: 100%;
+  line-height: 170rpx;
+}
+.product-list-main .products .product {
+  margin-top: 20rpx;
+  float: right;
+  height: 180rpx;
+  width: 73%;
+}
+.product-list-main .products .product .product-img {
+  float: left;
+  width: 180rpx;
+  height: 180rpx;
+}
+.product-list-main .products .product .product-detail {
+  width: 60%;
+  float: right;
+}
+.product-list-main .products .product .product-detail .name {
+  font-size: 35rpx;
+}
+.product-list-main .products .product .product-detail .production-intro {
+  height: 70rpx;
+  margin-top: 5rpx;
+  color: #888888;
+  font-size: 24rpx;
+}
+.product-list-main .products .product .product-detail .price {
+  margin-top: 10rpx;
+  color: #43BB57;
+  font-size: 35rpx;
+}

@@ -1,0 +1,26 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="login-option-nav">
+    <block>
+      <text id='user'>用户</text>
+    </block>
+    <block>
+      <text id='merchant'>商户</text>
+    </block>
+  </view>
+
+  <view class='form' id='register-form'>
+    <view class='row underline'>
+      <label>用户名</label>
+      <input type="string" placeholder="请输入用户名"/>
+    </view>
+    <view class='row'>
+      <label>密码</label>
+      <input type="string" placeholder="请输入密码"/>
+    </view>
+  </view>
+
+  <view class='register-button'>
+    <button class='bind-user'>授权绑定</button>
+  </view>
+</view>

@@ -1,0 +1,21 @@
+<view class="product-detail-main container">
+    <scroll-view class="img underline" scroll-x="true" bindscroll="getSelectItem" scroll-left="{{number}}">
+        <image src="/images/jeans.jpg" />
+        <image src="/images/missgrace.jpeg" />   
+    </scroll-view>     
+
+    <view class="product-info">
+        <view class="top">
+            <view class="left">
+                <view class="name">直筒水洗破洞牛仔裤</view>
+                <view class="price">￥199</view>             
+            </view>                    
+            <view class="button">收藏</view>     
+        </view>            
+        <view class="description">实习破洞牛仔裤阿斯顿发送到发送到发送到发斯蒂芬</view>   
+    </view>                    
+    <view class="bottom-row">
+        <view class="info">已关注3款商品</view>
+        <view class="btn">收藏夹</view>        
+    </view>
+</view>

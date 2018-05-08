@@ -1,0 +1,86 @@
+.underline {
+  border-bottom: solid 1px #D1D1D1;
+}
+.form {
+  width: 100%;
+  border-top: solid 1px #D1D1D1;
+  border-bottom: solid 1px #D1D1D1;
+}
+.form .row {
+  width: 95%;
+  float: right;
+  height: 114rpx;
+}
+.form .row label {
+  line-height: 114rpx;
+  float: left;
+}
+.form .row input {
+  height: 114rpx;
+  text-align: right;
+  float: right;
+  margin-right: 5%;
+}
+.form .row picker {
+  height: 114rpx;
+  line-height: 114rpx;
+  text-align: right;
+  float: right;
+  margin-right: 5%;
+}
+.logo {
+  margin-top: 20rpx;
+  width: 180rpx;
+  height: 180rpx;
+  border-radius: 10px;
+}
+.bottom-row {
+  height: 110rpx;
+  line-height: 110rpx;
+  width: 100%;
+  border-top: solid 1px #D1D1D1;
+  position: absolute;
+  bottom: 0;
+  font-size: 35rpx;
+}
+.bottom-row .info {
+  float: left;
+  width: 69%;
+  height: 100%;
+  text-indent: 50rpx;
+}
+.bottom-row .btn {
+  float: right;
+  width: 30%;
+  height: 100%;
+  background-color: #43BB57;
+  text-align: center;
+  color: white;
+}
+.std-button {
+  width: 100%;
+  margin-top: 30rpx;
+}
+.std-button .bind-user {
+  background-color: #43BB57;
+  color: white;
+  width: 90%;
+  height: 90rpx;
+}
+.edit-product-main .product-images {
+  min-height: 250rpx;
+  width: 100%;
+}
+.edit-product-main .product-images .product-image {
+  float: left;
+  margin-left: 35rpx;
+  margin-top: 20rpx;
+  border: solid 1px #D1D1D1;
+  width: 200rpx;
+  height: 200rpx;
+  border-radius: 3px;
+  background-color: #EEF9F1;
+}
+.edit-product-main .form {
+  margin-top: 20rpx;
+}

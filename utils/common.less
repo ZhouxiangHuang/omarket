@@ -1,0 +1,79 @@
+@theme-color: #43BB57;
+@font-color: white;
+@nav-height: 60rpx;
+@border: solid 1px #D1D1D1;
+@std-height: 220rpx;
+
+.underline {
+    border-bottom: @border;
+}
+
+.form { 
+    width: 100%;
+    border-top: @border;
+    border-bottom: @border;    
+    .row {
+        width: 95%;
+        float: right;
+        height: @nav-height * 1.9;
+        label {
+            line-height: @nav-height * 1.9;
+            float: left;
+        }
+        input {
+            height: @nav-height * 1.9;
+            text-align: right;
+            float: right;
+            margin-right: 5%;
+        }
+        picker {
+            height: @nav-height * 1.9;
+            line-height: @nav-height * 1.9;            
+            text-align: right;
+            float: right;
+            margin-right: 5%;
+        }
+    }
+}
+
+.logo {
+    margin-top: 20rpx;
+    width: @std-height - 40rpx;
+    height: @std-height - 40rpx;
+    border-radius: 10px;
+}
+
+.bottom-row {
+    height: 110rpx;
+    line-height: 110rpx;    
+    width: 100%;
+    border-top: @border;
+    position: absolute;
+    bottom: 0;
+    font-size: 35rpx;
+    .info {
+        float: left;
+        width: 69%;
+        height: 100%;
+        text-indent: 50rpx;
+    }
+    .btn {
+        float: right;
+        width: 30%;
+        height: 100%; 
+        background-color: @theme-color;
+        text-align: center;
+        color: white;
+    }
+}
+
+.std-button {
+    width: 100%;
+    margin-top: 30rpx;
+    .bind-user {
+        background-color: @theme-color;
+        color: white;
+        width: 90%;
+        height: 90rpx;
+    }
+}

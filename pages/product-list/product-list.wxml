@@ -1,0 +1,33 @@
+<view class="container product-list-main">
+    <view class="merchant underline">
+        <view class="merchant-logo">
+            <image class="logo" src="{{merchant.imageUrl}}" />
+        </view>
+        <view class="merchant-profile">
+            <view id="merchant-name">{{merchant.name}}</view>
+            <view id="merchant-address">{{merchant.address}}</view>   
+            <view id="merchant-intro">{{merchant.description}}</view>                 
+            <view class="tags">
+                <view class="tag" wx:for="{{merchant.tags}}" wx:key="{{tags}}">
+                    <text>{{item}}</text>        
+                </view>           
+            </view>
+        </view>        
+    </view>
+    <view class="filter underline"></view>
+    <view class="products">
+        <view class="categories">
+            <view class="category" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-no="{{item}}" style="background-color: {{item.color}}">
+                <text>{{item.name}}</text>
+            </view>
+        </view>
+        <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}">
+            <image class="product-img" src="/images/jeans.jpg" />         
+            <view class="product-detail">
+                <view class="name">{{item.name}}</view>
+                <view class="production-intro">这个货卖的非常好这个货卖的非常好这个货卖的</view>
+                <view class="price">￥{{item.price}}</view>
+            </view>   
+        </view>
+    </view>
+</view>

@@ -1,0 +1,34 @@
+{
+  "pages":[
+    "pages/product-detail/product-detail",    
+    "pages/home/home",    
+    "pages/edit-product-info/edit-product-info",                    
+    "pages/edit-merchant-info/edit-merchant-info",                
+    "pages/product-list/product-list",             
+    "pages/login/login",
+    "pages/index/index",        
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "欧贸平台",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/edit-product-info/edit-product-info",
+        "text": "编辑产品"
+      },
+      {
+        "pagePath": "pages/product-list/product-list",
+        "text": "产品列表"
+      }
+    ]
+  }
+}

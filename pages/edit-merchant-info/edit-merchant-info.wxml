@@ -1,0 +1,44 @@
+<view class="edit-merch-main container">
+    <view class="top-logo">
+        <image class="logo" src="{{merchant.imageUrl}}"/>
+    </view>
+
+    <view class="form">
+        <view class='row underline'>
+            <label>公司名称</label>
+            <input type="string" value="{{merchant.name}}" placeholder="请输入公司名称"/>
+        </view>
+         <view class='row underline'>
+            <label>商铺地址</label>
+            <input type="string" value="{{merchant.address}}" placeholder="请输入商铺地址"/>
+        </view>
+         <view class='row underline'>
+            <label>开始营业时间</label>
+            <picker mode="time" value="06:00" start="06:00" end="24:00" bindchange="listenerStartTimePickerSelected">
+                <text>{{startTime}}</text>
+            </picker>
+        </view>
+        <view class='row underline'>
+            <label>结束营业时间</label>
+            <picker mode="time" value="06:00" start="15:00" end="24:00" bindchange="listenerEndTimePickerSelected">
+                <text>{{endTime}}</text>
+            </picker>
+        </view>
+         <view class='row underline'>
+            <label>联系电话</label>
+            <input type="string" value="{{merchant.mobile}}" placeholder="请输入联系电话"/>
+        </view>
+        <view class='row underline'>
+            <label>公告</label>
+            <input type="string" placeholder="请输入公告"/>
+        </view>
+        <view class='row'>
+            <label>标签</label>
+            <input type="string" placeholder="请选择标签"/>
+        </view>
+    </view>
+
+    <view class='std-button'>
+        <button class='bind-user'>保存</button>
+    </view>
+</view>

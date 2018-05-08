@@ -1,0 +1,100 @@
+@import "../../utils/common.less";
+
+.product-list-main {
+    .merchant{ 
+        width: 100%;
+        height: @std-height;
+        .merchant-logo {
+            margin-left: 15rpx;
+            float: left;
+            width: @std-height;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .merchant-profile {
+            margin-top: 20rpx;
+            float: right;
+            width: 500rpx; 
+            height: 100%;
+            #merchant-name {
+                font-size: 35rpx;
+            }
+            #merchant-intro {
+                font-size: 24rpx;
+                color: #979797;
+            }
+            #merchant-address {
+                font-size: 24rpx;
+                color: #979797;
+            }
+            .tags {
+                margin-top: 10rpx;
+                .tag {
+                    margin-right: 10rpx;
+                    float: left;
+                    border: 1px solid #FFA32C;
+                    text-align: center;
+                    border-radius: 3px;
+                    height: 30rpx;
+                    line-height: 30rpx;
+                    width: 110rpx;
+                    font-size: 24rpx;
+                    text {
+                        color: #FFA32C;
+                    }
+                }
+            }
+        }
+    }
+    .filter {
+        width: 100%;
+        height: 100rpx;
+    }
+    .products {
+        height: 780rpx;
+        width: 100%;
+        .categories {
+            float: left;
+            width: @std-height - 40rpx;
+            height: 100%;
+            background-color: #F8F8F8;
+            text-align: center;
+            .category {
+                height: @std-height - 70rpx;
+                width: 100%;
+                line-height: @std-height - 50rpx;  
+            }
+        }
+        .product {
+            margin-top: 20rpx;
+            float: right;
+            height: @std-height - 40rpx;
+            width: 73%;
+            .product-img {
+                float: left;
+                width: 180rpx;
+                height: 180rpx;
+            }
+            .product-detail {
+                width: 60%;
+                float: right;
+                .name {
+                    font-size: 35rpx;
+                }
+                .production-intro {
+                    height: 70rpx;
+                    margin-top: 5rpx;
+                    color: #888888;
+                    font-size: 24rpx;
+                }
+                .price {
+                    margin-top: 10rpx;
+                    color: @theme-color;
+                    font-size: 35rpx;
+                }
+            }
+        }
+    }
+    
+}
