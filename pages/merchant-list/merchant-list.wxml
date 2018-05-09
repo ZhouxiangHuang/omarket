@@ -1,0 +1,39 @@
+
+<view class="merchant-list-main container">
+    <view class="filter underline">
+        <picker class="selection border-right" range = "{{['牛仔裤','睡衣']}}">
+            <view>选择地区</view>
+        </picker>
+         <picker class="selection" range = "{{['牛仔裤','睡衣']}}">
+            <view>选择种类</view>
+        </picker>          
+    </view>
+
+    <view class="merchant underline">
+        <view class="merchant-info">
+            <view class="merchant-logo">
+                <image class="logo" src="{{merchant.imageUrl}}" />
+            </view>
+            <view class="merchant-profile">
+                <view class="merchant-name">{{merchant.name}}</view>
+                <view class="merchant-address">（{{merchant.address}}）</view>  
+                <view class="merchant-announcement">
+                    <view class="announcement-icon">公告</view>
+                    <view class="announcement-content">全年优惠，牛仔裤天天打折</view> 
+                </view>           
+                <view class="tags">
+                    <view class="tag" wx:for="{{merchant.tags}}" wx:key="{{tags}}">
+                        <text>{{item}}</text>        
+                    </view>           
+                </view>
+            </view>
+        </view>
+        
+        <view class="merchant-products">
+            <image class="product-image" src="/images/jeans.jpg" />        
+            <image class="product-image" src="/images/jeans.jpg" />        
+            <image class="product-image" src="/images/jeans.jpg" />        
+        </view>        
+    </view>
+    
+</view>

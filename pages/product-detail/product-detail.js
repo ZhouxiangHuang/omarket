@@ -18,7 +18,7 @@ Page({
     })
   },
   onLoad: function () {
-
+    
   },
   getUserInfo: function (e) {
     console.log(e)

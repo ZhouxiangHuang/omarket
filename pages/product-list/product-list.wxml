@@ -1,5 +1,5 @@
 <view class="container product-list-main">
-    <view class="merchant underline">
+    <view class="merchant-profile underline">
         <view class="merchant-logo">
             <image class="logo" src="{{merchant.imageUrl}}" />
         </view>
