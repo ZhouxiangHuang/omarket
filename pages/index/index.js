@@ -39,6 +39,8 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
+
+          
         }
       })
     }

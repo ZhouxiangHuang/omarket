@@ -9,18 +9,15 @@
     </block>
   </view>
 
-  <view class='form' id='register-form'>
-    <view class='row underline'>
-      <label>用户名</label>
-      <input type="string" placeholder="请输入用户名"/>
-    </view>
-    <view class='row'>
-      <label>密码</label>
-      <input type="string" placeholder="请输入密码"/>
-    </view>
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
   </view>
 
   <view class='register-button'>
-    <button class='bind-user'>授权绑定</button>
+    <button class='bind-user' bindtap="login">授权绑定</button>
   </view>
 </view>

@@ -16,14 +16,33 @@ Page({
     })
   },
   onLoad: function () {
-    console.log('hellllo');
+    wx.getUserInfo({
+      success: res => {
+        app.globalData.userInfo = res.userInfo
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      }
+    })
   },
   getUserInfo: function (e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  login: function (e) {
+    wx.login({
+      success: res => {
+        app.http.post('/site/user/login',{'code': res.code},function(res){  
+          this.setData({
+            authorized: true
+          })  
+        });  
+      }
+    })
   }
+  
 })
