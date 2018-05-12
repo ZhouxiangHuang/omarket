@@ -2,10 +2,10 @@
 <view class="container">
   <view class="login-option-nav">
     <block>
-      <text id='user'>用户</text>
+      <text id='user' bindtap="userLogin" style="background-color:{{userColor}}; color:{{userFont}}">用户</text>
     </block>
     <block>
-      <text id='merchant'>商户</text>
+      <text id='merchant' bindtap="merchantLogin" style="background-color:{{merchantColor}}; color:{{merchantFont}}">商户</text>
     </block>
   </view>
 
@@ -17,7 +17,22 @@
     </block>
   </view>
 
+  <view class="form" wx:if="{{role === 1}}"> 
+         <view class='row underline'>
+            <label>商铺名称</label>
+            <input type="string" placeholder="请输入商铺名称"/>
+        </view>
+         <view class='row underline'>
+            <label>地址</label>
+            <input type="string" placeholder="请输入地址"/>
+        </view>
+         <view class='row'>
+            <label>联系电话</label>
+            <input type="string" placeholder="请输入联系电话"/>
+        </view>
+    </view>
+
   <view class='register-button'>
-    <button class='bind-user' bindtap="login">授权绑定</button>
+    <button class='bind-user' bindtap="login">授权绑定微信</button>
   </view>
 </view>

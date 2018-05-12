@@ -1,6 +1,6 @@
 @import "../../utils/common.less";
 @margin-space: 30rpx;
-
+ 
 .login-option-nav {
     border: 1px solid @theme-color;
     width: 500rpx; 
@@ -15,10 +15,8 @@
         border-bottom-left-radius: 10px;    
         float: left;
         width: 50%;
-        background: @theme-color;
     }
     #merchant {
-        color: @theme-color;
         height: 100%;
         line-height: @nav-height;
         border-top-right-radius: 10px;
@@ -33,6 +31,10 @@
     margin-top: @margin-space;
 }
 
+.form {
+    margin-top: 30rpx;
+}
+
 .register-button {
     width: 100%;
     margin-top: @margin-space;
@@ -43,26 +45,3 @@
         height: 90rpx;
     }
 }
-
-/**index.wxss**/
-.userinfo {
-    margin-top: 50rpx;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .userinfo-avatar {
-    width: 200rpx;
-    height: 200rpx;
-    margin: 20rpx;
-    border-radius: 50%;
-  }
-  
-  .userinfo-nickname {
-    color: #aaa;
-  }
-  
-  .usermotto {
-    margin-top: 200px;
-  }
