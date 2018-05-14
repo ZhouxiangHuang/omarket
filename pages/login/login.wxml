@@ -2,10 +2,10 @@
 <view class="container">
   <view class="login-option-nav">
     <block>
-      <text id='user' bindtap="userLogin" style="background-color:{{userColor}}; color:{{userFont}}">用户</text>
+      <text id='user' bindtap="changeRole" style="background-color:{{userColor}}; color:{{userFont}}">用户</text>
     </block>
     <block>
-      <text id='merchant' bindtap="merchantLogin" style="background-color:{{merchantColor}}; color:{{merchantFont}}">商户</text>
+      <text id='merchant' bindtap="changeRole" style="background-color:{{merchantColor}}; color:{{merchantFont}}">商户</text>
     </block>
   </view>
 
@@ -33,6 +33,6 @@
     </view>
 
   <view class='register-button'>
-    <button class='bind-user' bindtap="login">授权绑定微信</button>
+    <button bindtap="login" class='bind-user'>授权绑定微信</button>
   </view>
 </view>

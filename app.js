@@ -32,6 +32,7 @@ App({
   },
   http: {
     post: http.post,
-    get: http.get
+    get: http.get,
+    domain: http.domain
   }
 })

@@ -38,5 +38,6 @@ function get(url,data,cb){
 
 module.exports = {  
   post: post,
-  get: get  
+  get: get,
+  domain: rootDocment 
 }

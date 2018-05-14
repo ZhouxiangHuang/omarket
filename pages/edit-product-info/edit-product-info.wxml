@@ -30,6 +30,6 @@
     </view>
 
     <view class='std-button'>
-        <button class='bind-user'>保存</button>
+        <button class='bind-user' bindtap="uploadImages">保存</button>
     </view>
 </view>

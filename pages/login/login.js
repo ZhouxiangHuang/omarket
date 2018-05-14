@@ -9,7 +9,6 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('ton.open-type.getUserInfo'),
-    authorized: false,
     userColor: '#FF4343',
     userFont: 'white',    
     merchantColor: 'white',
@@ -44,14 +43,9 @@ Page({
     wx.login({
       success: res => {
         app.http.post('/site/user/login',{'code': res.code, 'role': this.data.role},function(res){ 
-          console.log(res);
           if(res.result_code === 10000) {
-            this.setData({
-              authorized: true
-            });
-            var url = (this.data.roel === 1) ? '../edit-merchant-info/edit-merchant-info' : '../merchant-list/merchant-list';
             wx.switchTab({
-              url: '../taste/index',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
+              url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
             })
           } else {
             wx.showToast({
@@ -64,14 +58,6 @@ Page({
         });  
       }
     })
-  },
-  userLogin: function() {
-    this.role = 2;
-    this.changeRole();
-  },
-  merchantLogin: function() {
-    this.role = 1;
-    this.changeRole();
   },
   changeRole: function() {
     var newRole = (this.data.role === 1) ? 2 : 1;

@@ -47,5 +47,18 @@ Page({
         })
       }
     })
+  },
+  uploadImages: function(e) {
+    this.data.productImages.forEach(function upload(path) {
+      wx.uploadFile({
+        url: app.http.domain + '/site/product/upload',
+        filePath: path,
+        name: 'file',
+        formData:{
+          'user': 'test'
+        },
+      })
+    })
+    
   }
 })
