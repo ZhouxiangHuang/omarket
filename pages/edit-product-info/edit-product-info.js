@@ -8,7 +8,10 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('ton.open-type.getUserInfo'),
-    productImages: ['/images/jeans.jpg']
+    productImages: ['/images/jeans.jpg'],
+    productCode: '',
+    productName: '',
+    productPrice: 0,    
   },
   //事件处理函数
   bindViewTap: function () {
@@ -48,17 +51,45 @@ Page({
       }
     })
   },
-  uploadImages: function(e) {
-    this.data.productImages.forEach(function upload(path) {
+  submit: function(e) {
+    var that = this;
+    var filename = 'file';
+    this.data.productImages.forEach(function upload(path, index) {
+      if(index === 0) {
+        var form = {
+            'file_name': filename,
+            'code': that.data.productCode,
+            'price': that.data.productPrice,
+            'name': that.data.productName,
+            'type': '牛仔裤',
+            'hot': 0
+        }
+      } else {
+        var form = {
+          'file_name': filename,
+          'image_only': true
+        };
+      }
+    
       wx.uploadFile({
-        url: app.http.domain + '/site/product/upload',
+        url: app.http.domain + '/site/product/create',
         filePath: path,
-        name: 'file',
-        formData:{
-          'user': 'test'
-        },
+        name: filename,
+        formData: form,
       })
     })
-    
-  }
+  },
+  bindPrice: function(e) {
+    this.setData({
+      productPrice: e.detail.value
+    })
+  },
+  bindProductName: function(e) {
+    this.setData({
+      productName: e.detail.value
+    })  },
+  bindProductCode: function(e) {
+    this.setData({
+      productCode: e.detail.value
+    })  }
 })

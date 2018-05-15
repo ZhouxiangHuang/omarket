@@ -5,7 +5,7 @@
         <image class="product-image" bindtap="chooseImage"/>    
             
     </view>
-    <view class="form">
+    <form class="form">
         <view class='row underline'>
             <label>产品类别</label>
             <picker range = "{{['牛仔裤','睡衣']}}">
@@ -14,22 +14,22 @@
         </view>
          <view class='row underline'>
             <label>产品编码</label>
-            <input type="string" placeholder="请输入产品编码"/>
+            <input type="string" bindinput="bindProductCode" placeholder="请输入产品编码"/>
         </view>
          <view class='row underline'>
             <label>产品名称</label>
-            <input type="string" placeholder="请输入产品名称"/>
+            <input type="string" bindinput="bindProductName" placeholder="请输入产品名称"/>
         </view>
          <view class='row underline'>
             <label>价格</label>
-            <input type="string" placeholder="请输入产品价格"/>
+            <input type="string" bindinput="bindPrice" placeholder="请输入产品价格"/>
         </view>
         <view class='row'>
             <label>热销</label>
         </view>
-    </view>
+    </form>
 
     <view class='std-button'>
-        <button class='bind-user' bindtap="uploadImages">保存</button>
+        <button class='bind-user' bindtap='submit'>保存</button>
     </view>
 </view>
