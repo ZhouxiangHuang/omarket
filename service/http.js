@@ -1,5 +1,10 @@
 
-var rootDocment = 'http://eu.localhost.com/index.php';//你的域名  
+var rootDocment = 'http://eu.localhost.com/index.php';//你的域名
+var accessToken = wx.getStorage({
+  key: 'access_token'
+});
+
+
 function post(url,data,cb){
     wx.request({  
       url: rootDocment + url,  

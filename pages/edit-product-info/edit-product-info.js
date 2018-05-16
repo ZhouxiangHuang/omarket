@@ -63,11 +63,12 @@ Page({
             'name': that.data.productName,
             'type': '牛仔裤',
             'hot': 0
-        }
+        };
       } else {
         var form = {
           'file_name': filename,
-          'image_only': true
+          'image_only': true,
+          'code': that.data.productCode
         };
       }
     
