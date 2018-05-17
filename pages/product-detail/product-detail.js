@@ -17,11 +17,16 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
-    
+  onLoad: function (options) {
+    var productId = options.product_id;
+    var data = {
+      product_id: productId
+    }
+    app.http.get('/site/product/detail',data, function(res){
+        console.log(res);
+    })
   },
   getUserInfo: function (e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

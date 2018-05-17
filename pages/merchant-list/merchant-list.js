@@ -61,9 +61,8 @@ Page({
     });
   },
   selectStore: function (event) {
-    var merchantId = event.currentTarget.dataset.merchant;
     wx.navigateTo({
-      url: '../product-list/product-list?merchant_id=' + merchantId,
+      url: '../product-list/product-list',
       fail: function(e) {
           console.log(e);
       }

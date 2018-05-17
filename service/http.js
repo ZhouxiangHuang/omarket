@@ -22,10 +22,11 @@ function post(url,data,cb){
 
 function get(url,data,cb){
     var params = [];
-    for (key in data){
+    var keys = Object.keys(data);
+    keys.forEach(function(key) {
       var param = key + '=' + data[key];
       params.push(param);
-    }
+    })
     params = params.join(',');
 
     wx.request({  

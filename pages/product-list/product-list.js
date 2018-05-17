@@ -16,17 +16,31 @@ Page({
     })
   },
   onLoad: function (option) {
+    var that = this;
     wx.showLoading({title: '加载中',mask: true});
-    app.http.post('/site/product/products',{},function(res){ 
+    app.http.get('/site/product/products',{},function(res){ 
       wx.hideLoading();
       if(res.result_code === 10000) {
-        this.setData({
-          products: {热销: [{name: '牛仔裤', price: 199,}, {name: '喇叭裤', price: 222}],
-                    裤子: [{name: '运动裤', price: 123}, {name: '迷彩裤', price: 666}]},
-        });
+        var data = res.result;
+        var products = {}
+        data.forEach(function(category) {
+            var prop = Object.keys(category)[0];
+            var val = category[prop];
+            products[prop] = val;
+        })
+
+        that.setData({
+          products: products
+        })
+        // that.setData({
+        //   products: {
+        //             热销: [{name: '牛仔裤', price: 199,}, {name: '喇叭裤', price: 222}],
+        //             裤子: [{name: '运动裤', price: 123}, {name: '迷彩裤', price: 666}]
+        //             },
+        // });
     
         var categoryList = [];
-        Object.keys(this.data.products).forEach(element => {
+        Object.keys(that.data.products).forEach(element => {
           if(element === '热销') {
             categoryList.push({name: element, color: 'white'});
           } else {
@@ -34,7 +48,7 @@ Page({
           }
         });
       
-        this.setData({
+        that.setData({
           merchant: {imageUrl: '/images/missgrace.jpeg', 
                       name: 'MISS GRACE', 
                       address: 'Baross Gabor utca 73, 16区', 
@@ -42,7 +56,7 @@ Page({
                       description: '买卖的都是质量最好的牛仔裤',                   
                     },
           categories: categoryList,
-          productList: this.data.products['热销'],
+          productList: that.data.products['热销'],
         });
         } else {
           wx.showToast({
@@ -69,5 +83,14 @@ Page({
       productList: this.data.products[category],
       categories: this.data.categories
     });
+  },
+  checkProductDetal: function(event) {
+    var id = event.currentTarget.dataset.no.id;
+    wx.navigateTo({
+      url: '../product-detail/product-detail?product_id=' + id,
+      fail: function(e) {
+          console.log(e);
+      }
+    })
   }
 })
