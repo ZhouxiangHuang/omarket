@@ -92,5 +92,6 @@ Page({
   bindProductCode: function(e) {
     this.setData({
       productCode: e.detail.value
-    })  }
+    })  
+  }
 })

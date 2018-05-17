@@ -15,31 +15,43 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
-    this.setData({
-      products: {热销: [{name: '牛仔裤', price: 199,}, {name: '喇叭裤', price: 222}],
-                裤子: [{name: '运动裤', price: 123}, {name: '迷彩裤', price: 666}]},
-    });
-
-    var categoryList = [];
-    Object.keys(this.data.products).forEach(element => {
-      if(element === '热销') {
-        categoryList.push({name: element, color: 'white'});
-      } else {
-        categoryList.push({name: element, color: '#F8F8F8'});
-      }
-    });
-
-    this.setData({
-      merchant: {imageUrl: '/images/missgrace.jpeg', 
-                  name: 'MISS GRACE', 
-                  address: 'Baross Gabor utca 73, 16区', 
-                  tags:['牛仔裤','运动服','休闲'],
-                  description: '买卖的都是质量最好的牛仔裤',                   
-                },
-      categories: categoryList,
-      productList: this.data.products['热销'],
-    });
+  onLoad: function (option) {
+    wx.showLoading({title: '加载中',mask: true});
+    app.http.post('/site/product/products',{},function(res){ 
+      wx.hideLoading();
+      if(res.result_code === 10000) {
+        this.setData({
+          products: {热销: [{name: '牛仔裤', price: 199,}, {name: '喇叭裤', price: 222}],
+                    裤子: [{name: '运动裤', price: 123}, {name: '迷彩裤', price: 666}]},
+        });
+    
+        var categoryList = [];
+        Object.keys(this.data.products).forEach(element => {
+          if(element === '热销') {
+            categoryList.push({name: element, color: 'white'});
+          } else {
+            categoryList.push({name: element, color: '#F8F8F8'});
+          }
+        });
+      
+        this.setData({
+          merchant: {imageUrl: '/images/missgrace.jpeg', 
+                      name: 'MISS GRACE', 
+                      address: 'Baross Gabor utca 73, 16区', 
+                      tags:['牛仔裤','运动服','休闲'],
+                      description: '买卖的都是质量最好的牛仔裤',                   
+                    },
+          categories: categoryList,
+          productList: this.data.products['热销'],
+        });
+        } else {
+          wx.showToast({
+            title: res.reason,
+            duration: 3000,
+            icon: 'none'
+          });
+        }
+    }); 
   },
   selectCategory: function (event) {
     var category = event.currentTarget.dataset.no.name;

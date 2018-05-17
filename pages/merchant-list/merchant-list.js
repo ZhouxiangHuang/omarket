@@ -16,8 +16,6 @@ Page({
     })
   },
   onLoad: function () {
-    console.log('test');
-
     this.setData({
       products: {热销: [{name: '牛仔裤', price: 199,}, {name: '喇叭裤', price: 222}],
                 裤子: [{name: '运动裤', price: 123}, {name: '迷彩裤', price: 666}]},
@@ -33,12 +31,14 @@ Page({
     });
 
     this.setData({
-      merchant: {imageUrl: '/images/missgrace.jpeg', 
+      merchants: [{
+                  id: 1,
+                  imageUrl: '/images/missgrace.jpeg', 
                   name: 'MISS GRACE', 
                   address: '布达佩斯 匈牙利', 
                   tags:['牛仔裤','运动服','休闲'],
                   description: '买卖的都是质量最好的牛仔裤',                   
-                },
+                }],
       categories: categoryList,
       productList: this.data.products['热销'],
     });
@@ -59,5 +59,14 @@ Page({
       productList: this.data.products[category],
       categories: this.data.categories
     });
+  },
+  selectStore: function (event) {
+    var merchantId = event.currentTarget.dataset.merchant;
+    wx.navigateTo({
+      url: '../product-list/product-list?merchant_id=' + merchantId,
+      fail: function(e) {
+          console.log(e);
+      }
+    })
   }
 })

@@ -3,7 +3,6 @@
 const app = getApp()
 
 Page({
-  role: 2, // 2 => user, 1 => merchant
   data: {
     motto: 'Hello World',
     userInfo: {},
@@ -13,7 +12,7 @@ Page({
     userFont: 'white',    
     merchantColor: 'white',
     merchantFont: '#FF4343', 
-    role: 2       
+    role: 2 // 2 => user, 1 => merchant
   },
   //事件处理函数
   bindViewTap: function () {
@@ -40,9 +39,20 @@ Page({
     })
   },
   login: function (e) {
+    wx.showLoading({
+      title: '登陆中',
+      mask: true
+    })
     wx.login({
       success: res => {
-        app.http.post('/site/user/login',{'code': res.code, 'role': this.data.role},function(res){ 
+        var data ={'code': res.code, 'role': this.data.role};
+        if(this.data.role == 1) {
+          data['store_name'] = this.data.storeName;
+          data['address'] = this.data.address;
+          data['mobile'] = this.data.mobile;      
+        }
+        app.http.post('/site/user/login',data,function(res){ 
+          wx.hideLoading();
           if(res.result_code === 10000) {
             wx.switchTab({
               url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
@@ -68,6 +78,20 @@ Page({
       merchantFont: this.data.userFont,
       role: newRole
     })
+  },
+  bindStoreName: function(e) {
+    this.setData({
+      storeName: e.detail.value
+    })
+  },
+  bindMobile: function(e) {
+    this.setData({
+      mobile: e.detail.value
+    })  },
+  bindAddress: function(e) {
+    this.setData({
+      address: e.detail.value
+    })  
   }
 })
 

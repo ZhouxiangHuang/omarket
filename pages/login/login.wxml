@@ -20,15 +20,15 @@
   <view class="form" wx:if="{{role === 1}}"> 
          <view class='row underline'>
             <label>商铺名称</label>
-            <input type="string" placeholder="请输入商铺名称"/>
+            <input type="string" bindinput="bindStoreName" placeholder="请输入商铺名称"/>
         </view>
          <view class='row underline'>
             <label>地址</label>
-            <input type="string" placeholder="请输入地址"/>
+            <input type="string" bindinput="bindAddress" placeholder="请输入地址"/>
         </view>
          <view class='row'>
             <label>联系电话</label>
-            <input type="string" placeholder="请输入联系电话"/>
+            <input type="string" bindinput="bindMobile" placeholder="请输入联系电话"/>
         </view>
     </view>
 

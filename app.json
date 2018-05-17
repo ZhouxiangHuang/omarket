@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/login/login",    
     "pages/edit-product-info/edit-product-info",                            
     "pages/product-detail/product-detail",    
-    "pages/login/login",    
     "pages/index/index",                
     "pages/home/home",        
     "pages/merchant-list/merchant-list",        
@@ -23,12 +23,8 @@
         "text": "市场"
       },
       {
-        "pagePath": "pages/edit-product-info/edit-product-info",
-        "text": "编辑产品"
-      },
-      {
-        "pagePath": "pages/product-list/product-list",
-        "text": "产品列表"
+        "pagePath": "pages/logs/logs",
+        "text": "个人中心"
       }
     ]
   }
