@@ -12,6 +12,7 @@
                     <text>{{item}}</text>        
                 </view>           
             </view>
+            <view class="edit-profile-btn" bindtap="editMerchant">编辑</view>
         </view>        
     </view>
     <view class="filter underline"></view>
@@ -19,6 +20,9 @@
         <view class="categories">
             <view class="category" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-no="{{item}}" style="background-color: {{item.color}}">
                 <text>{{item.name}}</text>
+            </view>
+            <view class="category" id="add-category">
+                <text>添加</text>
             </view>
         </view>
         <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}">
@@ -29,5 +33,6 @@
                 <view class="price">￥{{item.price}}</view>
             </view>   
         </view>
+        <view class="add-product-btn"></view>
     </view>
 </view>

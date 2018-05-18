@@ -92,5 +92,29 @@ Page({
           console.log(e);
       }
     })
+  },
+  editMerchant: function() {
+    wx.navigateTo({
+      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + 1,
+      fail: function(e) {
+          console.log(e);
+      }
+    })
+  },
+  editCatogory: function() {
+    wx.navigateTo({
+      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + 1,
+      fail: function(e) {
+          console.log(e);
+      }
+    })
+  }, 
+  editProducts: function() {
+    wx.navigateTo({
+      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + 1,
+      fail: function(e) {
+          console.log(e);
+      }
+    })
   }
 })

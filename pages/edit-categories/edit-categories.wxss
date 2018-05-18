@@ -98,3 +98,23 @@
   width: 90%;
   height: 90rpx;
 }
+.edit-categories-main {
+  align-items: right;
+}
+.edit-categories-main .save-edit-pos {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 50rpx;
+}
+.edit-categories-main .edit-btn-wrapper {
+  width: 100%;
+}
+.edit-categories-main .edit-btn-wrapper .add-category-btn {
+  float: right;
+  margin-right: 50rpx;
+  margin-top: 50rpx;
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  background: #FF4343;
+}

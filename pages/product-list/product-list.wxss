@@ -4,52 +4,6 @@
 .border-right {
   border-right: solid 1px #D1D1D1;
 }
-.merchant {
-  width: 100%;
-  height: 220rpx;
-}
-.merchant .merchant-logo {
-  margin-left: 15rpx;
-  float: left;
-  width: 220rpx;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-}
-.merchant .merchant-profile {
-  margin-top: 20rpx;
-  float: right;
-  width: 500rpx;
-  height: 100%;
-}
-.merchant .merchant-profile #merchant-name {
-  font-size: 35rpx;
-}
-.merchant .merchant-profile #merchant-intro {
-  font-size: 24rpx;
-  color: #979797;
-}
-.merchant .merchant-profile #merchant-address {
-  font-size: 24rpx;
-  color: #979797;
-}
-.merchant .merchant-profile .tags {
-  margin-top: 10rpx;
-}
-.merchant .merchant-profile .tags .tag {
-  margin-right: 10rpx;
-  float: left;
-  border: 1px solid #FFA32C;
-  text-align: center;
-  border-radius: 3px;
-  height: 30rpx;
-  line-height: 30rpx;
-  width: 110rpx;
-  font-size: 24rpx;
-}
-.merchant .merchant-profile .tags .tag text {
-  color: #FFA32C;
-}
 .filter {
   width: 100%;
   height: 100rpx;
@@ -61,7 +15,7 @@
   width: 49.6%;
   display: inline-block;
   text-align: center;
-  color: #43BB57;
+  color: #FF4343;
 }
 .form {
   width: 100%;
@@ -115,7 +69,7 @@
   float: right;
   width: 30%;
   height: 100%;
-  background-color: #43BB57;
+  background-color: #FF4343;
   text-align: center;
   color: white;
 }
@@ -124,7 +78,7 @@
   margin-top: 30rpx;
 }
 .std-button .bind-user {
-  background-color: #43BB57;
+  background-color: #FF4343;
   color: white;
   width: 90%;
   height: 90rpx;
@@ -175,6 +129,14 @@
 .product-list-main .merchant-profile .merchant-profile .tags .tag text {
   color: #FFA32C;
 }
+.product-list-main .merchant-profile .merchant-profile .edit-profile-btn {
+  position: absolute;
+  width: 100rpx;
+  height: 50rpx;
+  border: solid 1px red;
+  right: 0;
+  top: 0;
+}
 .product-list-main .products {
   height: 780rpx;
   width: 100%;
@@ -189,7 +151,7 @@
 .product-list-main .products .categories .category {
   height: 150rpx;
   width: 100%;
-  line-height: 170rpx;
+  line-height: 150rpx;
 }
 .product-list-main .products .product {
   margin-top: 20rpx;
@@ -217,6 +179,20 @@
 }
 .product-list-main .products .product .product-detail .price {
   margin-top: 10rpx;
-  color: #43BB57;
+  color: #FF4343;
   font-size: 35rpx;
+}
+.product-list-main .products .add-product-btn {
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  background: #FF4343;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin-right: 50rpx;
+  margin-bottom: 50rpx;
+}
+.product-list-main .products #add-category {
+  background: #FF4343;
 }

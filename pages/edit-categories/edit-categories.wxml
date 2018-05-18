@@ -1,0 +1,13 @@
+<view class="edit-categories-main container">
+   <view class="list">
+        <view class="row underline">
+            <input type="string" bindinput="bindProductCode" placeholder="请输入产品编码"/>
+        </view>
+   </view>
+   <view class="edit-btn-wrapper">
+        <view class="add-category-btn"></view>   
+   </view>
+   <view class="std-button save-edit-pos">
+        <button class="bind-user">保存</button>
+   </view>
+</view>

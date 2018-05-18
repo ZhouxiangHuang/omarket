@@ -45,6 +45,14 @@
                     }
                 }
             }
+            .edit-profile-btn {
+                position: absolute;
+                width: 100rpx;
+                height: 50rpx;
+                border: solid 1px red;
+                right: 0;
+                top: 0;
+            }
         }
     }
     .products {
@@ -59,7 +67,7 @@
             .category {
                 height: @std-height - 70rpx;
                 width: 100%;
-                line-height: @std-height - 50rpx;  
+                line-height: @std-height - 70rpx;  
             }
         }
         .product {
@@ -90,6 +98,20 @@
                     font-size: 35rpx;
                 }
             }
+        }
+        .add-product-btn {
+            border-radius: 50%;
+            width: 100rpx;
+            height: 100rpx;
+            background: @theme-color;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            margin-right: 50rpx;
+            margin-bottom: 50rpx;            
+        }
+        #add-category {
+            background: @theme-color
         }
     }
     

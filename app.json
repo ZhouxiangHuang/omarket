@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/edit-categories/edit-categories",
     "pages/product-list/product-list",                         
     "pages/edit-product-info/edit-product-info",                                
     "pages/login/login",    
