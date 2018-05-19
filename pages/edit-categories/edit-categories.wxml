@@ -1,13 +1,14 @@
 <view class="edit-categories-main container">
    <view class="list">
-        <view class="row underline">
-            <input type="string" bindinput="bindProductCode" placeholder="请输入产品编码"/>
+        <view class="row underline" wx:for="{{categories}}" wx:for-item="category">
+            <input type="string" bindinput="editCategory" data-input="{{category.id}}" placeholder="请输入产品类别名称" value="{{category.name}}"/>
+            <view class="delete-btn" bindtap="delete" data-input="{{category.id}}"></view>
         </view>
    </view>
    <view class="edit-btn-wrapper">
-        <view class="add-category-btn"></view>   
+        <view class="add-category-btn" bindtap="addCategory"></view>   
    </view>
    <view class="std-button save-edit-pos">
-        <button class="bind-user">保存</button>
+        <button class="bind-user" bindtap="save">保存</button>
    </view>
 </view>

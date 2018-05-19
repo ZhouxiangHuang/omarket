@@ -59,6 +59,12 @@
   text-align: left;
   float: left;
 }
+.list .row .delete-btn {
+  width: 100rpx;
+  height: 114rpx;
+  float: right;
+  background: red;
+}
 .logo {
   margin-top: 20rpx;
   width: 180rpx;

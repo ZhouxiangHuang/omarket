@@ -14,14 +14,12 @@
         </view>
          <view class='row underline'>
             <label>开始营业时间</label>
-            <picker mode="time" value="06:00" start="06:00" end="24:00" bindchange="listenerStartTimePickerSelected">
-                <text>{{startTime}}</text>
-            </picker>
-        </view>
-        <view class='row underline'>
-            <label>结束营业时间</label>
             <picker mode="time" value="06:00" start="15:00" end="24:00" bindchange="listenerEndTimePickerSelected">
                 <text>{{endTime}}</text>
+            </picker>
+            <view class="info-divider"> - </view>
+            <picker mode="time" value="06:00" style="margin-right:0" start="06:00" end="24:00" bindchange="listenerStartTimePickerSelected">
+                <text>{{startTime}}</text>
             </picker>
         </view>
          <view class='row underline'>
@@ -30,13 +28,25 @@
         </view>
         <view class='row underline'>
             <label>公告</label>
-            <input type="string" placeholder="请输入公告"/>
+            <input type="string" bindtap="annouce" placeholder="请输入公告" value="{{form.announcement}}"/>
+        </view>
+        <view class='row underline'>
+            <label>标签1</label>
+            <input type="string" placeholder="请选择标签" bindtap="selectTap" data-tag="1" value="{{tag1}}"/>
+        </view>
+        <view class='row underline'>
+            <label>标签2</label>
+            <input type="string" placeholder="请选择标签" bindtap="selectTap" data-tag="2" value="{{tag2}}"/>
         </view>
         <view class='row'>
-            <label>标签</label>
-            <input type="string" placeholder="请选择标签"/>
+            <label>标签3</label>
+            <input type="string" placeholder="请选择标签" bindtap="selectTap" data-tag="3" value="{{tag3}}"/>
         </view>
     </view>
+
+    <modal  title="通告内容设定" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="listenerConfirm" bindcancel="listenerCancel" >
+         <input type='text'placeholder="请输入内容" bindinput="announceContent" auto-focus/>  
+    </modal>
 
     <view class='std-button'>
         <button class='bind-user'>保存</button>

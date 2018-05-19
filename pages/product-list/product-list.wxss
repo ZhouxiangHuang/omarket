@@ -44,6 +44,27 @@
   float: right;
   margin-right: 5%;
 }
+.list {
+  width: 100%;
+  border-top: solid 1px #D1D1D1;
+}
+.list .row {
+  width: 100%;
+  float: right;
+  height: 114rpx;
+}
+.list .row input {
+  margin-left: 5%;
+  height: 114rpx;
+  text-align: left;
+  float: left;
+}
+.list .row .delete-btn {
+  width: 100rpx;
+  height: 114rpx;
+  float: right;
+  background: red;
+}
 .logo {
   margin-top: 20rpx;
   width: 180rpx;
@@ -138,7 +159,7 @@
   top: 0;
 }
 .product-list-main .products {
-  height: 780rpx;
+  height: 880rpx;
   width: 100%;
 }
 .product-list-main .products .categories {

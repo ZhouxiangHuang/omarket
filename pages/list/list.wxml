@@ -1,0 +1,8 @@
+<view class='list-main container'>
+    <view class='list'>
+        <view class='row underline' wx:for='{{list}}' wx:key="index" bindtap="select" data-select="{{item}}">
+            <label>{{item.name}}</label>
+            <image wx:if="{{item.children.length}}" class="selector" src="/images/selector.png" mode="right"></image>
+        </view>
+    </view>
+</view>

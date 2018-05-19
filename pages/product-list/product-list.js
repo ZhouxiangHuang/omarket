@@ -16,6 +16,9 @@ Page({
     })
   },
   onLoad: function (option) {
+
+  },
+  onShow: function () {
     var that = this;
     wx.showLoading({title: '加载中',mask: true});
     app.http.get('/site/product/products',{},function(res){ 
@@ -32,12 +35,6 @@ Page({
         that.setData({
           products: products
         })
-        // that.setData({
-        //   products: {
-        //             热销: [{name: '牛仔裤', price: 199,}, {name: '喇叭裤', price: 222}],
-        //             裤子: [{name: '运动裤', price: 123}, {name: '迷彩裤', price: 666}]
-        //             },
-        // });
     
         var categoryList = [];
         Object.keys(that.data.products).forEach(element => {
@@ -103,7 +100,7 @@ Page({
   },
   editCatogory: function() {
     wx.navigateTo({
-      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + 1,
+      url: '../edit-categories/edit-categories',
       fail: function(e) {
           console.log(e);
       }
@@ -111,7 +108,7 @@ Page({
   }, 
   editProducts: function() {
     wx.navigateTo({
-      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + 1,
+      url: '../edit-product-info/edit-product-info',
       fail: function(e) {
           console.log(e);
       }

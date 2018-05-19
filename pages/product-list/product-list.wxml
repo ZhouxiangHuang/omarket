@@ -21,7 +21,7 @@
             <view class="category" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-no="{{item}}" style="background-color: {{item.color}}">
                 <text>{{item.name}}</text>
             </view>
-            <view class="category" id="add-category">
+            <view class="category" id="add-category" bindtap="editCatogory">
                 <text>添加</text>
             </view>
         </view>
@@ -33,6 +33,6 @@
                 <view class="price">￥{{item.price}}</view>
             </view>   
         </view>
-        <view class="add-product-btn"></view>
+        <view class="add-product-btn" bindtap="editProducts"></view>
     </view>
 </view>

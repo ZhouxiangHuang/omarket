@@ -44,14 +44,6 @@
   float: right;
   margin-right: 5%;
 }
-.form .row .info-divider {
-  text-align: right;
-  float: right;
-  height: 114rpx;
-  line-height: 114rpx;
-  width: 40rpx;
-  text-align: center;
-}
 .list {
   width: 100%;
   border-top: solid 1px #D1D1D1;
