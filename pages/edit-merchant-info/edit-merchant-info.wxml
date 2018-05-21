@@ -63,7 +63,7 @@
          <input type='text'placeholder="请输入内容" bindinput="announceContent" auto-focus/>  
     </modal>
 
-    <view class='std-button'>
+    <view class='std-button' bindtap="updateMerchant">
         <button class='bind-user'>保存</button>
     </view>
 </view>

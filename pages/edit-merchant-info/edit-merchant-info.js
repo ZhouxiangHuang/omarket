@@ -37,7 +37,9 @@ Page({
   onShow: function(option) {
     var record = app.globalData.tagRecord;
     console.log(record);
-    this.data.form.tags.push(record);
+    if(record) {
+      this.data.form.tags.push(record.id);
+    }
 
     if(record) {
       if(record.tag === '1') {
@@ -95,5 +97,29 @@ Page({
     wx.navigateTo({
       url: '../list/list?tag=' + tag
     })
+  },
+  updateMerchant: function(e) {
+      var form = {
+        name: this.data.merchant.name,
+        start: this.data.startTime,
+        end: this.data.endTime,
+        tags: this.data.form.tags,
+        mobile: this.data.merchant.mobile,
+        announcement: this.data.form.announcement,  
+        address: this.data.merchant.address,                 
+      }
+
+      // var form = {
+      //   name: 'ASDFASDEWDF',
+      //   start: "05:00",
+      //   end: "18:00",
+      //   tags: [111, 6, 29],
+      //   mobile: '41324123423',
+      //   announcement: '我先来测试一下今天的天气到底好不好',  
+      //   address: 'baross gabor utca 328',                 
+      // }
+      app.http.post('/site/merchant/update', form, function(res) {
+        console.log(res);
+      });
   }
 })
