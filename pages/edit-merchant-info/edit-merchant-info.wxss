@@ -133,3 +133,24 @@
 .edit-merch-main .form {
   margin-top: 40rpx;
 }
+.edit-merch-main .std-tags {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  float: right;
+  margin-right: 5%;
+}
+.edit-merch-main .std-tags .tag {
+  margin-right: 10rpx;
+  float: right;
+  border: 1px solid #FFA32C;
+  text-align: center;
+  border-radius: 3px;
+  height: 30rpx;
+  line-height: 30rpx;
+  width: 110rpx;
+  font-size: 24rpx;
+}
+.edit-merch-main .std-tags .tag text {
+  color: #FFA32C;
+}

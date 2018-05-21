@@ -54,6 +54,8 @@ Page({
         app.http.post('/site/user/login',data,function(res){ 
           wx.hideLoading();
           if(res.result_code === 10000) {
+            var token = res.result.access_token;
+            wx.setStorage({key: 'token',data: token})
             wx.switchTab({
               url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
             })
