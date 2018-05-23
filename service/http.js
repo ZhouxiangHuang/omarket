@@ -1,14 +1,13 @@
 
 var rootDocment = 'http://eu.localhost.com/index.php';//你的域名
 
-
 function post(url,data,cb){
     var accessToken = wx.getStorage({key: 'token'});
     wx.request({  
       url: rootDocment + url,  
       data: data,  
       method: 'POST',  
-      header: {'Content-Type': 'application/json'},  
+      header: {'Content-Type': 'application/json', 'access-token': accessToken},  
       success: function(res){  
         return typeof cb == "function" && cb(res.data)  
       },  
@@ -19,6 +18,7 @@ function post(url,data,cb){
 }
 
 function get(url,data,cb){
+    var accessToken = wx.getStorage({key: 'token'});
     var params = [];
     var keys = Object.keys(data);
     keys.forEach(function(key) {
@@ -30,7 +30,7 @@ function get(url,data,cb){
     wx.request({  
       url: rootDocment + url + '?' + params,
       method: 'get',  
-      header: {'Content-Type': 'application/json'},  
+      header: {'Content-Type': 'application/json', 'access-token': accessToken},  
       success: function(res){  
         return typeof cb == "function" && cb(res.data)  
       },  

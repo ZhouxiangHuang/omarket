@@ -7,7 +7,8 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo')
+    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
+    isOwner: false
   },
   //事件处理函数
   bindViewTap: function () {
@@ -16,7 +17,8 @@ Page({
     })
   },
   onLoad: function (option) {
-
+    // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
+    this.setData({isOwner: true});
   },
   onShow: function () {
     var that = this;
@@ -50,7 +52,7 @@ Page({
                       name: 'MISS GRACE', 
                       address: 'Baross Gabor utca 73, 16区', 
                       tags:['牛仔裤','运动服','休闲'],
-                      description: '买卖的都是质量最好的牛仔裤',                   
+                      announcement: '买卖的都是质量最好的牛仔裤',                                                         
                     },
           categories: categoryList,
           productList: that.data.products['热销'],

@@ -12,7 +12,8 @@ Page({
     userFont: 'white',    
     merchantColor: 'white',
     merchantFont: '#FF4343', 
-    role: 2 // 2 => user, 1 => merchant
+    role: 2, // 2 => user, 1 => merchant,
+    isMerchant: false
   },
   //事件处理函数
   bindViewTap: function () {
@@ -21,6 +22,10 @@ Page({
     })
   },
   onLoad: function () {
+    this.setData({
+      isMerchant: app.globalData.isMerchant
+    })
+
     wx.getUserInfo({
       success: res => {
         app.globalData.userInfo = res.userInfo
@@ -51,9 +56,11 @@ Page({
           data['address'] = this.data.address;
           data['mobile'] = this.data.mobile;      
         }
+        var that = this;
         app.http.post('/site/user/login',data,function(res){ 
           wx.hideLoading();
           if(res.result_code === 10000) {
+            app.globalData.userRole = that.data.role; 
             var token = res.result.access_token;
             wx.setStorage({key: 'token',data: token})
             wx.switchTab({

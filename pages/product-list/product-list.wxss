@@ -1,6 +1,9 @@
 .underline {
   border-bottom: solid 1px #D1D1D1;
 }
+.underline-light {
+  border-bottom: #E6E5F4;
+}
 .border-right {
   border-right: solid 1px #D1D1D1;
 }
@@ -15,7 +18,7 @@
   width: 49.6%;
   display: inline-block;
   text-align: center;
-  color: #FF4343;
+  color: #FF9E9E;
 }
 .form {
   width: 100%;
@@ -44,6 +47,14 @@
   float: right;
   margin-right: 5%;
 }
+.form .row .info-divider {
+  text-align: right;
+  float: right;
+  height: 114rpx;
+  line-height: 114rpx;
+  width: 40rpx;
+  text-align: center;
+}
 .list {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -64,6 +75,18 @@
   height: 114rpx;
   float: right;
   background: red;
+}
+.list .row label {
+  margin-left: 5%;
+  line-height: 114rpx;
+  float: left;
+}
+.list .row .selector {
+  width: 100rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
 }
 .logo {
   margin-top: 20rpx;
@@ -120,18 +143,40 @@
   margin-top: 20rpx;
   float: right;
   width: 500rpx;
+  margin-right: 10rpx;
   height: 100%;
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-name {
   font-size: 35rpx;
 }
-.product-list-main .merchant-profile .merchant-profile #merchant-intro {
-  font-size: 24rpx;
+.product-list-main .merchant-profile .merchant-profile #merchant-hours {
+  margin-top: 5rpx;
+  font-size: 20rpx;
   color: #979797;
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-address {
-  font-size: 24rpx;
+  margin-top: 10rpx;
+  font-size: 20rpx;
   color: #979797;
+}
+.product-list-main .merchant-profile .merchant-profile #merchant-address .highlight {
+  background-color: #FFA32C;
+}
+.product-list-main .merchant-profile .merchant-profile #merchant-address text {
+  margin-left: 10rpx;
+  color: #FFA32C;
+}
+.product-list-main .merchant-profile .merchant-profile #merchant-announcement {
+  margin-top: 10rpx;
+  font-size: 20rpx;
+  color: #979797;
+}
+.product-list-main .merchant-profile .merchant-profile #merchant-announcement .highlight {
+  background-color: #FF4343;
+}
+.product-list-main .merchant-profile .merchant-profile #merchant-announcement text {
+  margin-left: 10rpx;
+  color: #FF4343;
 }
 .product-list-main .merchant-profile .merchant-profile .tags {
   margin-top: 10rpx;
@@ -151,12 +196,13 @@
   color: #FFA32C;
 }
 .product-list-main .merchant-profile .merchant-profile .edit-profile-btn {
-  position: absolute;
   width: 100rpx;
   height: 50rpx;
   border: solid 1px red;
-  right: 0;
-  top: 0;
+  float: right;
+  margin-top: -30rpx;
+  color: #FF4343;
+  font-size: 25rpx;
 }
 .product-list-main .products {
   height: 880rpx;
@@ -168,11 +214,15 @@
   height: 100%;
   background-color: #F8F8F8;
   text-align: center;
+  color: #999999;
 }
 .product-list-main .products .categories .category {
-  height: 150rpx;
+  height: 125rpx;
+  line-height: 125rpx;
   width: 100%;
-  line-height: 150rpx;
+}
+.product-list-main .products .categories .category #add-text {
+  margin-left: -20rpx;
 }
 .product-list-main .products .product {
   margin-top: 20rpx;
@@ -188,6 +238,7 @@
 .product-list-main .products .product .product-detail {
   width: 60%;
   float: right;
+  margin-right: 20rpx;
 }
 .product-list-main .products .product .product-detail .name {
   font-size: 35rpx;
@@ -215,5 +266,26 @@
   margin-bottom: 50rpx;
 }
 .product-list-main .products #add-category {
-  background: #FF4343;
+  color: #FF4343;
+}
+.circle {
+  border-radius: 50%;
+  background-color: #FF4343;
+  height: 50rpx;
+  width: 50rpx;
+  margin-top: 36.5rpx;
+  display: flex;
+  align-items: center;
+  float: left;
+  margin-left: 20rpx;
+}
+.highlight {
+  width: 75rpx;
+  float: left;
+  height: 35rpx;
+  line-height: 35rpx;
+  text-align: center;
+  color: white;
+  border-radius: 5rpx;
+  font-size: 20rpx;
 }

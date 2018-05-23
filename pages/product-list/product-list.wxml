@@ -5,24 +5,34 @@
         </view>
         <view class="merchant-profile">
             <view id="merchant-name">{{merchant.name}}</view>
-            <view id="merchant-address">{{merchant.address}}</view>   
-            <view id="merchant-intro">{{merchant.description}}</view>                 
-            <view class="tags">
-                <view class="tag" wx:for="{{merchant.tags}}" wx:key="{{tags}}">
-                    <text>{{item}}</text>        
-                </view>           
-            </view>
-            <view class="edit-profile-btn" bindtap="editMerchant">编辑</view>
+            <view id="merchant-hours">营业时间: 6:00 - 18:00</view>                 
+            <view id="merchant-address">
+                <view class="highlight">地址</view>
+                <text>{{merchant.address}}</text>
+            </view>   
+            <view id="merchant-announcement">
+                <view class="highlight">公告</view>
+                <text>{{merchant.announcement}}</text>
+            </view>  
+            <view wx:if="{{isOwner}}" class="edit-profile-btn" bindtap="editMerchant">编辑</view>
         </view>        
     </view>
-    <view class="filter underline"></view>
+    <view class="filter underline">
+      <picker class="selection border-right" range = "{{['牛仔裤','睡衣']}}">
+            <view>选择地区</view>
+        </picker>
+         <picker class="selection" range = "{{['牛仔裤','睡衣']}}">
+            <view>选择种类</view>
+        </picker>    
+    </view>
     <view class="products">
         <view class="categories">
-            <view class="category" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-no="{{item}}" style="background-color: {{item.color}}">
+            <view class="category underline" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-no="{{item}}" style="background-color: {{item.color}}">
                 <text>{{item.name}}</text>
             </view>
-            <view class="category" id="add-category" bindtap="editCatogory">
-                <text>添加</text>
+            <view wx:if="{{isOwner}}" class="category underline" id="add-category" bindtap="editCatogory">
+                <view class="circle"></view>
+                <text id="add-text">添加</text>
             </view>
         </view>
         <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}">

@@ -6,7 +6,11 @@
     <view class="form">
         <view class='row underline'>
             <label>公司名称</label>
-            <input type="string" value="{{merchant.name}}" placeholder="请输入公司名称"/>
+            <input type="string" value="{{merchant.store_name}}" placeholder="请输入公司名称"/>
+        </view>
+         <view class='row underline'>
+            <label>国家/地区</label>
+            <input type="string" bindtap="selectRegion" value="{{merchant.region}}" placeholder="请输入商铺地址"/>
         </view>
          <view class='row underline'>
             <label>商铺地址</label>
@@ -32,7 +36,7 @@
         </view>
         <view class='row underline'>
             <label>标签1</label>
-            <input wx:if="{{!tag1}}" type="string" placeholder="请选择标签" bindtap="selectTap" data-tag="1" value="{{tag1}}"/>
+            <input wx:if="{{!tag1}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="1" value="{{tag1}}"/>
             <view wx:if="{{tag1}}" class="std-tags">
                 <view class="tag">
                     <text>{{tag1}}</text>        
@@ -41,7 +45,7 @@
         </view>
         <view class='row underline'>
             <label>标签2</label>
-            <input wx:if="{{!tag2}}" type="string" placeholder="请选择标签" bindtap="selectTap" data-tag="2" value="{{tag2}}"/>
+            <input wx:if="{{!tag2}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="2" value="{{tag2}}"/>
             <view wx:if="{{tag2}}" class="std-tags">
                 <view class="tag">
                     <text>{{tag2}}</text>        
@@ -50,7 +54,7 @@
         </view>
         <view class='row'>
             <label>标签3</label>
-            <input wx:if="{{!tag3}}" type="string" placeholder="请选择标签" bindtap="selectTap" data-tag="3" value="{{tag3}}"/>
+            <input wx:if="{{!tag3}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="3" value="{{tag3}}"/>
             <view wx:if="{{tag3}}" class="std-tags">
                 <view class="tag">
                     <text>{{tag3}}</text>        

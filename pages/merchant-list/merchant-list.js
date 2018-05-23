@@ -43,6 +43,9 @@ Page({
       productList: this.data.products['热销'],
     });
   },
+  onShow: function() {
+    console.log(app.globalData.userRole);
+  },
   selectCategory: function (event) {
     var category = event.currentTarget.dataset.no.name;
 
@@ -60,9 +63,10 @@ Page({
       categories: this.data.categories
     });
   },
-  selectStore: function (event) {
+  selectStore: function (e) {
+    var merchantId = e.currentTarget.dataset.merchant;
     wx.navigateTo({
-      url: '../product-list/product-list',
+      url: '../product-list/product-list?merchantId=' + merchantId,
       fail: function(e) {
           console.log(e);
       }

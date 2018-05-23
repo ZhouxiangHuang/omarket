@@ -17,7 +17,7 @@
     </block>
   </view>
 
-  <view class="form" wx:if="{{role === 1}}"> 
+  <view class="form" wx:if="{{role === 1 && !isMerchant}}"> 
          <view class='row underline'>
             <label>商铺名称</label>
             <input type="string" bindinput="bindStoreName" placeholder="请输入商铺名称"/>

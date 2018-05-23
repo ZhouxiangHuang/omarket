@@ -1,10 +1,11 @@
 {
   "pages":[
-    "pages/edit-merchant-info/edit-merchant-info",                    
-    "pages/merchant-list/merchant-list",        
-    "pages/login/login",    
-    "pages/list/list",                        
     "pages/product-list/product-list",                       
+    "pages/login/login",    
+    "pages/center/center",    
+    "pages/edit-merchant-info/edit-merchant-info",                    
+    "pages/list/list",                        
+    "pages/merchant-list/merchant-list",        
     "pages/edit-categories/edit-categories",
     "pages/edit-product-info/edit-product-info",                                
     "pages/product-detail/product-detail",    
@@ -25,7 +26,7 @@
         "text": "市场"
       },
       {
-        "pagePath": "pages/logs/logs",
+        "pagePath": "pages/center/center",
         "text": "个人中心"
       }
     ]

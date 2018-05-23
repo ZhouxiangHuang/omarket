@@ -16,6 +16,8 @@ Page({
     tag1: '',
     tag2: '',
     tag3: '',    
+    countryCode: 0,
+    cityCode: 0,
   },
   //事件处理函数
   bindViewTap: function () {
@@ -24,24 +26,38 @@ Page({
     })
   },
   onLoad: function () {
-    this.setData({
-      merchant: {imageUrl: '/images/missgrace.jpeg', 
-                  name: 'MISS GRACE', 
-                  address: 'Baross Gabor utca 73', 
-                  tags:['牛仔裤','运动服','休闲'],
-                  description: '买卖的都是质量最好的牛仔裤',
-                  mobile: '0036305591038',
-                },
-    });
+    var that = this;
+    app.http.get('/site/merchant/detail', {}, function(res) {
+      that.data.countryCode = res.result.country_code;
+      that.data.cityCode = res.result.city_code;
+      that.data.form.tags = res.result.tags;
+      that.data.form.announcement = res.result.announcement;      
+      that.setData({
+        merchant: res.result, 
+        tag1: res.result.tag_names[0], 
+        tag2: res.result.tag_names[1],
+        tag3: res.result.tag_names[2],
+        form: that.data.form
+      });
+      
+      // this.setData({
+      //   merchant: {imageUrl: '/images/missgrace.jpeg', 
+      //               store_name: 'MISS GRACE', 
+      //               region: '匈牙利/布达佩斯',
+      //               address: 'Baross Gabor utca 73', 
+      //               tags:['牛仔裤','运动服','休闲'],
+      //               description: '买卖的都是质量最好的牛仔裤',
+      //               mobile: '0036305591038',
+      //             },
+      // });
+    })
   },
   onShow: function(option) {
     var record = app.globalData.tagRecord;
-    console.log(record);
-    if(record) {
-      this.data.form.tags.push(record.id);
-    }
+    var region = app.globalData.region;
 
     if(record) {
+      this.data.form.tags.push(record.id);
       if(record.tag === '1') {
         this.setData({
           tag1: record.name
@@ -55,6 +71,16 @@ Page({
           tag3: record.name
         })
       }
+    }
+
+    if(region) {
+      var merchant = this.data.merchant;
+      this.data.countryCode = region.country_code;
+      this.data.cityCode = region.city_code;     
+      merchant.region = region.country + "/" + region.name;
+      this.setData({
+        merchant: merchant
+      })
     }
   },
    /**
@@ -92,7 +118,7 @@ Page({
     var inputVal = e.detail.value;
     this.data.form.announcement = inputVal;
   },
-  selectTap: function(e) {
+  selectTag: function(e) {
     var tag = e.currentTarget.dataset.tag;
     wx.navigateTo({
       url: '../list/list?tag=' + tag
@@ -100,15 +126,18 @@ Page({
   },
   updateMerchant: function(e) {
       var form = {
-        name: this.data.merchant.name,
+        name: this.data.merchant.store_name,
         start: this.data.startTime,
         end: this.data.endTime,
         tags: this.data.form.tags,
         mobile: this.data.merchant.mobile,
         announcement: this.data.form.announcement,  
-        address: this.data.merchant.address,                 
+        address: this.data.merchant.address,    
+        city_code: this.data.cityCode,
+        country_code: this.data.countryCode,
       }
 
+      console.log(form);
       // var form = {
       //   name: 'ASDFASDEWDF',
       //   start: "05:00",
@@ -121,5 +150,10 @@ Page({
       app.http.post('/site/merchant/update', form, function(res) {
         console.log(res);
       });
+  },
+  selectRegion: function(e) {
+    wx.navigateTo({
+      url: '../list/list?mode=regions'
+    })
   }
 })
