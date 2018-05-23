@@ -30,7 +30,7 @@
             <label>联系电话</label>
             <input type="string" bindinput="bindMobile" placeholder="请输入联系电话"/>
         </view>
-    </view>
+  </view>
 
   <view class='register-button'>
     <button bindtap="login" class='bind-user'>授权绑定微信</button>

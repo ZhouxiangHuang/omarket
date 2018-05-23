@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="container collections-main">
+  <view class="product-list"> 
+         <view class='title'>
+            <view class="btn">进店</view>
+            <view class="name">VERSACE</view>            
+        </view>
+        <view class="content">
+            <view class="left">
+                <image src="../../images/jeans.png" />
+            </view>
+            <view class="right"></view>            
+        </view>
+  </view>
+</view>
