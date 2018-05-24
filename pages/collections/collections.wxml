@@ -1,15 +1,32 @@
 <!--index.wxml-->
 <view class="container collections-main">
   <view class="product-list"> 
-         <view class='title'>
+         <view class='title underline'>
             <view class="btn">进店</view>
             <view class="name">VERSACE</view>            
         </view>
         <view class="content">
             <view class="left">
-                <image src="../../images/jeans.png" />
+                <image src="../../images/jeans.jpg" />
             </view>
-            <view class="right"></view>            
+            <view class="right">
+                <view class="name">直筒水洗破坏牛仔裤</view>
+                <view class="price">$199</view>
+                <view class="code">商品编号: 01290988700</view>
+                <view class="description">介绍：这款货很好卖</view>                
+            </view>            
+        </view>
+        <view class="content">
+            <view class="left">
+                <image src="../../images/jeans.jpg" />
+            </view>
+            <view class="right">
+                <view class="name">直筒水洗破坏牛仔裤</view>
+                <view class="price">$199</view>
+                <view class="code">商品编号: 01290988700</view>
+                <view class="description">介绍：这款货很好卖</view>                
+            </view>            
         </view>
   </view>
+  
 </view>

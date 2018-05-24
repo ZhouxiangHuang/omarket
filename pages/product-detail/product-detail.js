@@ -9,7 +9,8 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('ton.open-type.getUserInfo'),
     productImages: ['/images/jeans.jpg'],
-    number: 0
+    number: 0,
+    productInfo: {}
   },
   //事件处理函数
   bindViewTap: function () {
@@ -20,17 +21,13 @@ Page({
   onLoad: function (options) {
     var productId = options.product_id;
     var data = {
-      product_id: productId
+      product_id: 1
     }
+    var that = this;
     app.http.get('/site/product/detail',data, function(res){
-        console.log(res);
-    })
-  },
-  getUserInfo: function (e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+        that.setData({
+          productInfo: res.result    
+        })
     })
   },
   getSelectItem: function(e) {
@@ -47,5 +44,15 @@ Page({
       //     number:  scrollLeft
       //   })
       // }
+  },
+  collect: function(e) {
+    app.http.post('/site/product/collect', {product_id: 1}, function(res) {
+      console.log(res);
+    })
+  },
+  checkCollections: function(e) {
+    wx.navigateTo({
+      url: '../collections/collections'
+    })
   }
 })

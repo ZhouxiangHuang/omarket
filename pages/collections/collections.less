@@ -2,23 +2,24 @@
 
 .collections-main {
     .product-list {
-        border: 1px solid red;
-        height: 300rpx;
+        border: @border;
+        min-height: 300rpx;
         width: 100%;
         .title {
-            border-bottom: 1px solid red;
             height: 65rpx;
             width: 95%;
             float: right;
             .btn {
                 float: left;
                 width: 110rpx;
-                height: 100%;
+                height: 65rpx;
+                line-height: 65rpx;
             }
             .name {
                 float: left;
                 width: 140rpx;
-                height: 100%;
+                height: 65rpx;
+                line-height: 65rpx;
                 font-size: 34rpx;
             }
         }
@@ -39,9 +40,23 @@
             }
             .right {
                 float: right;                
-                width: 200rpx;
+                width: 460rpx;
                 height: 100%;
-                border-right: 1px solid red;
+                .name {
+                    margin-top: 35rpx;
+                    font-size: 27rpx;
+                }
+                .price {
+                    margin-top: 15rpx;
+                    font-size: 27rpx;
+                }
+                .code {
+                    margin-top: 15rpx;
+                    font-size: 20rpx;
+                }
+                .description {
+                    font-size: 20rpx;
+                }
             }
         }
     }

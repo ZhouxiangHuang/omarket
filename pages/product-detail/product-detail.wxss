@@ -1,6 +1,25 @@
 .underline {
   border-bottom: solid 1px #D1D1D1;
 }
+.underline-light {
+  border-bottom: #E6E5F4;
+}
+.border-right {
+  border-right: solid 1px #D1D1D1;
+}
+.filter {
+  width: 100%;
+  height: 100rpx;
+}
+.filter .selection {
+  margin-top: 15rpx;
+  height: 70rpx;
+  line-height: 70rpx;
+  width: 49.6%;
+  display: inline-block;
+  text-align: center;
+  color: #FF9E9E;
+}
 .form {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -28,6 +47,47 @@
   float: right;
   margin-right: 5%;
 }
+.form .row .info-divider {
+  text-align: right;
+  float: right;
+  height: 114rpx;
+  line-height: 114rpx;
+  width: 40rpx;
+  text-align: center;
+}
+.list {
+  width: 100%;
+  border-top: solid 1px #D1D1D1;
+}
+.list .row {
+  width: 100%;
+  float: right;
+  height: 114rpx;
+}
+.list .row input {
+  margin-left: 5%;
+  height: 114rpx;
+  text-align: left;
+  float: left;
+}
+.list .row .delete-btn {
+  width: 100rpx;
+  height: 114rpx;
+  float: right;
+  background: red;
+}
+.list .row label {
+  margin-left: 5%;
+  line-height: 114rpx;
+  float: left;
+}
+.list .row .selector {
+  width: 100rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
+}
 .logo {
   margin-top: 20rpx;
   width: 180rpx;
@@ -53,7 +113,7 @@
   float: right;
   width: 30%;
   height: 100%;
-  background-color: #43BB57;
+  background-color: #FF4343;
   text-align: center;
   color: white;
 }
@@ -62,7 +122,7 @@
   margin-top: 30rpx;
 }
 .std-button .bind-user {
-  background-color: #43BB57;
+  background-color: #FF4343;
   color: white;
   width: 90%;
   height: 90rpx;
@@ -80,34 +140,61 @@
 }
 .product-detail-main .product-info {
   width: 90%;
-  margin-top: 50rpx;
 }
 .product-detail-main .product-info .top {
+  margin-top: 10rpx;
   width: 100%;
-  height: 100rpx;
-}
-.product-detail-main .product-info .top .left {
-  float: left;
-  width: 60%;
-}
-.product-detail-main .product-info .top .left .name {
-  width: 100%;
-  font-size: 35rpx;
-}
-.product-detail-main .product-info .top .left .price {
-  font-size: 35rpx;
-}
-.product-detail-main .product-info .top .button {
-  float: right;
-  border: 1px solid #43BB57;
-  color: #43BB57;
-  text-align: center;
-  width: 25%;
   height: 80rpx;
   line-height: 80rpx;
 }
+.product-detail-main .product-info .top .left {
+  float: left;
+  color: #FF4343;
+  font-size: 37rpx;
+}
+.product-detail-main .product-info .top .right {
+  float: right;
+}
+.product-detail-main .product-info .low {
+  width: 100%;
+  height: 100rpx;
+}
+.product-detail-main .product-info .low .left {
+  float: left;
+  width: 60%;
+}
+.product-detail-main .product-info .low .left .name {
+  width: 100%;
+  font-size: 37rpx;
+}
+.product-detail-main .product-info .low .left .name .fire {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 5rpx;
+  float: left;
+  margin-right: 10rpx;
+}
+.product-detail-main .product-info .low .left .code {
+  font-size: 25rpx;
+}
+.product-detail-main .product-info .low .button {
+  float: right;
+  border: 1px solid #FF4343;
+  color: #FF4343;
+  text-align: center;
+  width: 25%;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.product-detail-main .product-info .low .button .heart {
+  width: 44rpx;
+  height: 40rpx;
+  margin-top: 15rpx;
+  float: left;
+  margin-left: 20rpx;
+}
 .product-detail-main .product-info .description {
-  margin-top: 30rpx;
+  margin-top: 10rpx;
   width: 100%;
   height: 35rpx;
   font-size: 25rpx;
