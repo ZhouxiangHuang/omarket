@@ -55,6 +55,13 @@
   width: 40rpx;
   text-align: center;
 }
+.form .row .selector {
+  width: 30rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
+}
 .list {
   width: 100%;
   border-top: solid 1px #D1D1D1;

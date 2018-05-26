@@ -11,7 +11,9 @@ Page({
     productImages: ['/images/jeans.jpg'],
     productCode: '',
     productName: '',
-    productPrice: 0,    
+    productPrice: 0,
+    categories: {},
+    categoryIndex: 0
   },
   //事件处理函数
   bindViewTap: function () {
@@ -20,7 +22,12 @@ Page({
     })
   },
   onLoad: function () {
-    console.log('check out yo');
+    var that = this;
+    app.http.get('/site/merchant/categories', {}, function(res){
+      that.setData({
+        categories: res.result
+      })
+    })
   },
   chooseImage: function(e) {
     var that = this;
@@ -56,12 +63,14 @@ Page({
     var filename = 'file';
     this.data.productImages.forEach(function upload(path, index) {
       if(index === 0) {
+        var categoryIndex = that.data.categoryIndex;
+        var categoryId = that.data.categories[categoryIndex].id;
         var form = {
             'file_name': filename,
             'code': that.data.productCode,
             'price': that.data.productPrice,
             'name': that.data.productName,
-            'type': '牛仔裤',
+            'merchant_category_id': categoryId,
             'hot': 0
         };
       } else {
@@ -93,5 +102,10 @@ Page({
     this.setData({
       productCode: e.detail.value
     })  
+  },
+  selectCategory: function(e) {
+    this.setData({
+      categoryIndex: e.detail.value
+    })
   }
 })

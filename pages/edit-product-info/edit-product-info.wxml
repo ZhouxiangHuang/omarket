@@ -1,15 +1,14 @@
 <view class="edit-product-main container">
     <view class="product-images">
         <image class="product-image" src="{{item}}" bindtap="chooseImage" wx:for="{{productImages}}" wx:key="{{productImages}}"/>
-        
         <image class="product-image" bindtap="chooseImage"/>    
-            
     </view>
     <form class="form">
         <view class='row underline'>
             <label>产品类别</label>
-            <picker range = "{{['牛仔裤','睡衣']}}">
-                <view value="jeans">牛仔裤</view>
+            <image class="selector" src="/images/selector.png" mode="right"></image>
+            <picker bindchange="selectCategory" range = "{{categories}}" value="{{categoryIndex}}" range-key="name">
+                <view value="jeans">{{categories[categoryIndex].name}}</view>
             </picker>
         </view>
          <view class='row underline'>

@@ -1,7 +1,7 @@
 /**app.wxss**/
 .container {
   font-size: 30rpx;
-  color: #4A4A4A RGB(74,74,74);
+  color: #4A4A4A;
   height: 100%;
   display: flex;
   flex-direction: column;

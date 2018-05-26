@@ -21,7 +21,7 @@ Page({
   onLoad: function (options) {
     var productId = options.product_id;
     var data = {
-      product_id: 1
+      product_id: productId
     }
     var that = this;
     app.http.get('/site/product/detail',data, function(res){

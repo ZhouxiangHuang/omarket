@@ -14,12 +14,13 @@
             <view class="merchant-logo">
                 <image class="logo" src="{{merchant.imageUrl}}" />
             </view>
-            <view class="merchant-profile" bindtap="selectStore" data-merchant="{{merchant.id}}">
+            <view class="merchant-profile" data-merchant="{{merchant.id}}">
                 <view class="merchant-name">{{merchant.name}}</view>
                 <view class="merchant-address"> {{merchant.address}}</view>  
+                <view class="enter" bindtap="selectStore">进店</view>                  
                 <view class="merchant-announcement">
                     <view class="announcement-icon">公告</view>
-                    <view class="announcement-content">全年优惠,牛仔裤天天打折</view> 
+                    <view class="announcement-content">{{merchant.announcement}}</view> 
                 </view>           
                 <view class="tags">
                     <view class="tag" wx:for="{{merchant.tags}}" wx:key="{{tags}}">

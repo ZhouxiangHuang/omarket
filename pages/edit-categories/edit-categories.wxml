@@ -6,7 +6,10 @@
         </view>
    </view>
    <view class="edit-btn-wrapper">
-        <view class="add-category-btn" bindtap="addCategory"></view>   
+        <view class="second-wrapper">
+            <view class="add-category-btn" bindtap="addCategory"></view>
+            <text>添加</text>
+        </view>
    </view>
    <view class="std-button save-edit-pos">
         <button class="bind-user" bindtap="save">保存</button>

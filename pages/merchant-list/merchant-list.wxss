@@ -136,7 +136,7 @@
 }
 .merchant .merchant-info {
   width: 100%;
-  height: 200rpx;
+  height: 190rpx;
 }
 .merchant .merchant-info .merchant-logo {
   margin-left: 15rpx;
@@ -160,14 +160,24 @@
   height: 100rpx;
 }
 .merchant .merchant-info .merchant-profile .merchant-name {
-  font-size: 38rpx;
+  font-size: 30rpx;
   display: inline-block;
 }
 .merchant .merchant-info .merchant-profile .merchant-address {
   display: inline-block;
   margin-left: 10rpx;
-  font-size: 24rpx;
+  font-size: 20rpx;
   color: #979797;
+}
+.merchant .merchant-info .merchant-profile .enter {
+  float: right;
+  margin-left: 10rpx;
+  font-size: 22rpx;
+  border-radius: 20px;
+  width: 80rpx;
+  text-align: center;
+  color: #FF4343;
+  border: 1px solid #FF4343;
 }
 .merchant .merchant-info .merchant-profile .merchant-announcement .announcement-icon {
   display: inline-block;

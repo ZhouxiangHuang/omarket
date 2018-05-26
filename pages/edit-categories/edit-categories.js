@@ -52,6 +52,7 @@ Page({
         form[category.id] = category.name;
       }
     })
+
     app.http.post('/site/product/update-merchant-category', {form: form}, function(res) {
       if(res.result_code === 10000) {
         wx.navigateBack(1);

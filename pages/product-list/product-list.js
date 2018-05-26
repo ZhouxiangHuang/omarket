@@ -108,7 +108,7 @@ Page({
       }
     })
   }, 
-  editProducts: function() {
+  editProducts: function() {  
     wx.navigateTo({
       url: '../edit-product-info/edit-product-info',
       fail: function(e) {

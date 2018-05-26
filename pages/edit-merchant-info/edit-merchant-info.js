@@ -137,7 +137,6 @@ Page({
         country_code: this.data.countryCode,
       }
 
-      console.log(form);
       // var form = {
       //   name: 'ASDFASDEWDF',
       //   start: "05:00",
@@ -148,7 +147,9 @@ Page({
       //   address: 'baross gabor utca 328',                 
       // }
       app.http.post('/site/merchant/update', form, function(res) {
-        console.log(res);
+        if(res.result_code === 10000) {
+          wx.navigateBack(1);
+        }
       });
   },
   selectRegion: function(e) {
