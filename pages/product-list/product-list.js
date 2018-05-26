@@ -3,6 +3,7 @@
 const app = getApp()
 
 Page({
+  merchantId: null,
   data: {
     motto: 'Hello World',
     userInfo: {},
@@ -17,20 +18,22 @@ Page({
     })
   },
   onLoad: function (option) {
+    var merchantId = option.merchantId;
     // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
+    this.merchantId = merchantId;
     this.setData({isOwner: true});
   },
   onShow: function () {
     var that = this;
     wx.showLoading({title: '加载中',mask: true});
 
-    app.http.get('/site/merchant/detail', {}, function(res) {
+    app.http.get('/site/merchant/detail', {merchant_id: this.merchantId}, function(res) {
       that.setData({
         merchant: res.result
       });
     });
 
-    app.http.get('/site/product/products',{},function(res){ 
+    app.http.get('/site/product/products', {merchant_id: this.merchantId},function(res){ 
       wx.hideLoading();
       if(res.result_code === 10000) {
         var data = res.result;
@@ -51,8 +54,6 @@ Page({
           products: products
         })
     
-        console.log(that.data.products);
-
         var categoryList = [];
         Object.keys(that.data.products).forEach(element => {
           if(element === '热销') {

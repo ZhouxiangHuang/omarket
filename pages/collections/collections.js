@@ -4,12 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
-    categories: [],
-    newCategory: ''
+    collections: []
   },
   //事件处理函数
   bindViewTap: function () {
@@ -18,7 +13,18 @@ Page({
     })
   },
   onLoad: function () {
-   
+    var that = this;
+    app.http.get('/site/product/collections', {}, function(res) {
+      console.log(res);
+      that.setData({
+        collections: res.result
+      })
+    })
   },
-
+  selectStore: function (e) {
+    var merchantId = e.currentTarget.dataset.merchant
+    wx.navigateTo({
+      url: '../product-list/product-list?merchantId=' + merchantId
+    })
+  }
 })

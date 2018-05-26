@@ -20,6 +20,16 @@
   text-align: center;
   color: #FF9E9E;
 }
+.filter .selection .selector {
+  width: 20rpx;
+  height: 15rpx;
+  float: right;
+  margin-right: 100rpx;
+  margin-top: 30rpx;
+}
+.filter .selection text {
+  margin-left: 100rpx;
+}
 .form {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -55,6 +65,13 @@
   width: 40rpx;
   text-align: center;
 }
+.form .row .selector {
+  width: 30rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
+}
 .list {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -74,7 +91,6 @@
   width: 100rpx;
   height: 114rpx;
   float: right;
-  background: red;
 }
 .list .row label {
   margin-left: 5%;
@@ -138,17 +154,31 @@
   float: right;
 }
 .collections-main .product-list .title .btn {
+  color: #FF4343;
   float: left;
   width: 110rpx;
-  height: 65rpx;
-  line-height: 65rpx;
+  margin-top: 10rpx;
+  height: 45rpx;
+  line-height: 45rpx;
+  border: 1px solid #FF4343;
+  text-indent: 50rpx;
+  border-radius: 12px;
+  font-size: 25rpx;
 }
 .collections-main .product-list .title .name {
+  margin-left: 10rpx;
   float: left;
   width: 140rpx;
   height: 65rpx;
   line-height: 65rpx;
   font-size: 34rpx;
+}
+.collections-main .product-list .title .selector {
+  width: 30rpx;
+  height: 20rpx;
+  margin-top: 22rpx;
+  margin-right: 20rpx;
+  float: right;
 }
 .collections-main .product-list .content {
   width: 95%;
