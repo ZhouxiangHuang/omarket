@@ -57,7 +57,7 @@ function getToken(request,url,data,cb) {
       console.log('fail test');
       return request(null,url,data,cb);
     }
-});
+  });
 }
 
 module.exports = {  

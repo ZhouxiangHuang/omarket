@@ -55,6 +55,13 @@
   width: 40rpx;
   text-align: center;
 }
+.form .row .selector {
+  width: 30rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
+}
 .list {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -74,7 +81,6 @@
   width: 100rpx;
   height: 114rpx;
   float: right;
-  background: red;
 }
 .list .row label {
   margin-left: 5%;
@@ -148,6 +154,7 @@
   height: 114rpx;
   line-height: 114rpx;
   width: 120rpx;
+  color: #FF4343;
 }
 .edit-categories-main .edit-btn-wrapper .second-wrapper .add-category-btn {
   margin-top: 30rpx;
@@ -156,6 +163,12 @@
   height: 50rpx;
   background: #FF4343;
   float: left;
+}
+.edit-categories-main .edit-btn-wrapper .second-wrapper .add-category-btn image {
+  width: 45%;
+  height: 45%;
+  margin-bottom: 70%;
+  margin-left: 30%;
 }
 .edit-categories-main .edit-btn-wrapper .second-wrapper text {
   float: right;

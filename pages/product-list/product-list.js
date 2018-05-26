@@ -23,21 +23,37 @@ Page({
   onShow: function () {
     var that = this;
     wx.showLoading({title: '加载中',mask: true});
+
+    app.http.get('/site/merchant/detail', {}, function(res) {
+      console.log(res.result);
+      that.setData({
+        merchant: res.result
+      });
+    });
+
     app.http.get('/site/product/products',{},function(res){ 
       wx.hideLoading();
       if(res.result_code === 10000) {
         var data = res.result;
         var products = {}
+        products['热销'] = [];
         data.forEach(function(category) {
-            var prop = Object.keys(category)[0];
-            var val = category[prop];
+            var prop = Object.keys(category)[0]; //category name
+            var val = category[prop]; //products within category
             products[prop] = val;
+            val.forEach(function(product) {
+                if(product.hot_item) {
+                  products['热销'].push(product);
+                }
+            });
         })
 
         that.setData({
           products: products
         })
     
+        console.log(that.data.products);
+
         var categoryList = [];
         Object.keys(that.data.products).forEach(element => {
           if(element === '热销') {
@@ -48,12 +64,6 @@ Page({
         });
       
         that.setData({
-          merchant: {imageUrl: '/images/missgrace.jpeg', 
-                      name: 'MISS GRACE', 
-                      address: 'Baross Gabor utca 73, 16区', 
-                      tags:['牛仔裤','运动服','休闲'],
-                      announcement: '买卖的都是质量最好的牛仔裤',                                                         
-                    },
           categories: categoryList,
           productList: that.data.products['热销'],
         });

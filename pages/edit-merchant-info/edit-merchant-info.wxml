@@ -1,6 +1,6 @@
 <view class="edit-merch-main container">
     <view class="top-logo">
-        <image class="logo" src="{{merchant.imageUrl}}"/>
+        <image class="logo" bindtap="chooseImage" src="{{merchant.image_url}}"/>
     </view>
 
     <view class="form">
@@ -32,7 +32,7 @@
         </view>
         <view class='row underline'>
             <label>公告</label>
-            <input type="string" bindtap="annouce" placeholder="请输入公告" value="{{form.announcement}}"/>
+            <input type="string" bindtap="announce" placeholder="请输入公告" value="{{form.announcement}}"/>
         </view>
         <view class='row underline'>
             <label>标签1</label>

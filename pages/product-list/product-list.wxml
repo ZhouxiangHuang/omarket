@@ -4,8 +4,8 @@
             <image class="logo" src="{{merchant.imageUrl}}" />
         </view>
         <view class="merchant-profile">
-            <view id="merchant-name">{{merchant.name}}</view>
-            <view id="merchant-hours">营业时间: 6:00 - 18:00</view>                 
+            <view id="merchant-name">{{merchant.store_name}}</view>
+            <view id="merchant-hours">营业时间: {{merchant.open_at}} - {{merchant.closed_at}}</view>                 
             <view id="merchant-address">
                 <view class="highlight">地址</view>
                 <text>{{merchant.address}}</text>
@@ -31,7 +31,9 @@
                 <text>{{item.name}}</text>
             </view>
             <view wx:if="{{isOwner}}" class="category underline" id="add-category" bindtap="editCatogory">
-                <view class="circle"></view>
+                <view class="circle">
+                    <image src="/images/add.png" mode="center"/>
+                </view>
                 <text id="add-text">添加</text>
             </view>
         </view>
@@ -43,6 +45,8 @@
                 <view class="price">￥{{item.price}}</view>
             </view>   
         </view>
-        <view class="add-product-btn" bindtap="editProducts"></view>
+        <view class="add-product-btn" bindtap="editProducts">
+            <image src="/images/add.png" mode="center"/>
+        </view>
     </view>
 </view>

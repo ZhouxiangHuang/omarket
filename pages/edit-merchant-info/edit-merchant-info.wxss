@@ -1,6 +1,9 @@
 .underline {
   border-bottom: solid 1px #D1D1D1;
 }
+.underline-light {
+  border-bottom: #E6E5F4;
+}
 .border-right {
   border-right: solid 1px #D1D1D1;
 }
@@ -15,7 +18,7 @@
   width: 49.6%;
   display: inline-block;
   text-align: center;
-  color: #FF4343;
+  color: #FF9E9E;
 }
 .form {
   width: 100%;
@@ -52,6 +55,13 @@
   width: 40rpx;
   text-align: center;
 }
+.form .row .selector {
+  width: 30rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
+}
 .list {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -71,7 +81,6 @@
   width: 100rpx;
   height: 114rpx;
   float: right;
-  background: red;
 }
 .list .row label {
   margin-left: 5%;
@@ -129,6 +138,9 @@
   width: 100%;
   display: flex;
   justify-content: center;
+}
+.edit-merch-main .top-logo image {
+  background-color: #FF9E9E;
 }
 .edit-merch-main .form {
   margin-top: 40rpx;

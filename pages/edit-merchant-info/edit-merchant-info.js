@@ -11,7 +11,7 @@ Page({
     canIUse: wx.canIUse('ton.open-type.getUserInfo'),
     startTime: '06:00',
     endTime: '18:00',
-    hiddenModal:true,
+    hiddenModal: true,
     form: {tags: []},
     tag1: '',
     tag2: '',
@@ -41,7 +41,7 @@ Page({
       });
       
       // this.setData({
-      //   merchant: {imageUrl: '/images/missgrace.jpeg', 
+      //   merchant: {image_url: '/images/missgrace.jpeg', 
       //               store_name: 'MISS GRACE', 
       //               region: '匈牙利/布达佩斯',
       //               address: 'Baross Gabor utca 73', 
@@ -49,7 +49,7 @@ Page({
       //               description: '买卖的都是质量最好的牛仔裤',
       //               mobile: '0036305591038',
       //             },
-      // });
+      // });  
     })
   },
   onShow: function(option) {
@@ -97,7 +97,7 @@ Page({
         endTime: e.detail.value
     });
   },
-  annouce: function(e) {
+  announce: function(e) {
     this.setData({
       hiddenModal: false
     })
@@ -126,7 +126,7 @@ Page({
   },
   updateMerchant: function(e) {
       var form = {
-        name: this.data.merchant.store_name,
+        store_name: this.data.merchant.store_name,
         start: this.data.startTime,
         end: this.data.endTime,
         tags: this.data.form.tags,
@@ -137,24 +137,51 @@ Page({
         country_code: this.data.countryCode,
       }
 
-      // var form = {
-      //   name: 'ASDFASDEWDF',
-      //   start: "05:00",
-      //   end: "18:00",
-      //   tags: [111, 6, 29],
-      //   mobile: '41324123423',
-      //   announcement: '我先来测试一下今天的天气到底好不好',  
-      //   address: 'baross gabor utca 328',                 
-      // }
-      app.http.post('/site/merchant/update', form, function(res) {
-        if(res.result_code === 10000) {
-          wx.navigateBack(1);
-        }
-      });
+      // app.http.post('/site/merchant/update', form, function(res) {
+      //   if(res.result_code === 10000) {
+      //     wx.navigateBack(1);
+      //   }
+      // });
+      var url = this.data.merchant.image_url;
+      if(url) {
+        wx.getStorage({
+          key: 'token', 
+          success: function(res){
+            var accessToken = res.data;
+            wx.uploadFile({
+              url: app.http.domain + '/site/merchant/upload-profile',
+              filePath: url,
+              name: 'file',
+              header: {'access-token': accessToken},  
+              formData: {},
+            })          
+          },
+          fail: function(res){
+            console.log(res);
+          }
+        });
+      }
   },
   selectRegion: function(e) {
     wx.navigateTo({
       url: '../list/list?mode=regions'
     })
-  }
+  },
+  chooseImage: function(e) {
+    var that = this;
+    wx.chooseImage({
+      count: 1, // 默认9
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        var tempFilePaths = res.tempFilePaths;
+        that.data.merchant.image_url = tempFilePaths[0];
+
+        that.setData({
+          merchant: that.data.merchant
+        })
+      }
+    })
+  },
 })

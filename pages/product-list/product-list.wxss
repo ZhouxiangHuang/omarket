@@ -55,6 +55,13 @@
   width: 40rpx;
   text-align: center;
 }
+.form .row .selector {
+  width: 30rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
+}
 .list {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -265,6 +272,10 @@
   margin-right: 50rpx;
   margin-bottom: 50rpx;
 }
+.product-list-main .products .add-product-btn image {
+  height: 100%;
+  width: 100%;
+}
 .product-list-main .products #add-category {
   color: #FF4343;
 }
@@ -278,6 +289,11 @@
   align-items: center;
   float: left;
   margin-left: 20rpx;
+}
+.circle image {
+  height: 40%;
+  width: 40%;
+  margin-left: 30%;
 }
 .highlight {
   width: 75rpx;
