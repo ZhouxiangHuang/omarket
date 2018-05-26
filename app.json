@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/edit-merchant-info/edit-merchant-info",                    
     "pages/product-list/product-list",                       
+    "pages/edit-merchant-info/edit-merchant-info",                    
     "pages/edit-categories/edit-categories",
     "pages/login/login",    
     "pages/edit-product-info/edit-product-info",                                

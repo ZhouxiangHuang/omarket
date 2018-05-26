@@ -20,6 +20,16 @@
   text-align: center;
   color: #FF9E9E;
 }
+.filter .selection .selector {
+  width: 20rpx;
+  height: 15rpx;
+  float: right;
+  margin-right: 100rpx;
+  margin-top: 30rpx;
+}
+.filter .selection text {
+  margin-left: 100rpx;
+}
 .form {
   width: 100%;
   border-top: solid 1px #D1D1D1;

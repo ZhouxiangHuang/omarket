@@ -20,6 +20,16 @@
   text-align: center;
   color: #FF9E9E;
 }
+.filter .selection .selector {
+  width: 20rpx;
+  height: 15rpx;
+  float: right;
+  margin-right: 100rpx;
+  margin-top: 30rpx;
+}
+.filter .selection text {
+  margin-left: 100rpx;
+}
 .form {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -81,7 +91,6 @@
   width: 100rpx;
   height: 114rpx;
   float: right;
-  background: red;
 }
 .list .row label {
   margin-left: 5%;
@@ -147,7 +156,7 @@
   justify-content: center;
 }
 .product-list-main .merchant-profile .merchant-profile {
-  margin-top: 20rpx;
+  margin-top: 23rpx;
   float: right;
   width: 500rpx;
   margin-right: 10rpx;
@@ -158,12 +167,12 @@
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-hours {
   margin-top: 5rpx;
-  font-size: 20rpx;
+  font-size: 23rpx;
   color: #979797;
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-address {
   margin-top: 10rpx;
-  font-size: 20rpx;
+  font-size: 23rpx;
   color: #979797;
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-address .highlight {
@@ -227,6 +236,11 @@
   height: 125rpx;
   line-height: 125rpx;
   width: 100%;
+}
+.product-list-main .products .categories .category .fire {
+  width: 40%;
+  height: 100%;
+  float: left;
 }
 .product-list-main .products .categories .category #add-text {
   margin-left: -20rpx;

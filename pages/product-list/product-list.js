@@ -25,7 +25,6 @@ Page({
     wx.showLoading({title: '加载中',mask: true});
 
     app.http.get('/site/merchant/detail', {}, function(res) {
-      console.log(res.result);
       that.setData({
         merchant: res.result
       });
@@ -57,9 +56,9 @@ Page({
         var categoryList = [];
         Object.keys(that.data.products).forEach(element => {
           if(element === '热销') {
-            categoryList.push({name: element, color: 'white'});
+            categoryList.push({name: element, color: 'white', ishot: true});
           } else {
-            categoryList.push({name: element, color: '#F8F8F8'});
+            categoryList.push({name: element, color: '#F8F8F8', ishot: false});
           }
         });
       

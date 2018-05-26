@@ -1,7 +1,7 @@
 <view class="container product-list-main">
     <view class="merchant-profile underline">
         <view class="merchant-logo">
-            <image class="logo" src="{{merchant.imageUrl}}" />
+            <image class="logo" src="{{merchant.image_url}}" />
         </view>
         <view class="merchant-profile">
             <view id="merchant-name">{{merchant.store_name}}</view>
@@ -19,15 +19,22 @@
     </view>
     <view class="filter underline">
       <picker class="selection border-right" range = "{{['牛仔裤','睡衣']}}">
-            <view>选择地区</view>
+            <view>
+                <text>选择地区</text>
+                <image class="selector" src="/images/triangle.png"/>
+            </view>
         </picker>
          <picker class="selection" range = "{{['牛仔裤','睡衣']}}">
-            <view>选择种类</view>
+            <view>
+                <text>选择种类</text>
+                <image class="selector" src="/images/triangle.png"/>
+            </view>
         </picker>    
     </view>
     <view class="products">
         <view class="categories">
             <view class="category underline" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-no="{{item}}" style="background-color: {{item.color}}">
+                <image class="fire" wx:if="{{item.ishot}}" src="/images/hot.png" mode="right"/>
                 <text>{{item.name}}</text>
             </view>
             <view wx:if="{{isOwner}}" class="category underline" id="add-category" bindtap="editCatogory">
