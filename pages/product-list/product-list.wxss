@@ -50,6 +50,13 @@
   float: right;
   margin-right: 5%;
 }
+.form .row .select-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 5%;
+  float: right;
+}
 .form .row picker {
   height: 114rpx;
   line-height: 114rpx;
@@ -88,8 +95,10 @@
   float: left;
 }
 .list .row .delete-btn {
-  width: 100rpx;
-  height: 114rpx;
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 20rpx;
   float: right;
 }
 .list .row label {
@@ -214,11 +223,16 @@
 .product-list-main .merchant-profile .merchant-profile .edit-profile-btn {
   width: 100rpx;
   height: 50rpx;
-  border: solid 1px red;
   float: right;
   margin-top: -30rpx;
   color: #FF4343;
   font-size: 25rpx;
+}
+.product-list-main .merchant-profile .merchant-profile .edit-profile-btn image {
+  margin-left: 5rpx;
+  margin-top: 5rpx;
+  width: 30rpx;
+  height: 30rpx;
 }
 .product-list-main .products {
   height: 880rpx;
@@ -238,9 +252,14 @@
   width: 100%;
 }
 .product-list-main .products .categories .category .fire {
-  width: 40%;
-  height: 100%;
+  width: 20%;
+  height: 30%;
   float: left;
+  margin-top: 40rpx;
+  margin-left: 20rpx;
+}
+.product-list-main .products .categories .category .hot-text {
+  margin-left: -30rpx;
 }
 .product-list-main .products .categories .category #add-text {
   margin-left: -20rpx;

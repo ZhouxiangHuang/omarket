@@ -46,7 +46,8 @@ Page({
       // }
   },
   collect: function(e) {
-    app.http.post('/site/product/collect', {product_id: 1}, function(res) {
+    var productId = this.data.productInfo.id;
+    app.http.post('/site/product/collect', {product_id: productId}, function(res) {
       console.log(res);
     })
   },

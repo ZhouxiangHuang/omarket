@@ -19,6 +19,8 @@ Page({
   },
   onLoad: function (option) {
     var merchantId = option.merchantId;
+    console.log(option);
+
     // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
     this.merchantId = merchantId;
     this.setData({isOwner: true});
@@ -104,7 +106,7 @@ Page({
   },
   editMerchant: function() {
     wx.navigateTo({
-      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + 1,
+      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + this.merchantId,
       fail: function(e) {
           console.log(e);
       }

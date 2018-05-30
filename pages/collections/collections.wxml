@@ -4,7 +4,7 @@
          <view class='title underline'>
             <view class="btn" bindtap="selectStore" data-merchant="{{collection.merchant_id}}">进店</view>
             <view class="name">{{collection.merchant_name}}</view>   
-            <image class="selector" class="selector" src="/images/triangle.png"/>         
+            <image class="selector" class="selector" src="/images/triangle.png"/>
         </view>
         <view class="content" wx:for="{{collection.products}}" wx:for-item="product" wx:key="productKey">
             <view class="left">
@@ -14,9 +14,10 @@
                 <view class="name">{{product.name}}</view>
                 <view class="price">$ {{product.price}}</view>
                 <view class="code">商品编号: {{product.product_unique_code}}</view>
-                <view class="description">介绍：{{product.description}}</view>                
+                <view class="description">介绍：{{product.description}}</view>    
+                <view class="trash" bindtap="delete" data-productid="{{product.id}}">垃圾</view>            
             </view>            
         </view>
   </view>
-  
+  <modal title="确认将产品移出收藏夹？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="doDelete" bindcancel="hideModal" ></modal>
 </view>

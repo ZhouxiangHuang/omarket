@@ -1,16 +1,16 @@
 {
   "pages":[
-    "pages/collections/collections",        
-    "pages/product-list/product-list",                       
-    "pages/edit-merchant-info/edit-merchant-info",                    
-    "pages/edit-categories/edit-categories",
-    "pages/login/login",    
     "pages/edit-product-info/edit-product-info",                                
+    "pages/product-list/product-list",                       
+    "pages/login/login",    
     "pages/merchant-list/merchant-list",        
+    "pages/edit-categories/edit-categories",
     "pages/product-detail/product-detail",    
+    "pages/collections/collections",        
+    "pages/edit-merchant-info/edit-merchant-info",                    
     "pages/center/center",    
     "pages/list/list",                        
-    "pages/index/index",                
+    "pages/index/index",              
     "pages/home/home",        
     "pages/logs/logs"
   ],
@@ -24,11 +24,15 @@
     "list": [
       {
         "pagePath": "pages/merchant-list/merchant-list",
-        "text": "市场"
+        "text": "市场",
+        "iconPath": "images/market-pre-select.png",
+        "selectedIconPath": "images/market-selected.png"
       },
       {
         "pagePath": "pages/center/center",
-        "text": "个人中心"
+        "text": "个人中心",
+        "iconPath": "images/center-pre-select.png",
+        "selectedIconPath": "images/center-selected.png"
       }
     ]
   }

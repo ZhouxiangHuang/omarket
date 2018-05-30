@@ -8,12 +8,13 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('ton.open-type.getUserInfo'),
-    productImages: ['/images/jeans.jpg'],
+    productImages: [],
     productCode: '',
     productName: '',
     productPrice: 0,
     categories: {},
-    categoryIndex: 0
+    categoryIndex: 0,
+    isHot: false
   },
   //事件处理函数
   bindViewTap: function () {
@@ -71,7 +72,7 @@ Page({
             'price': that.data.productPrice,
             'name': that.data.productName,
             'merchant_category_id': categoryId,
-            'hot': 0
+            'hot': this.data.isHot
         };
       } else {
         var form = {
@@ -106,6 +107,11 @@ Page({
   selectCategory: function(e) {
     this.setData({
       categoryIndex: e.detail.value
+    })
+  },
+  selectHot: function(e) {
+    this.setData({
+      isHot: !this.data.isHot
     })
   }
 })

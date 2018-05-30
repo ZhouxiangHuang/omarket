@@ -20,6 +20,16 @@
   text-align: center;
   color: #FF9E9E;
 }
+.filter .selection .selector {
+  width: 20rpx;
+  height: 15rpx;
+  float: right;
+  margin-right: 100rpx;
+  margin-top: 30rpx;
+}
+.filter .selection text {
+  margin-left: 100rpx;
+}
 .form {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -78,8 +88,10 @@
   float: left;
 }
 .list .row .delete-btn {
-  width: 100rpx;
-  height: 114rpx;
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 20rpx;
   float: right;
 }
 .list .row label {
@@ -158,10 +170,8 @@
 }
 .edit-categories-main .edit-btn-wrapper .second-wrapper .add-category-btn {
   margin-top: 30rpx;
-  border-radius: 50%;
   width: 50rpx;
   height: 50rpx;
-  background: #FF4343;
   float: left;
 }
 .edit-categories-main .edit-btn-wrapper .second-wrapper .add-category-btn image {

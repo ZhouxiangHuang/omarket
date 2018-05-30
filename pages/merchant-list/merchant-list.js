@@ -7,7 +7,7 @@ Page({
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo')
+    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
   },
   //事件处理函数
   bindViewTap: function () {
@@ -23,19 +23,9 @@ Page({
       });    
     })
 
-    // this.setData({
-    //   merchants: [{
-    //               id: 1,
-    //               imageUrl: '/images/missgrace.jpeg', 
-    //               name: 'MISS GRACE', 
-    //               address: '布达佩斯 匈牙利', 
-    //               tags:['牛仔裤','运动服','休闲'],
-    //               description: '买卖的都是质量最好的牛仔裤',                   
-    //             }],
-    // });
   },
   onShow: function() {
-    console.log(app.globalData.userRole);
+    // console.log(app.globalData.userRole);
   },
   selectCategory: function (event) {
     var category = event.currentTarget.dataset.no.name;

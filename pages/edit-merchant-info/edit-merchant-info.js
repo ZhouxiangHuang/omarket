@@ -25,9 +25,10 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (option) {
+    var merchantId = option.merchant_id;
     var that = this;
-    app.http.get('/site/merchant/detail', {}, function(res) {
+    app.http.get('/site/merchant/detail', {merchant_id: merchantId}, function(res) {
       that.data.countryCode = res.result.country_code;
       that.data.cityCode = res.result.city_code;
       that.data.form.tags = res.result.tags;

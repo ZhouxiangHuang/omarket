@@ -216,3 +216,10 @@
 .collections-main .product-list .content .right .description {
   font-size: 20rpx;
 }
+.collections-main .product-list .content .right .trash {
+  width: 12%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 90rpx;
+}

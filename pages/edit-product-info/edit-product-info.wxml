@@ -1,7 +1,9 @@
 <view class="edit-product-main container">
     <view class="product-images">
         <image class="product-image" src="{{item}}" bindtap="chooseImage" wx:for="{{productImages}}" wx:key="{{productImages}}"/>
-        <image class="product-image" bindtap="chooseImage"/>    
+        <view class="product-image" bindtap="chooseImage">
+            <image class="add-icon" src="/images/add-button.png"/>
+        </view>
     </view>
     <form class="form">
         <view class='row underline'>
@@ -25,6 +27,8 @@
         </view>
         <view class='row'>
             <label>热销</label>
+            <image wx:if="{{!isHot}}" class="select-icon" bindtap="selectHot" src="/images/pre-select.png"/>
+            <image wx:if="{{isHot}}" class="select-icon" bindtap="selectHot" src="/images/selected.png"/>            
         </view>
     </form>
 

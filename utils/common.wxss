@@ -50,6 +50,13 @@
   float: right;
   margin-right: 5%;
 }
+.form .row .select-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 5%;
+  float: right;
+}
 .form .row picker {
   height: 114rpx;
   line-height: 114rpx;
@@ -88,8 +95,10 @@
   float: left;
 }
 .list .row .delete-btn {
-  width: 100rpx;
-  height: 114rpx;
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 20rpx;
   float: right;
 }
 .list .row label {
