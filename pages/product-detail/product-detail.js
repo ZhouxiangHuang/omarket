@@ -3,52 +3,40 @@
 const app = getApp()
 
 Page({
+  curIndex: 0,
+  scroll: 0,
   data: {
-    motto: 'Hello World',
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
-    productImages: ['/images/jeans.jpg'],
-    number: 0,
-    productInfo: {}
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
+    productImages: [],
+    productInfo: {},
+    collectionCount: 0,
   },
   onLoad: function (options) {
     var productId = options.product_id;
-    var data = {
-      product_id: productId
-    }
+    
     var that = this;
-    app.http.get('/site/product/detail',data, function(res){
+    app.http.get('/site/product/detail',{product_id: productId}, function(res){
         that.setData({
-          productInfo: res.result    
+          productInfo: res.result,
+          productImages: res.result.images
         })
     })
-  },
-  getSelectItem: function(e) {
-      var that = this;
-      var itemWidth = e.detail.scrollWidth / that.data.productImages.length;//每个商品的宽度
-      var scrollLeft = e.detail.scrollLeft * 2;//滚动宽度
-      console.log(itemWidth, scrollLeft);
-      var curIndex = Math.round(scrollLeft / itemWidth);//通过Math.round方法对滚动大于一半的位置进行进位
-      
-      // console.log(curIndex);
-      // if(curIndex === 1) {
-      //   console.log('test');
-      //   that.setData({
-      //     number:  scrollLeft
-      //   })
-      // }
+
+    app.http.get('/site/product/collections', {}, function(res) {
+      that.setData({
+        collectionCount: that.data.collectionCount + 1 
+      })
+    })
   },
   collect: function(e) {
     var productId = this.data.productInfo.id;
     app.http.post('/site/product/collect', {product_id: productId}, function(res) {
-      console.log(res);
+      wx.showToast({
+        title: '收藏成功',
+        icon: 'succes',
+        duration: 1000,
+        mask:true
+      })
     })
   },
   checkCollections: function(e) {

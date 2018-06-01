@@ -52,7 +52,7 @@
             <image class="product-img" src="/images/jeans.jpg" />         
             <view class="product-detail">
                 <view class="name">{{item.name}}</view>
-                <view class="production-intro">这个货卖的非常好这个货卖的非常好这个货卖的</view>
+                <view class="production-intro">{{item.description}}</view>
                 <view class="price">￥{{item.price}}</view>
             </view>   
         </view>

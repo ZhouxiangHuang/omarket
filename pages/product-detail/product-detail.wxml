@@ -1,8 +1,12 @@
 <view class="product-detail-main container">
-    <scroll-view class="img underline" scroll-x="true" bindscroll="getSelectItem" scroll-left="{{number}}">
-        <image src="/images/jeans.jpg" />
-        <image src="/images/missgrace.jpeg" />   
-    </scroll-view>     
+
+    <swiper class="img underline" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
+      <block wx:for="{{productImages}}" wx:for-index="index">    
+        <swiper-item>    
+          <image src="{{item}}" class="slide-image" mode="aspectFill"/>    
+        </swiper-item>    
+      </block>    
+    </swiper>   
 
     <view class="product-info">
         <view class="top">
@@ -27,7 +31,7 @@
         <view class="description">{{productInfo.description}}</view>   
     </view>                    
     <view class="bottom-row">
-        <view class="info">已关注3款商品</view>
+        <view class="info">已关注{{collectionCount}}款商品</view>
         <view class="btn" bindtap="checkCollections">收藏夹</view>        
     </view>
 </view>

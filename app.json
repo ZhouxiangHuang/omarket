@@ -1,17 +1,17 @@
 {
   "pages":[
     "pages/edit-product-info/edit-product-info",                                
-    "pages/product-list/product-list",                       
+    "pages/home/home",        
+    "pages/list/list",                        
     "pages/login/login",    
     "pages/merchant-list/merchant-list",        
-    "pages/edit-categories/edit-categories",
+    "pages/product-list/product-list",                       
     "pages/product-detail/product-detail",    
-    "pages/collections/collections",        
+    "pages/edit-categories/edit-categories",
+    "pages/collections/collections", 
     "pages/edit-merchant-info/edit-merchant-info",                    
     "pages/center/center",    
-    "pages/list/list",                        
     "pages/index/index",              
-    "pages/home/home",        
     "pages/logs/logs"
   ],
   "window":{

@@ -18,17 +18,12 @@ Page({
     })
   },
   onLoad: function (option) {
-    var merchantId = option.merchantId;
-    console.log(option);
-
+    this.merchantId = option.merchantId;
     // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
-    this.merchantId = merchantId;
     this.setData({isOwner: true});
   },
   onShow: function () {
     var that = this;
-    wx.showLoading({title: '加载中',mask: true});
-
     app.http.get('/site/merchant/detail', {merchant_id: this.merchantId}, function(res) {
       that.setData({
         merchant: res.result
@@ -36,28 +31,22 @@ Page({
     });
 
     app.http.get('/site/product/products', {merchant_id: this.merchantId},function(res){ 
-      wx.hideLoading();
       if(res.result_code === 10000) {
-        var data = res.result;
         var products = {}
         products['热销'] = [];
-        data.forEach(function(category) {
-            var prop = Object.keys(category)[0]; //category name
-            var val = category[prop]; //products within category
-            products[prop] = val;
-            val.forEach(function(product) {
+        res.result.forEach(function(category, index) {
+            var categoryName = Object.keys(category)[0]; //category name
+            var productList = category[categoryName]; //products within category
+            products[categoryName] = productList;
+            productList.forEach(function(product) {
                 if(product.hot_item) {
                   products['热销'].push(product);
                 }
             });
         })
 
-        that.setData({
-          products: products
-        })
-    
         var categoryList = [];
-        Object.keys(that.data.products).forEach(element => {
+        Object.keys(products).forEach(element => {
           if(element === '热销') {
             categoryList.push({name: element, color: 'white', ishot: true});
           } else {
@@ -67,9 +56,10 @@ Page({
       
         that.setData({
           categories: categoryList,
-          productList: that.data.products['热销'],
+          productList: products['热销'],
+          products: products
         });
-        } else {
+      } else {
           wx.showToast({
             title: res.reason,
             duration: 3000,

@@ -8,15 +8,18 @@ function post(url,data,cb){
 }
 
 function doPost(accessToken,url,data,cb) {
+  wx.showLoading({title: '加载中',mask: true});
   wx.request({  
     url: rootDocment + url,  
     data: data,  
     method: 'POST',  
     header: {'Content-Type': 'application/json', 'access-token': accessToken},  
     success: function(res){  
+      wx.hideLoading();
       return typeof cb == "function" && cb(res.data)  
     },  
     fail: function(){  
+      wx.hideLoading();
       return typeof cb == "function" && cb(false)  
     }  
   }) 
@@ -27,6 +30,7 @@ function get(url,data,cb){
 }
 
 function doGet(accessToken,url,data,cb) {
+  wx.showLoading({title: '加载中',mask: true});
   var params = [];
   var keys = Object.keys(data);
   keys.forEach(function(key) {
@@ -40,9 +44,11 @@ function doGet(accessToken,url,data,cb) {
     method: 'get',  
     header: {'Content-Type': 'application/json', 'access-token': accessToken},  
     success: function(res){  
+      wx.hideLoading();
       return typeof cb == "function" && cb(res.data)  
     },  
     fail: function(){  
+      wx.hideLoading();
       return typeof cb == "function" && cb(false)  
     }  
   })  

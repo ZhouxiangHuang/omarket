@@ -1,6 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const REGION_MODE = "regions";
+
 
 Page({
   tag: 0,
@@ -8,41 +10,31 @@ Page({
   data: {
     countries: [],
     selectedRecord: {},
-    motto: 'list',
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
     list: []
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
   },
   onLoad: function (option) {
     this.tag = option.tag;
-    var that = this;
     this.mode = option.mode;
-    if(option.mode == "regions") {
+    var that = this;
+    if(option.mode == REGION_MODE) {
       app.http.get('/site/user/regions', {}, function(res) {
         that.data.countries = res.result;
         if(res.result_code === 10000) {
           that.setData({
             list: res.result
-        })
+          })
         }
       });
     } else {
-        app.http.get('/site/product/categories', {}, function(res) {
+      app.http.get('/site/product/categories', {}, function(res) {
           if(res.result_code === 10000) {
             that.setData({
               list: res.result
           })
-          }
-        });
+        }
+      });
     }
-
   },
   select: function(e) {
     var selectedCategory = e.currentTarget.dataset.select;
@@ -58,9 +50,7 @@ Page({
         }
       })
 
-      console.log(selectedCategory);
-
-      if(this.mode === "regions") {
+      if(this.mode === REGION_MODE) {
         app.globalData.region = selectedCategory;
       } else {
         var record = {'id': selectedCategory.id, 'tag': this.tag, 'name': selectedCategory.name}

@@ -1,25 +1,19 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const USER_ROLE = 2;
+const MERCHANT_ROLE = 1;
 
 Page({
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
     userColor: '#FF4343',
     userFont: 'white',    
     merchantColor: 'white',
     merchantFont: '#FF4343', 
-    role: 2, // 2 => user, 1 => merchant,
+    role: USER_ROLE,
     isMerchant: false
-  },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
   },
   onLoad: function () {
     this.setData({
@@ -44,25 +38,20 @@ Page({
     })
   },
   login: function (e) {
-    wx.showLoading({
-      title: '登陆中',
-      mask: true
-    })
     wx.login({
       success: res => {
         var data ={'code': res.code, 'role': this.data.role};
-        if(this.data.role == 1) {
+        if(this.data.role == MERCHANT_ROLE) {
           data['store_name'] = this.data.storeName;
           data['address'] = this.data.address;
           data['mobile'] = this.data.mobile;      
         }
         var that = this;
         app.http.post('/site/user/login',data,function(res){ 
-          wx.hideLoading();
           if(res.result_code === 10000) {
             app.globalData.userRole = that.data.role; 
             var token = res.result.access_token;
-            wx.setStorage({key: 'token',data: token})
+            wx.setStorage({key:'token',data: token})
             wx.switchTab({
               url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
             })
@@ -78,7 +67,7 @@ Page({
     })
   },
   changeRole: function() {
-    var newRole = (this.data.role === 1) ? 2 : 1;
+    var newRole = (this.data.role === MERCHANT_ROLE) ? USER_ROLE : MERCHANT_ROLE;
     this.setData({
       userColor: this.data.merchantColor,
       merchantColor: this.data.userColor,

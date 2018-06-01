@@ -1,13 +1,10 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const FILE_NAME = 'file';
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
     productImages: [],
     productCode: '',
     productName: '',
@@ -16,18 +13,21 @@ Page({
     categoryIndex: 0,
     isHot: false
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   onLoad: function () {
     var that = this;
     app.http.get('/site/merchant/categories', {}, function(res){
-      that.setData({
-        categories: res.result
+      if(res.result_code === 10000) {
+        that.setData({
+          categories: res.result
+        })
+      } else {
+        wx.showToast({
+          title: '请求失败',
+          icon: 'fail',
+          duration: 1000,
+          mask:true
       })
+      }
     })
   },
   chooseImage: function(e) {
@@ -49,34 +49,32 @@ Page({
           });
           return false;
         }
-        tempFilePaths.forEach(element => {
-          that.data.productImages.push(element);
-        });
 
         that.setData({
-          productImages: that.data.productImages
+          productImages: tempFilePaths
         })
       }
     })
   },
   submit: function(e) {
     var that = this;
-    var filename = 'file';
+    var uploadedCount = 0;
     this.data.productImages.forEach(function upload(path, index) {
       if(index === 0) {
+        //第一次上传带上字段信息，之后只传照片
         var categoryIndex = that.data.categoryIndex;
         var categoryId = that.data.categories[categoryIndex].id;
         var form = {
-            'file_name': filename,
+            'file_name': FILE_NAME,
             'code': that.data.productCode,
             'price': that.data.productPrice,
             'name': that.data.productName,
             'merchant_category_id': categoryId,
-            'hot': this.data.isHot
+            'hot': that.data.isHot ? 1 : 0
         };
       } else {
         var form = {
-          'file_name': filename,
+          'file_name': FILE_NAME,
           'image_only': true,
           'code': that.data.productCode
         };
@@ -85,8 +83,23 @@ Page({
       wx.uploadFile({
         url: app.http.domain + '/site/product/create',
         filePath: path,
-        name: filename,
+        name: FILE_NAME,
         formData: form,
+        success: function(res) {
+          if(res.data.result_code === 10000) {
+            uploadedCount++;
+            if(uploadedCount === this.data.productImages.length) {
+                wx.navigateBack(1);
+            }
+          } else {
+            wx.showToast({
+              title: '上传失败，请稍后再试',
+              icon: 'none',
+              duration: 3000,
+              mask:true
+            });
+          }
+        }
       })
     })
   },
