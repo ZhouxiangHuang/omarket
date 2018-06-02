@@ -57,7 +57,7 @@ Page({
             })
           } else {
             wx.showToast({
-              title: res.reason,
+              title: '登录失败',
               duration: 3000,
               icon: 'none'
             });

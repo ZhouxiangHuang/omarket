@@ -20,6 +20,16 @@
   text-align: center;
   color: #FF9E9E;
 }
+.filter .selection .selector {
+  width: 20rpx;
+  height: 15rpx;
+  float: right;
+  margin-right: 100rpx;
+  margin-top: 30rpx;
+}
+.filter .selection text {
+  margin-left: 100rpx;
+}
 .form {
   width: 100%;
   border-top: solid 1px #D1D1D1;
@@ -39,6 +49,20 @@
   text-align: right;
   float: right;
   margin-right: 5%;
+}
+.form .row .text-content {
+  height: 114rpx;
+  text-align: right;
+  float: right;
+  line-height: 114rpx;
+  margin-right: 5%;
+}
+.form .row .select-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 5%;
+  float: right;
 }
 .form .row picker {
   height: 114rpx;
@@ -78,8 +102,10 @@
   float: left;
 }
 .list .row .delete-btn {
-  width: 100rpx;
-  height: 114rpx;
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 20rpx;
   float: right;
 }
 .list .row label {
@@ -139,8 +165,14 @@
   display: flex;
   justify-content: center;
 }
-.edit-merch-main .top-logo image {
+.edit-merch-main .top-logo .logo {
   background-color: #FF9E9E;
+}
+.edit-merch-main .top-logo .logo .add {
+  width: 70rpx;
+  height: 70rpx;
+  margin-top: 55rpx;
+  margin-left: 55rpx;
 }
 .edit-merch-main .form {
   margin-top: 40rpx;
@@ -163,6 +195,6 @@
   width: 110rpx;
   font-size: 24rpx;
 }
-.edit-merch-main .std-tags .tag text {
+.edit-merch-main .std-tags .tag .tag-text {
   color: #FFA32C;
 }

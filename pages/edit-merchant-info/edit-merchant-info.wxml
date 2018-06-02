@@ -1,6 +1,11 @@
 <view class="edit-merch-main container">
     <view class="top-logo">
-        <image class="logo" bindtap="chooseImage" src="{{merchant.image_url}}"/>
+        <view>
+            <image class="logo" wx:if="{{merchant.image_url !== null}}" bindtap="chooseImage" src="{{merchant.image_url}}"/>
+            <view class="logo" wx:if="{{merchant.image_url === null}}">
+                <image  class="add" bindtap="chooseImage" src="/images/add-button.png"/>            
+            </view>
+        </view>
     </view>
 
     <view class="form">
@@ -32,14 +37,15 @@
         </view>
         <view class='row underline'>
             <label>公告</label>
-            <input type="string" bindtap="announce" placeholder="请输入公告" value="{{form.announcement}}"/>
+            <text class="text-content" bindtap="announce" wx:if="{{form.announcement === null}}">请输入公告</text>
+            <text class="text-content" bindtap="announce" wx:if="{{form.announcement !== null}}">{{form.announcement}}</text>
         </view>
         <view class='row underline'>
             <label>标签1</label>
             <input wx:if="{{!tag1}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="1" value="{{tag1}}"/>
             <view wx:if="{{tag1}}" class="std-tags">
                 <view class="tag">
-                    <text>{{tag1}}</text>        
+                    <text class="tag-text">{{tag1}}</text>        
                 </view>           
             </view>
         </view>
@@ -48,7 +54,7 @@
             <input wx:if="{{!tag2}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="2" value="{{tag2}}"/>
             <view wx:if="{{tag2}}" class="std-tags">
                 <view class="tag">
-                    <text>{{tag2}}</text>        
+                    <text class="tag-text">{{tag2}}</text>        
                 </view>           
             </view>
         </view>
@@ -57,7 +63,7 @@
             <input wx:if="{{!tag3}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="3" value="{{tag3}}"/>
             <view wx:if="{{tag3}}" class="std-tags">
                 <view class="tag">
-                    <text>{{tag3}}</text>        
+                    <text class="tag-text">{{tag3}}</text>        
                 </view>           
             </view>
         </view>
@@ -67,7 +73,7 @@
          <input type='text'placeholder="请输入内容" bindinput="announceContent" auto-focus/>  
     </modal>
 
-    <view class='std-button' bindtap="updateMerchant">
+    <view class='std-button' bindtap="updateMerchant" style="margin-bottom: 30rpx;">
         <button class='bind-user'>保存</button>
     </view>
 </view>

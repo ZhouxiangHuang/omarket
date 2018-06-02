@@ -2,18 +2,23 @@
 
 .edit-merch-main {
     .top-logo {
-        height: @std-height;
+        height: 220rpx;
         width: 100%;
         display: flex;
         justify-content: center;
-        image {
+        .logo {
             background-color: @theme-color-light;
-        }
+            .add {
+                width: 70rpx;
+                height: 70rpx;
+                margin-top: 55rpx;
+                margin-left: 55rpx;
+            }
+        } 
     }
     .form {
         margin-top: 40rpx;
     } 
-
     .std-tags {
         height: 100%;
         display: flex;
@@ -30,7 +35,7 @@
             line-height: 30rpx;
             width: 110rpx;
             font-size: 24rpx;
-            text {
+            .tag-text {
                 color: #FFA32C;
             }
         }

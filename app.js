@@ -58,6 +58,7 @@ App({
   http: {
     post: http.post,
     get: http.get,
-    domain: http.domain
+    domain: http.domain,
+    uploadFiles: http.uploadFiles
   }
 })

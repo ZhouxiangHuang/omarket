@@ -49,7 +49,7 @@
             </view>
         </view>
         <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}">
-            <image class="product-img" src="/images/jeans.jpg" />         
+            <image class="product-img" src="{{item.images[0]}}" />         
             <view class="product-detail">
                 <view class="name">{{item.name}}</view>
                 <view class="production-intro">{{item.description}}</view>

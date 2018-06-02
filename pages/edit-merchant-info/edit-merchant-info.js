@@ -4,11 +4,8 @@ const app = getApp()
 
 Page({
   data: {
-    announcement: '哈',
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
     startTime: '06:00',
     endTime: '18:00',
     hiddenModal: true,
@@ -40,17 +37,7 @@ Page({
         tag3: res.result.tag_names[2],
         form: that.data.form
       });
-      
-      // this.setData({
-      //   merchant: {image_url: '/images/missgrace.jpeg', 
-      //               store_name: 'MISS GRACE', 
-      //               region: '匈牙利/布达佩斯',
-      //               address: 'Baross Gabor utca 73', 
-      //               tags:['牛仔裤','运动服','休闲'],
-      //               description: '买卖的都是质量最好的牛仔裤',
-      //               mobile: '0036305591038',
-      //             },
-      // });  
+    
     })
   },
   onShow: function(option) {
@@ -138,11 +125,11 @@ Page({
         country_code: this.data.countryCode,
       }
 
-      // app.http.post('/site/merchant/update', form, function(res) {
-      //   if(res.result_code === 10000) {
-      //     wx.navigateBack(1);
-      //   }
-      // });
+      app.http.post('/site/merchant/update', form, function(res) {
+        if(res.result_code === 10000) {
+          wx.navigateBack(1);
+        }
+      });
       var url = this.data.merchant.image_url;
       if(url) {
         wx.getStorage({

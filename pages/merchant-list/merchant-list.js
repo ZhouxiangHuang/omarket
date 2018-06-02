@@ -7,6 +7,8 @@ Page({
     merchants: [],
   },
   onLoad: function () {
+  },
+  onShow: function () {
     var that = this;
     app.http.get('/site/merchant/list', {}, function(res) {
       that.setData({

@@ -50,6 +50,13 @@
   float: right;
   margin-right: 5%;
 }
+.form .row .text-content {
+  height: 114rpx;
+  text-align: right;
+  float: right;
+  line-height: 114rpx;
+  margin-right: 5%;
+}
 .form .row .select-icon {
   width: 40rpx;
   height: 40rpx;
