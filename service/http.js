@@ -63,19 +63,20 @@ function doUploadFiles(accessToken, url, data, cb, index) {
   if(!index) {
     index = 0;
   }
-
   var paths = data['paths'];
   var path = paths[index];
+  if(!path) {
+    path = '';
+  }
   var fileName = data['file_name'];
-
   //recursion to solve async image upload
-  if(index == paths.length) {
+  if(index == paths.length && paths.length > 0) {
     var res = {result_code: 10000};
     wx.hideLoading();
     return typeof cb == "function" && cb(res)  
   } else {
     wx.uploadFile({
-      url: rootDocment + '/site/product/create',
+      url: rootDocment + url,
       header: {'access-token': accessToken},  
       filePath: path,
       name: fileName,

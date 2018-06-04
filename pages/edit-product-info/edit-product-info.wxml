@@ -1,10 +1,17 @@
 <view class="edit-product-main container">
     <view class="product-images">
-        <image class="product-image" src="{{item.url}}" bindtap="replace" data-name="{{item.unique_name}}" wx:for="{{productImages}}" wx:key="{{productImages}}"/>
+        <view class="product-image" wx:for="{{productImages}}" wx:key="{{productImages}}">
+            <image class="delete" src="/images/delete.png" bindtap="askDelete" data-product="{{item}}"/>
+            <image class="product" src="{{item.url}}" bindtap="delete"/>
+        </view>
         <view class="product-image" bindtap="chooseImage">
             <image class="add-icon" src="/images/add-button.png"/>
         </view>
     </view>
+
+    <modal  title="是否确认要删除该图片？" hidden="{{hideDelete}}" confirm-text="确认" cancel-text="取消" bindconfirm="delete" bindcancel="hide" >
+    </modal>
+
     <form class="form">
         <view class='row underline'>
             <label>产品类别</label>

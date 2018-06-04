@@ -4,6 +4,8 @@ const app = getApp()
 const FILE_NAME = 'file';
 
 Page({
+  deleteList: [],
+  tempName : null,
   data: {
     productImages: [],
     productCode: '',
@@ -14,25 +16,27 @@ Page({
     categoryId: null,
     isHot: false,
     isEdit: false,
+    hideDelete: true
   },
   onLoad: function (option) {
-    var that = this;
     var productId = option.product_id;
+    var productId = 1;    
     if(productId) {
       this.setData({
         isEdit: true,
         productId: productId
-      })
+      });
 
-      app.http.get('/site/product/detail', {product_id: productId}, function(res){
+      var that = this;
+      app.http.get('/site/product/detail', {product_id: productId}, function(res) {
         var images = res.result.images;
-        if(res.result === 10000) {
+        if(res.result_code === 10000) {
           that.setData({
             productImages: images,
             productCode: res.result.product_unique_code,
             productName: res.result.name,
             productPrice: res.result.price,
-            isHot: (res.result.hot_item == 1) ? true : false,
+            isHot: res.result.hot_item === 1,
             categoryId: res.result.merchant_category_id
           })
         } else {
@@ -50,7 +54,7 @@ Page({
       if(res.result_code === 10000) {
         that.setData({
           categories: res.result
-        })
+        });
 
         that.data.categories.forEach(function(category, index) {
             if(that.data.categoryId !== null) {
@@ -94,10 +98,11 @@ Page({
         //do not delete, added for multiple photo upload
         tempFilePaths.forEach(function(path) {
           var image = {};
+          image.unique_name = Date.now();
           image.url = path;
           image.is_new = true; //标记是新图
           that.data.productImages.push(image);
-        })
+        });
 
         that.setData({
           productImages: that.data.productImages
@@ -107,15 +112,13 @@ Page({
   },
   submit: function(e) {
     var that = this;
-    var uploadedCount = 0;
     var categoryIndex = that.data.categoryIndex;
     var category = that.data.categories[categoryIndex];
     var categoryId = category.id;
-    var deleteList = [];
     var paths = [];
     this.data.productImages.forEach(function(image) {
       if(image.updated) {
-        deleteList.push(image.unique_name);
+        that.deleteList.push(image.unique_name);
         paths.push(image.url);
       } 
       if(image.is_new) {
@@ -130,28 +133,35 @@ Page({
         'name': that.data.productName,
         'merchant_category_id': categoryId,
         'hot': that.data.isHot ? 1 : 0,
-        'delete_list': deleteList,
+        'delete_list': JSON.stringify(this.deleteList),
         'product_id': that.data.productId
     };
-
     if(this.data.isEdit) {
       var url = '/site/product/update';
     } else {
       var url = '/site/product/create';
     }
 
-    app.http.uploadFiles(url, form, paths, function(res) {
-      if(res.result_code === 10000) {
-        wx.navigateBack(1);
-      } else {
-        wx.showToast({
-          title: '上传失败，请稍后再试',
-          icon: 'none',
-          duration: 3000,
-          mask:true
-        });
-      }
-    });
+    if(paths.length === 0) {
+      app.http.post(url, form, function(res) {
+        if(res.result_code === 10000) {
+
+        }
+      })
+    } else {
+      app.http.uploadFiles(url, form, paths, function(res) {
+        if(res.result_code === 10000) {
+          wx.navigateBack(1);
+        } else {
+          wx.showToast({
+            title: '上传失败，请稍后再试',
+            icon: 'none',
+            duration: 3000,
+            mask:true
+          });
+        }
+      });
+    }
   },
   bindPrice: function(e) {
     this.setData({
@@ -177,28 +187,62 @@ Page({
       isHot: !this.data.isHot
     })
   },
-  replace: function(e) {
-    var uniqueName = e.currentTarget.dataset.name;
-    var that = this;
-    wx.chooseImage({
-      count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
-        // 替换旧图只会选择一张照片，所以去数组的第一个元素
-        var tempFilePath = res.tempFilePaths[0] 
-        //替换对应的图片并标识已更新
-        that.data.productImages.map(function(image) {
-          if(image.unique_name === uniqueName) {
-            image.url = tempFilePath;
-            image.updated = true; //标记是更新
-          }
-        })
+  // replace: function(e) {
+  //   var uniqueName = e.currentTarget.dataset.name;
+  //   var that = this;
+  //   wx.chooseImage({
+  //     count: 1, // 默认9
+  //     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+  //     success: function (res) {
+  //       // 替换旧图只会选择一张照片，所以去数组的第一个元素
+  //       var tempFilePath = res.tempFilePaths[0] 
+  //       //替换对应的图片并标识已更新
+  //       that.data.productImages.map(function(image) {
+  //         if(image.unique_name === uniqueName) {
+  //           image.url = tempFilePath;
+  //           image.updated = true; //标记是更新
+  //         }
+  //       })
 
-        that.setData({
-          productImages: that.data.productImages
-        })
+  //       that.setData({
+  //         productImages: that.data.productImages
+  //       })
+  //     }
+  //   })
+  // }, 
+  delete: function() {
+    var uniqueName = this.tempName;
+    var newProductImages = [];
+    var that = this;
+    this.data.productImages.map(function(image) {
+      if(image.unique_name === uniqueName) {
+        if(!image.is_new) {
+          that.deleteList.push(image.unique_name);
+        }
+      } else {
+        newProductImages.push(image);
       }
+    });
+
+    this.setData({
+      productImages: newProductImages,
+      hideDelete: true
+    })
+  },
+  hide: function(e) {
+    this.tempName = null;
+
+    this.setData({
+      hideDelete: true
+    })
+  },
+  askDelete: function(e) {
+    var product = e.currentTarget.dataset.product;
+    this.tempName = product.unique_name;
+    
+    this.setData({
+      hideDelete: false
     })
   }
 })
