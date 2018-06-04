@@ -3,7 +3,7 @@
     <swiper class="img underline" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
       <block wx:for="{{productImages}}" wx:for-index="index">    
         <swiper-item>    
-          <image src="{{item}}" class="slide-image" mode="aspectFill"/>    
+          <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
         </swiper-item>    
       </block>    
     </swiper>   
@@ -32,6 +32,7 @@
     </view>                    
     <view class="bottom-row">
         <view class="info">已关注{{collectionCount}}款商品</view>
-        <view class="btn" bindtap="checkCollections">收藏夹</view>        
+        <view wx:if="{{!isOwner}}" class="btn" bindtap="checkCollections">收藏夹</view>
+        <view wx:if="{{isOwner}}" class="btn" bindtap="edit">编辑</view>              
     </view>
 </view>

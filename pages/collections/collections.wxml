@@ -1,5 +1,6 @@
 <!--index.wxml-->
 <view class="container collections-main">
+  <image class="no-collection" src="/images/no-collections.png" mode="center"></image>
   <view class="product-list" wx:for="{{collections}}" wx:for-item="collection" wx:key="key"> 
          <view class='title underline'>
             <view class="btn" bindtap="selectStore" data-merchant="{{collection.merchant_id}}">进店</view>

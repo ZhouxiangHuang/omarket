@@ -10,10 +10,14 @@ Page({
     productImages: [],
     productInfo: {},
     collectionCount: 0,
+    isOwner: false
   },
   onLoad: function (options) {
-    var productId = options.product_id;
-    
+    // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
+    this.setData({isOwner: true});
+    // var productId = options.product_id;
+    var productId = 1;
+
     var that = this;
     app.http.get('/site/product/detail',{product_id: productId}, function(res){
         that.setData({
@@ -42,6 +46,12 @@ Page({
   checkCollections: function(e) {
     wx.navigateTo({
       url: '../collections/collections'
+    })
+  },
+  edit: function(e) {
+    var productId = this.data.productInfo.id;
+    wx.navigateTo({
+      url: '../edit-product-info/edit-product-info?product_id=' + productId 
     })
   }
 })

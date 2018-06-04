@@ -1,6 +1,6 @@
 <view class="edit-product-main container">
     <view class="product-images">
-        <image class="product-image" src="{{item}}" bindtap="chooseImage" wx:for="{{productImages}}" wx:key="{{productImages}}"/>
+        <image class="product-image" src="{{item.url}}" bindtap="replace" data-name="{{item.unique_name}}" wx:for="{{productImages}}" wx:key="{{productImages}}"/>
         <view class="product-image" bindtap="chooseImage">
             <image class="add-icon" src="/images/add-button.png"/>
         </view>
@@ -15,15 +15,15 @@
         </view>
          <view class='row underline'>
             <label>产品编码</label>
-            <input type="string" bindinput="bindProductCode" placeholder="请输入产品编码"/>
+            <input type="string" bindinput="bindProductCode" placeholder="请输入产品编码" value="{{productCode}}"/>
         </view>
          <view class='row underline'>
             <label>产品名称</label>
-            <input type="string" bindinput="bindProductName" placeholder="请输入产品名称"/>
+            <input type="string" bindinput="bindProductName" placeholder="请输入产品名称" value="{{productName}}"/>
         </view>
          <view class='row underline'>
             <label>价格</label>
-            <input type="string" bindinput="bindPrice" placeholder="请输入产品价格"/>
+            <input type="string" bindinput="bindPrice" placeholder="请输入产品价格" value="{{productPrice}}"/>
         </view>
         <view class='row'>
             <label>热销</label>

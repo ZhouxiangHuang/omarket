@@ -1,15 +1,15 @@
 {
   "pages":[
-    "pages/edit-product-info/edit-product-info",                                
     "pages/login/login",    
-    "pages/edit-merchant-info/edit-merchant-info",                    
+    "pages/product-detail/product-detail",    
+    "pages/edit-product-info/edit-product-info",                                
     "pages/merchant-list/merchant-list",        
+    "pages/collections/collections", 
+    "pages/product-list/product-list",                       
+    "pages/edit-merchant-info/edit-merchant-info",                    
     "pages/home/home",        
     "pages/list/list",                        
-    "pages/product-list/product-list",                       
-    "pages/product-detail/product-detail",    
     "pages/edit-categories/edit-categories",
-    "pages/collections/collections", 
     "pages/center/center",    
     "pages/index/index",              
     "pages/logs/logs"

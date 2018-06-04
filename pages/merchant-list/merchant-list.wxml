@@ -12,7 +12,8 @@
     <view class="merchant underline" wx:for="{{merchants}}" wx:for-item="merchant">
         <view class="merchant-info">
             <view class="merchant-logo">
-                <image class="logo" src="{{merchant.imageUrl}}" />
+                <image wx:if="{{merchant.imageUrl}}" class="logo" src="{{merchant.imageUrl}}" />
+                <image wx:if="{{!merchant.imageUrl}}" class="logo" src="/images/no-store.png" />                
             </view>
             <view class="merchant-profile" data-merchant="{{merchant.id}}">
                 <view class="merchant-name">{{merchant.name}}</view>
@@ -31,7 +32,8 @@
         </view>
         
         <view class="merchant-products">
-            <image class="product-image" src="{{url}}" wx:for-item="url" wx:for="{{merchant.productImages}}"/>        
+            <image wx:if="{{image.url}}" class="product-image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}"/> 
+            <image wx:if="{{image.url === null}}" class="product-image" src="/images/no-image-sm.png" wx:for-item="image.url" wx:for="{{merchant.productImages}}"/>                           
         </view>        
     </view>
     

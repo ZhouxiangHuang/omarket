@@ -1,7 +1,8 @@
 <view class="container product-list-main">
     <view class="merchant-profile underline">
         <view class="merchant-logo">
-            <image class="logo" src="{{merchant.image_url}}" />
+            <image wx:if="{{merchant.image_url}}" class="logo" src="{{merchant.image_url}}" />
+            <image wx:if="{{!merchant.image_url}}" class="logo" src="/images/no-store.png" />            
         </view>
         <view class="merchant-profile">
             <view id="merchant-name">{{merchant.store_name}}</view>
@@ -49,7 +50,7 @@
             </view>
         </view>
         <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}">
-            <image class="product-img" src="{{item.images[0]}}" />         
+            <image class="product-img" src="{{item.images[0].url}}" />         
             <view class="product-detail">
                 <view class="name">{{item.name}}</view>
                 <view class="production-intro">{{item.description}}</view>

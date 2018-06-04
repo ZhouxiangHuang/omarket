@@ -111,6 +111,15 @@ Page({
     })
   }, 
   editProducts: function() {  
+    if(this.data.categories.length === 1) {
+      wx.showToast({  
+        title: '请先添加产品类别',
+        icon: 'none',
+        duration: 3000,
+        mask:true
+      })
+      return false;
+    }
     wx.navigateTo({
       url: '../edit-product-info/edit-product-info',
       fail: function(e) {
