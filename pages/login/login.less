@@ -33,6 +33,28 @@
 
 .form {
     margin-top: 30rpx;
+    #code {
+        height: @nav-height * 1.9;
+        text-align: right;
+        float: right;
+        color: @theme-color;
+        min-width: 40rpx;
+        .content {
+            height: 50rpx;
+            line-height: 50rpx;
+            border: 1px solid @theme-color;
+            border-radius: 5px;
+            margin-top: ((@nav-height * 1.9) - 50)/2;
+            image { 
+                width:15rpx;
+                height:10rpx;
+                padding-right: 5rpx;
+                float:right;
+                margin-top: 22.5rpx;
+                margin-left: 5rpx;
+            }
+        }
+    }
 }
 
 .register-button {

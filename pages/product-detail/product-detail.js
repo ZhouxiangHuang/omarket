@@ -15,8 +15,7 @@ Page({
   onLoad: function (options) {
     // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
     this.setData({isOwner: true});
-    // var productId = options.product_id;
-    var productId = 1;
+    var productId = options.product_id;
 
     var that = this;
     app.http.get('/site/product/detail',{product_id: productId}, function(res){
@@ -28,7 +27,7 @@ Page({
 
     app.http.get('/site/product/collections', {}, function(res) {
       that.setData({
-        collectionCount: that.data.collectionCount + 1 
+        collectionCount: res.result.length
       })
     })
   },

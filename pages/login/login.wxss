@@ -1,6 +1,9 @@
 .underline {
   border-bottom: solid 1px #D1D1D1;
 }
+.underline-light {
+  border-bottom: #E6E5F4;
+}
 .border-right {
   border-right: solid 1px #D1D1D1;
 }
@@ -15,7 +18,17 @@
   width: 49.6%;
   display: inline-block;
   text-align: center;
-  color: #FF4343;
+  color: #FF9E9E;
+}
+.filter .selection .selector {
+  width: 20rpx;
+  height: 15rpx;
+  float: right;
+  margin-right: 100rpx;
+  margin-top: 30rpx;
+}
+.filter .selection text {
+  margin-left: 100rpx;
 }
 .form {
   width: 100%;
@@ -36,13 +49,77 @@
   text-align: right;
   float: right;
   margin-right: 5%;
+  width: 250rpx;
 }
-.form .row picker {
+.form .row .text-content {
+  height: 114rpx;
+  text-align: right;
+  float: right;
+  line-height: 114rpx;
+  margin-right: 5%;
+}
+.form .row .select-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 5%;
+  float: right;
+}
+.form .row categoy-picker {
   height: 114rpx;
   line-height: 114rpx;
   text-align: right;
   float: right;
   margin-right: 5%;
+}
+.form .row .info-divider {
+  text-align: right;
+  float: right;
+  height: 114rpx;
+  line-height: 114rpx;
+  width: 40rpx;
+  text-align: center;
+}
+.form .row .selector {
+  width: 30rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
+}
+.list {
+  width: 100%;
+  border-top: solid 1px #D1D1D1;
+}
+.list .row {
+  width: 100%;
+  float: right;
+  height: 114rpx;
+}
+.list .row input {
+  margin-left: 5%;
+  height: 114rpx;
+  text-align: left;
+  float: left;
+}
+.list .row .delete-btn {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 37rpx;
+  margin-right: 20rpx;
+  float: right;
+}
+.list .row label {
+  margin-left: 5%;
+  line-height: 114rpx;
+  float: left;
+}
+.list .row .selector {
+  width: 100rpx;
+  height: 100%;
+  margin-right: 5%;
+  line-height: 114rpx;
+  float: right;
 }
 .logo {
   margin-top: 20rpx;
@@ -113,6 +190,28 @@
 }
 .form {
   margin-top: 30rpx;
+}
+.form #code {
+  height: 114rpx;
+  text-align: right;
+  float: right;
+  color: #FF4343;
+  min-width: 40rpx;
+}
+.form #code .content {
+  height: 50rpx;
+  line-height: 50rpx;
+  border: 1px solid #FF4343;
+  border-radius: 5px;
+  margin-top: 32rpx;
+}
+.form #code .content image {
+  width: 15rpx;
+  height: 10rpx;
+  padding-right: 5rpx;
+  float: right;
+  margin-top: 22.5rpx;
+  margin-left: 5rpx;
 }
 .register-button {
   width: 100%;

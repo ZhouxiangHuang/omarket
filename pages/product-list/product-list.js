@@ -5,10 +5,8 @@ const app = getApp()
 Page({
   merchantId: null,
   data: {
-    motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
     isOwner: false
   },
   //事件处理函数
@@ -48,12 +46,12 @@ Page({
         var categoryList = [];
         Object.keys(products).forEach(element => {
           if(element === '热销') {
-            categoryList.push({name: element, color: 'white', ishot: true});
+            categoryList.unshift({name: element, color: 'white', ishot: true});
           } else {
             categoryList.push({name: element, color: '#F8F8F8', ishot: false});
           }
         });
-      
+
         that.setData({
           categories: categoryList,
           productList: products['热销'],
@@ -126,5 +124,16 @@ Page({
           console.log(e);
       }
     })
+  },
+  callMerchant: function(e) {
+    wx.makePhoneCall({  
+      phoneNumber: e.currentTarget.dataset.tel, //此号码并非真实电话号码，仅用于测试  
+      success:function(){  
+        console.log("拨打电话成功！")  
+      },  
+      fail:function(){  
+        console.log("拨打电话失败！")  
+      }  
+    })  
   }
 })

@@ -19,6 +19,10 @@
                 <text>编辑</text>
                 <image src="/images/edit.png"/>
             </view>
+            <view wx:if="{{!isOwner}}" class="call-merchant-btn" bindtap="callMerchant" data-tel="{{merchant.mobile}}">
+                <text>联系商家</text>
+                <image src="/images/phone.png"/>
+            </view>
         </view>        
     </view>
     <view class="filter underline">

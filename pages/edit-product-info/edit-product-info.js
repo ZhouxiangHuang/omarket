@@ -16,18 +16,19 @@ Page({
     categoryId: null,
     isHot: false,
     isEdit: false,
-    hideDelete: true
+    hideDelete: true,
+    productDescription: null
   },
   onLoad: function (option) {
     var productId = option.product_id;
-    var productId = 1;    
+    var that = this;
+
     if(productId) {
       this.setData({
         isEdit: true,
         productId: productId
       });
 
-      var that = this;
       app.http.get('/site/product/detail', {product_id: productId}, function(res) {
         var images = res.result.images;
         if(res.result_code === 10000) {
@@ -37,7 +38,8 @@ Page({
             productName: res.result.name,
             productPrice: res.result.price,
             isHot: res.result.hot_item === 1,
-            categoryId: res.result.merchant_category_id
+            categoryId: res.result.merchant_category_id,
+            productDescription: res.result.description            
           })
         } else {
           wx.showToast({  
@@ -134,7 +136,8 @@ Page({
         'merchant_category_id': categoryId,
         'hot': that.data.isHot ? 1 : 0,
         'delete_list': JSON.stringify(this.deleteList),
-        'product_id': that.data.productId
+        'product_id': that.data.productId,
+        'description': that.data.productDescription
     };
     if(this.data.isEdit) {
       var url = '/site/product/update';
@@ -145,7 +148,7 @@ Page({
     if(paths.length === 0) {
       app.http.post(url, form, function(res) {
         if(res.result_code === 10000) {
-
+          wx.navigateBack({delta: 2});
         }
       })
     } else {
@@ -175,6 +178,11 @@ Page({
   bindProductCode: function(e) {
     this.setData({
       productCode: e.detail.value
+    })  
+  },
+  bindDescription: function(e) {
+    this.setData({
+      productDescription: e.detail.value
     })  
   },
   selectCategory: function(e) {

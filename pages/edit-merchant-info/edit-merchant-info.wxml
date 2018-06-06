@@ -43,7 +43,7 @@
         <view class='row underline'>
             <label>标签1</label>
             <input wx:if="{{!tag1}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="1" value="{{tag1}}"/>
-            <view wx:if="{{tag1}}" class="std-tags">
+            <view wx:if="{{tag1}}" bindtap="selectTag" data-tag="1" class="std-tags" value="{{tag1}}">
                 <view class="tag">
                     <text class="tag-text">{{tag1}}</text>        
                 </view>           
@@ -52,7 +52,7 @@
         <view class='row underline'>
             <label>标签2</label>
             <input wx:if="{{!tag2}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="2" value="{{tag2}}"/>
-            <view wx:if="{{tag2}}" class="std-tags">
+            <view wx:if="{{tag2}}" bindtap="selectTag" data-tag="2" class="std-tags" value="{{tag2}}">
                 <view class="tag">
                     <text class="tag-text">{{tag2}}</text>        
                 </view>           
@@ -61,7 +61,7 @@
         <view class='row'>
             <label>标签3</label>
             <input wx:if="{{!tag3}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="3" value="{{tag3}}"/>
-            <view wx:if="{{tag3}}" class="std-tags">
+            <view wx:if="{{tag3}}" class="std-tags" bindtap="selectTag" data-tag="3" value="{{tag3}}">
                 <view class="tag">
                     <text class="tag-text">{{tag3}}</text>        
                 </view>           

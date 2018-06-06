@@ -1,7 +1,35 @@
 <!--index.wxml-->
-<view class="container">
- 
-  <view class='register-button'>
+<view class="center-main container">
+      <view class="merchant-profile">
+        <view class="merchant-logo">
+            <image wx:if="{{merchant.image_url}}" class="logo" src="{{merchant.image_url}}" />
+            <image wx:if="{{!merchant.image_url}}" class="logo" src="/images/no-store.png" />            
+        </view>
+        <view class="merchant-profile">
+            <view id="merchant-name">{{merchant.store_name}}</view>
+            <view id="merchant-hours">营业时间: {{merchant.open_at}} - {{merchant.closed_at}}</view>                 
+            <view id="merchant-address">
+                <view class="highlight">地址</view>
+                <text>{{merchant.address}}</text>
+            </view>   
+            <view id="merchant-announcement">
+                <view class="highlight">公告</view>
+                <text>{{merchant.announcement}}</text>
+            </view>  
+            <view class="call-merchant-btn" bindtap="callMerchant" data-tel="{{merchant.mobile}}">
+                <text>管理商铺</text>
+                <image src="/images/selector.png"/>
+            </view>
+        </view>        
+    </view>
+  <view class="mine form">
+     <view class='row'>
+        <image class="icon" src="/images/star.png" />
+        <label>我的收藏</label>
+        <image class="select-icon" src="/images/selector.png" />
+    </view>
+  </view>
+  <view class='std-button'>
     <button bindtap="logout" class='bind-user'>退出登录</button>
   </view>
 </view>

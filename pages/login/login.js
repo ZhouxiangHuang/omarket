@@ -13,7 +13,9 @@ Page({
     merchantColor: 'white',
     merchantFont: '#FF4343', 
     role: USER_ROLE,
-    isMerchant: false
+    isMerchant: false,
+    codes: [],
+    telCodeIndex: 6
   },
   onLoad: function () {
     this.setData({
@@ -29,6 +31,19 @@ Page({
         })
       }
     })
+
+    var that = this;
+    app.http.get('/site/user/tel-codes', {}, function(res) {
+      if(res.result_code === 10000) {
+        res.result.map(function(country) {
+          country.name = country.name + ' (+' + country.tel_code + ')';
+        })
+
+        that.setData({
+          codes: res.result
+        });
+      }
+    })
   },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
@@ -40,11 +55,11 @@ Page({
   login: function (e) {
     wx.login({
       success: res => {
-        var data ={'code': res.code, 'role': this.data.role};
+        var data = {'code': res.code, 'role': this.data.role};
         if(this.data.role == MERCHANT_ROLE) {
           data['store_name'] = this.data.storeName;
           data['address'] = this.data.address;
-          data['mobile'] = this.data.mobile;      
+          data['mobile'] = '+' + this.data.codes[this.data.telCodeIndex].tel_code + this.data.mobile;      
         }
         var that = this;
         app.http.post('/site/user/login',data,function(res){ 
@@ -89,6 +104,11 @@ Page({
     this.setData({
       address: e.detail.value
     })  
+  },
+  selectCodes: function(e) {
+    this.setData({
+      telCodeIndex: e.detail.value
+    })
   }
 })
 

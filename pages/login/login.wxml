@@ -29,6 +29,11 @@
          <view class='row'>
             <label>联系电话</label>
             <input type="string" bindinput="bindMobile" placeholder="请输入联系电话"/>
+            <picker id="code" range = "{{codes}}" value="{{telCodeIndex}}" range-key="name" bindchange="selectCodes">
+              <view class="content">+{{codes[telCodeIndex].tel_code}}          
+                <image src="/images/triangle.png" />
+              </view>
+            </picker>   
         </view>
   </view>
 

@@ -40,6 +40,13 @@
   float: right;
   height: 114rpx;
 }
+.form .row .icon {
+  float: left;
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 30rpx;
+  margin-right: 20rpx;
+}
 .form .row label {
   line-height: 114rpx;
   float: left;
@@ -49,15 +56,23 @@
   text-align: right;
   float: right;
   margin-right: 5%;
+  width: 250rpx;
+}
+.form .row .text-content {
+  height: 114rpx;
+  text-align: right;
+  float: right;
+  line-height: 114rpx;
+  margin-right: 5%;
 }
 .form .row .select-icon {
-  width: 40rpx;
-  height: 40rpx;
-  margin-top: 37rpx;
+  width: 20rpx;
+  height: 30rpx;
+  margin-top: 42rpx;
   margin-right: 5%;
   float: right;
 }
-.form .row picker {
+.form .row categoy-picker {
   height: 114rpx;
   line-height: 114rpx;
   text-align: right;
@@ -229,6 +244,19 @@
   font-size: 25rpx;
 }
 .product-list-main .merchant-profile .merchant-profile .edit-profile-btn image {
+  margin-left: 5rpx;
+  margin-top: 5rpx;
+  width: 30rpx;
+  height: 30rpx;
+}
+.product-list-main .merchant-profile .merchant-profile .call-merchant-btn {
+  width: 150rpx;
+  height: 50rpx;
+  float: right;
+  margin-top: -30rpx;
+  font-size: 25rpx;
+}
+.product-list-main .merchant-profile .merchant-profile .call-merchant-btn image {
   margin-left: 5rpx;
   margin-top: 5rpx;
   width: 30rpx;

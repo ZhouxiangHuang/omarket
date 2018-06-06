@@ -5,6 +5,7 @@
 @border: solid 1px #D1D1D1;
 @std-height: 220rpx;
 @announcement-color: #35B4EF;
+@row-height: 114rpx;
 
 .underline {
     border-bottom: @border;
@@ -49,34 +50,42 @@
     .row {
         width: 95%;
         float: right;
-        height: @nav-height * 1.9;
+        height: @row-height;
+        .icon {
+            float: left;
+            width: 50rpx;
+            height: 50rpx;
+            margin-top: 30rpx;
+            margin-right: 20rpx;
+        }
         label {
-            line-height: @nav-height * 1.9;
+            line-height: @row-height;
             float: left;
         }
         input {
-            height: @nav-height * 1.9;
+            height: @row-height;
             text-align: right;
             float: right;
             margin-right: 5%;
+            width: 250rpx;
         }
         .text-content {
-            height: @nav-height * 1.9;
+            height: @row-height;
             text-align: right;
             float: right;
-            line-height: @nav-height * 1.9;
+            line-height: @row-height;
             margin-right: 5%;
         }
         .select-icon {
-            width: 40rpx;
-            height: 40rpx;
-            margin-top: 37rpx;
+            width: 20rpx;
+            height: 30rpx;
+            margin-top: 42rpx;
             margin-right: 5%;
             float: right;
         }
-        picker {
-            height: @nav-height * 1.9;
-            line-height: @nav-height * 1.9;            
+        categoy-picker {
+            height: @row-height;
+            line-height: @row-height;            
             text-align: right;
             float: right;
             margin-right: 5%;
@@ -84,8 +93,8 @@
         .info-divider {
             text-align: right;
             float: right;
-            height: @nav-height * 1.9;
-            line-height: @nav-height * 1.9; 
+            height: @row-height;
+            line-height: @row-height; 
             width: 40rpx;   
             text-align: center;
         }
@@ -93,7 +102,7 @@
             width: 30rpx;
             height: 100%;
             margin-right: 5%;
-            line-height: @nav-height * 1.9;
+            line-height: @row-height;
             float: right;
         }
     }
@@ -105,10 +114,10 @@
     .row {
         width: 100%;
         float: right;
-        height: @nav-height * 1.9;
+        height: @row-height;
         input {
             margin-left: 5%;
-            height: @nav-height * 1.9;
+            height: @row-height;
             text-align: left;
             float: left;
         }
@@ -121,14 +130,14 @@
         }
         label {
             margin-left: 5%;
-            line-height: @nav-height * 1.9;
+            line-height: @row-height;
             float: left;
         }
         .selector {
             width: 100rpx;
             height: 100%;
             margin-right: 5%;
-            line-height: @nav-height * 1.9;
+            line-height: @row-height;
             float: right;
         }
     }

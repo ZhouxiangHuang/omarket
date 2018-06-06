@@ -37,7 +37,6 @@ Page({
         tag3: res.result.tag_names[2],
         form: that.data.form
       });
-    
     })
   },
   onShow: function(option) {

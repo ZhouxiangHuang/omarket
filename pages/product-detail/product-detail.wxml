@@ -31,7 +31,7 @@
         <view class="description">{{productInfo.description}}</view>   
     </view>                    
     <view class="bottom-row">
-        <view class="info">已关注{{collectionCount}}款商品</view>
+        <view wx:if="{{!isOwner}}" class="info">已关注{{collectionCount}}款商品</view>
         <view wx:if="{{!isOwner}}" class="btn" bindtap="checkCollections">收藏夹</view>
         <view wx:if="{{isOwner}}" class="btn" bindtap="edit">编辑</view>              
     </view>
