@@ -205,11 +205,12 @@
   color: #979797;
 }
 .center-main .merchant-profile .merchant-profile #merchant-address .highlight {
-  background-color: #FFA32C;
+  min-width: 75rpx;
+  background-color: #FF4343;
 }
 .center-main .merchant-profile .merchant-profile #merchant-address text {
   margin-left: 10rpx;
-  color: #FFA32C;
+  color: #FF4343;
 }
 .center-main .merchant-profile .merchant-profile #merchant-announcement {
   margin-top: 10rpx;
@@ -217,7 +218,10 @@
   color: #979797;
 }
 .center-main .merchant-profile .merchant-profile #merchant-announcement .highlight {
-  background-color: #FF4343;
+  margin-right: 10rpx;
+  min-width: 100rpx;
+  border: 1px solid #FFA32C;
+  color: #FFA32C;
 }
 .center-main .merchant-profile .merchant-profile #merchant-announcement text {
   margin-left: 10rpx;
@@ -270,7 +274,6 @@
   height: 20rpx;
 }
 .center-main .highlight {
-  width: 75rpx;
   float: left;
   height: 35rpx;
   line-height: 35rpx;

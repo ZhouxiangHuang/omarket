@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="center-main container">
-      <view class="merchant-profile">
+    <view class="merchant-profile" wx:if="{{isMerchant}}">
         <view class="merchant-logo">
             <image wx:if="{{merchant.image_url}}" class="logo" src="{{merchant.image_url}}" />
             <image wx:if="{{!merchant.image_url}}" class="logo" src="/images/no-store.png" />            
@@ -13,17 +13,25 @@
                 <text>{{merchant.address}}</text>
             </view>   
             <view id="merchant-announcement">
-                <view class="highlight">公告</view>
-                <text>{{merchant.announcement}}</text>
+                <view class="highlight">{{merchant.tag_names[0]}}</view>
+                <view class="highlight">{{merchant.tag_names[1]}}</view>   
+                <view class="highlight">{{merchant.tag_names[2]}}</view>                                             
             </view>  
-            <view class="call-merchant-btn" bindtap="callMerchant" data-tel="{{merchant.mobile}}">
+            <view class="call-merchant-btn" bindtap="myStore">
                 <text>管理商铺</text>
                 <image src="/images/selector.png"/>
             </view>
         </view>        
     </view>
+    <view class="userinfo" wx:if="{{!isMerchant}}">
+        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+        <block wx:else>
+            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+        </block>
+    </view>
   <view class="mine form">
-     <view class='row'>
+     <view class='row' wx:if="{{!isMerchant}}" bindtap="getCollections">
         <image class="icon" src="/images/star.png" />
         <label>我的收藏</label>
         <image class="select-icon" src="/images/selector.png" />

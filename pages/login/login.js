@@ -65,6 +65,10 @@ Page({
         app.http.post('/site/user/login',data,function(res){ 
           if(res.result_code === 10000) {
             app.globalData.userRole = that.data.role; 
+            if(that.data.role === MERCHANT_ROLE) {
+              app.globalData.merchantId = res.result.merchant_id;
+              app.globalData.isMerchant = true;
+            }
             var token = res.result.access_token;
             wx.setStorage({key:'token',data: token})
             wx.switchTab({

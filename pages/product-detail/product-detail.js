@@ -10,11 +10,14 @@ Page({
     productImages: [],
     productInfo: {},
     collectionCount: 0,
-    isOwner: false
+    isOwner: false,
+    isCollected: false,
+    isMerchant: false,
   },
   onLoad: function (options) {
     // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
-    this.setData({isOwner: true});
+    // var isMerchant = app.globalData.isMerchant;
+    this.setData({isOwner: true, isMerchant: true});
     var productId = options.product_id;
 
     var that = this;
@@ -33,14 +36,38 @@ Page({
   },
   collect: function(e) {
     var productId = this.data.productInfo.id;
-    app.http.post('/site/product/collect', {product_id: productId}, function(res) {
-      wx.showToast({
-        title: '收藏成功',
-        icon: 'succes',
-        duration: 1000,
-        mask:true
+    var that = this;
+
+    if(this.data.isCollected) {
+      app.http.post('/site/product/discard', {product_id: productId}, function(res) {
+        if(res.result_code === 10000) {
+          that.setData({
+            isCollected: false
+          });
+          wx.showToast({
+            title: '操作成功',
+            icon: 'succes',
+            duration: 1000,
+            mask:true
+          })
+        }
       })
-    })
+    } else {
+      app.http.post('/site/product/collect', {product_id: productId}, function(res) {
+        if(res.result_code === 10000) {
+          that.setData({
+            isCollected: true
+          });
+          wx.showToast({
+            title: '收藏成功',
+            icon: 'succes',
+            duration: 1000,
+            mask:true
+          })
+        }
+      })
+    }
+
   },
   checkCollections: function(e) {
     wx.navigateTo({

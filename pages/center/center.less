@@ -34,11 +34,12 @@
                 font-size: 23rpx;
                 color: #979797;
                 .highlight {
-                    background-color: #FFA32C;
+                    min-width: 75rpx;
+                    background-color: @theme-color;
                 }
                 text {
                     margin-left: 10rpx;
-                    color: #FFA32C;
+                    color: @theme-color;
                 }
             }
             #merchant-announcement {
@@ -46,7 +47,10 @@
                 font-size: 20rpx;
                 color: #979797;
                 .highlight {
-                    background-color: @theme-color;
+                    margin-right: 10rpx;
+                    min-width: 100rpx;
+                    border: 1px solid #FFA32C;
+                    color: #FFA32C;
                 }
                 text {
                     margin-left: 10rpx;
@@ -103,7 +107,6 @@
     }
 
     .highlight {
-        width: 75rpx;
         float: left;
         height: 35rpx;
         line-height: 35rpx;

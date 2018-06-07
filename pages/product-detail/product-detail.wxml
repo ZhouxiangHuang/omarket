@@ -23,8 +23,9 @@
                 </view>
                 <view class="code">商品编码{{productInfo.product_unique_code}}</view>             
             </view>                    
-            <view class="button" bindtap="collect">
-                <image class="heart" mode="aspectFit" src="/images/heart.png"/>
+            <view class="button" bindtap="collect" wx:if="{{!isMerchant}}">
+                <image wx:if="{{!isCollected}}" class="heart" mode="aspectFit" src="/images/empty-star.png"/>
+                <image wx:if="{{isCollected}}" class="heart" mode="aspectFit" src="/images/star.png"/>                
                 <text>收藏</text>
             </view>     
         </view>            
