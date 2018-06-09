@@ -9,7 +9,7 @@
         </picker>          
     </view>
 
-    <view class="merchant underline" wx:for="{{merchants}}" wx:for-item="merchant">
+    <view class="merchant underline" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant">
         <view class="merchant-info">
             <view class="merchant-logo">
                 <image wx:if="{{merchant.imageUrl}}" class="logo" src="{{merchant.imageUrl}}" />
@@ -32,8 +32,8 @@
         </view>
         
         <view class="merchant-products">
-            <image wx:if="{{image.url}}" class="product-image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}"/> 
-            <image wx:if="{{image.url === null}}" class="product-image" src="/images/no-image-sm.png" wx:for-item="image.url" wx:for="{{merchant.productImages}}"/>                           
+            <image wx:if="{{image.url}}" class="product-image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}" wx:key="{{key}}"/> 
+            <image wx:if="{{image.url === null}}" class="product-image" src="/images/no-image-sm.png" wx:for-item="image.url" wx:for="{{merchant.productImages}}" wx:key="{{key}}"/>                           
         </view>        
     </view>
     

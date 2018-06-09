@@ -53,7 +53,7 @@ Page({
       if(this.mode === REGION_MODE) {
         app.globalData.region = selectedCategory;
       } else {
-        var record = {'id': selectedCategory.id, 'tag': this.tag, 'name': selectedCategory.name}
+        var record = {'tag_id': selectedCategory.id, 'prev_tag': this.tag, 'name': selectedCategory.name}
         app.globalData.tagRecord = record;
       }
       wx.navigateBack(1);

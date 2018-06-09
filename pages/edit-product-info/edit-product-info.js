@@ -139,31 +139,60 @@ Page({
         'product_id': that.data.productId,
         'description': that.data.productDescription
     };
-    if(this.data.isEdit) {
-      var url = '/site/product/update';
-    } else {
-      var url = '/site/product/create';
-    }
 
-    if(paths.length === 0) {
+    if(paths.length === 0) { //no image to upload
+      if(this.data.isEdit) {
+        var url = '/site/product/update';
+      } else {
+        var url = '/site/product/create';
+      }
+
       app.http.post(url, form, function(res) {
         if(res.result_code === 10000) {
-          wx.navigateBack({delta: 2});
+          wx.navigateBack(1);
         }
       })
-    } else {
-      app.http.uploadFiles(url, form, paths, function(res) {
-        if(res.result_code === 10000) {
-          wx.navigateBack(1);
-        } else {
-          wx.showToast({
-            title: '上传失败，请稍后再试',
-            icon: 'none',
-            duration: 3000,
-            mask:true
-          });
-        }
-      });
+    } else { //upload with images 
+      if(!this.data.isEdit) {
+        app.http.post('/site/product/create', form, function(res) {
+          if(res.result_code === 10000) {
+            app.http.uploadFiles('/site/product/update', form, paths, function(response) {
+              if(response.result_code === 10000) {
+                wx.navigateBack(1);
+              } else {
+                wx.showToast({
+                  title: '上传失败，请稍后再试',
+                  icon: 'none',
+                  duration: 3000,
+                  mask:true
+                });
+              }
+            });
+          } else {
+            wx.showToast({
+              title: '上传失败，请稍后再试',
+              icon: 'none',
+              duration: 3000,
+              mask:true
+            });
+          }
+        })
+      } else {
+        console.log('test2  ');
+
+        app.http.uploadFiles('/site/product/update', form, paths, function(res) {
+          if(res.result_code === 10000) {
+            wx.navigateBack(1);
+          } else {
+            wx.showToast({
+              title: '上传失败，请稍后再试',
+              icon: 'none',
+              duration: 3000,
+              mask:true
+            });
+          }
+        });
+      }
     }
   },
   bindPrice: function(e) {

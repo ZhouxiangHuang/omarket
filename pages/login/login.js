@@ -18,9 +18,12 @@ Page({
     telCodeIndex: 6
   },
   onLoad: function () {
-    this.setData({
-      isMerchant: app.globalData.isMerchant
-    })
+
+    if(app.globalData.isMerchant) {
+      this.setData({
+        isMerchant: app.globalData.isMerchant
+      })
+    }
 
     wx.getUserInfo({
       success: res => {
@@ -62,7 +65,7 @@ Page({
           data['mobile'] = '+' + this.data.codes[this.data.telCodeIndex].tel_code + this.data.mobile;      
         }
         var that = this;
-        app.http.post('/site/user/login',data,function(res){ 
+        app.http.post('/site/user/login',data,function(res) { 
           if(res.result_code === 10000) {
             app.globalData.userRole = that.data.role; 
             if(that.data.role === MERCHANT_ROLE) {

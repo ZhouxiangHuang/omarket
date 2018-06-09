@@ -6,8 +6,7 @@ Page({
   data: {
     userInfo: {},
   },
-
-  onLoad: function () {
+  onShow: function () {
     this.setData({
       isMerchant: app.globalData.isMerchant,
       userInfo: app.globalData.userInfo

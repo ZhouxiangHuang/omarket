@@ -1,7 +1,7 @@
 <view class="product-detail-main container">
 
     <swiper class="img underline" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
-      <block wx:for="{{productImages}}" wx:for-index="index">    
+      <block wx:for="{{productImages}}" wx:for-index="index" wx:key="key">    
         <swiper-item>    
           <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
         </swiper-item>    

@@ -87,7 +87,8 @@ function doUploadFiles(accessToken, url, data, cb, index) {
           return doUploadFiles(accessToken, url, data, cb, index + 1);
         } else {
           wx.hideLoading();
-          return {result_code: 15000};
+          var res = {result_code: 15000};
+          return typeof cb == "function" && cb(res)  
         }
       }
     })  

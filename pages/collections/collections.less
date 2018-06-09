@@ -1,13 +1,15 @@
 @import "../../utils/common.less";
 
 .collections-main {
+    height: 1200rpx;
+    background-color: @background-color;
     .no-collection {
         width: 500rpx;
-        height: 400rpx;
+        height: 700rpx;
     }
     .product-list {
-        border: @border;
-        min-height: 300rpx;
+        background: white;
+        min-height: 65rpx;
         width: 100%;
         .title {
             height: 65rpx;
@@ -24,11 +26,21 @@
                 text-indent: 50rpx;
                 border-radius: 12px;
                 font-size: 25rpx;
+                .market-icon {
+                    margin-top: 5rpx;
+                    margin-left: 10rpx;
+                    width: 35rpx;
+                    height: 35rpx;
+                    float: left;
+                }
+                text {
+                    margin-left: -40rpx;
+                }
             }
             .name {
                 margin-left: 10rpx;
                 float: left;
-                width: 140rpx;
+                width: 400rpx;
                 height: 65rpx;
                 line-height: 65rpx;
                 font-size: 34rpx;
@@ -50,7 +62,6 @@
                 width: 210rpx;
                 height: 100%;
                 image {
-                    border: 1px solid red;
                     width: 210rpx;
                     height: 210rpx;
                     margin-top: 6%;
@@ -76,11 +87,11 @@
                     font-size: 20rpx;
                 }
                 .trash {
-                    width: 12%;
+                    width: 40rpx;
+                    height: 40rpx;
                     position: absolute;
-                    top: 0;
-                    right: 0;
-                    margin-top: 90rpx;
+                    top: 90rpx;
+                    right: 20rpx;
                 }
             }
         }

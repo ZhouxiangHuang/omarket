@@ -3,20 +3,21 @@
 const app = getApp()
 
 Page({
+  tempAnnouncementContent: null,
   data: {
     userInfo: {},
     hasUserInfo: false,
     startTime: '06:00',
     endTime: '18:00',
     hiddenModal: true,
-    form: {tags: []},
-    tag1: '',
-    tag2: '',
-    tag3: '',    
+    form: {},
+    tag1: null,
+    tag2: null,
+    tag3: null,    
     countryCode: 0,
     cityCode: 0,
+    announcement: null
   },
-  //事件处理函数
   bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
@@ -28,14 +29,13 @@ Page({
     app.http.get('/site/merchant/detail', {merchant_id: merchantId}, function(res) {
       that.data.countryCode = res.result.country_code;
       that.data.cityCode = res.result.city_code;
-      that.data.form.tags = res.result.tags;
-      that.data.form.announcement = res.result.announcement;      
+      that.data.announcement = res.result.announcement;      
       that.setData({
         merchant: res.result, 
-        tag1: res.result.tag_names[0], 
-        tag2: res.result.tag_names[1],
-        tag3: res.result.tag_names[2],
-        form: that.data.form
+        tag1: res.result.tags[0], 
+        tag2: res.result.tags[1],
+        tag3: res.result.tags[2],
+        announcement: res.result.announcement
       });
     })
   },
@@ -43,21 +43,40 @@ Page({
     var record = app.globalData.tagRecord;
     var region = app.globalData.region;
 
+    console.log(this.data);
+
     if(record) {
-      this.data.form.tags.push(record.id);
-      if(record.tag === '1') {
+
+      if(!this.data.tag1) {
         this.setData({
-          tag1: record.name
+          tag1: record
         })
-      } else if(record.tag === '2') {
+      } else if(!this.data.tag2) {
         this.setData({
-          tag2: record.name
+          tag2: record
         })
-      } else {
+      } else if(!this.data.tag3) {
         this.setData({
-          tag3: record.name
+          tag3: record
         })
       }
+      
+      if(this.data.tag1 && this.data.tag1.tag_id == record.prev_tag) {
+        this.setData({
+          tag1: record
+        })
+      } else if(this.data.tag2 && this.data.tag2.tag_id == record.prev_tag) {
+        this.setData({
+          tag2: record
+        })
+      } else if(this.data.tag3 && this.data.tag3.tag_id == record.prev_tag){
+        this.setData({
+          tag3: record
+        })
+      } 
+
+
+
     }
 
     if(region) {
@@ -92,23 +111,23 @@ Page({
   listenerConfirm: function(e) {
     this.setData({
       hiddenModal: true,
-      form: this.data.form
+      announcement: this.tempAnnouncementContent
     })
   },
   listenerCancel: function() {
+    this.tempAnnouncementContent = null;
     this.setData({
       hiddenModal: true,
-      announcement: ''
     })
   },
   announceContent: function(e) {
     var inputVal = e.detail.value;
-    this.data.form.announcement = inputVal;
+    this.tempAnnouncementContent = inputVal;
   },
   selectTag: function(e) {
-    var tag = e.currentTarget.dataset.tag;
+    var tagId = e.currentTarget.dataset.tag;
     wx.navigateTo({
-      url: '../list/list?tag=' + tag
+      url: '../list/list?tag=' + tagId
     })
   },
   updateMerchant: function(e) {
@@ -116,9 +135,9 @@ Page({
         store_name: this.data.merchant.store_name,
         start: this.data.startTime,
         end: this.data.endTime,
-        tags: this.data.form.tags,
+        tags: [this.data.tag1.tag_id, this.data.tag2.tag_id, this.data.tag3.tag_id],
         mobile: this.data.merchant.mobile,
-        announcement: this.data.form.announcement,  
+        announcement: this.data.announcement,  
         address: this.data.merchant.address,    
         city_code: this.data.cityCode,
         country_code: this.data.countryCode,

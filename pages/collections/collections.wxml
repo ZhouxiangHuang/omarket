@@ -1,22 +1,25 @@
 <!--index.wxml-->
 <view class="container collections-main">
-  <image class="no-collection" src="/images/no-collections.png" mode="center"></image>
-  <view class="product-list" wx:for="{{collections}}" wx:for-item="collection" wx:key="key"> 
+  <image wx:if="{{collections.length === 0}}" class="no-collection" src="/images/no-collections.png" mode="center"></image>
+  <view class="product-list" wx:for="{{display}}" wx:for-item="collection" wx:key="key"> 
          <view class='title underline'>
-            <view class="btn" bindtap="selectStore" data-merchant="{{collection.merchant_id}}">进店</view>
+            <view class="btn" bindtap="selectStore" data-merchant="{{collection.merchant_id}}">
+                <image class="market-icon" src="/images/market-selected.png" />
+                <text>进店</text>
+            </view>
             <view class="name">{{collection.merchant_name}}</view>   
-            <image class="selector" class="selector" src="/images/triangle.png"/>
+            <image class="selector" bindtap="productListSwitch" data-merchant="{{collection.merchant_name}}" src="/images/triangle.png"/>
         </view>
         <view class="content" wx:for="{{collection.products}}" wx:for-item="product" wx:key="productKey">
             <view class="left">
-                <image src="{{product.images[0]}}" />
+                <image src="{{product.images[0].url}}" />
             </view>
             <view class="right">
                 <view class="name">{{product.name}}</view>
                 <view class="price">$ {{product.price}}</view>
                 <view class="code">商品编号: {{product.product_unique_code}}</view>
                 <view class="description">介绍：{{product.description}}</view>    
-                <view class="trash" bindtap="delete" data-productid="{{product.id}}">垃圾</view>            
+                <image class="trash" src="/images/trash.png" bindtap="delete" data-productid="{{product.id}}" data-merchant="{{collection.merchant_name}}" />            
             </view>            
         </view>
   </view>

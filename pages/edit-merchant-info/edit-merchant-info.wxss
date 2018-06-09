@@ -40,6 +40,13 @@
   float: right;
   height: 114rpx;
 }
+.form .row .icon {
+  float: left;
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 30rpx;
+  margin-right: 20rpx;
+}
 .form .row label {
   line-height: 114rpx;
   float: left;
@@ -49,6 +56,7 @@
   text-align: right;
   float: right;
   margin-right: 5%;
+  width: 250rpx;
 }
 .form .row .text-content {
   height: 114rpx;
@@ -58,13 +66,20 @@
   margin-right: 5%;
 }
 .form .row .select-icon {
-  width: 40rpx;
-  height: 40rpx;
-  margin-top: 37rpx;
+  width: 20rpx;
+  height: 30rpx;
+  margin-top: 42rpx;
   margin-right: 5%;
   float: right;
 }
-.form .row picker {
+.form .row .categoy-picker {
+  height: 114rpx;
+  line-height: 114rpx;
+  text-align: right;
+  float: right;
+  margin-right: 5%;
+}
+.form .row .time-picker {
   height: 114rpx;
   line-height: 114rpx;
   text-align: right;
