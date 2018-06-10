@@ -25,6 +25,12 @@ Page({
       })
     }
 
+    if(app.globalData.hasMerchantId) {
+      this.setData({
+        hasMerchantId: app.globalData.hasMerchantId
+      })
+    }
+
     wx.getUserInfo({
       success: res => {
         app.globalData.userInfo = res.userInfo
@@ -32,6 +38,9 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+      },
+      fail: res => {
+        console.log(res);
       }
     })
 
@@ -71,6 +80,9 @@ Page({
             if(that.data.role === MERCHANT_ROLE) {
               app.globalData.merchantId = res.result.merchant_id;
               app.globalData.isMerchant = true;
+            } else {
+              app.globalData.merchantId = -1;
+              app.globalData.isMerchant = false;
             }
             var token = res.result.access_token;
             wx.setStorage({key:'token',data: token})
@@ -78,13 +90,12 @@ Page({
               url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
             })
           } else {
-            wx.showToast({
-              title: '登录失败',
-              duration: 3000,
-              icon: 'none'
-            });
+            app.toast('登录失败');
           }
         });  
+      },
+      fail: res => {
+        app.toast('登录失败, 请查看网络连接');
       }
     })
   },

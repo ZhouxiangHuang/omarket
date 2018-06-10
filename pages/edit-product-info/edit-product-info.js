@@ -88,12 +88,7 @@ Page({
         var tempFilePaths = res.tempFilePaths
         var limit = 6;
         if(that.data.productImages.length === limit) {
-          wx.showToast({
-            title: '限定上传'+limit+'张照片',
-            icon: 'none',
-            duration: 3000,
-            mask:true
-          });
+          app.toast('限定上传'+limit+'张照片');
           return false;
         }
 
@@ -129,7 +124,6 @@ Page({
     });
 
     var form = {
-        'file_name': FILE_NAME,
         'code': that.data.productCode,
         'price': that.data.productPrice,
         'name': that.data.productName,
@@ -150,9 +144,13 @@ Page({
       app.http.post(url, form, function(res) {
         if(res.result_code === 10000) {
           wx.navigateBack(1);
+        } else {
+          app.toast('上传失败，请稍后再试');
         }
       })
-    } else { //upload with images 
+      //upload with images
+    } else {  
+      form.file_name = FILE_NAME;
       if(!this.data.isEdit) {
         app.http.post('/site/product/create', form, function(res) {
           if(res.result_code === 10000) {
@@ -160,36 +158,19 @@ Page({
               if(response.result_code === 10000) {
                 wx.navigateBack(1);
               } else {
-                wx.showToast({
-                  title: '上传失败，请稍后再试',
-                  icon: 'none',
-                  duration: 3000,
-                  mask:true
-                });
+                app.toast('上传失败，请稍后再试');
               }
             });
           } else {
-            wx.showToast({
-              title: '上传失败，请稍后再试',
-              icon: 'none',
-              duration: 3000,
-              mask:true
-            });
+            app.toast('上传失败，请稍后再试');
           }
         })
       } else {
-        console.log('test2  ');
-
         app.http.uploadFiles('/site/product/update', form, paths, function(res) {
           if(res.result_code === 10000) {
             wx.navigateBack(1);
           } else {
-            wx.showToast({
-              title: '上传失败，请稍后再试',
-              icon: 'none',
-              duration: 3000,
-              mask:true
-            });
+            app.toast('上传失败，请稍后再试');
           }
         });
       }

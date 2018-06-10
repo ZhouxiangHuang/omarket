@@ -32,9 +32,9 @@ Page({
       that.data.announcement = res.result.announcement;      
       that.setData({
         merchant: res.result, 
-        tag1: res.result.tags[0], 
-        tag2: res.result.tags[1],
-        tag3: res.result.tags[2],
+        tag1: res.result.tags[0] || null,
+        tag2: res.result.tags[1] || null,
+        tag3: res.result.tags[2] || null,
         announcement: res.result.announcement
       });
     })
@@ -43,10 +43,7 @@ Page({
     var record = app.globalData.tagRecord;
     var region = app.globalData.region;
 
-    console.log(this.data);
-
     if(record) {
-
       if(!this.data.tag1) {
         this.setData({
           tag1: record
@@ -74,9 +71,6 @@ Page({
           tag3: record
         })
       } 
-
-
-
     }
 
     if(region) {

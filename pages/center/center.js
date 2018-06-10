@@ -28,7 +28,7 @@ Page({
       })
   },
   getCollections: function() {
-    wx.redirectTo({
+    wx.navigateTo({
       url: '../collections/collections'
     })
   },

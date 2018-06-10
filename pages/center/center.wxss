@@ -64,6 +64,7 @@
   float: right;
   line-height: 114rpx;
   margin-right: 5%;
+  max-width: 200rpx;
 }
 .form .row .select-icon {
   width: 20rpx;
@@ -72,7 +73,14 @@
   margin-right: 5%;
   float: right;
 }
-.form .row categoy-picker {
+.form .row .categoy-picker {
+  height: 114rpx;
+  line-height: 114rpx;
+  text-align: right;
+  float: right;
+  margin-right: 5%;
+}
+.form .row .time-picker {
   height: 114rpx;
   line-height: 114rpx;
   text-align: right;
@@ -279,8 +287,8 @@
   line-height: 35rpx;
   text-align: center;
   color: white;
-  border-radius: 5rpx;
-  font-size: 20rpx;
+  border-radius: 3px;
+  font-size: 24rpx;
 }
 .center-main .mine {
   background-color: white;

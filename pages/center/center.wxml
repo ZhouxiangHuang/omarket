@@ -13,9 +13,9 @@
                 <text>{{merchant.address}}</text>
             </view>   
             <view id="merchant-announcement">
-                <view class="highlight">{{merchant.tag_names[0]}}</view>
-                <view class="highlight">{{merchant.tag_names[1]}}</view>   
-                <view class="highlight">{{merchant.tag_names[2]}}</view>                                             
+                <view wx:if="{{merchant.tags[0]}}" class="highlight">{{merchant.tags[0].name}}</view>
+                <view wx:if="{{merchant.tags[1]}}" class="highlight">{{merchant.tags[1].name}}</view>   
+                <view wx:if="{{merchant.tags[2]}}" class="highlight">{{merchant.tags[2].name}}</view>                                             
             </view>  
             <view class="call-merchant-btn" bindtap="myStore">
                 <text>管理商铺</text>

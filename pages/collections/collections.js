@@ -33,8 +33,6 @@ Page({
         collections: res.result
       })
     })
-
-    console.log(that.data.display);
   },
   selectStore: function (e) {
     var merchantId = e.currentTarget.dataset.merchant;

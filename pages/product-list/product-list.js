@@ -17,8 +17,8 @@ Page({
   },
   onLoad: function (option) {
     this.merchantId = option.merchantId;
-    // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
-    this.setData({isOwner: true});
+    var isOwner = app.globalData.merchantId.toString() == option.merchantId;
+    this.setData({isOwner: isOwner});
   },
   onShow: function () {
     var that = this;
@@ -58,12 +58,8 @@ Page({
           products: products
         });
       } else {
-          wx.showToast({
-            title: res.reason,
-            duration: 3000,
-            icon: 'none'
-          });
-        }
+        app.toast(res.reason);
+      }
     }); 
   },
   selectCategory: function (event) {
@@ -110,12 +106,7 @@ Page({
   }, 
   editProducts: function() {  
     if(this.data.categories.length === 1) {
-      wx.showToast({  
-        title: '请先添加产品类别',
-        icon: 'none',
-        duration: 3000,
-        mask:true
-      })
+      app.toast('请先添加产品类别');
       return false;
     }
     wx.navigateTo({

@@ -64,6 +64,7 @@
   float: right;
   line-height: 114rpx;
   margin-right: 5%;
+  max-width: 200rpx;
 }
 .form .row .select-icon {
   width: 20rpx;
@@ -72,7 +73,14 @@
   margin-right: 5%;
   float: right;
 }
-.form .row categoy-picker {
+.form .row .categoy-picker {
+  height: 114rpx;
+  line-height: 114rpx;
+  text-align: right;
+  float: right;
+  margin-right: 5%;
+}
+.form .row .time-picker {
   height: 114rpx;
   line-height: 114rpx;
   text-align: right;
@@ -93,6 +101,11 @@
   margin-right: 5%;
   line-height: 114rpx;
   float: right;
+}
+.form .row #announcement {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .list {
   width: 100%;
@@ -208,15 +221,20 @@
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-announcement {
   margin-top: 10rpx;
-  font-size: 20rpx;
+  width: 370rpx;
+  font-size: 23rpx;
   color: #979797;
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-announcement .highlight {
   background-color: #FF4343;
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-announcement text {
-  margin-left: 10rpx;
   color: #FF4343;
+  margin-left: 10rpx;
+  display: inline-block;
+  font-size: 24rpx;
+  text-overflow: ellipsis;
+  width: 100rpx;
 }
 .product-list-main .merchant-profile .merchant-profile .tags {
   margin-top: 10rpx;
@@ -238,10 +256,11 @@
 .product-list-main .merchant-profile .merchant-profile .edit-profile-btn {
   width: 100rpx;
   height: 50rpx;
-  float: right;
-  margin-top: -30rpx;
   color: #FF4343;
   font-size: 25rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 0;
 }
 .product-list-main .merchant-profile .merchant-profile .edit-profile-btn image {
   margin-left: 5rpx;
@@ -253,7 +272,9 @@
   width: 150rpx;
   height: 50rpx;
   float: right;
-  margin-top: -30rpx;
+  position: absolute;
+  top: 20rpx;
+  right: 0;
   font-size: 25rpx;
 }
 .product-list-main .merchant-profile .merchant-profile .call-merchant-btn image {

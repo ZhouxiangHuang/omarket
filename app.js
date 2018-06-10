@@ -2,6 +2,8 @@
 var http = require('service/http.js')  
 App({
   onLaunch: function () {
+    wx.showLoading({title: '加载中',mask: true});
+
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
     // logs.unshift(Date.now())
@@ -27,27 +29,36 @@ App({
       }
     })
 
+    console.log('app runing');
+
     wx.login({
-      // success: res => {
-      //   var code = res.code;
-      //   var that = this;
-      //   http.post('/site/user/validate',{code: code},function(res){ 
-      //     if(res.result_code === 10000) {
-      //       var token = res.result.access_token;
-      //       if(res.result.is_merchant) {
-      //         that.globalData.merchantId = res.result.merchant_id;
-      //         that.globalData.isMerchant = res.result.is_merchant;
-      //         that.globalData.userRole = 1;              
-      //       } else {
-      //         that.globalData.userRole = 2;              
-      //       }
-      //       wx.setStorage({key: 'token',data: token})
-      //       wx.switchTab({
-      //         url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
-      //       })
-      //     } 
-      //   });  
-      // }
+      success: res => {
+        wx.hideLoading();
+        var code = res.code;
+        var that = this;
+        http.post('/site/user/validate',{code: code},function(res){ 
+          if(res.result_code === 10000) {
+            var token = res.result.access_token;
+            that.globalData.hasMerchantId = res.result.has_merchant_id;
+            that.globalData.isMerchant = res.result.last_login_role === 1;
+            if(res.result.has_merchant_id && that.globalData.isMerchant) {
+              that.globalData.merchantId = res.result.merchant_id;
+              that.globalData.userRole = 1;              
+            } else {
+              that.globalData.userRole = 2;
+              that.globalData.merchantId = -1;         
+            }
+            wx.setStorage({key: 'token',data: token})
+            wx.switchTab({
+              url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
+            })
+          } 
+        });  
+      },
+      fail: res => {
+        wx.hideLoading();
+        console.log(res);
+      }
     })
   },
   globalData: {
@@ -60,5 +71,12 @@ App({
     get: http.get,
     domain: http.domain,
     uploadFiles: http.uploadFiles
+  },
+  toast: function(text) {
+    wx.showToast({
+      title: text,
+      duration: 3000,
+      icon: 'none'
+    });
   }
 })

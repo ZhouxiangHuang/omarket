@@ -39,8 +39,9 @@
                 }
             }
             #merchant-announcement {
-                margin-top: 10rpx;
-                font-size: 20rpx;
+                margin-top: 10rpx; 
+                width: 370rpx;
+                font-size: 23rpx;
                 color: #979797;
                 .highlight {
                     background-color: @theme-color;
@@ -48,6 +49,11 @@
                 text {
                     margin-left: 10rpx;
                     color: @theme-color;
+                    margin-left: 10rpx;
+                    display: inline-block;
+                    font-size: 24rpx;
+                    text-overflow: ellipsis;
+                    width: 100rpx;
                 }
             }
             .tags {
@@ -70,10 +76,11 @@
             .edit-profile-btn {
                 width: 100rpx;
                 height: 50rpx;
-                float: right;
-                margin-top: -30rpx;
                 color: @theme-color;
                 font-size: 25rpx;
+                position: absolute;
+                top: 20rpx;
+                right: 0;
                     image {
                         margin-left: 5rpx;
                         margin-top: 5rpx;
@@ -85,7 +92,9 @@
                 width: 150rpx;
                 height: 50rpx;
                 float: right;
-                margin-top: -30rpx;
+                position: absolute;
+                top: 20rpx;
+                right: 0;
                 font-size: 25rpx;
                     image {
                         margin-left: 5rpx;

@@ -1,12 +1,14 @@
 <view class="product-detail-main container">
 
-    <swiper class="img underline" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
+    <swiper wx:if="{{productImages.length}}" class="img underline" indicator-dots="true" autoplay="true" interval="5000" duration="1000">    
       <block wx:for="{{productImages}}" wx:for-index="index" wx:key="key">    
         <swiper-item>    
-          <image src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
+          <image wx:if="{{item.url}}" src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
+          <image wx:if="{{!item.url}}" src="/images/no-image-lg.png" class="slide-image" mode="aspectFill"/>    
         </swiper-item>    
       </block>    
-    </swiper>   
+    </swiper>       
+    <image class="img underline" wx:if="{{!productImages.length}}" src="/images/no-image-lg.png" mode="aspectFill"/>    
 
     <view class="product-info">
         <view class="top">
@@ -17,7 +19,7 @@
         </view>
         <view class="low">
             <view class="left">
-                <view class="name">           
+                <view class="name">  
                     <image wx:if="{{productInfo.hot_item}}" src="/images/hot.png" class="fire"/>
                     <text>{{productInfo.name}}</text>
                 </view>
@@ -28,6 +30,9 @@
                 <image wx:if="{{isCollected}}" class="heart" mode="aspectFit" src="/images/star.png"/>                
                 <text>收藏</text>
             </view>     
+            <view class="button-del" bindtap="askDelete" wx:if="{{isMerchant}}">
+                <image class="trash" mode="aspectFit" src="/images/trash.png"/>                
+            </view>     
         </view>            
         <view class="description">{{productInfo.description}}</view>   
     </view>                    
@@ -36,4 +41,5 @@
         <view wx:if="{{!isOwner}}" class="btn" bindtap="checkCollections">收藏夹</view>
         <view wx:if="{{isOwner}}" class="btn" bindtap="edit">编辑</view>              
     </view>
+    <modal title="确认将产品删除？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="delete" bindcancel="hideModal" ></modal>
 </view>

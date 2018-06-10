@@ -13,18 +13,21 @@ Page({
     isOwner: false,
     isCollected: false,
     isMerchant: false,
+    hiddenModal: true
   },
   onLoad: function (options) {
-    // var isOwner = app.globalData.merchantId.toString() == option.merchantId;
-    // var isMerchant = app.globalData.isMerchant;
-    this.setData({isOwner: true, isMerchant: true});
+    var isMerchant = app.globalData.isMerchant;
+    this.setData({isMerchant: isMerchant});
     var productId = options.product_id;
 
     var that = this;
     app.http.get('/site/product/detail',{product_id: productId}, function(res){
+      var merchantId = res.result.merchant_id;
+      var isOwner = app.globalData.merchantId == merchantId;
         that.setData({
           productInfo: res.result,
-          productImages: res.result.images
+          productImages: res.result.images,
+          isOwner: isOwner
         })
     })
 
@@ -44,12 +47,7 @@ Page({
           that.setData({
             isCollected: false
           });
-          wx.showToast({
-            title: '操作成功',
-            icon: 'succes',
-            duration: 1000,
-            mask:true
-          })
+          app.toast('操作成功');
         }
       })
     } else {
@@ -58,12 +56,7 @@ Page({
           that.setData({
             isCollected: true
           });
-          wx.showToast({
-            title: '收藏成功',
-            icon: 'succes',
-            duration: 1000,
-            mask:true
-          })
+          app.toast('收藏成功');
         }
       })
     }
@@ -78,6 +71,26 @@ Page({
     var productId = this.data.productInfo.id;
     wx.navigateTo({
       url: '../edit-product-info/edit-product-info?product_id=' + productId 
+    })
+  },
+  delete: function(e) {
+    var productId = this.data.productInfo.id;
+    app.http.post('/site/product/delete', {product_id: productId}, function(res) {
+      if(res.result_code === 10000) {
+        wx.navigateBack(1);
+      } else {
+        app.toat('操作失败，请稍后再试')
+      }
+    })
+  },
+  askDelete: function() {
+    this.setData({
+      hiddenModal: false
+    })
+  },
+  hideModal: function() {
+    this.setData({
+      hiddenModal: true
     })
   }
 })

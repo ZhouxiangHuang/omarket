@@ -64,6 +64,7 @@
   float: right;
   line-height: 114rpx;
   margin-right: 5%;
+  max-width: 200rpx;
 }
 .form .row .select-icon {
   width: 20rpx;
@@ -100,6 +101,11 @@
   margin-right: 5%;
   line-height: 114rpx;
   float: right;
+}
+.form .row #announcement {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .list {
   width: 100%;

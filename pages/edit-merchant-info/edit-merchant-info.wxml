@@ -38,7 +38,7 @@
         <view class='row underline'>
             <label>公告</label>
             <text class="text-content" bindtap="announce" wx:if="{{!announcement}}">请输入公告</text>
-            <text class="text-content" bindtap="announce" wx:if="{{announcement}}">{{announcement}}</text>
+            <text class="text-content" id="announcement" bindtap="announce" wx:if="{{announcement}}">{{announcement}}</text>
         </view>
         <view class='row underline'>
             <label>标签1</label>
