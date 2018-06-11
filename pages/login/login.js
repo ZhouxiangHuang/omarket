@@ -15,7 +15,8 @@ Page({
     role: USER_ROLE,
     isMerchant: false,
     codes: [],
-    telCodeIndex: 6
+    telCodeIndex: 6,
+    filterCountries: [],
   },
   onLoad: function () {
 

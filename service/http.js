@@ -1,6 +1,6 @@
 
-// var rootDocment = 'http://eu.localhost.com/index.php';//你的域名
-var rootDocment = 'http://47.98.237.13/index.php';//你的域名
+var rootDocment = 'http://eu.localhost.com/index.php';//你的域名
+// var rootDocment = 'http://47.98.237.13/index.php';//你的域名
 
 function post(url,data,cb){    
     getToken(doPost,url,data,cb);

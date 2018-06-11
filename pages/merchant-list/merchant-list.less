@@ -4,9 +4,16 @@
     border-top: @border;
 }
  
-.merchant{ 
+.merchant-list {
+    height: 1010rpx;
+    background-color: @background-color;    
+}
+
+.merchant{
+    background-color: white;
     width: 100%;
     min-height: @std-height;
+    margin-bottom: 20rpx;
     .merchant-info {
         width: 100%;
         height: 190rpx;
@@ -51,7 +58,10 @@
                 border: 1px solid @theme-color
             }
             .merchant-announcement {
-                height: 50rpx;
+                overflow:hidden;
+                white-space:nowrap;
+                text-overflow:ellipsis;
+
                 .announcement-icon { 
                     display: inline-block;
                     font-size: 24rpx;
@@ -65,15 +75,14 @@
                 }
                 .announcement-content {
                     margin-left: 10rpx;
-                    display: inline-block;
+                    color: @theme-color;
+                    margin-left: 10rpx;
                     font-size: 24rpx;
-                    color: #979797;
-                    text-overflow: ellipsis;
-                    width: 100rpx;
+                    width: 350rpx;
                 }
             }
             .tags {
-                margin-top: 15rpx;
+                margin-top: 10rpx;
                 .tag {
                     margin-right: 10rpx;
                     float: left;
@@ -91,7 +100,7 @@
             }
         }        
     }
-
+ 
     .merchant-products {
         height: 230rpx;
         width: 100%;
@@ -99,6 +108,7 @@
             float: left;
             width: 203rpx;
             height: 203rpx;
+            border-radius: 3px; 
             margin-left: 34rpx;
             border: @border;
         }

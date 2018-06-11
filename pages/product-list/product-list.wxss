@@ -182,7 +182,7 @@
 }
 .product-list-main .merchant-profile {
   width: 100%;
-  height: 220rpx;
+  min-height: 220rpx;
 }
 .product-list-main .merchant-profile .merchant-logo {
   margin-left: 15rpx;
@@ -221,7 +221,7 @@
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-announcement {
   margin-top: 10rpx;
-  width: 370rpx;
+  width: 450rpx;
   font-size: 23rpx;
   color: #979797;
 }
@@ -231,10 +231,8 @@
 .product-list-main .merchant-profile .merchant-profile #merchant-announcement text {
   color: #FF4343;
   margin-left: 10rpx;
-  display: inline-block;
   font-size: 24rpx;
-  text-overflow: ellipsis;
-  width: 100rpx;
+  width: 350rpx;
 }
 .product-list-main .merchant-profile .merchant-profile .tags {
   margin-top: 10rpx;

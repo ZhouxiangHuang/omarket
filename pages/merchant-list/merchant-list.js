@@ -5,8 +5,18 @@ const app = getApp()
 Page({
   data: {
     merchants: [],
+    filterCountries: [],
+    countryIndex: null
   },
   onLoad: function () {
+    var that = this;
+    app.http.get('/site/merchant/registered-countries', {}, function(res) {
+      if(res.result_code === 10000) {
+        that.setData({
+          filterCountries: res.result
+        })
+      }
+    })
   },
   onShow: function () {
     var that = this;
@@ -25,4 +35,18 @@ Page({
       }
     })
   },
+  onPullDownRefresh: function(){
+    var that = this;
+    app.http.get('/site/merchant/list', {}, function(res) {
+      that.setData({
+        merchants: res.result
+      });    
+      wx.stopPullDownRefresh();
+    })
+  },
+  filterCountry: function(e) {
+    this.setData({
+      countryIndex: e.detail.value
+    })
+  }
 })

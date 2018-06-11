@@ -45,7 +45,8 @@ Page({
       app.http.post('/site/product/discard', {product_id: productId}, function(res) {
         if(res.result_code === 10000) {
           that.setData({
-            isCollected: false
+            isCollected: false,
+            collectionCount: that.data.collectionCount - 1 
           });
           app.toast('操作成功');
         }
@@ -54,7 +55,8 @@ Page({
       app.http.post('/site/product/collect', {product_id: productId}, function(res) {
         if(res.result_code === 10000) {
           that.setData({
-            isCollected: true
+            isCollected: true,
+            collectionCount: that.data.collectionCount + 1
           });
           app.toast('收藏成功');
         }

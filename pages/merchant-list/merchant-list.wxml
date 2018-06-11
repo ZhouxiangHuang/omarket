@@ -1,40 +1,42 @@
 
 <view class="merchant-list-main container">
     <view class="filter underline">
-        <picker class="selection border-right" range = "{{['牛仔裤','睡衣']}}">
-            <view>选择地区</view>
+        <picker class="selection border-right" range = "{{filterCountries}}" range-key="name" bindchange="filterCountry">
+            <view>{{filterCountries[countryIndex].name || '选择国家'}}</view>
         </picker>
          <picker class="selection" range = "{{['牛仔裤','睡衣']}}">
             <view>选择种类</view>
         </picker>          
     </view>
 
-    <view class="merchant underline" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant">
-        <view class="merchant-info">
-            <view class="merchant-logo">
-                <image wx:if="{{merchant.imageUrl}}" class="logo" src="{{merchant.imageUrl}}" />
-                <image wx:if="{{!merchant.imageUrl}}" class="logo" src="/images/no-store.png" />                
-            </view>
-            <view class="merchant-profile" data-merchant="{{merchant.id}}">
-                <view class="merchant-name">{{merchant.name}}</view>
-                <view class="merchant-address"> {{merchant.address}}</view>  
-                <view class="enter" bindtap="selectStore" data-merchant = "{{merchant.id}}">进店</view>                  
-                <view class="merchant-announcement">
-                    <view class="announcement-icon">公告</view>
-                    <view class="announcement-content">{{merchant.announcement}}</view> 
-                </view>           
-                <view class="tags">
-                    <view class="tag" wx:for="{{merchant.tags}}" wx:key="{{tags}}">
-                        <text>{{item}}</text>        
+    <view class="merchant-list">
+        <view class="merchant" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant">
+            <view class="merchant-info">
+                <view class="merchant-logo">
+                    <image wx:if="{{merchant.imageUrl}}" class="logo" src="{{merchant.imageUrl}}" />
+                    <image wx:if="{{!merchant.imageUrl}}" class="logo" src="/images/no-store.png" />                
+                </view>
+                <view class="merchant-profile" data-merchant="{{merchant.id}}">
+                    <view class="merchant-name">{{merchant.name}}</view>
+                    <view class="merchant-address"> {{merchant.address}}</view>  
+                    <view class="enter" bindtap="selectStore" data-merchant = "{{merchant.id}}">进店</view>                  
+                    <view class="merchant-announcement">
+                        <view class="announcement-icon">公告</view>
+                        <text class="announcement-content">{{merchant.announcement}}</text> 
                     </view>           
+                    <view class="tags"> 
+                        <view class="tag" wx:for="{{merchant.tags}}" wx:key="{{tags}}">
+                            <text>{{item}}</text>        
+                        </view>           
+                    </view>
                 </view>
             </view>
+            
+            <view class="merchant-products">
+                <image wx:if="{{image.url}}" class="product-image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}" wx:key="{{key}}"/> 
+                <image wx:if="{{image.url === null}}" class="product-image" src="/images/no-image-sm.png" wx:for-item="image.url" wx:for="{{merchant.productImages}}" wx:key="{{key}}"/>                           
+            </view>        
         </view>
-        
-        <view class="merchant-products">
-            <image wx:if="{{image.url}}" class="product-image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}" wx:key="{{key}}"/> 
-            <image wx:if="{{image.url === null}}" class="product-image" src="/images/no-image-sm.png" wx:for-item="image.url" wx:for="{{merchant.productImages}}" wx:key="{{key}}"/>                           
-        </view>        
     </view>
     
 </view>
