@@ -36,7 +36,7 @@ function doGet(accessToken,url,data,cb) {
     var param = key + '=' + data[key];
     params.push(param);
   })
-  params = params.join(',');
+  params = params.join('&');
 
   wx.request({
     url: rootDocment + url + '?' + params,

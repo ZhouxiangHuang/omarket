@@ -185,7 +185,7 @@
   border-top: solid 1px #D1D1D1;
 }
 .merchant-list {
-  height: 1010rpx;
+  min-height: 1010rpx;
   background-color: #F8F8F8;
 }
 .merchant {

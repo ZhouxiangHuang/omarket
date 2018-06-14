@@ -8,6 +8,7 @@
   border-right: solid 1px #D1D1D1;
 }
 .filter {
+  background-color: white;
   width: 100%;
   height: 100rpx;
 }
@@ -224,6 +225,8 @@
   width: 450rpx;
   font-size: 23rpx;
   color: #979797;
+  display: flex;
+  word-wrap: break-word;
 }
 .product-list-main .merchant-profile .merchant-profile #merchant-announcement .highlight {
   background-color: #FF4343;

@@ -7,7 +7,17 @@ Page({
   data: {
     userInfo: {},
     hasUserInfo: false,
-    isOwner: false
+    isOwner: false,
+    timeRange: [
+      {'name': '从新到旧', 'code': 'newest'},
+      {'name': '从旧到新', 'code': 'oldest'}
+    ],
+    priceRange: [
+      {'name': '从高到低', 'code': 'highest'},
+      {'name': '从低到高', 'code': 'lowest'}
+    ],
+    timeIndex: null,
+    priceIndex: null
   },
   //事件处理函数
   bindViewTap: function () {
@@ -126,5 +136,37 @@ Page({
         console.log("拨打电话失败！")  
       }  
     })  
+  },
+  orderByTime: function(e) {
+    var index = e.detail.value;    
+    var order = this.data.timeRange[index];
+    var newList = this.data.productList.sort(function(a, b) {
+      if(order.code === "oldest") {
+        return a.timestamp > b.timestamp
+      } else {
+        return a.timestamp < b.timestamp
+      }
+    })
+    this.setData({
+      timeIndex: index,
+      priceIndex: null,
+      productList: newList
+    })
+  },
+  orderByPrice: function(e) {
+    var index = e.detail.value;    
+    var order = this.data.priceRange[index];
+    var newList = this.data.productList.sort(function(a, b) {
+      if(order.code === "lowest") {
+        return a.price > b.price
+      } else {
+        return a.price < b.price
+      }
+    })
+    this.setData({
+      timeIndex: null,
+      priceIndex: index,
+      productList: newList
+    })
   }
 })

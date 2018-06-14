@@ -26,15 +26,15 @@
         </view>        
     </view>
     <view class="filter underline">
-      <picker class="selection border-right" range = "{{['牛仔裤','睡衣']}}">
+      <picker class="selection border-right" bindchange="orderByTime" range = "{{timeRange}}" range-key="name">
             <view>
-                <text>选择地区</text>
+                <text>{{timeRange[timeIndex].name || '时间排序'}}</text>
                 <image class="selector" src="/images/triangle.png"/>
             </view>
         </picker>
-         <picker class="selection" range = "{{['牛仔裤','睡衣']}}">
+         <picker class="selection" bindchange="orderByPrice" range = "{{priceRange}}" range-key="name">
             <view>
-                <text>选择种类</text>
+                <text>{{priceRange[priceIndex].name || '价格排序'}}</text>
                 <image class="selector" src="/images/triangle.png"/>
             </view>
         </picker>    

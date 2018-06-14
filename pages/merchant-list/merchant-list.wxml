@@ -2,10 +2,12 @@
 <view class="merchant-list-main container">
     <view class="filter underline">
         <picker class="selection border-right" range = "{{filterCountries}}" range-key="name" bindchange="filterCountry">
-            <view>{{filterCountries[countryIndex].name || '选择国家'}}</view>
+            <text>{{filterCountries[countryIndex].name || '选择国家'}}</text>
+            <image class="selector" src="/images/triangle.png"/>
         </picker>
-         <picker class="selection" range = "{{['牛仔裤','睡衣']}}">
-            <view>选择种类</view>
+         <picker class="selection" range = "{{filterCategories}}" range-key="name" bindchange="filterCategory">
+            <text>{{filterCategories[categoryIndex].name || '选择种类'}}</text>
+            <image class="selector" src="/images/triangle.png"/>
         </picker>          
     </view>
 
@@ -26,7 +28,7 @@
                     </view>           
                     <view class="tags"> 
                         <view class="tag" wx:for="{{merchant.tags}}" wx:key="{{tags}}">
-                            <text>{{item}}</text>        
+                            <text>{{item.name}}</text>        
                         </view>           
                     </view>
                 </view>
