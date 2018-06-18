@@ -1,8 +1,8 @@
 {
   "pages":[
+    "pages/login/login", 
     "pages/merchant-list/merchant-list",        
     "pages/product-list/product-list",                   
-    "pages/login/login", 
     "pages/product-detail/product-detail",    
     "pages/center/center",    
     "pages/collections/collections", 

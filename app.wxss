@@ -25,6 +25,13 @@
     border-radius: 50%;
   }
   
+  .merchant-avatar {
+    width: 200rpx;
+    height: 200rpx;
+    margin: 20rpx;
+    border-radius: 3px;
+  }
+
   .userinfo-nickname {
     color: #aaa;
   }

@@ -10,11 +10,12 @@
   </view>
 
   <view class="userinfo">
-    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-    </block>
+    <image  wx:if="{{role === 2}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+    <image wx:if="{{role === 1 && merchantProfile}}" bindtap="bindViewTap" class="merchant-avatar" src="{{merchantProfile}}" background-size="cover"></image>      
+    <image wx:if="{{role === 1 && !merchantProfile}}" bindtap="bindViewTap" class="merchant-avatar" src="/images/no-store.png" background-size="cover"></image>          
+    <text wx:if="{{role === 2}}" class="userinfo-nickname">{{userInfo.nickName}}</text>    
+    <text wx:if="{{role === 1 && !storeName}}" class="userinfo-nickname">{{userInfo.nickName}}</text>
+    <text wx:if="{{role === 1 && storeName}}" class="userinfo-nickname">{{storeName}}</text>
   </view>
 
   <view class="form" wx:if="{{role === 1 && !hasMerchantId}}"> 
@@ -38,6 +39,6 @@
   </view>
 
   <view class='register-button'>
-    <button bindtap="login" class='bind-user'>授权绑定微信</button>
+    <button open-type="getUserInfo" bindtap="login" class='bind-user'>授权绑定微信</button>
   </view>
 </view>

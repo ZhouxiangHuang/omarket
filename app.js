@@ -41,12 +41,14 @@ App({
             var token = res.result.access_token;
             that.globalData.hasMerchantId = res.result.has_merchant_id;
             that.globalData.isMerchant = res.result.last_login_role === 1;
+            that.globalData.storeName = res.result.store_name; 
+            that.globalData.merchantProfileUrl = res.result.profile;                                   
             if(res.result.has_merchant_id && that.globalData.isMerchant) {
               that.globalData.merchantId = res.result.merchant_id;
-              that.globalData.userRole = 1;              
+              that.globalData.userRole = 1; 
             } else {
               that.globalData.userRole = 2;
-              that.globalData.merchantId = -1;         
+              that.globalData.merchantId = -1;  
             }
             wx.setStorage({key: 'token',data: token})
             wx.switchTab({

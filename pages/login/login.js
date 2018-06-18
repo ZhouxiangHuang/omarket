@@ -58,6 +58,14 @@ Page({
       }
     })
   },
+  onShow: function () {
+    var url = app.globalData.merchantProfileUrl;
+    var storeName = app.globalData.storeName;
+    this.setData({
+      merchantProfile: url,
+      storeName: storeName
+    })
+  },
   getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({

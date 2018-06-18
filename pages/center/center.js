@@ -6,6 +6,20 @@ Page({
   data: {
     userInfo: {},
   },
+  onLoad: function() {
+    wx.getUserInfo({
+      success: res => {
+        app.globalData.userInfo = res.userInfo
+        this.setData({
+          userInfo: res.userInfo,
+          hasUserInfo: true
+        })
+      },
+      fail: res => {
+        console.log(res);
+      }
+    })
+  },
   onShow: function () {
     this.setData({
       isMerchant: app.globalData.isMerchant,
@@ -41,5 +55,5 @@ Page({
       }
     })
   }
-
+ 
 })
