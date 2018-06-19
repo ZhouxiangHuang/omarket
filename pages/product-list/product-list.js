@@ -168,5 +168,5 @@ Page({
       priceIndex: index,
       productList: newList
     })
-  }
+  },
 })

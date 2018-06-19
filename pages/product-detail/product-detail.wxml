@@ -15,7 +15,7 @@
             <view class="left">
                 ￥{{productInfo.price}}
             </view>
-            <view class="right">分享</view>            
+            <button id="share" open-type='share' class="right">分享</button>            
         </view>
         <view class="low">
             <view class="left">
