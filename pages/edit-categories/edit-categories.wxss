@@ -8,6 +8,7 @@
   border-right: solid 1px #D1D1D1;
 }
 .filter {
+  background-color: white;
   width: 100%;
   height: 100rpx;
 }
@@ -40,6 +41,13 @@
   float: right;
   height: 114rpx;
 }
+.form .row .icon {
+  float: left;
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 30rpx;
+  margin-right: 20rpx;
+}
 .form .row label {
   line-height: 114rpx;
   float: left;
@@ -49,8 +57,31 @@
   text-align: right;
   float: right;
   margin-right: 5%;
+  width: 250rpx;
 }
-.form .row picker {
+.form .row .text-content {
+  height: 114rpx;
+  text-align: right;
+  float: right;
+  line-height: 114rpx;
+  margin-right: 5%;
+  max-width: 200rpx;
+}
+.form .row .select-icon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 42rpx;
+  margin-right: 5%;
+  float: right;
+}
+.form .row .categoy-picker {
+  height: 114rpx;
+  line-height: 114rpx;
+  text-align: right;
+  float: right;
+  margin-right: 5%;
+}
+.form .row .time-picker {
   height: 114rpx;
   line-height: 114rpx;
   text-align: right;
@@ -71,6 +102,11 @@
   margin-right: 5%;
   line-height: 114rpx;
   float: right;
+}
+.form .row #announcement {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .list {
   width: 100%;
@@ -144,6 +180,7 @@
   color: white;
   width: 90%;
   height: 90rpx;
+  line-height: 90rpx;
 }
 .edit-categories-main {
   align-items: right;

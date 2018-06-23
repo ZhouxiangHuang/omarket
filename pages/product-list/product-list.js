@@ -1,12 +1,13 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
+const COLOR_SELECTED = 'white';
+const COLOR_DEFAULT = 'F8F8F8';
 
 Page({
   merchantId: null,
+  categories: [],
   data: {
-    userInfo: {},
-    hasUserInfo: false,
     isOwner: false,
     timeRange: [
       {'name': '从新到旧', 'code': 'newest'},
@@ -17,7 +18,7 @@ Page({
       {'name': '从低到高', 'code': 'lowest'}
     ],
     timeIndex: null,
-    priceIndex: null
+    priceIndex: null,
   },
   //事件处理函数
   bindViewTap: function () {
@@ -40,54 +41,19 @@ Page({
 
     app.http.get('/site/product/products', {merchant_id: this.merchantId},function(res){ 
       if(res.result_code === 10000) {
-        var products = {}
-        products['热销'] = [];
-        res.result.forEach(function(category, index) {
-            var categoryName = Object.keys(category)[0]; //category name
-            var productList = category[categoryName]; //products within category
-            products[categoryName] = productList;
-            productList.forEach(function(product) {
-                if(product.hot_item) {
-                  products['热销'].push(product);
-                }
-            });
-        })
-
-        var categoryList = [];
-        Object.keys(products).forEach(element => {
-          if(element === '热销') {
-            categoryList.unshift({name: element, color: 'white', ishot: true});
-          } else {
-            categoryList.push({name: element, color: '#F8F8F8', ishot: false});
-          }
-        });
-
-        that.setData({
-          categories: categoryList,
-          productList: products['热销'],
-          products: products
-        });
+        that.categories = res.result;
+        var categoryId = that.getReviewHistory().categoryId;
+        console.log(categoryId);
+        that.displayCategory(categoryId);
       } else {
         app.toast(res.reason);
       }
     }); 
   },
   selectCategory: function (event) {
-    var category = event.currentTarget.dataset.no.name;
-
-    //change color
-    this.data.categories.map(element => {
-        if(element.name === category) {
-          element.color = 'white';
-        } else {
-          element.color = '#F8F8F8';
-        }
-    });
-
-    this.setData({
-      productList: this.data.products[category],
-      categories: this.data.categories
-    });
+    var categoryId = event.currentTarget.dataset.category;
+    this.updateReviewHistory(categoryId);
+    this.displayCategory(categoryId);
   },
   checkProductDetal: function(event) {
     var id = event.currentTarget.dataset.no.id;
@@ -168,5 +134,30 @@ Page({
       priceIndex: index,
       productList: newList
     })
+  },
+  displayCategory: function(categoryId) {
+    var displayProducts = [];
+    this.categories.map(function(category) {
+        if(categoryId === category.id) {
+          category.color = COLOR_SELECTED;
+          displayProducts = category.products;
+        } else {
+          category.color = COLOR_DEFAULT;
+        }
+    })
+
+    this.setData({
+      categories: this.categories,
+      productList: displayProducts
+    })
+  },
+  updateReviewHistory: function(categoryId) {
+    app.globalData.lastViewedCategory = categoryId;
+  },
+  getReviewHistory: function() {
+    var id = app.globalData.lastViewedCategory || 0;
+    return {
+      'categoryId': id
+    }
   }
 })

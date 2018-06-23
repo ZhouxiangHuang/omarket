@@ -41,10 +41,10 @@
     </view>
     <view class="products">
         <view class="categories">
-            <view class="category underline" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-no="{{item}}" style="background-color: {{item.color}}">
-                <image class="fire" wx:if="{{item.ishot}}" src="/images/hot.png"/>
-                <text wx:if="{{!item.ishot}}">{{item.name}}</text>
-                <text class="hot-text" wx:if="{{item.ishot}}">{{item.name}}</text>                
+            <view class="category underline" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-category="{{item.id}}" style="background-color: {{item.color}}">
+                <image class="fire" wx:if="{{item.is_hot}}" src="/images/hot.png"/>
+                <text wx:if="{{!item.is_hot}}">{{item.name}}</text>
+                <text class="hot-text" wx:if="{{item.is_hot}}">{{item.name}}</text>                
             </view>
             <view wx:if="{{isOwner}}" class="category underline" id="add-category" bindtap="editCatogory">
                 <view class="circle">
