@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   tempAnnouncementContent: null,
+  pictureTaken: false,
   data: {
     userInfo: {},
     hasUserInfo: false,
@@ -118,6 +119,27 @@ Page({
     var inputVal = e.detail.value;
     this.tempAnnouncementContent = inputVal;
   },
+  storeNameListener: function(e) {
+    var inputVal = e.detail.value;
+    this.data.merchant.store_name = inputVal;
+    this.setData({
+      merchant: this.data.merchant
+    });
+  },
+  addressListener: function(e) {
+    var inputVal = e.detail.value;
+    this.data.merchant.address = inputVal;
+    this.setData({
+      merchant: this.data.merchant
+    });
+  },
+  mobileListener: function(e) {
+    var inputVal = e.detail.value;
+    this.data.merchant.mobile = inputVal;
+    this.setData({
+      merchant: this.data.merchant
+    });
+  },
   selectTag: function(e) {
     var tagId = e.currentTarget.dataset.tag;
     wx.navigateTo({
@@ -137,13 +159,15 @@ Page({
         country_code: this.data.countryCode,
       }
 
+      return console.log(form);
+
       app.http.post('/site/merchant/update', form, function(res) {
         if(res.result_code === 10000) {
           wx.navigateBack(1);
         }
       });
       var url = this.data.merchant.image_url;
-      if(url) {
+      if(this.pictureTaken) {
         wx.getStorage({
           key: 'token', 
           success: function(res){
@@ -168,10 +192,11 @@ Page({
     })
   },
   chooseImage: function(e) {
+    this.pictureTaken = true;
     var that = this;
     wx.chooseImage({
       count: 1, // 默认9
-      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sizeType: ['compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
       success: function (res) {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片

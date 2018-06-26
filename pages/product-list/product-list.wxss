@@ -68,7 +68,7 @@
   max-width: 200rpx;
 }
 .form .row .select-icon {
-  width: 20rpx;
+  width: 30rpx;
   height: 30rpx;
   margin-top: 42rpx;
   margin-right: 5%;
@@ -180,6 +180,7 @@
   color: white;
   width: 90%;
   height: 90rpx;
+  line-height: 90rpx;
 }
 .product-list-main .merchant-profile {
   width: 100%;
@@ -338,6 +339,8 @@
   margin-top: 5rpx;
   color: #888888;
   font-size: 24rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .product-list-main .products .product .product-detail .price {
   margin-top: 10rpx;

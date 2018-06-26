@@ -21,6 +21,7 @@ Page({
   },
   onShow: function () {
     var that = this;
+    this.page = 0;
     this.getMerchantList();
     app.http.get('/site/merchant/registered-countries', {}, function(res) {
       if(res.result_code === 10000) {

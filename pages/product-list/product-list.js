@@ -43,7 +43,6 @@ Page({
       if(res.result_code === 10000) {
         that.categories = res.result;
         var categoryId = that.getReviewHistory().categoryId;
-        console.log(categoryId);
         that.displayCategory(categoryId);
       } else {
         app.toast(res.reason);
@@ -153,9 +152,14 @@ Page({
   },
   updateReviewHistory: function(categoryId) {
     app.globalData.lastViewedCategory = categoryId;
+    app.globalData.lastViewedMerchant = this.merchantId;
   },
   getReviewHistory: function() {
-    var id = app.globalData.lastViewedCategory || 0;
+    var id = 0;
+    if(app.globalData.lastViewedMerchant == this.merchantId) {
+      id = app.globalData.lastViewedCategory || 0;
+    }
+
     return {
       'categoryId': id
     }

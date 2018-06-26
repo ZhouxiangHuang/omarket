@@ -11,7 +11,7 @@
     <view class="form">
         <view class='row underline'>
             <label>公司名称</label>
-            <input type="string" value="{{merchant.store_name}}" placeholder="请输入公司名称"/>
+            <input type="string" bindinput="storeNameListener" value="{{merchant.store_name}}" placeholder="请输入公司名称"/>
         </view>
          <view class='row underline'>
             <label>国家/地区</label>
@@ -19,7 +19,7 @@
         </view>
          <view class='row underline'>
             <label>商铺地址</label>
-            <input type="string" value="{{merchant.address}}" placeholder="请输入商铺地址"/>
+            <input type="string" bindinput="addressListener" value="{{merchant.address}}" placeholder="请输入商铺地址"/>
         </view>
          <view class='row underline'>
             <label>开始营业时间</label>
@@ -33,7 +33,7 @@
         </view>
         <view class='row underline'>
             <label>联系电话</label>
-            <input type="string" value="{{merchant.mobile}}" placeholder="请输入联系电话"/>
+            <input type="string" bindinput="mobileListener" value="{{merchant.mobile}}" placeholder="请输入联系电话"/>
         </view>
         <view class='row underline'>
             <label>公告</label>
