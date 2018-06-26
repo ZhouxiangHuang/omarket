@@ -6,24 +6,22 @@ Page({
   curIndex: 0,
   scroll: 0,
   data: {
-    userInfo: {},
+    user: {},
+    hasUserInfo: false,
     productImages: [],
     productInfo: {},
     collectionCount: 0,
     isOwner: false,
     isCollected: false,
-    isMerchant: false,
     hiddenModal: true
   },
   onLoad: function (options) {
-    var isMerchant = app.globalData.isMerchant;
-    this.setData({isMerchant: isMerchant});
     var productId = options.product_id;
 
     var that = this;
     app.http.get('/site/product/detail',{product_id: productId}, function(res){
       var merchantId = res.result.merchant_id;
-      var isOwner = app.globalData.merchantId == merchantId;
+      var isOwner = app.globalData.user.merchantInfo.id == merchantId;
         that.setData({
           productInfo: res.result,
           productImages: res.result.images,
@@ -35,6 +33,12 @@ Page({
       that.setData({
         collectionCount: res.result.length
       })
+    })
+  },
+  onShow: function () {
+    this.setData({
+      user: app.globalData.user,
+      hasUserInfo: true
     })
   },
   collect: function(e) {
@@ -101,16 +105,7 @@ Page({
         desc: '这款产品很好卖!',
         path: '/product-detail/product-detail?product_id=' + this.data.productInfo.id,
         success: function (res) {
-            if (this.data.savedId === this.data.id) {
-                return;
-            }
 
-            this.saveData().then(() => {
-                this.setData({
-                    savedId: this.data.id
-                });
-                // todo 如果跳转到其他页面，删除this.data.id
-            });
         }
     };
   },

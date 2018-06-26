@@ -1,50 +1,21 @@
 //index.js
 //获取应用实例
 const app = getApp()
-const USER_ROLE = 2;
-const MERCHANT_ROLE = 1;
+
 
 Page({
   data: {
-    userInfo: {},
     hasUserInfo: false,
-    userColor: '#FF4343',
-    userFont: 'white',    
-    merchantColor: 'white',
-    merchantFont: '#FF4343', 
-    role: USER_ROLE,
-    isMerchant: false,
+    user: {},
+    userColor: 'white',
+    userFont: '#FF4343',    
+    merchantColor: '#FF4343',
+    merchantFont: 'white', 
     codes: [],
     telCodeIndex: 6,
     filterCountries: [],
   },
   onLoad: function () {
-
-    if(app.globalData.isMerchant) {
-      this.setData({
-        isMerchant: app.globalData.isMerchant
-      })
-    }
-
-    if(app.globalData.hasMerchantId) {
-      this.setData({
-        hasMerchantId: app.globalData.hasMerchantId
-      })
-    }
-
-    wx.getUserInfo({
-      success: res => {
-        app.globalData.userInfo = res.userInfo
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      },
-      fail: res => {
-        console.log(res);
-      }
-    })
-
     var that = this;
     app.http.get('/site/user/tel-codes', {}, function(res) {
       if(res.result_code === 10000) {
@@ -59,40 +30,42 @@ Page({
     })
   },
   onShow: function () {
-    var url = app.globalData.merchantProfileUrl;
-    var storeName = app.globalData.storeName;
-    this.setData({
-      merchantProfile: url,
-      storeName: storeName
-    })
-  },
-  getUserInfo: function (e) {
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    if(!app.globalData.hasUserInfo) {
+      var that = this;
+      app.getUserInfo(function() {
+        that.setData({
+          user: app.globalData.user,
+          hasUserInfo: true
+        });
+        that.setColors(app.globalData.user.currentRole);
+      });
+    } else {
+      this.setData({
+        user: app.globalData.user,
+        hasUserInfo: true
+      });
+      this.setColors(app.globalData.user.currentRole);
+      console.log('current role', app.globalData.user)
+    }
   },
   login: function (e) {
     wx.login({
       success: res => {
-        var data = {'code': res.code, 'role': this.data.role};
-        if(this.data.role == MERCHANT_ROLE) {
-          data['store_name'] = this.data.storeName;
-          data['address'] = this.data.address;
-          data['mobile'] = '+' + this.data.codes[this.data.telCodeIndex].tel_code + this.data.mobile;      
+        var data = {};
+        data.code = res.code;
+        data.role = this.data.user.currentRole;
+        if(this.data.user.currentRole == app.merchantRole) {
+          data.store_name = this.data.user.merchantInfo.storeName;
+          data.address = this.data.user.merchantInfo.address;
+          data.mobile = '+' + this.data.codes[this.data.telCodeIndex].tel_code + this.data.user.merchantInfo.mobile;
+          if(!this.isValid(data)) {
+            return false;
+          }
         }
         var that = this;
         app.http.post('/site/user/login',data,function(res) { 
           if(res.result_code === 10000) {
-            app.globalData.userRole = that.data.role; 
-            if(that.data.role === MERCHANT_ROLE) {
-              app.globalData.merchantId = res.result.merchant_id;
-              app.globalData.isMerchant = true;
-            } else {
-              app.globalData.merchantId = -1;
-              app.globalData.isMerchant = false;
-            }
+            app.globalData.user = that.data.user; 
             var token = res.result.access_token;
             wx.setStorage({key:'token',data: token})
             wx.switchTab({
@@ -101,6 +74,7 @@ Page({
           } else {
             app.toast('登录失败');
           }
+          console.log(app.globalData.user);
         });  
       },
       fail: res => {
@@ -109,33 +83,75 @@ Page({
     })
   },
   changeRole: function() {
-    var newRole = (this.data.role === MERCHANT_ROLE) ? USER_ROLE : MERCHANT_ROLE;
+    var newRole = (this.data.user.currentRole === app.merchantRole) ? app.userRole : app.merchantRole;
+    this.data.user.currentRole = newRole;
     this.setData({
       userColor: this.data.merchantColor,
       merchantColor: this.data.userColor,
       userFont: this.data.merchantFont,
       merchantFont: this.data.userFont,
-      role: newRole
+      user: this.data.user
     })
   },
   bindStoreName: function(e) {
+    this.data.user.merchantInfo.storeName = e.detail.value;
     this.setData({
-      storeName: e.detail.value
+      user: this.data.user
     })
   },
   bindMobile: function(e) {
+    this.data.user.merchantInfo.mobile = e.detail.value;
     this.setData({
-      mobile: e.detail.value
-    })  },
+      user: this.data.user
+    })  
+  },
   bindAddress: function(e) {
+    this.data.user.merchantInfo.address = e.detail.value;
     this.setData({
-      address: e.detail.value
+      user: this.data.user
     })  
   },
   selectCodes: function(e) {
     this.setData({
       telCodeIndex: e.detail.value
     })
+  }, 
+  isValid: function(data) {
+    if(this.data.user.isMerchant) {
+      return true;
+    }
+
+    if(data.store_name === null) {
+      app.toast("请输入店名");
+      return false;
+    }
+    if(!data.address) {
+      app.toast("请输入地址");
+      return false;
+    }
+    if(data.mobile.includes('undefined')) {
+      app.toast("请输入手机号码");
+      return false;
+    }
+
+    return true;
+  },
+  setColors: function(role) {
+    if(role === app.merchantRole) {
+      this.setData({
+        userColor: 'white',
+        userFont: '#FF4343',    
+        merchantColor: '#FF4343',
+        merchantFont: 'white'
+      })
+    } else {
+      this.setData({
+        userColor: '#FF4343',
+        userFont: 'white',    
+        merchantColor: 'white',
+        merchantFont: '#FF4343'
+      })
+    }
   }
 })
 

@@ -5,9 +5,9 @@ const COLOR_SELECTED = 'white';
 const COLOR_DEFAULT = 'F8F8F8';
 
 Page({
-  merchantId: null,
   categories: [],
   data: {
+    user: {},
     isOwner: false,
     timeRange: [
       {'name': '从新到旧', 'code': 'newest'},
@@ -27,19 +27,26 @@ Page({
     })
   },
   onLoad: function (option) {
-    this.merchantId = option.merchantId;
-    var isOwner = app.globalData.merchantId.toString() == option.merchantId;
-    this.setData({isOwner: isOwner});
+    this.data.user.merchantInfo.id = option.merchantId;
+    var isOwner = app.globalData.user.merchantInfo.id.toString() == option.merchantId;
+    this.setData({
+      isOwner: isOwner,
+      user: this.data.user
+    });
   },
   onShow: function () {
+    this.setData({
+      user: app.globalData.user
+    })
+
     var that = this;
-    app.http.get('/site/merchant/detail', {merchant_id: this.merchantId}, function(res) {
+    app.http.get('/site/merchant/detail', {merchant_id: this.data.user.merchantInfo.id}, function(res) {
       that.setData({
         merchant: res.result
       });
     });
 
-    app.http.get('/site/product/products', {merchant_id: this.merchantId},function(res){ 
+    app.http.get('/site/product/products', {merchant_id: this.data.user.merchantInfo.id},function(res){ 
       if(res.result_code === 10000) {
         that.categories = res.result;
         var categoryId = that.getReviewHistory().categoryId;
@@ -65,7 +72,7 @@ Page({
   },
   editMerchant: function() {
     wx.navigateTo({
-      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + this.merchantId,
+      url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + this.data.user.merchantInfo.id,
       fail: function(e) {
           console.log(e);
       }
@@ -152,11 +159,11 @@ Page({
   },
   updateReviewHistory: function(categoryId) {
     app.globalData.lastViewedCategory = categoryId;
-    app.globalData.lastViewedMerchant = this.merchantId;
+    app.globalData.lastViewedMerchant = this.data.user.merchantInfo.id;
   },
   getReviewHistory: function() {
     var id = 0;
-    if(app.globalData.lastViewedMerchant == this.merchantId) {
+    if(app.globalData.lastViewedMerchant == this.data.user.merchantInfo.id) {
       id = app.globalData.lastViewedCategory || 0;
     }
 

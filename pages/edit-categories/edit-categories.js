@@ -4,9 +4,7 @@ const app = getApp()
 
 Page({
   data: {
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('ton.open-type.getUserInfo'),
+    user: {},
     categories: [],
     newCategory: ''
   },
@@ -21,6 +19,11 @@ Page({
             }
         }
     });
+  },
+  onShow: function () {
+    this.setData({
+      user: app.globalData.user
+    })
   },
   editCategory: function (e) {
     var inputVal = e.detail.value;

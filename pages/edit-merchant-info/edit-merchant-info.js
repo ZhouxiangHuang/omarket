@@ -6,7 +6,7 @@ Page({
   tempAnnouncementContent: null,
   pictureTaken: false,
   data: {
-    userInfo: {},
+    user: {},
     hasUserInfo: false,
     startTime: '06:00',
     endTime: '18:00',
@@ -144,7 +144,16 @@ Page({
   },
   selectTag: function(e) {
     var tagId = e.currentTarget.dataset.tag;
-    var tags = [this.data.tag1.tag_id, this.data.tag2.tag_id, this.data.tag3.tag_id];
+    var tags = [];
+    if(this.data.tag1 != null) {
+      tags.push(this.data.tag1.tag_id);
+    } 
+    if(this.data.tag2 != null) {
+      tags.push(this.data.tag2.tag_id);
+    } 
+    if(this.data.tag3 != null) {
+      tags.push(this.data.tag3.tag_id);
+    } 
     var otherTags = [];
     tags.forEach(function(id) {
       if(tagId != id) {
@@ -169,7 +178,9 @@ Page({
         country_code: this.data.countryCode,
       }
 
-      return console.log(form);
+      if(!this.isValid(form)) {
+        return false;
+      };
 
       app.http.post('/site/merchant/update', form, function(res) {
         if(res.result_code === 10000) {
@@ -219,4 +230,24 @@ Page({
       }
     })
   },
+  isValid: function(form) {
+      if(form.store_name === "") {
+        app.toast('店面不能为空');
+        return false;
+      }
+      if(form.city_code === "") {
+        app.toast('请选择地区');
+        return false;
+      }
+      if(form.store_name.length > 20) {
+        app.toast('店名过长');
+        return false;
+      }
+      if(form.announcement.length > 25) {
+        app.toast('公告过长，请控制在25个字以内');
+        return false;
+      }
+
+      return true;
+  }
 })

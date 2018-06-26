@@ -10,15 +10,28 @@
   </view>
 
   <view class="userinfo">
-    <image  wx:if="{{role === 2}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <image wx:if="{{role === 1 && merchantProfile}}" bindtap="bindViewTap" class="merchant-avatar" src="{{merchantProfile}}" background-size="cover"></image>      
-    <image wx:if="{{role === 1 && !merchantProfile}}" bindtap="bindViewTap" class="merchant-avatar" src="/images/no-store.png" background-size="cover"></image>          
-    <text wx:if="{{role === 2}}" class="userinfo-nickname">{{userInfo.nickName}}</text>    
-    <text wx:if="{{role === 1 && !storeName}}" class="userinfo-nickname">{{userInfo.nickName}}</text>
-    <text wx:if="{{role === 1 && storeName}}" class="userinfo-nickname">{{storeName}}</text>
+    <block wx:if="{{user.currentRole === 2}}">
+        <image  bindtap="bindViewTap" class="userinfo-avatar" src="{{user.avatarUrl}}" background-size="cover"></image>
+        <text class="userinfo-nickname">{{user.nickName}}</text>    
+    </block>
+    <block wx:else>
+        <block wx:if="{{user.merchantInfo.profileUrl}}">
+            <image bindtap="bindViewTap" class="merchant-avatar" src="{{user.merchantInfo.profileUrl}}" background-size="cover"></image>              
+        </block>
+        <block wx:else>
+            <image bindtap="bindViewTap" class="merchant-avatar" src="/images/no-store.png" background-size="cover"></image>          
+        </block>
+
+        <block wx:if="{{user.merchantInfo.storeName}}">
+            <text class="userinfo-nickname">{{user.merchantInfo.storeName}}</text>
+        </block>
+        <block wx:else>
+            <text class="userinfo-nickname">{{user.nickName}}</text>
+        </block>
+    </block>
   </view>
 
-  <view class="form" wx:if="{{role === 1 && !hasMerchantId}}"> 
+  <view class="form" wx:if="{{user.currentRole === 1 && !user.isMerchant}}"> 
          <view class='row underline'>
             <label>商铺名称</label>
             <input type="text" bindinput="bindStoreName" placeholder="请输入商铺名称"/>

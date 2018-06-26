@@ -1,8 +1,12 @@
 <view class="container product-list-main">
     <view class="merchant-profile underline">
         <view class="merchant-logo">
-            <image wx:if="{{merchant.image_url}}" class="logo" src="{{merchant.image_url}}" />
-            <image wx:if="{{!merchant.image_url}}" class="logo" src="/images/no-store.png" />            
+            <block wx:if="{{merchant.image_url}}">
+                <image class="logo" src="{{merchant.image_url}}" />
+            </block>
+            <block wx:else>
+                <image class="logo" src="/images/no-store.png" />            
+            </block>
         </view>
         <view class="merchant-profile">
             <view id="merchant-name">{{merchant.store_name}}</view>
@@ -15,14 +19,18 @@
                 <view class="highlight">公告</view>
                 <text>{{merchant.announcement}}</text>
             </view>  
-            <view wx:if="{{isOwner}}" class="edit-profile-btn" bindtap="editMerchant">
-                <text>编辑</text>
-                <image src="/images/edit.png"/>
-            </view>
-            <view wx:if="{{!isOwner}}" class="call-merchant-btn" bindtap="callMerchant" data-tel="{{merchant.mobile}}">
-                <text>联系商家</text>
-                <image src="/images/phone.png"/>
-            </view>
+            <block wx:if="{{isOwner && user.currentRole === 1}}">
+                <view class="edit-profile-btn" bindtap="editMerchant">
+                    <text>编辑</text>
+                    <image src="/images/edit.png"/>
+                </view>
+            </block>
+            <block wx:else>
+                <view class="call-merchant-btn" bindtap="callMerchant" data-tel="{{merchant.mobile}}">
+                    <text>联系商家</text>
+                    <image src="/images/phone.png"/>
+                </view>
+            </block>
         </view>        
     </view>
     <view class="filter underline">
@@ -42,11 +50,15 @@
     <view class="products">
         <view class="categories">
             <view class="category underline" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-category="{{item.id}}" style="background-color: {{item.color}}">
-                <image class="fire" wx:if="{{item.is_hot}}" src="/images/hot.png"/>
-                <text wx:if="{{!item.is_hot}}">{{item.name}}</text>
-                <text class="hot-text" wx:if="{{item.is_hot}}">{{item.name}}</text>                
+                <block wx:if="{{item.is_hot}}">
+                    <image class="fire" src="/images/hot.png"/>
+                    <text class="hot-text">{{item.name}}</text>                
+                </block>
+                <block wx:else>
+                    <text>{{item.name}}</text>
+                </block>
             </view>
-            <view wx:if="{{isOwner}}" class="category underline" id="add-category" bindtap="editCatogory">
+            <view wx:if="{{isOwner && user.currentRole === 1}}" class="category underline" id="add-category" bindtap="editCatogory">
                 <view class="circle">
                     <image src="/images/add.png" mode="center"/>
                 </view>
@@ -54,15 +66,20 @@
             </view>
         </view>
         <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}">
-            <image class="product-img"  wx:if="{{item.images[0].url}}" src="{{item.images[0].url}}" />   
-            <image class="product-img"  wx:if="{{!item.images[0].url}}" src="/images/no-image-sm.png"/>         
+            <block wx:if="{{item.images[0].url}}">
+                <image class="product-img" src="{{item.images[0].url}}" />   
+            </block>
+            <block wx:else>
+                <image class="product-img" src="/images/no-image-sm.png"/>         
+            </block>
+
             <view class="product-detail">
                 <view class="name">{{item.name}}</view>
                 <view class="production-intro">{{item.description}}</view>
                 <view class="price">￥{{item.price}}</view>
             </view>   
         </view>
-        <view wx:if="{{isOwner}}" class="add-product-btn" bindtap="editProducts">
+        <view wx:if="{{isOwner && user.currentRole === 1}}" class="add-product-btn" bindtap="editProducts">
             <image src="/images/add.png" mode="center"/>
         </view>
     </view>

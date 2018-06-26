@@ -1,42 +1,47 @@
 <!--index.wxml-->
 <view class="center-main container">
-    <view class="merchant-profile" wx:if="{{isMerchant}}">
-        <view class="merchant-logo">
-            <image wx:if="{{merchant.image_url}}" class="logo" src="{{merchant.image_url}}" />
-            <image wx:if="{{!merchant.image_url}}" class="logo" src="/images/no-store.png" />            
-        </view>
+    <block wx:if="{{user.currentRole === 1}}">
         <view class="merchant-profile">
-            <view id="merchant-name">{{merchant.store_name}}</view>
-            <view id="merchant-hours">营业时间: {{merchant.open_at}} - {{merchant.closed_at}}</view>                 
-            <view id="merchant-address">
-                <view class="highlight">地址</view>
-                <text>{{merchant.address}}</text>
-            </view>   
-            <view id="merchant-announcement">
-                <view wx:if="{{merchant.tags[0]}}" class="highlight">{{merchant.tags[0].name}}</view>
-                <view wx:if="{{merchant.tags[1]}}" class="highlight">{{merchant.tags[1].name}}</view>   
-                <view wx:if="{{merchant.tags[2]}}" class="highlight">{{merchant.tags[2].name}}</view>                                             
-            </view>  
-            <view class="call-merchant-btn" bindtap="myStore">
-                <text>管理商铺</text>
-                <image src="/images/selector.png"/>
+            <view class="merchant-logo">
+                <image wx:if="{{user.merchantInfo.profileUrl}}" class="logo" src="{{user.merchantInfo.profileUrl}}" />
+                <image wx:if="{{!user.merchantInfo.profileUrl}}" class="logo" src="/images/no-store.png" />            
             </view>
-        </view>        
-    </view>
-    <view class="userinfo" wx:if="{{!isMerchant}}">
-        <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-        <block wx:else>
-            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-            <text class="userinfo-nickname">{{userInfo.nickName}}</text>
-        </block>
-    </view>
-  <view class="mine form">
-     <view class='row' wx:if="{{!isMerchant}}" bindtap="getCollections">
-        <image class="icon" src="/images/star.png" />
-        <label>我的收藏</label>
-        <image class="select-icon" src="/images/selector.png" />
-    </view>
-  </view>
+            <view class="merchant-profile">
+                <view id="merchant-name">{{merchant.store_name}}</view>
+                <view id="merchant-hours">营业时间: {{merchant.open_at}} - {{merchant.closed_at}}</view>                 
+                <view id="merchant-address">
+                    <view class="highlight">地址</view>
+                    <text>{{merchant.address}}</text>
+                </view>   
+                <view id="merchant-announcement">
+                    <view wx:if="{{merchant.tags[0]}}" class="highlight">{{merchant.tags[0].name}}</view>
+                    <view wx:if="{{merchant.tags[1]}}" class="highlight">{{merchant.tags[1].name}}</view>   
+                    <view wx:if="{{merchant.tags[2]}}" class="highlight">{{merchant.tags[2].name}}</view>                                             
+                </view>  
+                <view class="call-merchant-btn" bindtap="myStore">
+                    <text>管理商铺</text>
+                    <image src="/images/selector.png"/>
+                </view>
+            </view>        
+        </view>
+    </block>
+    <block wx:else>
+        <view class="userinfo">
+            <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+            <block wx:else>
+                <image bindtap="bindViewTap" class="userinfo-avatar" src="{{user.avatarUrl}}" background-size="cover"></image>
+                <text class="userinfo-nickname">{{user.nickName}}</text>
+            </block>
+        </view>
+        <view class="mine form">
+            <view class='row' bindtap="getCollections">
+                <image class="icon" src="/images/star.png" />
+                <label>我的收藏</label>
+                <image class="select-icon" src="/images/selector.png" />
+            </view>
+        </view>
+    </block>
+  
   <view class='std-button'>
     <button bindtap="logout" class='bind-user'>退出登录</button>
   </view>

@@ -4,32 +4,23 @@ const app = getApp()
 
 Page({
   data: {
-    userInfo: {},
-  },
-  onLoad: function() {
-    wx.getUserInfo({
-      success: res => {
-        app.globalData.userInfo = res.userInfo
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      },
-      fail: res => {
-        console.log(res);
-      }
-    })
+    hasUserInfo: false,
+    user: {},
+    merchant: {}
   },
   onShow: function () {
-    this.setData({
-      isMerchant: app.globalData.isMerchant,
-      userInfo: app.globalData.userInfo
-    })
+    if(app.globalData.hasUserInfo) {
+      this.setData({
+        user: app.globalData.user,
+        hasUserInfo: true
+      })
+    } else {
+      app.toast('获取用户信息失败');
+    }
 
-    if(this.data.isMerchant) {
-      var merchantId = app.globalData.merchantId;
+    if(this.data.user.currentRole === app.merchantRole) {
       var that = this;
-      app.http.get('/site/merchant/detail', {merchant_id: merchantId}, function(res) {
+      app.http.get('/site/merchant/detail', {merchant_id: this.data.user.merchantInfo.id}, function(res) {
         that.setData({
           merchant: res.result
         });
@@ -47,9 +38,8 @@ Page({
     })
   },
   myStore: function() {
-    var merchantId = app.globalData.merchantId;
     wx.navigateTo({
-      url: '../product-list/product-list?merchantId=' + merchantId,
+      url: '../product-list/product-list?merchantId=' + this.data.user.merchantInfo.id,
       fail: function(e) {
           console.log(e);
       }
