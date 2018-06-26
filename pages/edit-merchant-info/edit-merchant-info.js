@@ -44,6 +44,8 @@ Page({
     var record = app.globalData.tagRecord;
     var region = app.globalData.region;
 
+    console.log(record);
+
     if(record) {
       if(!this.data.tag1) {
         this.setData({
@@ -142,8 +144,16 @@ Page({
   },
   selectTag: function(e) {
     var tagId = e.currentTarget.dataset.tag;
+    var tags = [this.data.tag1.tag_id, this.data.tag2.tag_id, this.data.tag3.tag_id];
+    var otherTags = [];
+    tags.forEach(function(id) {
+      if(tagId != id) {
+        otherTags.push(id);
+      }
+    })
+
     wx.navigateTo({
-      url: '../list/list?tag=' + tagId
+      url: '../list/list?tag=' + tagId + '&tag2=' + otherTags[0] + '&tag3=' + otherTags[1] 
     })
   },
   updateMerchant: function(e) {

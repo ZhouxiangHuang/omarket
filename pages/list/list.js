@@ -3,7 +3,6 @@
 const app = getApp()
 const REGION_MODE = "regions";
 
-
 Page({
   tag: 0,
   mode: '',
@@ -15,6 +14,8 @@ Page({
   },
   onLoad: function (option) {
     this.tag = option.tag;
+    this.tag2 = option.tag2;
+    this.tag3 = option.tag3;
     this.mode = option.mode;
     var that = this;
     if(option.mode == REGION_MODE) {
@@ -53,6 +54,11 @@ Page({
       if(this.mode === REGION_MODE) {
         app.globalData.region = selectedCategory;
       } else {
+        var existingTags = [this.tag2, this.tag3];
+        if(existingTags.includes(selectedCategory.id.toString())) {
+          app.toast('此标签已存在，请重新选择');
+          return false;
+        }
         var record = {'tag_id': selectedCategory.id, 'prev_tag': this.tag, 'name': selectedCategory.name}
         app.globalData.tagRecord = record;
       }

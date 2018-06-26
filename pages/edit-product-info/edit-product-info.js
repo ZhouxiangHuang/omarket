@@ -6,6 +6,7 @@ const FILE_NAME = 'file';
 Page({
   deleteList: [],
   tempName : null,
+  productId : null,
   data: {
     productImages: [],
     productCode: '',
@@ -32,6 +33,7 @@ Page({
       app.http.get('/site/product/detail', {product_id: productId}, function(res) {
         var images = res.result.images;
         if(res.result_code === 10000) {
+          that.productId = res.result.id;
           that.setData({
             productImages: images,
             productCode: res.result.product_unique_code,
@@ -130,8 +132,8 @@ Page({
         'merchant_category_id': categoryId,
         'hot': that.data.isHot ? 1 : 0,
         'delete_list': JSON.stringify(this.deleteList),
-        'product_id': that.data.productId,
-        'description': that.data.productDescription
+        'product_id': that.productId,
+        'description': that.data.productDescription,
     };
 
     if(paths.length === 0) { //no image to upload
@@ -152,7 +154,9 @@ Page({
     } else {  
       form.file_name = FILE_NAME;
       if(!this.data.isEdit) {
+        var that = this;
         app.http.post('/site/product/create', form, function(res) {
+          form.product_id = res.result.product_id;
           if(res.result_code === 10000) {
             app.http.uploadFiles('/site/product/update', form, paths, function(response) {
               if(response.result_code === 10000) {
@@ -205,30 +209,6 @@ Page({
       isHot: !this.data.isHot
     })
   },
-  // replace: function(e) {
-  //   var uniqueName = e.currentTarget.dataset.name;
-  //   var that = this;
-  //   wx.chooseImage({
-  //     count: 1, // 默认9
-  //     sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
-  //     sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-  //     success: function (res) {
-  //       // 替换旧图只会选择一张照片，所以去数组的第一个元素
-  //       var tempFilePath = res.tempFilePaths[0] 
-  //       //替换对应的图片并标识已更新
-  //       that.data.productImages.map(function(image) {
-  //         if(image.unique_name === uniqueName) {
-  //           image.url = tempFilePath;
-  //           image.updated = true; //标记是更新
-  //         }
-  //       })
-
-  //       that.setData({
-  //         productImages: that.data.productImages
-  //       })
-  //     }
-  //   })
-  // }, 
   delete: function() {
     var uniqueName = this.tempName;
     var newProductImages = [];
