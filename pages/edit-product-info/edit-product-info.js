@@ -97,7 +97,7 @@ Page({
         //do not delete, added for multiple photo upload
         tempFilePaths.forEach(function(path) {
           var image = {};
-          image.unique_name = Date.now();
+          image.unique_name = Date.now() + Math.floor(Math.random() * 100);
           image.url = path;
           image.is_new = true; //标记是新图
           that.data.productImages.push(image);
