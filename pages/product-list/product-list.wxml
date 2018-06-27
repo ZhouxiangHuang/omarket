@@ -65,7 +65,7 @@
                 <text id="add-text">添加</text>
             </view>
         </view>
-        <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}">
+        <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
             <block wx:if="{{item.images[0].url}}">
                 <image class="product-img" src="{{item.images[0].url}}" />   
             </block>

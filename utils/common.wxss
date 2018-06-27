@@ -182,3 +182,6 @@
   height: 90rpx;
   line-height: 90rpx;
 }
+.selected-hover {
+  background-color: #F0F0F0;
+}

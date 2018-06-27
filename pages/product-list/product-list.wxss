@@ -182,6 +182,9 @@
   height: 90rpx;
   line-height: 90rpx;
 }
+.selected-hover {
+  background-color: #F0F0F0;
+}
 .product-list-main .merchant-profile {
   width: 100%;
   min-height: 220rpx;

@@ -21,10 +21,18 @@ Page({
     productDescription: null
   },
   onLoad: function (option) {
+    var categoryId = option.category_id;
     var productId = option.product_id;
     var that = this;
 
-    if(productId) {
+    console.log(categoryId);
+    if(categoryId) {
+      this.setData({
+        categoryId: categoryId
+      })
+    }
+
+    if(productId) { 
       this.setData({
         isEdit: true,
         productId: productId
@@ -42,14 +50,9 @@ Page({
             isHot: res.result.hot_item === 1,
             categoryId: res.result.merchant_category_id,
             productDescription: res.result.description            
-          })
+          }) 
         } else {
-          wx.showToast({  
-            title: '系统更新，请稍后重试',
-            icon: 'fail',
-            duration: 2000,
-            mask:true
-          })
+          app.toast('系统更新，请稍后重试');
         }
       })
     }
@@ -62,20 +65,15 @@ Page({
 
         that.data.categories.forEach(function(category, index) {
             if(that.data.categoryId !== null) {
-                if(that.data.categoryId === category.id) {
+                if(that.data.categoryId == category.id) {
                   that.setData({
                     categoryIndex: index
                   })
                 }
             }
-        });
+        }); 
       } else {
-        wx.showToast({  
-          title: '请求失败',
-          icon: 'fail',
-          duration: 1000,
-          mask:true
-        })
+        app.toast('请求失败');
       }
     })
   },

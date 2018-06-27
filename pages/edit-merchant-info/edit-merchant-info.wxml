@@ -40,37 +40,61 @@
             <text class="text-content" bindtap="announce" wx:if="{{!announcement}}">请输入公告</text>
             <text class="text-content" id="announcement" bindtap="announce" wx:if="{{announcement}}">{{announcement}}</text>
         </view>
-        <view class='row underline'>
+
+        <block wx:if="{{!tag1}}">
+            <view class='row underline'  bindtap="selectTag" data-tag="1" hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
+                <label>标签1</label>
+                <input type="string" placeholder="请选择标签" value="{{tag1}}"/>
+            </view>
+        </block>
+        <block wx:else>
+            <view class='row underline' bindtap="selectTag" data-tag="{{tag1.tag_id}}" hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>标签1</label>
-            <input wx:if="{{!tag1}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="1" value="{{tag1}}"/>
-            <view wx:if="{{tag1}}" bindtap="selectTag" data-tag="{{tag1.tag_id}}" class="std-tags" value="{{tag1.name}}">
+            <view class="std-tags" value="{{tag1.name}}">
                 <view class="tag">
                     <text class="tag-text">{{tag1.name}}</text>        
                 </view>           
             </view>
-        </view>
-        <view class='row underline'>
+            </view>
+        </block>
+
+        <block wx:if="{{!tag2}}">
+            <view class='row underline' bindtap="selectTag" data-tag="2" hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>标签2</label>
-            <input wx:if="{{!tag2}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="2" value="{{tag2}}"/>
-            <view wx:if="{{tag2}}" bindtap="selectTag" data-tag="{{tag2.tag_id}}" class="std-tags" value="{{tag2.name}}">
-                <view class="tag">
-                    <text class="tag-text">{{tag2.name}}</text>        
-                </view>           
-            </view>
+            <input type="string" placeholder="请选择标签" value="{{tag2}}"/>
         </view>
-        <view class='row'>
-            <label>标签3</label>
-            <input wx:if="{{!tag3}}" type="string" placeholder="请选择标签" bindtap="selectTag" data-tag="3" value="{{tag3}}"/>
-            <view wx:if="{{tag3}}" class="std-tags" bindtap="selectTag" data-tag="{{tag3.tag_id}}" value="{{tag3.name}}">
-                <view class="tag">
-                    <text class="tag-text">{{tag3.name}}</text>        
-                </view>           
+        </block>
+        <block wx:else>
+            <view class='row underline' bindtap="selectTag" data-tag="{{tag2.tag_id}}" hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
+                <label>标签2</label>
+                <view class="std-tags" value="{{tag2.name}}">
+                    <view class="tag">
+                        <text class="tag-text">{{tag2.name}}</text>        
+                    </view>           
+                </view>
             </view>
-        </view>
+        </block>
+
+        <block wx:if="{{!tag3}}">
+            <view class='row' bindtap="selectTag" data-tag="3" hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
+                <label>标签3</label>
+                <input type="string" placeholder="请选择标签" value="{{tag3}}"/>
+            </view>
+        </block>
+        <block wx:else>
+            <view class='row' bindtap="selectTag" data-tag="{{tag3.tag_id}}" hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
+                <label>标签3</label>
+                <view class="std-tags" value="{{tag3.name}}">
+                    <view class="tag">
+                        <text class="tag-text">{{tag3.name}}</text>        
+                    </view>           
+                </view>
+            </view>
+        </block>
     </view>
 
     <modal  title="通告内容设定" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="listenerConfirm" bindcancel="listenerCancel" >
-         <input type='text'placeholder="请输入内容" bindinput="announceContent" auto-focus/>  
+         <input type='text'placeholder="请输入内容" bindinput="announceContent" value="{{announcement}}" auto-focus/>  
     </modal>
 
     <view class='std-button' bindtap="updateMerchant" style="margin-bottom: 30rpx;">

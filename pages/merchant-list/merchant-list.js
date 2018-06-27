@@ -58,6 +58,7 @@ Page({
   filterCountry: function(e) {
     var index = e.detail.value;   
     var countryCode = this.data.filterCountries[index].code;
+    this.page = 0;
     if(countryCode === "all") {
       this.filterConditions.country = null;
     } else {
@@ -71,6 +72,7 @@ Page({
   filterCategory: function(e) {
     var index = e.detail.value;    
     var categoryId = this.data.filterCategories[index].id;
+    this.page = 0;
     this.filterConditions.category = categoryId;
     if(categoryId === "all") {
       this.filterConditions.category = null;

@@ -5,6 +5,7 @@ const COLOR_SELECTED = 'white';
 const COLOR_DEFAULT = 'F8F8F8';
 
 Page({
+  selectedCategoryId: null,
   categories: [],
   ownerId: null,
   data: {
@@ -44,8 +45,9 @@ Page({
       });
     }
 
-    this.ownerId = option.merchantId;
+    this.ownerId = option.merchantId; 
     var isOwner = app.globalData.user.merchantInfo.id.toString() == option.merchantId;
+    console.log(app.globalData.user);
     this.setData({
       isOwner: isOwner,
       user: this.data.user
@@ -75,6 +77,7 @@ Page({
   },
   selectCategory: function (event) {
     var categoryId = event.currentTarget.dataset.category;
+    this.selectedCategoryId = categoryId;
     this.updateReviewHistory(categoryId);
     this.displayCategory(categoryId);
   },
@@ -108,8 +111,13 @@ Page({
       app.toast('请先添加产品类别');
       return false;
     }
+    var path = '../edit-product-info/edit-product-info';
+    if(this.selectedCategoryId) {
+      path = path + '?category_id=' +  this.selectedCategoryId;
+    }
+    
     wx.navigateTo({
-      url: '../edit-product-info/edit-product-info',
+      url: path,
       fail: function(e) {
           console.log(e);
       }
