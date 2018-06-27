@@ -6,6 +6,7 @@ const COLOR_DEFAULT = 'F8F8F8';
 
 Page({
   categories: [],
+  ownerId: null,
   data: {
     user: {},
     isOwner: false,
@@ -27,7 +28,23 @@ Page({
     })
   },
   onLoad: function (option) {
-    this.data.user.merchantInfo.id = option.merchantId;
+    if(!app.globalData.hasUserInfo) {
+      var that = this;
+      app.getUserInfo(function() {
+        that.setData({
+          user: app.globalData.user,
+          hasUserInfo: true
+        });
+        that.setColors(app.globalData.user.currentRole);
+      });
+    } else {
+      this.setData({
+        user: app.globalData.user,
+        hasUserInfo: true
+      });
+    }
+
+    this.ownerId = option.merchantId;
     var isOwner = app.globalData.user.merchantInfo.id.toString() == option.merchantId;
     this.setData({
       isOwner: isOwner,
@@ -40,13 +57,13 @@ Page({
     })
 
     var that = this;
-    app.http.get('/site/merchant/detail', {merchant_id: this.data.user.merchantInfo.id}, function(res) {
+    app.http.get('/site/merchant/detail', {merchant_id: this.ownerId}, function(res) {
       that.setData({
         merchant: res.result
       });
     });
 
-    app.http.get('/site/product/products', {merchant_id: this.data.user.merchantInfo.id},function(res){ 
+    app.http.get('/site/product/products', {merchant_id: this.ownerId},function(res){ 
       if(res.result_code === 10000) {
         that.categories = res.result;
         var categoryId = that.getReviewHistory().categoryId;

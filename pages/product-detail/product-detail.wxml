@@ -30,7 +30,7 @@
                     <image class="trash" mode="aspectFit" src="/images/trash.png"/>                
                 </view>     
             </block>
-            <block wx:eliff="{{user.currentRole === 2}}">
+            <block wx:elif="{{user.currentRole === 2}}">
                 <view class="button" bindtap="collect">
                     <block wx:if="{{!isCollected}}">
                         <image class="heart" mode="aspectFit" src="/images/empty-star.png"/>
@@ -45,15 +45,17 @@
         </view>            
         <view class="description">{{productInfo.description}}</view>   
     </view>                    
-    <view class="bottom-row">
-        <block wx:if="{{isOwner && user.currentRole === 1}}">
-            <view class="btn" bindtap="edit">编辑</view>              
-        </block>
 
-        <block wx:if="{{!isOwner}}">
+    <block wx:if="{{isOwner && user.currentRole === 1}}">
+        <view class="bottom-row">
+            <view class="btn" bindtap="edit">编辑</view>              
+        </view>
+    </block>
+    <block wx:if="{{!isOwner && user.currentRole === 2}}">
+        <view class="bottom-row">
             <view class="info">已关注{{collectionCount}}款商品</view>
             <view class="btn" bindtap="checkCollections">收藏夹</view>
-        </block>
-    </view>
+        </view>
+    </block>
     <modal title="确认将产品删除？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="delete" bindcancel="hideModal" ></modal>
 </view>

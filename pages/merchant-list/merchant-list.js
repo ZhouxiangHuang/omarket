@@ -16,9 +16,6 @@ Page({
     countryIndex: null,
     categoryIndex: null,
   },
-  onLoad: function () {
-    
-  },
   onShow: function () {
     var that = this;
     this.page = 0;
