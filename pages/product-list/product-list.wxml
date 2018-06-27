@@ -76,7 +76,7 @@
             <view class="product-detail">
                 <view class="name">{{item.name}}</view>
                 <view class="production-intro">{{item.description}}</view>
-                <view class="price">￥{{item.price}}</view>
+                <view class="price">{{merchant.currency}} {{item.price}}</view>
             </view>   
         </view>
         <view wx:if="{{isOwner && user.currentRole === 1}}" class="add-product-btn" bindtap="editProducts">

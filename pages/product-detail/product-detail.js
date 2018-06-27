@@ -7,6 +7,7 @@ Page({
   scroll: 0,
   data: {
     user: {},
+    merchant: {},
     hasUserInfo: false,
     productImages: [],
     productInfo: {},
@@ -22,11 +23,17 @@ Page({
     app.http.get('/site/product/detail',{product_id: productId}, function(res){
       var merchantId = res.result.merchant_id;
       var isOwner = app.globalData.user.merchantInfo.id == merchantId;
+      that.setData({
+        productInfo: res.result,
+        productImages: res.result.images,
+        isOwner: isOwner
+      })
+
+      app.http.get('/site/merchant/detail', {merchant_id: merchantId}, function(res) {
         that.setData({
-          productInfo: res.result,
-          productImages: res.result.images,
-          isOwner: isOwner
-        })
+          merchant: res.result
+        });
+      });
     })
 
     app.http.get('/site/product/collections', {}, function(res) {

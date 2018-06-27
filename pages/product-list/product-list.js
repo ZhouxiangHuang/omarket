@@ -47,7 +47,6 @@ Page({
 
     this.ownerId = option.merchantId; 
     var isOwner = app.globalData.user.merchantInfo.id.toString() == option.merchantId;
-    console.log(app.globalData.user);
     this.setData({
       isOwner: isOwner,
       user: this.data.user

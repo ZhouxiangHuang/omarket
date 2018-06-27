@@ -13,7 +13,7 @@
     <view class="product-info">
         <view class="top">
             <view class="left">
-                ￥{{productInfo.price}}
+               {{merchant.currency}} {{productInfo.price}}
             </view>
             <button id="share" open-type='share' class="right">分享</button>            
         </view>

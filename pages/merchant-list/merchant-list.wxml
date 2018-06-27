@@ -12,7 +12,7 @@
     </view>
 
     <view class="merchant-list">
-        <view class="merchant" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant"  bindtap="selectStore" data-merchant = "{{merchant.id}}">
+        <view class="merchant" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant"  bindtap="selectStore" data-merchant = "{{merchant.id}}" hover="true" hover-class="selected-hover" hover-start-time="0" hover-stay-time="500">
             <view class="merchant-info">
                 <view class="merchant-logo">
                     <image wx:if="{{merchant.imageUrl}}" class="logo" src="{{merchant.imageUrl}}" />

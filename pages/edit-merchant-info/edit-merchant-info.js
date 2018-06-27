@@ -8,6 +8,7 @@ Page({
   data: {
     user: {},
     hasUserInfo: false,
+    currencies: [],
     startTime: '06:00',
     endTime: '18:00',
     hiddenModal: true,
@@ -17,7 +18,8 @@ Page({
     tag3: null,    
     countryCode: 0,
     cityCode: 0,
-    announcement: null
+    announcement: null,
+    currencyIndex: 0,
   },
   bindViewTap: function () {
     wx.navigateTo({
@@ -39,12 +41,16 @@ Page({
         announcement: res.result.announcement
       });
     })
+
+    app.http.get('/site/merchant/currencies', {}, function(res) {
+        that.setData({
+          currencies: res.result
+        })
+    })
   },
   onShow: function(option) {
     var record = app.globalData.tagRecord;
     var region = app.globalData.region;
-
-    console.log(record);
 
     if(record) {
       if(!this.data.tag1) {
@@ -142,6 +148,11 @@ Page({
       merchant: this.data.merchant
     });
   },
+  currencySelectListener: function(e) {
+    this.setData({
+      currencyIndex: e.detail.value
+    })
+  },
   selectTag: function(e) {
     var tagId = e.currentTarget.dataset.tag;
     var tags = [];
@@ -166,16 +177,28 @@ Page({
     })
   },
   updateMerchant: function(e) {
+      var tags = [];
+      if(this.data.tag1) {
+        tags.push(this.data.tag1.tag_id);
+      }
+      if(this.data.tag2) {
+        tags.push(this.data.tag2.tag_id);
+      }
+      if(this.data.tag3) {
+        tags.push(this.data.tag3.tag_id);
+      }
+
       var form = {
         store_name: this.data.merchant.store_name,
         start: this.data.startTime,
         end: this.data.endTime,
-        tags: [this.data.tag1.tag_id, this.data.tag2.tag_id, this.data.tag3.tag_id],
+        tags: tags,
         mobile: this.data.merchant.mobile,
         announcement: this.data.announcement,  
         address: this.data.merchant.address,    
         city_code: this.data.cityCode,
         country_code: this.data.countryCode,
+        currency_id: this.getCurrencyId()
       }
 
       if(!this.isValid(form)) {
@@ -243,11 +266,14 @@ Page({
         app.toast('店名过长');
         return false;
       }
-      if(form.announcement.length > 25) {
+      if(form.announcement && form.announcement.length > 25) {
         app.toast('公告过长，请控制在25个字以内');
         return false;
       }
 
       return true;
+  },
+  getCurrencyId: function() {
+    return this.data.currencies[this.currencyIndex].id;
   }
 })
