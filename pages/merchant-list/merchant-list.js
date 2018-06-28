@@ -10,6 +10,7 @@ Page({
     'category': null
   },
   data: {
+    banners: ["/images/banner_sample1.png", "/images/banner_sample2.png"],
     merchants: [],
     filterCountries: [],
     filterCategories: [],

@@ -274,6 +274,6 @@ Page({
       return true;
   },
   getCurrencyId: function() {
-    return this.data.currencies[this.currencyIndex].id;
+    return this.data.currencies[this.data.currencyIndex].id;
   }
 })

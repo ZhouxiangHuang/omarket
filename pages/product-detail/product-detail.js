@@ -108,9 +108,10 @@ Page({
   },
   onShareAppMessage: function () {
     return {
-        title: '我的店在欧贸！',
-        desc: '这款产品很好卖!',
-        path: '/product-detail/product-detail?product_id=' + this.data.productInfo.id,
+        title: this.data.merchant.store_name,
+        desc: this.data.productInfo.product_unique_code,
+        path: '/pages/product-detail/product-detail?product_id=' + this.data.productInfo.id,
+        imageUrl: this.data.productInfo.images[0].url,
         success: function (res) {
 
         }
