@@ -9,21 +9,21 @@
     </view>
 
     <view class="form">
-        <view class='row underline'>
+        <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>公司名称</label>
             <input type="string" bindinput="storeNameListener" value="{{merchant.store_name}}" placeholder="请输入公司名称"/>
         </view>
-        <view class='row underline'>
+        <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>国家/地区</label>
             <input type="string" bindtap="selectRegion" value="{{merchant.region}}" placeholder="请选择地区"/>
         </view>
-         <view class='row underline'>
+         <view class='row underline currency' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>使用货币</label>
                 <picker class="time-picker" range = "{{currencies}}" range-key="symbol" placeholder="请选择货币" bindchange="currencySelectListener">
                     <text>{{currencies[currencyIndex].symbol}}</text>
                 </picker>
             </view>
-         <view class='row underline'>
+         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>商铺地址</label>
             <input type="string" bindinput="addressListener" value="{{merchant.address}}" placeholder="请输入商铺地址"/>
         </view>
@@ -37,14 +37,14 @@
                 <text>{{startTime}}</text>
             </picker>
         </view>
-        <view class='row underline'>
+        <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>联系电话</label>
             <input type="string" bindinput="mobileListener" value="{{merchant.mobile}}" placeholder="请输入联系电话"/>
         </view>
-        <view class='row underline'>
+        <view class='row underline' bindtap="announce" hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>公告</label>
-            <text class="text-content" bindtap="announce" wx:if="{{!announcement}}">请输入公告</text>
-            <text class="text-content" id="announcement" bindtap="announce" wx:if="{{announcement}}">{{announcement}}</text>
+            <text class="text-content" wx:if="{{!announcement}}">请输入公告</text>
+            <text class="text-content" id="announcement" wx:if="{{announcement}}">{{announcement}}</text>
         </view>
 
         <block wx:if="{{!tag1}}">

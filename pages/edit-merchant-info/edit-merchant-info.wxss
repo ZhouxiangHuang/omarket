@@ -57,7 +57,7 @@
   text-align: right;
   float: right;
   margin-right: 5%;
-  width: 250rpx;
+  width: 450rpx;
 }
 .form .row .text-content {
   height: 114rpx;
@@ -211,6 +211,12 @@
 }
 .edit-merch-main .form {
   margin-top: 40rpx;
+}
+.edit-merch-main .form .currency picker {
+  width: 450rpx;
+}
+.edit-merch-main .form .row .text-content {
+  width: 450rpx;
 }
 .edit-merch-main .std-tags {
   height: 100%;
