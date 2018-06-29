@@ -1,6 +1,6 @@
 
-// var rootDocment = 'http://eu.localhost.com/index.php';// develpment
-var rootDocment = 'http://47.98.237.13/index.php';// testing
+var rootDocment = 'http://eu.localhost.com/index.php';// develpment
+// var rootDocment = 'http://47.98.237.13/index.php';// testing
 
 function post(url,data,cb){    
     getToken(doPost,url,data,cb);
@@ -26,7 +26,7 @@ function doPost(accessToken,url,data,cb) {
  
 function get(url,data,cb){
     getToken(doGet,url,data,cb);
-}
+} 
 
 function doGet(accessToken,url,data,cb) {
   wx.showLoading({title: '加载中',mask: true});

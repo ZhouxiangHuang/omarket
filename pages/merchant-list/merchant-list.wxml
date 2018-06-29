@@ -9,7 +9,7 @@
 
     </swiper> 
 
-    <view class="filter underline">
+    <view class="filter underline" style="{{filterStyle}}">
         <picker class="selection border-right" range = "{{filterCountries}}" range-key="name" bindchange="filterCountry">
             <text>{{filterCountries[countryIndex].name || '选择国家'}}</text>
             <image class="selector" src="/images/triangle.png"/>

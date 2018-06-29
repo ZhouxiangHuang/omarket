@@ -35,17 +35,22 @@ Page({
         });
       });
     })
-
-    app.http.get('/site/product/collections', {}, function(res) {
-      that.setData({
-        collectionCount: res.result.length
-      })
-    })
   },
   onShow: function () {
     this.setData({
       user: app.globalData.user,
       hasUserInfo: true
+    })
+
+    var that = this;
+    app.http.get('/site/user/collections', {}, function(res) {
+      var productList = that.getProductList(res.result);
+      var isCollected = that.itemExists(productList, that.data.productInfo);
+      console.log(isCollected);
+      that.setData({
+        collectionCount: that.countCollectedProducts(res.result),
+        isCollected: isCollected
+      })
     })
   },
   collect: function(e) {
@@ -117,4 +122,30 @@ Page({
         }
     };
   },
+  itemExists: function(productList, item) {
+    var result = false;
+    productList.forEach(function(product) {
+      if(product.id == item.id) {
+        result = true;
+      }
+    });
+
+    return result;
+  },
+  countCollectedProducts: function(collections) {
+    var count = 0;
+    collections.forEach(function(collection) {
+      count += collection.products.length;
+    })
+
+    return count;
+  },
+  getProductList: function(collections) {
+    var products = [];
+    collections.forEach(function(collection) {
+      products = products.concat(collection.products);
+    })
+
+    return products;
+  }
 })

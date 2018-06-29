@@ -20,7 +20,7 @@ Page({
   },
   onLoad: function () {
     var that = this;
-    app.http.get('/site/product/collections', {}, function(res) {
+    app.http.get('/site/user/collections', {}, function(res) {
       
       res.result.forEach(function(merchant) {
         that.data.display[merchant.merchant_name] = {'merchant_id': merchant.merchant_id, 'merchant_name': merchant.merchant_name, 'products': []};

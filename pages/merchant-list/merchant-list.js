@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
   page: 0,
+  filterPositionFlag: true,
   allMerchants: [],
   filterConditions: {
     'country': null,
@@ -16,6 +17,7 @@ Page({
     filterCategories: [],
     countryIndex: null,
     categoryIndex: null,
+    filterStyle: null
   },
   onShow: function () {
     var that = this;
@@ -38,6 +40,23 @@ Page({
         })
       }
     })
+  },
+  onPageScroll: function(e) {
+    if(this.filterPositionFlag) {
+      if(e.scrollTop >= 125) {
+        this.setData({
+          filterStyle: "position: fixed;"
+        })
+      }
+      this.filterPositionFlag = false;
+    } else {
+      if(e.scrollTop <= 125) {
+        this.setData({
+          filterStyle: null
+        })
+      }
+      this.filterPositionFlag = true;
+    }
   },
   selectStore: function (e) {
     var merchantId = e.currentTarget.dataset.merchant;
