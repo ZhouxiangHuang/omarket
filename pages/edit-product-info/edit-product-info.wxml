@@ -13,26 +13,26 @@
     </modal>
 
     <form class="form">
-        <view class='row underline'>
+        <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>产品类别</label>
             <image class="selector" src="/images/selector.png" mode="right"></image>
             <picker class="categoy-picker" bindchange="selectCategory" range = "{{categories}}" value="{{categoryIndex}}" range-key="name">
                 <view value="jeans">{{categories[categoryIndex].name}}</view>
             </picker>
         </view>
-         <view class='row underline'>
+         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>产品编码</label>
             <input type="string" bindinput="bindProductCode" placeholder="请输入产品编码" value="{{productCode}}"/>
         </view>
-         <view class='row underline'>
+         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>产品名称</label>
             <input type="string" bindinput="bindProductName" placeholder="请输入产品名称" value="{{productName}}"/>
         </view>
-         <view class='row underline'>
+         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>产品介绍</label>
             <input type="string" bindinput="bindDescription" placeholder="请输入产品介绍" value="{{productDescription}}"/>
         </view>
-         <view class='row underline'>
+         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>价格</label>
             <input type="string" bindinput="bindPrice" placeholder="请输入产品价格" value="{{productPrice}}"/>
         </view>

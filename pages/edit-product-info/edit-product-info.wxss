@@ -228,3 +228,6 @@
 .edit-product-main .form {
   margin-top: 20rpx;
 }
+.edit-product-main .form .categoy-picker {
+  width: 450rpx;
+}
