@@ -31,18 +31,18 @@
     </block>
   </view>
 
-  <view class="form" wx:if="{{user.currentRole === 1 && !user.isMerchant}}"> 
-         <view class='row underline'>
+  <view class="form"> 
+         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>商铺名称</label>
             <input type="text" bindinput="bindStoreName" placeholder="请输入商铺名称"/>
         </view>
-         <view class='row underline'>
+         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>地址</label>
             <input style="width: 450rpx;"type="text" bindinput="bindAddress" placeholder="请输入地址"/>
         </view>
-         <view class='row'>
+         <view class='row' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>联系电话</label>
-            <input type="number" bindinput="bindMobile" placeholder="请输入联系电话"/>
+            <input class="mobile" type="number" bindinput="bindMobile" placeholder="请输入联系电话"/>
             <picker id="code" range = "{{codes}}" value="{{telCodeIndex}}" range-key="name" bindchange="selectCodes">
               <view class="content">+{{codes[telCodeIndex].tel_code}}          
                 <image src="/images/triangle.png" />

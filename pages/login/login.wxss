@@ -57,7 +57,7 @@
   text-align: right;
   float: right;
   margin-right: 5%;
-  width: 250rpx;
+  width: 450rpx;
 }
 .form .row .text-content {
   height: 114rpx;
@@ -68,7 +68,7 @@
   max-width: 200rpx;
 }
 .form .row .select-icon {
-  width: 20rpx;
+  width: 30rpx;
   height: 30rpx;
   margin-top: 42rpx;
   margin-right: 5%;
@@ -182,6 +182,18 @@
   height: 90rpx;
   line-height: 90rpx;
 }
+.selected-hover {
+  background-color: #F0F0F0;
+  width: 100%;
+}
+.banner {
+  width: 100%;
+  height: 250rpx;
+}
+.banner image {
+  width: 100%;
+  height: 100%;
+}
 .login-option-nav {
   border: 1px solid #FF4343;
   width: 500rpx;
@@ -234,6 +246,9 @@
   float: right;
   margin-top: 22.5rpx;
   margin-left: 5rpx;
+}
+.form .row .mobile {
+  width: 250rpx;
 }
 .register-button {
   width: 100%;

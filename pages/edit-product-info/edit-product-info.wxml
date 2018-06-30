@@ -20,13 +20,13 @@
                 <view value="jeans">{{categories[categoryIndex].name}}</view>
             </picker>
         </view>
+        <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
+            <label>产品名称</label>
+            <input type="string" bindinput="bindProductName" placeholder="请输入产品名称" value="{{productName}}"/>
+        </view>
          <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>产品编码</label>
             <input type="string" bindinput="bindProductCode" placeholder="请输入产品编码" value="{{productCode}}"/>
-        </view>
-         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
-            <label>产品名称</label>
-            <input type="string" bindinput="bindProductName" placeholder="请输入产品名称" value="{{productName}}"/>
         </view>
          <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>产品介绍</label>
