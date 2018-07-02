@@ -1,0 +1,6 @@
+<!--index.wxml-->
+<view class="container poster">
+  <canvas style="width: 350px; height: 500px;" canvas-id="firstCanvas"/>
+  <button class="change" bindtap=""> 更换 </button>
+  <button class="save" bindtap=""> 保存 </button>
+</view>

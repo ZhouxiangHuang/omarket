@@ -22,16 +22,20 @@
                     <text>管理商铺</text>
                     <image src="/images/selector.png"/>
                 </view>
-            </view>        
+            </view>    
         </view>
+        <view class="mine form">
+            <view class='row' bindtap="posterGenerate">
+                <image class="icon" src="/images/star.png" />
+                <label>生成商铺名片</label>
+                <image class="select-icon" src="/images/selector.png" />
+            </view>
+        </view>    
     </block>
     <block wx:else>
         <view class="userinfo">
-            <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-            <block wx:else>
                 <image bindtap="bindViewTap" class="userinfo-avatar" src="{{user.avatarUrl}}" background-size="cover"></image>
                 <text class="userinfo-nickname">{{user.nickName}}</text>
-            </block>
         </view>
         <view class="mine form">
             <view class='row' bindtap="getCollections">

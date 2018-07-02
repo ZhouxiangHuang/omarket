@@ -12,7 +12,8 @@
     "pages/home/home",        
     "pages/list/list",            
     "pages/index/index",              
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/poster-generate/poster-generate"
   ],
   "window":{
     "backgroundTextStyle":"light",

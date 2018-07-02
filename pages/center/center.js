@@ -44,6 +44,14 @@ Page({
           console.log(e);
       }
     })
+  },
+  posterGenerate: function() {
+    wx.navigateTo({
+      url: '../poster-generate/poster-generate',
+      fail: function(e) {
+          console.log(e);
+      }
+    })
   }
  
 })

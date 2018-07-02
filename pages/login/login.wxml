@@ -31,7 +31,7 @@
     </block>
   </view>
 
-  <view class="form"> 
+  <view class="form" wx:if="{{user.currentRole === 1 && !user.isMerchant}}"> 
          <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>商铺名称</label>
             <input type="text" bindinput="bindStoreName" placeholder="请输入商铺名称"/>

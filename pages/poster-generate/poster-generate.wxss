@@ -194,135 +194,19 @@
   width: 100%;
   height: 100%;
 }
-.center-main {
-  height: 1110rpx;
-  background-color: #F8F8F8;
-}
-.center-main .merchant-profile {
-  width: 100%;
-  height: 220rpx;
-  background-color: white;
-}
-.center-main .merchant-profile .merchant-logo {
-  margin-left: 15rpx;
-  float: left;
-  width: 220rpx;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-}
-.center-main .merchant-profile .merchant-profile {
-  float: right;
-  width: 500rpx;
-  margin-right: 10rpx;
-  height: 100%;
-}
-.center-main .merchant-profile .merchant-profile #merchant-name {
-  margin-top: 23rpx;
-  font-size: 35rpx;
-}
-.center-main .merchant-profile .merchant-profile #merchant-hours {
-  margin-top: 5rpx;
-  font-size: 23rpx;
-  color: #979797;
-}
-.center-main .merchant-profile .merchant-profile #merchant-address {
-  margin-top: 10rpx;
-  font-size: 23rpx;
-  color: #979797;
-}
-.center-main .merchant-profile .merchant-profile #merchant-address .highlight {
-  min-width: 75rpx;
-  background-color: #FF4343;
-}
-.center-main .merchant-profile .merchant-profile #merchant-address text {
-  margin-left: 10rpx;
-  color: #FF4343;
-}
-.center-main .merchant-profile .merchant-profile #merchant-announcement {
-  margin-top: 10rpx;
-  font-size: 20rpx;
-  color: #979797;
-}
-.center-main .merchant-profile .merchant-profile #merchant-announcement .highlight {
-  margin-right: 10rpx;
-  min-width: 100rpx;
-  border: 1px solid #FFA32C;
-  color: #FFA32C;
-}
-.center-main .merchant-profile .merchant-profile #merchant-announcement text {
-  margin-left: 10rpx;
-  color: #FF4343;
-}
-.center-main .merchant-profile .merchant-profile .tags {
-  margin-top: 10rpx;
-}
-.center-main .merchant-profile .merchant-profile .tags .tag {
-  margin-right: 10rpx;
-  float: left;
-  border: 1px solid #FFA32C;
-  text-align: center;
-  border-radius: 3px;
-  height: 30rpx;
-  line-height: 30rpx;
-  width: 110rpx;
-  font-size: 24rpx;
-}
-.center-main .merchant-profile .merchant-profile .tags .tag text {
-  color: #FFA32C;
-}
-.center-main .merchant-profile .merchant-profile .edit-profile-btn {
-  width: 100rpx;
-  height: 50rpx;
-  float: right;
-  margin-top: -30rpx;
-  color: #FF4343;
-  font-size: 25rpx;
-}
-.center-main .merchant-profile .merchant-profile .edit-profile-btn image {
-  margin-left: 5rpx;
-  margin-top: 5rpx;
-  width: 30rpx;
-  height: 30rpx;
-}
-.center-main .merchant-profile .merchant-profile .call-merchant-btn {
-  width: 150rpx;
-  height: 50rpx;
-  margin-top: 5rpx;
-  top: 0;
-  right: 0;
+.poster button {
   position: absolute;
-  font-size: 25rpx;
+  bottom: 0;
+  margin-bottom: 100rpx;
 }
-.center-main .merchant-profile .merchant-profile .call-merchant-btn image {
-  margin-left: 10rpx;
-  margin-top: 5rpx;
-  width: 15rpx;
-  height: 20rpx;
+.poster .change {
+  color: #FF4343;
+  background-color: white;
+  border: 1px solid #FF4343;
+  left: 220rpx;
 }
-.center-main .highlight {
-  float: left;
-  height: 35rpx;
-  line-height: 35rpx;
-  text-align: center;
+.poster .save {
+  background-color: #FF4343;
   color: white;
-  border-radius: 3px;
-  font-size: 24rpx;
-}
-.center-main .mine {
-  background-color: white;
-  margin-top: -500rpx;
-  border-top: none;
-  border-bottom: 0;
-}
-.center-main .mine .select-icon {
-  width: 20rpx;
-}
-.center-main .std-button {
-  margin-bottom: 20rpx;
-}
-.center-main .selectors {
-  width: 100%;
-  background-color: white;
-  min-height: 114rpx;
+  right: 220rpx;
 }
