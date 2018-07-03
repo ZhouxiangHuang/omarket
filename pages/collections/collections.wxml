@@ -16,7 +16,7 @@
             </view>
             <view class="right">
                 <view class="name">{{product.name}}</view>
-                <view class="price">$ {{product.price}}</view>
+                <view class="price">{{product.price}}</view>
                 <view class="code">商品编号: {{product.product_unique_code}}</view>
                 <view class="description">介绍：{{product.description}}</view>    
                 <image class="trash" src="/images/trash.png" bindtap="delete" data-productid="{{product.id}}" data-merchant="{{collection.merchant_name}}" />            

@@ -5,6 +5,7 @@ const app = getApp()
 Page({
   config: {},
   tempFile: null,
+  posterId : 1,
   data: {
   },
   //事件处理函数
@@ -24,37 +25,60 @@ Page({
     })
   },
   getNewPoster: function() {
+    var data = {id: this.posterId};
     var that = this;
-    var data = {};
     app.http.get('/site/merchant/share', data, function(res) {
       if(res.result_code == 10000) {
         that.config = that.formatConfig(res.result);
         that.generate(that.config);
+        that.posterId = res.result.next_poster_id;
       } else {
         app.toast('系统错误，请尝试联系客服');
       }
     });
   },
   generate: function(config) {
-    var context = wx.createCanvasContext('firstCanvas');
-    context.scale(config.image.scaleX, config.image.scaleY); 
-    context.drawImage(config.image.url, config.image.posX, config.image.posY);
-    context.scale(config.qrCode.scaleX, config.qrCode.scaleY); 
-    context.drawImage(config.qrCode.url, config.qrCode.posX, config.qrCode.posY);
-    context.draw()
+    var that = this;
+    wx.showLoading({title: '正在为您制作海报...',mask: true});
+    wx.downloadFile({
+      url: config.image.url,
+      success: function (sres) {
+        wx.downloadFile({
+          url: config.qrCode.url,
+          success: function (res) {
+            var context = wx.createCanvasContext('firstCanvas');
+            context.scale(config.image.scaleX, config.image.scaleY); 
+            context.drawImage(sres.tempFilePath, config.image.posX, config.image.posY);
+            context.scale(config.qrCode.scaleX, config.qrCode.scaleY); 
+            context.drawImage(res.tempFilePath, config.qrCode.posX, config.qrCode.posY);
+            context.draw();
+            wx.hideLoading();
+          },fail:function(res){
+            console.log(res);
+            wx.hideLoading();
+          }
+        })
+      },fail:function(fres){
+        wx.hideLoading();
+        console.log(fres);
+      }
+    });
 
+  },
+  saveToAlbum: function() {
     var that = this;
     wx.canvasToTempFilePath({
       canvasId: 'firstCanvas',
       success: function (res) {
         var tempFilePath = res.tempFilePath;
         that.tempFile = tempFilePath;
+        that.save();
       },
       fail: function (res) {
           console.log(res);
       }
     })
-  },
+  }, 
   save: function() {
     var that = this;
     wx.getSetting({

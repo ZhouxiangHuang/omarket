@@ -4,18 +4,21 @@
 .underline-light {
   border-bottom: #E6E5F4;
 }
+.underline-light-gray {
+  border-bottom: solid 1px #E2E2E2;
+}
 .border-right {
   border-right: solid 1px #D1D1D1;
 }
 .filter {
   background-color: white;
   width: 100%;
-  height: 100rpx;
+  height: 90rpx;
 }
 .filter .selection {
   margin-top: 15rpx;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 60rpx;
+  line-height: 60rpx;
   width: 49.6%;
   display: inline-block;
   text-align: center;
@@ -26,7 +29,7 @@
   height: 15rpx;
   float: right;
   margin-right: 100rpx;
-  margin-top: 30rpx;
+  margin-top: 25rpx;
 }
 .filter .selection text {
   margin-left: 100rpx;
@@ -57,7 +60,7 @@
   text-align: right;
   float: right;
   margin-right: 5%;
-  width: 250rpx;
+  width: 450rpx;
 }
 .form .row .text-content {
   height: 114rpx;
@@ -68,7 +71,7 @@
   max-width: 200rpx;
 }
 .form .row .select-icon {
-  width: 20rpx;
+  width: 30rpx;
   height: 30rpx;
   margin-top: 42rpx;
   margin-right: 5%;
@@ -147,19 +150,20 @@
   width: 180rpx;
   height: 180rpx;
   border-radius: 10px;
+  border: 1px solid #E2E2E2;
 }
 .bottom-row {
-  height: 110rpx;
-  line-height: 110rpx;
+  height: 90rpx;
+  line-height: 90rpx;
   width: 100%;
-  border-top: solid 1px #D1D1D1;
+  border-top: 1px solid #e2e2e2;
   position: absolute;
   bottom: 0;
-  font-size: 35rpx;
+  font-size: 30rpx;
 }
 .bottom-row .info {
   float: left;
-  width: 69%;
+  width: 50%;
   height: 100%;
   text-indent: 50rpx;
 }
@@ -171,6 +175,30 @@
   text-align: center;
   color: white;
 }
+.bottom-row .collect-button {
+  width: 15%;
+  height: 100%;
+  float: right;
+  border-left: 1px solid #e2e2e2;
+}
+.bottom-row .collect-button .top-wrapper {
+  width: 100%;
+  height: 50%;
+}
+.bottom-row .collect-button .top-wrapper .star {
+  width: 35rpx;
+  height: 35rpx;
+  margin-top: 15rpx;
+  margin-left: 40rpx;
+  position: absolute;
+}
+.bottom-row .collect-button .buttom-wrapper {
+  text-align: center;
+  font-size: 25rpx;
+  line-height: 40rpx;
+  width: 100%;
+  height: 50%;
+}
 .std-button {
   width: 100%;
   margin-top: 30rpx;
@@ -180,6 +208,19 @@
   color: white;
   width: 90%;
   height: 90rpx;
+  line-height: 90rpx;
+}
+.selected-hover {
+  background-color: #F0F0F0;
+  width: 100%;
+}
+.banner {
+  width: 100%;
+  height: 200rpx;
+}
+.banner image {
+  width: 100%;
+  height: 100%;
 }
 .product-detail-main .img {
   min-width: 750rpx;
@@ -211,6 +252,7 @@
 }
 .product-detail-main .product-info .top #share {
   height: 60rpx;
+  margin-top: 10rpx;
   line-height: 60rpx;
   width: 120rpx;
   font-size: 30rpx;

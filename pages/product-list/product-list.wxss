@@ -4,18 +4,21 @@
 .underline-light {
   border-bottom: #E6E5F4;
 }
+.underline-light-gray {
+  border-bottom: solid 1px #E2E2E2;
+}
 .border-right {
   border-right: solid 1px #D1D1D1;
 }
 .filter {
   background-color: white;
   width: 100%;
-  height: 100rpx;
+  height: 90rpx;
 }
 .filter .selection {
   margin-top: 15rpx;
-  height: 70rpx;
-  line-height: 70rpx;
+  height: 60rpx;
+  line-height: 60rpx;
   width: 49.6%;
   display: inline-block;
   text-align: center;
@@ -26,7 +29,7 @@
   height: 15rpx;
   float: right;
   margin-right: 100rpx;
-  margin-top: 30rpx;
+  margin-top: 25rpx;
 }
 .filter .selection text {
   margin-left: 100rpx;
@@ -57,7 +60,7 @@
   text-align: right;
   float: right;
   margin-right: 5%;
-  width: 250rpx;
+  width: 450rpx;
 }
 .form .row .text-content {
   height: 114rpx;
@@ -147,6 +150,7 @@
   width: 180rpx;
   height: 180rpx;
   border-radius: 10px;
+  border: 1px solid #E2E2E2;
 }
 .bottom-row {
   height: 110rpx;
@@ -184,10 +188,19 @@
 }
 .selected-hover {
   background-color: #F0F0F0;
+  width: 100%;
+}
+.banner {
+  width: 100%;
+  height: 200rpx;
+}
+.banner image {
+  width: 100%;
+  height: 100%;
 }
 .product-list-main .merchant-profile {
   width: 100%;
-  min-height: 220rpx;
+  min-height: 200rpx;
 }
 .product-list-main .merchant-profile .merchant-logo {
   margin-left: 15rpx;
@@ -276,6 +289,7 @@
 .product-list-main .merchant-profile .merchant-profile .call-merchant-btn {
   width: 150rpx;
   height: 50rpx;
+  line-height: 50rpx;
   float: right;
   position: absolute;
   top: 20rpx;
@@ -284,12 +298,13 @@
 }
 .product-list-main .merchant-profile .merchant-profile .call-merchant-btn image {
   margin-left: 5rpx;
-  margin-top: 5rpx;
+  margin-top: 10rpx;
   width: 30rpx;
   height: 30rpx;
+  position: absolute;
 }
 .product-list-main .products {
-  height: 880rpx;
+  height: 900rpx;
   width: 100%;
 }
 .product-list-main .products .categories {
@@ -349,6 +364,7 @@
   margin-top: 10rpx;
   color: #FF4343;
   font-size: 35rpx;
+  font-weight: 500;
 }
 .product-list-main .products .add-product-btn {
   border-radius: 50%;

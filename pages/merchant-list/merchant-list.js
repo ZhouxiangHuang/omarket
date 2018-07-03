@@ -11,7 +11,7 @@ Page({
     'category': null
   },
   data: {
-    banners: ["/images/banner_sample1.png", "/images/banner_sample2.png"],
+    banners: ["/images/banner-1.png", "/images/banner-2.png"],
     merchants: [],
     filterCountries: [],
     filterCategories: [],
@@ -43,14 +43,14 @@ Page({
   },
   onPageScroll: function(e) {
     if(this.filterPositionFlag) {
-      if(e.scrollTop >= 125) {
+      if(e.scrollTop >= 100) {
         this.setData({
           filterStyle: "position: fixed;"
         })
       }
       this.filterPositionFlag = false;
     } else {
-      if(e.scrollTop <= 125) {
+      if(e.scrollTop <= 100) {
         this.setData({
           filterStyle: null
         })

@@ -1,6 +1,6 @@
 
-var rootDocment = 'http://eu.localhost.com/index.php';// develpment
-// var rootDocment = 'http://47.98.237.13/index.php';// testing
+// var rootDocment = 'http://eu.localhost.com/index.php';// develpment
+var rootDocment = 'http://47.98.237.13/index.php';// testing
 
 function post(url,data,cb){    
     getToken(doPost,url,data,cb);

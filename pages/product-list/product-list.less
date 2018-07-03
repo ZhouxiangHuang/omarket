@@ -3,8 +3,8 @@
 .product-list-main {
     .merchant-profile{ 
         width: 100%;
-        min-height: @std-height;
-        .merchant-logo {
+        min-height: 200rpx;
+        .merchant-logo { 
             margin-left: 15rpx;
             float: left;
             width: @std-height;
@@ -91,6 +91,7 @@
             .call-merchant-btn {
                 width: 150rpx;
                 height: 50rpx;
+                line-height: 50rpx;
                 float: right;
                 position: absolute;
                 top: 20rpx;
@@ -98,15 +99,16 @@
                 font-size: 25rpx;
                     image {
                         margin-left: 5rpx;
-                        margin-top: 5rpx;
+                        margin-top: 10rpx;
                         width: 30rpx;
                         height: 30rpx;
+                        position: absolute;
                     }
             }
         }
     }
     .products {
-        height: 880rpx;
+        height: 900rpx;
         width: 100%;
         .categories {
             float: left;
@@ -163,9 +165,10 @@
                     margin-top: 10rpx;
                     color: @theme-color;
                     font-size: 35rpx;
-                }
+                    font-weight: 500;
+                } 
             }
-        }
+        } 
         .add-product-btn {
             border-radius: 50%;
             width: 100rpx;
