@@ -40,7 +40,7 @@
                 <image class="selector" src="/images/triangle.png"/>
             </view>
         </picker>
-         <picker class="selection" bindchange="orderByPrice" range = "{{priceRange}}" range-key="name">
+        <picker class="selection" bindchange="orderByPrice" range = "{{priceRange}}" range-key="name">
             <view>
                 <text>{{priceRange[priceIndex].name || '价格排序'}}</text>
                 <image class="selector" src="/images/triangle.png"/>
@@ -75,7 +75,7 @@
 
             <view class="product-detail">
                 <view class="name">{{item.name}}</view>
-                <view class="production-intro">{{item.description}}</view>
+                <view class="production-intro">{{item.description || '暂无产品描述'}}</view>
                 <view class="price">{{merchant.currency}} {{item.price}}</view>
             </view>   
         </view>

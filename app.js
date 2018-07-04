@@ -1,5 +1,6 @@
 //app.js
 var http = require('service/http.js');
+var wxApi = require('service/wxApi.js');
 
 App({
   onLaunch: function () {
@@ -15,11 +16,15 @@ App({
     user: {},
     hasUserInfo: false
   },
+  wxApi: {
+    getAccessToken: wxApi.getAccessToken
+  },
   http: {
     post: http.post,
     get: http.get,
     domain: http.domain,
-    uploadFiles: http.uploadFiles
+    uploadFiles: http.uploadFiles,
+    promiseGet: http.promiseGet
   },
   getUserInfo: function(cb) {
     wx.showLoading({title: '加载中',mask: true});

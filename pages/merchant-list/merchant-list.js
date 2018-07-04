@@ -23,23 +23,27 @@ Page({
     var that = this;
     this.page = 0;
     this.getMerchantList();
-    app.http.get('/site/merchant/registered-countries', {}, function(res) {
-      if(res.result_code === 10000) {
+    app.http.promiseGet('/site/merchant/registered-countries', {})
+      .then(res => {
         res.result.push({'name': '全部', 'code': 'all'});
         that.setData({
           filterCountries: res.result
         })
-      }
-    })
+      })
+      .catch(error => {
+        app.toast(error);
+      })
 
-    app.http.get('/site/product/categories', {}, function(res) {
-      if(res.result_code === 10000) {
+    app.http.promiseGet('/site/product/categories', {})
+      .then(res => {
         res.result.push({'name': '全部', 'id': 'all'});
         that.setData({
           filterCategories: res.result
-        })
-      }
-    })
+        });
+      })
+      .catch(error => {
+        app.toast(error);
+      })
   },
   onPageScroll: function(e) {
     if(this.filterPositionFlag) {
@@ -116,12 +120,16 @@ Page({
     if(category) {
       data.category = category;
     }
-    app.http.get('/site/merchant/list', data, function(res) {
-      that.allMerchants = res.result;
-      that.setData({
-        merchants: res.result
-      });    
-    })
+    app.http.promiseGet('/site/merchant/list', data)
+      .then(res => {
+        that.allMerchants = res.result;
+        that.setData({
+          merchants: res.result
+        });
+      })
+      .catch(error => {
+        app.toast(error);
+      })
   }, 
   getMoreMerchantList: function() {
     this.page++;
@@ -136,14 +144,19 @@ Page({
     if(category) {
       data.category = category;
     }
-    app.http.get('/site/merchant/list', data, function(res) {
-      that.allMerchants = res.result;
-      res.result.forEach(function(merchant) {
-        that.data.merchants.push(merchant);
+
+    app.http.promiseGet('/site/merchant/list', data)
+      .then(res => {
+        that.allMerchants = res.result;
+        res.result.forEach(function(merchant) {
+          that.data.merchants.push(merchant);
+        })
+        that.setData({
+          merchants: that.data.merchants
+        }); 
       })
-      that.setData({
-        merchants: that.data.merchants
-      });    
-    })
+      .catch(error => {
+        app.toast(error);
+      })
   }
 })

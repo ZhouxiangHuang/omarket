@@ -18,7 +18,7 @@ Page({
     isHot: false,
     isEdit: false,
     hideDelete: true,
-    productDescription: null
+    productDescription: ''
   },
   onLoad: function (option) {
     var categoryId = option.category_id;

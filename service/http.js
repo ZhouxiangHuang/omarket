@@ -1,9 +1,13 @@
 
 // var rootDocment = 'http://eu.localhost.com/index.php';// develpment
 var rootDocment = 'http://47.98.237.13/index.php';// testing
+var wxApi = require('wxApi.js');
 
 function post(url,data,cb){    
-    getToken(doPost,url,data,cb);
+    wxApi.getAccessToken().then(accessToken => {
+      doPost(accessToken, url, data, cb);
+    })
+    // getToken(doPost,url,data,cb);
 }
 
 function doPost(accessToken,url,data,cb) {
@@ -25,8 +29,69 @@ function doPost(accessToken,url,data,cb) {
 }
  
 function get(url,data,cb){
-    getToken(doGet,url,data,cb);
+  wx.showLoading({title: '加载中',mask: true});
+  wxApi.getAccessToken()
+  .then(accessToken => {
+    return httpGet(accessToken, url, data);
+  })
+  .then(res => {
+    cb(res);
+  })
+  .finally(() => {
+    wx.hideLoading();
+  })
 } 
+
+function promiseGet(url,data){
+  wx.showLoading({title: '加载中',mask: true});
+  let promise = new Promise((resolve, reject) => {
+      wxApi.getAccessToken()
+      .then(accessToken => {
+        return httpGet(accessToken, url, data);
+      })
+      .then(res => {
+        resolve(res);
+      })
+      .catch(error => {
+        reject(error);
+      })
+      .finally(() => {
+        wx.hideLoading();
+      })
+  })
+
+  return promise;
+} 
+
+const httpGet = (accessToken,url,data) => {
+    let promise = new Promise((resolve, reject) => {
+      var params = [];
+      var keys = Object.keys(data);
+      keys.forEach(function(key) {
+        var param = key + '=' + data[key];
+        params.push(param);
+      })
+      params = params.join('&');
+  
+      wx.request({
+        url: rootDocment + url + '?' + params,
+        method: 'get',  
+        header: {'Content-Type': 'application/json', 'access-token': accessToken},  
+        success: function(res){  
+          if(res.data.result_code === 10000) {
+            resolve(res.data)  
+          } else {
+            reject('服务器正在维护，请稍后再试');
+          }
+        },  
+        fail: function(){  
+          reject(false);
+        }  
+      })  
+    })
+
+    return promise;    
+}
 
 function doGet(accessToken,url,data,cb) {
   wx.showLoading({title: '加载中',mask: true});
@@ -113,5 +178,6 @@ module.exports = {
   post: post,
   get: get,
   domain: rootDocment,
-  uploadFiles: uploadFiles
+  uploadFiles: uploadFiles,
+  promiseGet: promiseGet
 }

@@ -2,7 +2,7 @@
 <view class="container collections-main">
   <image wx:if="{{collections.length === 0}}" class="no-collection" src="/images/no-collections.png" mode="center"></image>
   <view class="product-list" wx:for="{{display}}" wx:for-item="collection" wx:key="key"> 
-         <view class='title underline'>
+         <view class='title underline-light-gray'>
             <view class="btn" bindtap="selectStore" data-merchant="{{collection.merchant_id}}">
                 <image class="market-icon" src="/images/market-selected.png" />
                 <text>进店</text>
@@ -18,9 +18,9 @@
                 <view class="name">{{product.name}}</view>
                 <view class="price">{{product.price}}</view>
                 <view class="code">商品编号: {{product.product_unique_code}}</view>
-                <view class="description">介绍：{{product.description}}</view>    
+                <view wx:if="{{product.description}}" class="description">介绍：{{product.description}}</view>    
                 <image class="trash" src="/images/trash.png" bindtap="delete" data-productid="{{product.id}}" data-merchant="{{collection.merchant_name}}" />            
-            </view>            
+            </view>
         </view>
   </view>
   <modal title="确认将产品移出收藏夹？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="doDelete" bindcancel="hideModal" ></modal>
