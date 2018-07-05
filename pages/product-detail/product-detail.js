@@ -18,23 +18,28 @@ Page({
   },
   onLoad: function (options) {
     var productId = options.product_id;
-
     var that = this;
-    app.http.get('/site/product/detail',{product_id: productId}, function(res){
-      var merchantId = res.result.merchant_id;
-      var isOwner = app.globalData.user.merchantInfo.id == merchantId;
-      that.setData({
-        productInfo: res.result,
-        productImages: res.result.images,
-        isOwner: isOwner
-      })
 
-      app.http.get('/site/merchant/detail', {merchant_id: merchantId}, function(res) {
+    app.http.promiseGet('/site/product/detail',{product_id: productId})
+      .then(res => {
+        var merchantId = res.result.merchant_id;
+        var isOwner = app.globalData.user.merchantInfo.id == merchantId;
+        that.setData({
+          productInfo: res.result,
+          productImages: res.result.images,
+          isOwner: isOwner
+        })
+
+        return app.http.promiseGet('/site/merchant/detail', {merchant_id: merchantId});
+      })
+      .then(res => {
         that.setData({
           merchant: res.result
         });
+      })
+      .catch(error => {
+        app.toast(error);
       });
-    })
   },
   onShow: function () {
     this.setData({
@@ -43,15 +48,18 @@ Page({
     })
 
     var that = this;
-    app.http.get('/site/user/collections', {}, function(res) {
-      var productList = that.getProductList(res.result);
-      var isCollected = that.itemExists(productList, that.data.productInfo);
-      console.log(isCollected);
-      that.setData({
-        collectionCount: that.countCollectedProducts(res.result),
-        isCollected: isCollected
+    app.http.promiseGet('/site/user/collections', {})
+      .then(res => {
+        var productList = that.getProductList(res.result);
+        var isCollected = that.itemExists(productList, that.data.productInfo);
+        that.setData({
+          collectionCount: that.countCollectedProducts(res.result),
+          isCollected: isCollected
+        })
       })
-    })
+      .catch(error => {
+        app.toast(error);
+      })
   },
   collect: function(e) {
     var productId = this.data.productInfo.id;
@@ -147,5 +155,14 @@ Page({
     })
 
     return products;
+  },
+  returnHome: function() {
+    // wx.switchTab({
+    //   url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
+    // })
+
+      wx.redirectTo({
+        url: '../login/login', 
+      })
   }
 })

@@ -19,19 +19,7 @@ Page({
     })
   },
   onLoad: function () {
-    var that = this;
-    app.http.get('/site/user/collections', {}, function(res) {
-      res.result.forEach(function(merchant) {
-        that.data.hide[merchant.merchant_name] = {'merchant_id': merchant.merchant_id, 'merchant_name': merchant.merchant_name, 'products': []};
-        that.data.display[merchant.merchant_name] = merchant;
-      });
-
-      that.setData({
-        display: that.data.display,
-        hide: that.data.hide,
-        collections: res.result
-      })
-    })
+    this.getCollections();
   },
   selectStore: function (e) {
     var merchantId = e.currentTarget.dataset.merchant;
@@ -72,8 +60,13 @@ Page({
         }
       })
 
-      this.data.display[this.toBeDeletedMerchantName].products = newArray;
+      if(newArray.length == 0) {
+        this.data.display[this.toBeDeletedMerchantName] = undefined;
+      } else {
+        this.data.display[this.toBeDeletedMerchantName].products = newArray;
+      }
 
+      console.log(this.data.display);
       this.setData({
         display: this.data.display
       })
@@ -89,5 +82,20 @@ Page({
     this.setData({
       hiddenModal: true
     });
+  },
+  getCollections() {
+    var that = this;
+    app.http.get('/site/user/collections', {}, function(res) {
+      res.result.forEach(function(merchant) {
+        that.data.hide[merchant.merchant_name] = {'merchant_id': merchant.merchant_id, 'merchant_name': merchant.merchant_name, 'products': []};
+        that.data.display[merchant.merchant_name] = merchant;
+      });
+
+      that.setData({
+        display: that.data.display,
+        hide: that.data.hide,
+        collections: res.result
+      })
+    })
   }
 })

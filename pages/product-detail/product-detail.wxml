@@ -64,6 +64,16 @@
                     </block>
                 </block>  
             </view>
+              <view class="home-button" bindtap="returnHome" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
+                <block wx:if="{{user.currentRole === 2}}">
+                    <view class="top-wrapper">
+                        <image class="star" mode="aspectFit" src="/images/market-pre-select.png"/>
+                    </view>
+                    <view class="buttom-wrapper">
+                        首页
+                    </view>
+                </block>  
+            </view>
         </view>
     </block>
     <modal title="确认将产品删除？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="delete" bindcancel="hideModal" ></modal>

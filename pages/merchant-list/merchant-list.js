@@ -1,6 +1,6 @@
 //index.js
 //获取应用实例
-const app = getApp()
+const app = getApp();
 
 Page({
   page: 0,
@@ -25,7 +25,7 @@ Page({
     this.getMerchantList();
     app.http.promiseGet('/site/merchant/registered-countries', {})
       .then(res => {
-        res.result.push({'name': '全部', 'code': 'all'});
+        res.result.push({ 'name': '全部', 'code': 'all' });
         that.setData({
           filterCountries: res.result
         })
@@ -36,7 +36,7 @@ Page({
 
     app.http.promiseGet('/site/product/categories', {})
       .then(res => {
-        res.result.push({'name': '全部', 'id': 'all'});
+        res.result.push({ 'name': '全部', 'id': 'all' });
         that.setData({
           filterCategories: res.result
         });
@@ -45,16 +45,16 @@ Page({
         app.toast(error);
       })
   },
-  onPageScroll: function(e) {
-    if(this.filterPositionFlag) {
-      if(e.scrollTop >= 100) {
+  onPageScroll: function (e) {
+    if (this.filterPositionFlag) {
+      if (e.scrollTop >= 100) {
         this.setData({
           filterStyle: "position: fixed;"
         })
       }
       this.filterPositionFlag = false;
     } else {
-      if(e.scrollTop <= 100) {
+      if (e.scrollTop <= 100) {
         this.setData({
           filterStyle: null
         })
@@ -66,24 +66,24 @@ Page({
     var merchantId = e.currentTarget.dataset.merchant;
     wx.navigateTo({
       url: '../product-list/product-list?merchantId=' + merchantId,
-      fail: function(e) {
-          console.log(e);
+      fail: function (e) {
+        console.log(e);
       }
     })
   },
-  onReachBottom: function() {
+  onReachBottom: function () {
     this.getMoreMerchantList();
   },
-  onPullDownRefresh: function(){
+  onPullDownRefresh: function () {
     this.page = 0;
     this.getMerchantList();
     wx.stopPullDownRefresh();
   },
-  filterCountry: function(e) {
-    var index = e.detail.value;   
+  filterCountry: function (e) {
+    var index = e.detail.value;
     var countryCode = this.data.filterCountries[index].code;
     this.page = 0;
-    if(countryCode === "all") {
+    if (countryCode === "all") {
       this.filterConditions.country = null;
     } else {
       this.filterConditions.country = countryCode;
@@ -93,12 +93,12 @@ Page({
       countryIndex: index
     });
   },
-  filterCategory: function(e) {
-    var index = e.detail.value;    
+  filterCategory: function (e) {
+    var index = e.detail.value;
     var categoryId = this.data.filterCategories[index].id;
     this.page = 0;
     this.filterConditions.category = categoryId;
-    if(categoryId === "all") {
+    if (categoryId === "all") {
       this.filterConditions.category = null;
     } else {
       this.filterConditions.category = categoryId;
@@ -108,16 +108,16 @@ Page({
       categoryIndex: index
     });
   },
-  getMerchantList: function() {
+  getMerchantList: function () {
     var that = this;
     var country = this.filterConditions.country;
     var category = this.filterConditions.category;
     var data = {};
     data.page = this.page;
-    if(country) {
+    if (country) {
       data.country = country;
     }
-    if(category) {
+    if (category) {
       data.category = category;
     }
     app.http.promiseGet('/site/merchant/list', data)
@@ -130,30 +130,30 @@ Page({
       .catch(error => {
         app.toast(error);
       })
-  }, 
-  getMoreMerchantList: function() {
+  },
+  getMoreMerchantList: function () {
     this.page++;
     var that = this;
     var country = this.filterConditions.country;
     var category = this.filterConditions.category;
     var data = {};
     data.page = this.page;
-    if(country) {
+    if (country) {
       data.country = country;
     }
-    if(category) {
+    if (category) {
       data.category = category;
     }
 
     app.http.promiseGet('/site/merchant/list', data)
       .then(res => {
         that.allMerchants = res.result;
-        res.result.forEach(function(merchant) {
+        res.result.forEach(function (merchant) {
           that.data.merchants.push(merchant);
         })
         that.setData({
           merchants: that.data.merchants
-        }); 
+        });
       })
       .catch(error => {
         app.toast(error);

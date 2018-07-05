@@ -29,7 +29,7 @@
                 </view>
                 <view class="merchant-profile" data-merchant="{{merchant.id}}">
                     <view class="merchant-name">{{merchant.name}}</view>
-                    <view class="merchant-address"> {{merchant.country}} {{merchant.city}}</view>  
+                    <view class="merchant-address"> {{merchant.country}} {{merchant.city || ''}}</view>  
                     <view class="enter">进店</view>                  
                     <view class="merchant-announcement">
                         <view class="announcement-icon">公告</view>

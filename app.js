@@ -17,14 +17,16 @@ App({
     hasUserInfo: false
   },
   wxApi: {
-    getAccessToken: wxApi.getAccessToken
+    getAccessToken: wxApi.getAccessToken,
+    wxLogin: wxApi.wxLogin
   },
   http: {
     post: http.post,
     get: http.get,
     domain: http.domain,
     uploadFiles: http.uploadFiles,
-    promiseGet: http.promiseGet
+    promiseGet: http.promiseGet,
+    promisePost: http.promisePost
   },
   getUserInfo: function(cb) {
     wx.showLoading({title: '加载中',mask: true});
@@ -66,7 +68,6 @@ App({
       fail: res => {
         wx.hideLoading();
         this.toast('系统错误, 请稍后重试');
-        console.log(res);
         return false;
       }
     })
@@ -76,7 +77,7 @@ App({
   toast: function(text) {
     wx.showToast({
       title: text,
-      duration: 3000,
+      duration: 2500,
       icon: 'none'
     });
   }

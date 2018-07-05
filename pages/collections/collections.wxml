@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container collections-main">
-  <image wx:if="{{collections.length === 0}}" class="no-collection" src="/images/no-collections.png" mode="center"></image>
+  <image wx:if="{{collections.length === 0}}" class="no-collection" src="/images/no-collections.png" mode="scaleToFill"></image>
   <view class="product-list" wx:for="{{display}}" wx:for-item="collection" wx:key="key"> 
          <view class='title underline-light-gray'>
             <view class="btn" bindtap="selectStore" data-merchant="{{collection.merchant_id}}">

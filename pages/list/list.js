@@ -51,6 +51,8 @@ Page({
         }
       })
 
+      console.log(selectedCategory);
+
       if(this.mode === REGION_MODE) {
         app.globalData.region = selectedCategory;
       } else {

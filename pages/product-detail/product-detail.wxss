@@ -163,7 +163,7 @@
 }
 .bottom-row .info {
   float: left;
-  width: 50%;
+  width: 35%;
   height: 100%;
   text-indent: 50rpx;
 }
@@ -175,24 +175,28 @@
   text-align: center;
   color: white;
 }
-.bottom-row .collect-button {
+.bottom-row .collect-button,
+.bottom-row .home-button {
   width: 15%;
   height: 100%;
   float: right;
   border-left: 1px solid #e2e2e2;
 }
-.bottom-row .collect-button .top-wrapper {
+.bottom-row .collect-button .top-wrapper,
+.bottom-row .home-button .top-wrapper {
   width: 100%;
   height: 50%;
 }
-.bottom-row .collect-button .top-wrapper .star {
+.bottom-row .collect-button .top-wrapper .star,
+.bottom-row .home-button .top-wrapper .star {
   width: 35rpx;
   height: 35rpx;
   margin-top: 15rpx;
   margin-left: 40rpx;
   position: absolute;
 }
-.bottom-row .collect-button .buttom-wrapper {
+.bottom-row .collect-button .buttom-wrapper,
+.bottom-row .home-button .buttom-wrapper {
   text-align: center;
   font-size: 25rpx;
   line-height: 40rpx;

@@ -7,20 +7,23 @@ Promise.prototype.finally = function (callback) {
 };
 
 function wxPromisify(fn) {
-    return function (obj = {}) {
-        let promise = new Promise((resolve, reject) => {
-            obj.success = function (res) {
-                //成功
-                resolve(res)
-            }
-            obj.fail = function (res) {
-                //失败
-                reject(res)
-            }
-            fn(obj)
-        })
-        return promise;
-    }
+    let promise = new Promise((resolve, reject) => {
+        let obj = {}
+        obj.success = function (res) {
+            //成功
+            resolve(res)
+        }
+        obj.fail = function (res) {
+            //失败
+            reject(res)
+        }
+        fn(obj)
+    })
+    return promise;
+}
+
+const wxLogin = () => {
+    return wxPromisify(wx.login)
 }
 
 const getAccessToken = () => {
@@ -41,4 +44,5 @@ const getAccessToken = () => {
 
 module.exports = {  
     getAccessToken: getAccessToken,
+    wxLogin: wxLogin
 }

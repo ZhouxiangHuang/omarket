@@ -228,8 +228,10 @@
   display: block;
 }
 .collections-main .no-collection {
-  width: 500rpx;
-  height: 700rpx;
+  margin-top: 150rpx;
+  margin-left: 205rpx;
+  width: 350rpx;
+  height: 300rpx;
 }
 .collections-main .product-list {
   background: white;

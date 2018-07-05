@@ -18,13 +18,16 @@ Page({
       app.toast('获取用户信息失败');
     }
 
+    console.log(this.data.user);
+
     if(this.data.user.currentRole === app.merchantRole) {
       var that = this;
-      app.http.get('/site/merchant/detail', {merchant_id: this.data.user.merchantInfo.id}, function(res) {
-        that.setData({
-          merchant: res.result
-        });
-      })
+      app.http.promiseGet('/site/merchant/detail', {merchant_id: this.data.user.merchantInfo.id})
+        .then(res => {
+          that.setData({
+            merchant: res.result
+          });
+        })
     }
   },
   logout: function() {
