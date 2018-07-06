@@ -36,7 +36,10 @@ Page({
 
     app.http.promiseGet('/site/product/categories', {})
       .then(res => {
-        res.result.push({ 'name': '全部', 'id': 'all' });
+        res.result.map(category => {
+          category.name_with_count = category.name + ' (' + category.merchant_count + ')';
+        })
+        res.result.push({ 'name_with_count': '全部', 'id': 'all' });
         that.setData({
           filterCategories: res.result
         });

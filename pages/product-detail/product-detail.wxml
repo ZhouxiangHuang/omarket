@@ -1,6 +1,6 @@
 <view class="product-detail-main container">
 
-    <swiper wx:if="{{productImages.length}}" class="img underline" indicator-dots="true" autoplay="true" interval="3000" duration="1000">    
+    <swiper wx:if="{{productImages.length}}" class="img underline" indicator-dots="true" autoplay="true" interval="3000" duration="3000">    
       <block wx:for="{{productImages}}" wx:for-index="index" wx:key="key">    
         <swiper-item>    
           <image wx:if="{{item.url}}" src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
@@ -42,8 +42,18 @@
     </block>
     <block wx:if="{{!isOwner && user.currentRole === 2}}">
         <view class="bottom-row">
-            <view class="info">已关注{{collectionCount}}款商品</view>
             <view class="btn" bindtap="checkCollections">收藏夹</view>
+            <view class="info">已关注{{collectionCount}}款商品</view>
+                <view class="home-button" bindtap="returnHome" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
+                <block wx:if="{{user.currentRole === 2}}">
+                    <view class="top-wrapper">
+                        <image class="star" mode="aspectFit" src="/images/market-pre-select.png"/>
+                    </view>
+                    <view class="buttom-wrapper">
+                        首页
+                    </view>
+                </block>  
+            </view>
             <view class="collect-button" bindtap="collect">
                 <block wx:if="{{user.currentRole === 2}}">
                     <block wx:if="{{!isCollected}}">
@@ -64,16 +74,7 @@
                     </block>
                 </block>  
             </view>
-              <view class="home-button" bindtap="returnHome" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
-                <block wx:if="{{user.currentRole === 2}}">
-                    <view class="top-wrapper">
-                        <image class="star" mode="aspectFit" src="/images/market-pre-select.png"/>
-                    </view>
-                    <view class="buttom-wrapper">
-                        首页
-                    </view>
-                </block>  
-            </view>
+          
         </view>
     </block>
     <modal title="确认将产品删除？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="delete" bindcancel="hideModal" ></modal>

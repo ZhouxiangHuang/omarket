@@ -153,17 +153,17 @@
   border: 1px solid #E2E2E2;
 }
 .bottom-row {
-  height: 110rpx;
-  line-height: 110rpx;
+  height: 90rpx;
+  line-height: 90rpx;
   width: 100%;
-  border-top: solid 1px #D1D1D1;
+  border-top: 1px solid #e2e2e2;
   position: absolute;
   bottom: 0;
-  font-size: 35rpx;
+  font-size: 30rpx;
 }
 .bottom-row .info {
-  float: left;
-  width: 69%;
+  float: right;
+  width: 35%;
   height: 100%;
   text-indent: 50rpx;
 }
@@ -174,6 +174,37 @@
   background-color: #FF4343;
   text-align: center;
   color: white;
+}
+.bottom-row .collect-button,
+.bottom-row .home-button {
+  width: 15%;
+  height: 100%;
+  float: left;
+  border-left: 1px solid #e2e2e2;
+}
+.bottom-row .collect-button .top-wrapper,
+.bottom-row .home-button .top-wrapper {
+  width: 100%;
+  height: 50%;
+}
+.bottom-row .collect-button .top-wrapper .star,
+.bottom-row .home-button .top-wrapper .star {
+  width: 35rpx;
+  height: 35rpx;
+  margin-top: 15rpx;
+  margin-left: 40rpx;
+  position: absolute;
+}
+.bottom-row .collect-button .buttom-wrapper,
+.bottom-row .home-button .buttom-wrapper {
+  text-align: center;
+  font-size: 25rpx;
+  line-height: 40rpx;
+  width: 100%;
+  height: 50%;
+}
+.bottom-row .collect-button {
+  border-right: 1px solid #e2e2e2;
 }
 .std-button {
   width: 100%;
@@ -302,6 +333,23 @@
   width: 30rpx;
   height: 30rpx;
   position: absolute;
+}
+.product-list-main .empty-product-list {
+  position: absolute;
+  height: 265rpx;
+  width: 144rpx;
+  margin-left: 210rpx;
+  margin-top: 200rpx;
+}
+.product-list-main .empty-product-hint {
+  position: absolute;
+  height: 265rpx;
+  width: 570rpx;
+  margin-left: 180rpx;
+  margin-top: 490rpx;
+  color: #999999;
+  text-align: center;
+  font-size: 25rpx;
 }
 .product-list-main .products {
   height: 900rpx;

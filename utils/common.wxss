@@ -162,7 +162,7 @@
   font-size: 30rpx;
 }
 .bottom-row .info {
-  float: left;
+  float: right;
   width: 35%;
   height: 100%;
   text-indent: 50rpx;
@@ -179,7 +179,7 @@
 .bottom-row .home-button {
   width: 15%;
   height: 100%;
-  float: right;
+  float: left;
   border-left: 1px solid #e2e2e2;
 }
 .bottom-row .collect-button .top-wrapper,
@@ -202,6 +202,9 @@
   line-height: 40rpx;
   width: 100%;
   height: 50%;
+}
+.bottom-row .collect-button {
+  border-right: 1px solid #e2e2e2;
 }
 .std-button {
   width: 100%;
