@@ -1,8 +1,10 @@
 Promise.prototype.finally = function (callback) {
     let P = this.constructor;
     return this.then(
-      value => P.resolve(callback()).then(() => value),
-      reason => P.resolve(callback()).then(() => { throw reason })
+        value => P.resolve(callback()).then(() => value),
+        reason => P.resolve(callback()).then(() => {
+            throw reason
+        })
     );
 };
 
@@ -26,23 +28,53 @@ const wxLogin = () => {
     return wxPromisify(wx.login)
 }
 
-const getAccessToken = () => {
+const wxUploadFile = (accessToken, fileName, url, data, path) => {
     let promise = new Promise((resolve, reject) => {
-        wx.getStorage({
-            key: 'token', 
+        wx.uploadFile({
+            url: url,
+            header: {
+                'access-token': accessToken
+            },
+            filePath: path,
+            name: fileName,
+            formData: data,
             success: res => {
-              resolve(res.data);
+                var res = JSON.parse(res.data);
+                if (res['result_code'] === 10000) {
+                    console.log('upload success');
+                    resolve();
+                } else {
+                    reject('请求失败');
+                }
             },
             fail: res => {
-                reject('获取本地AccessToken失败');
+                console.error(res);
+                reject();
             }
-          });
+        })
     })
 
     return promise;
 }
 
-module.exports = {  
+const getAccessToken = () => {
+    let promise = new Promise((resolve, reject) => {
+        wx.getStorage({
+            key: 'token',
+            success: res => {
+                resolve(res.data);
+            },
+            fail: res => {
+                reject('获取本地AccessToken失败');
+            }
+        });
+    })
+
+    return promise;
+}
+
+module.exports = {
     getAccessToken: getAccessToken,
-    wxLogin: wxLogin
+    wxLogin: wxLogin,
+    wxUploadFile: wxUploadFile
 }

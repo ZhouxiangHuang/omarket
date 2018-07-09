@@ -15,7 +15,9 @@
             <view class="left">
                {{merchant.currency}} {{productInfo.price}}
             </view>
-            <button id="share" open-type='share' class="right">分享</button>            
+            <image id="share-image" src="/images/share-3d.png" mode="scaleFill"/>
+            <button id="share" open-type='share' class="right">
+            </button>            
         </view>
         <view class="low">
             <view class="left">
@@ -23,7 +25,7 @@
                     <image wx:if="{{productInfo.hot_item}}" src="/images/hot.png" class="fire"/>
                     <text>{{productInfo.name}}</text>
                 </view>
-                <view class="code">商品编码{{productInfo.product_unique_code}}</view>             
+                <view class="code">商品编码: {{productInfo.product_unique_code}}</view>             
             </view>       
             <block wx:if="{{user.currentRole === 1 && isOwner}}">
                 <view class="button-del" bindtap="askDelete">

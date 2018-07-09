@@ -8,7 +8,14 @@
                 <text>进店</text>
             </view>
             <view class="name">{{collection.merchant_name}}</view>   
-            <image class="selector" bindtap="productListSwitch" data-merchant="{{collection.merchant_name}}" src="/images/triangle.png"/>
+            <view class="selector-wrapper" bindtap="productListSwitch" data-merchant="{{collection.merchant_name}}">
+                <block wx:if="{{collection.dropTriangle}}">
+                    <image class="selector" src="/images/triangle.png"/>
+                </block>
+                <block wx:else>
+                    <image class="selector-left" src="/images/triangle-left.png"/>
+                </block>
+            </view>
         </view>
         <view class="content" wx:for="{{collection.products}}" wx:for-item="product" wx:key="productKey">
             <view class="left">
@@ -16,9 +23,10 @@
             </view>
             <view class="right">
                 <view class="name">{{product.name}}</view>
-                <view class="price">{{product.price}}</view>
+                <view class="price">{{collection.currency}} {{product.price}}</view>
                 <view class="code">商品编号: {{product.product_unique_code}}</view>
                 <view wx:if="{{product.description}}" class="description">介绍：{{product.description}}</view>    
+                <view wx:else class="description">暂无介绍</view>    
                 <image class="trash" src="/images/trash.png" bindtap="delete" data-productid="{{product.id}}" data-merchant="{{collection.merchant_name}}" />            
             </view>
         </view>

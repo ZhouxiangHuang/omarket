@@ -68,10 +68,10 @@
         <block wx:if="{{!productList.length}}">
             <image class="empty-product-list" src="/images/empty.png" />
             <block wx:if="{{isOwner}}">
-                <view class="empty-product-hint" >赶快去添加产品吧</view>
+                <view class="empty-product-hint">赶快去添加产品吧</view>
             </block>
             <block wx:else>
-                <view class="empty-product-hint" >产品还没上架哦</view>
+                <view class="empty-product-hint">产品还没上架哦</view>
             </block>
         </block>
         <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
@@ -85,7 +85,7 @@
             <view class="product-detail">
                 <view class="name">{{item.name}}</view>
                 <view class="production-intro">{{item.description || '暂无产品描述'}}</view>
-                <view class="price">{{merchant.currency}} {{item.price}}</view>
+                <view wx:if="{{item.price}}" class="price">{{merchant.currency}} {{item.price}}</view>
             </view>   
         </view>
         <view wx:if="{{isOwner && user.currentRole === 1}}" class="add-product-btn" bindtap="editProducts">

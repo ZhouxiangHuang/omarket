@@ -18,7 +18,7 @@
                     <view wx:if="{{merchant.tags[1]}}" class="highlight">{{merchant.tags[1].name}}</view>   
                     <view wx:if="{{merchant.tags[2]}}" class="highlight">{{merchant.tags[2].name}}</view>                                             
                 </view>  
-                <view class="call-merchant-btn" bindtap="myStore">
+                <view class="edit-merchant-btn" bindtap="myStore">
                     <text>管理商铺</text>
                     <image src="/images/selector.png"/>
                 </view>
@@ -26,8 +26,8 @@
         </view>
         <view class="mine form">
             <view class='row' bindtap="posterGenerate">
-                <image class="icon" src="/images/star.png" />
-                <label>生成商铺名片</label>
+                <image class="icon" src="/images/qr-code.png" />
+                <label>二维码名片</label>
                 <image class="select-icon" src="/images/selector.png" />
             </view>
         </view>    

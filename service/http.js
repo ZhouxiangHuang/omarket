@@ -25,13 +25,11 @@ function promisePost(url,data){
         return httpPost('', url, data);
       })
       .then(res => {
+        wx.hideLoading();
         resolve(res);
       })
       .catch(error => {
         reject(error);
-      })
-      .finally(() => {
-        wx.hideLoading();
       })
   })
 
@@ -145,7 +143,42 @@ const httpGet = (accessToken,url,data) => {
 
 function uploadFiles(url, data, paths, cb) {
   data['paths'] = paths;
-  getToken(doUploadFiles,url,data,cb);
+  wxApi.getAccessToken().then( accessToken => {
+    doUploadFiles(accessToken, url, data, cb);
+  }).catch(error => {
+    console.error(error);
+  })
+}
+
+function promiseUploadFiles(url, data, paths) {
+  wx.showLoading({title: '上传中',mask: true,});
+  let promise = new Promise((resolve, reject) => {
+    wxApi.getAccessToken().then(accessToken => {
+      return doPromiseUploadFiles(accessToken, url, data, paths);
+    })
+    .then(res => {
+      wx.hideLoading();
+      resolve(res);
+    })
+    .catch(error => {
+      reject(error);
+    })
+  });
+
+  return promise;
+}
+
+function doPromiseUploadFiles(accessToken, url, data, paths) {
+  let promise = new Promise((resolve, reject) => {
+    let promises = [];
+    for(let i = 0; i < paths.length; i++) {
+        promises.push(wxApi.wxUploadFile(accessToken ,data['file_name'], rootDocment + url, data, paths[i]));
+    }
+
+    resolve(Promise.all(promises));
+  })
+
+  return promise;
 }
 
 function doUploadFiles(accessToken, url, data, cb, index) {
@@ -193,7 +226,6 @@ function getToken(request,url,data,cb) {
       return request(accessToken,url,data,cb);
     },
     fail: function(res){
-      console.log('fail test');
       return request(null,url,data,cb);
     }
   });
@@ -205,5 +237,6 @@ module.exports = {
   domain: rootDocment,
   uploadFiles: uploadFiles,
   promiseGet: promiseGet,
-  promisePost: promisePost
+  promisePost: promisePost,
+  promiseUploadFiles: promiseUploadFiles
 }

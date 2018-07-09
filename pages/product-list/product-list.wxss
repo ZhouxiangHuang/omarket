@@ -338,7 +338,7 @@
   position: absolute;
   height: 265rpx;
   width: 144rpx;
-  margin-left: 210rpx;
+  margin-left: 390rpx;
   margin-top: 200rpx;
 }
 .product-list-main .empty-product-hint {
@@ -352,8 +352,9 @@
   font-size: 25rpx;
 }
 .product-list-main .products {
-  height: 900rpx;
+  height: 890rpx;
   width: 100%;
+  overflow: scroll;
 }
 .product-list-main .products .categories {
   float: left;
@@ -362,6 +363,7 @@
   background-color: #F8F8F8;
   text-align: center;
   color: #999999;
+  position: fixed;
 }
 .product-list-main .products .categories .category {
   height: 125rpx;

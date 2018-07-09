@@ -11,7 +11,7 @@ Page({
     productImages: [],
     productCode: '',
     productName: '',
-    productPrice: 0,
+    productPrice: null,
     categories: {},
     categoryIndex: 0,
     categoryId: null,
@@ -25,7 +25,6 @@ Page({
     var productId = option.product_id;
     var that = this;
 
-    console.log(categoryId);
     if(categoryId) {
       this.setData({
         categoryId: categoryId
@@ -38,11 +37,11 @@ Page({
         productId: productId
       });
 
-      app.http.get('/site/product/detail', {product_id: productId}, function(res) {
-        var images = res.result.images;
-        if(res.result_code === 10000) {
-          that.productId = res.result.id;
-          that.setData({
+      app.http.promiseGet('/site/product/detail', {product_id: productId})
+        .then(res => {
+          var images = res.result.images;
+          this.productId = res.result.id;
+          this.setData({
             productImages: images,
             productCode: res.result.product_unique_code,
             productName: res.result.name,
@@ -51,71 +50,69 @@ Page({
             categoryId: res.result.merchant_category_id,
             productDescription: res.result.description            
           }) 
-        } else {
+        })
+        .catch(error => {
           app.toast('系统更新，请稍后重试');
-        }
-      })
+        })
     }
 
-    app.http.get('/site/merchant/categories', {}, function(res){
-      if(res.result_code === 10000) {
-        that.setData({
+    app.http.promiseGet('/site/merchant/categories', {})
+      .then(res => {
+        this.setData({
           categories: res.result
         });
 
-        that.data.categories.forEach(function(category, index) {
-            if(that.data.categoryId !== null) {
-                if(that.data.categoryId == category.id) {
-                  that.setData({
+        this.data.categories.forEach((category, index) => {
+            if(this.data.categoryId !== null) {
+                if(this.data.categoryId == category.id) {
+                  this.setData({
                     categoryIndex: index
                   })
                 }
             }
         }); 
-      } else {
+      })
+      .catch(res => {
         app.toast('请求失败');
-      }
-    })
+      })
   },
   chooseImage: function(e) {
-    var that = this;
     wx.chooseImage({
       count: 6, // 默认9
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
       sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
-      success: function (res) {
+      success: res => {
         // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
         var tempFilePaths = res.tempFilePaths
         var limit = 6;
-        if(that.data.productImages.length === limit) {
+        if(this.data.productImages.length === limit) {
           app.toast('限定上传'+limit+'张照片');
           return false;
         }
 
         //do not delete, added for multiple photo upload
-        tempFilePaths.forEach(function(path) {
+        tempFilePaths.forEach(path => {
           var image = {};
           image.unique_name = Date.now() + Math.floor(Math.random() * 100);
           image.url = path;
           image.is_new = true; //标记是新图
-          that.data.productImages.push(image);
+          this.data.productImages.push(image);
         });
 
-        that.setData({
-          productImages: that.data.productImages
+        this.setData({
+          productImages: this.data.productImages
         })
       }
     })
   },
   submit: function(e) {
-    var that = this;
-    var categoryIndex = that.data.categoryIndex;
-    var category = that.data.categories[categoryIndex];
+    var categoryIndex = this.data.categoryIndex;
+    var category = this.data.categories[categoryIndex];
     var categoryId = category.id;
     var paths = [];
-    this.data.productImages.forEach(function(image) {
+    this.data.productImages.forEach(image => {
       if(image.updated) {
-        that.deleteList.push(image.unique_name);
+        this.deleteList.push(image.unique_name);
         paths.push(image.url);
       } 
       if(image.is_new) {
@@ -124,14 +121,14 @@ Page({
     });
 
     var form = {
-        'code': that.data.productCode,
-        'price': that.data.productPrice,
-        'name': that.data.productName,
+        'code': this.data.productCode,
+        'price': this.data.productPrice,
+        'name': this.data.productName,
         'merchant_category_id': categoryId,
-        'hot': that.data.isHot ? 1 : 0,
+        'hot': this.data.isHot ? 1 : 0,
         'delete_list': JSON.stringify(this.deleteList),
-        'product_id': that.productId,
-        'description': that.data.productDescription,
+        'product_id': this.productId,
+        'description': this.data.productDescription,
     };
 
     if(paths.length === 0) { //no image to upload
@@ -152,29 +149,28 @@ Page({
     } else {  
       form.file_name = FILE_NAME;
       if(!this.data.isEdit) {
-        var that = this;
-        app.http.post('/site/product/create', form, function(res) {
-          form.product_id = res.result.product_id;
-          if(res.result_code === 10000) {
-            app.http.uploadFiles('/site/product/update', form, paths, function(response) {
-              if(response.result_code === 10000) {
-                wx.navigateBack(1);
-              } else {
-                app.toast('上传失败，请稍后再试');
-              }
-            });
-          } else {
-            app.toast('上传失败，请稍后再试');
-          }
-        })
-      } else {
-        app.http.uploadFiles('/site/product/update', form, paths, function(res) {
-          if(res.result_code === 10000) {
+        console.log('start');
+        app.http.promisePost('/site/product/create', form)
+          .then(res => {
+            form.product_id = res.result.product_id;
+            return app.http.promiseUploadFiles('/site/product/update', form, paths);
+          })
+          .then(res => {
             wx.navigateBack(1);
-          } else {
+          })
+          .catch(error => {
+            console.error(error);
             app.toast('上传失败，请稍后再试');
-          }
-        });
+          })
+      } else {
+        app.http.promiseUploadFiles('/site/product/update', form, paths)
+          .then(res => {
+            wx.navigateBack(1);
+          })
+          .catch(error => {
+            console.error(error);
+            app.toast('上传失败，请稍后再试');
+          })
       }
     }
   },

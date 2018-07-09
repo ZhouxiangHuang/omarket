@@ -30,13 +30,11 @@ Page({
   },
   onLoad: function (option) {
     if(!app.globalData.hasUserInfo) {
-      var that = this;
-      app.getUserInfo(function() {
-        that.setData({
+      app.getUserInfo(() => {
+        this.setData({
           user: app.globalData.user,
           hasUserInfo: true
         });
-        that.setColors(app.globalData.user.currentRole);
       });
     } else {
       this.setData({
@@ -57,22 +55,23 @@ Page({
       user: app.globalData.user
     })
 
-    var that = this;
-    app.http.get('/site/merchant/detail', {merchant_id: this.ownerId}, function(res) {
-      that.setData({
-        merchant: res.result
-      });
-    });
+    app.http.promiseGet('/site/merchant/detail', {merchant_id: this.ownerId})
+      .then(res => {
+        this.setData({
+          merchant: res.result
+        });
+      })
 
-    app.http.get('/site/product/products', {merchant_id: this.ownerId},function(res){ 
-      if(res.result_code === 10000) {
-        that.categories = res.result;
-        var categoryId = that.getReviewHistory().categoryId;
-        that.displayCategory(categoryId);
-      } else {
-        app.toast(res.reason);
-      }
-    }); 
+    app.http.promiseGet('/site/product/products', {merchant_id: this.ownerId})
+      .then(res => {
+        this.categories = res.result;
+        var categoryId = this.getReviewHistory().categoryId;
+        this.displayCategory(categoryId);
+      })
+      .catch(error => {
+        app.toast(error);
+      })
+
   },
   selectCategory: function (event) {
     var categoryId = event.currentTarget.dataset.category;
@@ -183,11 +182,11 @@ Page({
   },
   updateReviewHistory: function(categoryId) {
     app.globalData.lastViewedCategory = categoryId;
-    app.globalData.lastViewedMerchant = this.data.user.merchantInfo.id;
+    app.globalData.lastViewedMerchant = this.ownerId;
   },
   getReviewHistory: function() {
     var id = 0;
-    if(app.globalData.lastViewedMerchant == this.data.user.merchantInfo.id) {
+    if(app.globalData.lastViewedMerchant == this.ownerId) {
       id = app.globalData.lastViewedCategory || 0;
     }
 

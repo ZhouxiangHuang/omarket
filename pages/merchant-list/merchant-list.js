@@ -20,13 +20,12 @@ Page({
     filterStyle: null
   },
   onShow: function () {
-    var that = this;
     this.page = 0;
     this.getMerchantList();
     app.http.promiseGet('/site/merchant/registered-countries', {})
       .then(res => {
         res.result.push({ 'name': '全部', 'code': 'all' });
-        that.setData({
+        this.setData({
           filterCountries: res.result
         })
       })
@@ -40,11 +39,12 @@ Page({
           category.name_with_count = category.name + ' (' + category.merchant_count + ')';
         })
         res.result.push({ 'name_with_count': '全部', 'id': 'all' });
-        that.setData({
+        this.setData({
           filterCategories: res.result
         });
       })
       .catch(error => {
+
         app.toast(error);
       })
   },
@@ -112,7 +112,6 @@ Page({
     });
   },
   getMerchantList: function () {
-    var that = this;
     var country = this.filterConditions.country;
     var category = this.filterConditions.category;
     var data = {};
@@ -125,8 +124,8 @@ Page({
     }
     app.http.promiseGet('/site/merchant/list', data)
       .then(res => {
-        that.allMerchants = res.result;
-        that.setData({
+        this.allMerchants = res.result;
+        this.setData({
           merchants: res.result
         });
       })
@@ -136,7 +135,6 @@ Page({
   },
   getMoreMerchantList: function () {
     this.page++;
-    var that = this;
     var country = this.filterConditions.country;
     var category = this.filterConditions.category;
     var data = {};
@@ -150,12 +148,12 @@ Page({
 
     app.http.promiseGet('/site/merchant/list', data)
       .then(res => {
-        that.allMerchants = res.result;
-        res.result.forEach(function (merchant) {
-          that.data.merchants.push(merchant);
+        this.allMerchants = res.result;
+        res.result.forEach(merchant => {
+          this.data.merchants.push(merchant);
         })
-        that.setData({
-          merchants: that.data.merchants
+        this.setData({
+          merchants: this.data.merchants
         });
       })
       .catch(error => {

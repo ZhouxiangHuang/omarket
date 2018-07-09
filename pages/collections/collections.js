@@ -29,15 +29,17 @@ Page({
   },
   productListSwitch(e) {
     var merchantName = e.currentTarget.dataset.merchant;
-    
-    if(this.data.display[merchantName].products.length > 0) {
+
+    if (this.data.display[merchantName].products.length > 0) {
       var tempProducts = this.data.display[merchantName].products;
       this.data.display[merchantName].products = [];
       this.data.hide[merchantName].products = tempProducts;
+      this.data.display[merchantName].dropTriangle = false;
     } else {
       var tempProducts = this.data.hide[merchantName].products;
       this.data.hide[merchantName].products = [];
       this.data.display[merchantName].products = tempProducts;
+      this.data.display[merchantName].dropTriangle = true;
     }
 
     this.setData({
@@ -47,29 +49,33 @@ Page({
 
   },
   doDelete() {
-      var productId = this.toBeDeleted;
-      var that = this;
-      app.http.post('/site/product/discard', {product_id: productId}, function(res) {
-        that.setData({hiddenModal: true});
-      })
+    var productId = this.toBeDeleted;
+    var that = this;
 
-      var newArray = [];
-      this.data.display[this.toBeDeletedMerchantName].products.forEach(function(product) {
-        if(product.id !== productId) {
-          newArray.push(product);
-        }
-      })
+    app.http.post('/site/product/discard', {
+      product_id: productId
+    }, function (res) {
+      that.setData({
+        hiddenModal: true
+      });
+    })
 
-      if(newArray.length == 0) {
-        this.data.display[this.toBeDeletedMerchantName] = undefined;
-      } else {
-        this.data.display[this.toBeDeletedMerchantName].products = newArray;
+    var newArray = [];
+    this.data.display[this.toBeDeletedMerchantName].products.forEach(function (product) {
+      if (product.id !== productId) {
+        newArray.push(product);
       }
+    })
 
-      console.log(this.data.display);
-      this.setData({
-        display: this.data.display
-      })
+    if (newArray.length == 0) {
+      this.data.display[this.toBeDeletedMerchantName] = undefined;
+    } else {
+      this.data.display[this.toBeDeletedMerchantName].products = newArray;
+    }
+
+    this.setData({
+      display: this.data.display
+    })
   },
   delete(e) {
     this.toBeDeleted = e.currentTarget.dataset.productid;
@@ -85,15 +91,21 @@ Page({
   },
   getCollections() {
     var that = this;
-    app.http.get('/site/user/collections', {}, function(res) {
-      res.result.forEach(function(merchant) {
-        that.data.hide[merchant.merchant_name] = {'merchant_id': merchant.merchant_id, 'merchant_name': merchant.merchant_name, 'products': []};
-        that.data.display[merchant.merchant_name] = merchant;
+    app.http.get('/site/user/collections', {}, res => {
+      res.result.forEach(merchant => {
+        this.data.hide[merchant.merchant_name] = {
+          'currency': merchant.currency,
+          'merchant_id': merchant.merchant_id,
+          'merchant_name': merchant.merchant_name,
+          'products': []
+        };
+        merchant.dropTriangle = true;
+        this.data.display[merchant.merchant_name] = merchant;
       });
 
       that.setData({
-        display: that.data.display,
-        hide: that.data.hide,
+        display: this.data.display,
+        hide: this.data.hide,
         collections: res.result
       })
     })

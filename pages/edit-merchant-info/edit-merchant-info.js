@@ -15,7 +15,7 @@ Page({
     form: {},
     tag1: null,
     tag2: null,
-    tag3: null,    
+    tag3: null,
     countryCode: 0,
     cityCode: 0,
     announcement: null,
@@ -28,214 +28,222 @@ Page({
   },
   onLoad: function (option) {
     var merchantId = option.merchant_id;
-    var that = this;
-    app.http.get('/site/merchant/detail', {merchant_id: merchantId}, function(res) {
-      that.data.countryCode = res.result.country_code;
-      that.data.cityCode = res.result.city_code;
-      that.data.announcement = res.result.announcement;      
-      that.setData({
-        merchant: res.result, 
-        tag1: res.result.tags[0] || null,
-        tag2: res.result.tags[1] || null,
-        tag3: res.result.tags[2] || null,
-        announcement: res.result.announcement
-      });
-    })
-
-    app.http.get('/site/merchant/currencies', {}, function(res) {
-        that.setData({
+    app.http.promiseGet('/site/merchant/detail', {
+        merchant_id: merchantId
+      })
+      .then(res => {
+        this.data.countryCode = res.result.country_code;
+        this.data.cityCode = res.result.city_code;
+        this.data.announcement = res.result.announcement;
+        this.setData({
+          merchant: res.result,
+          tag1: res.result.tags[0] || null,
+          tag2: res.result.tags[1] || null,
+          tag3: res.result.tags[2] || null,
+          announcement: res.result.announcement
+        });
+      })
+    
+    app.http.promiseGet('/site/merchant/currencies', {})
+      .then(res => {
+        res.result.map(currency => {
+          currency.symbol = currency.abbreviation + " (" + currency.symbol + ")";
+        })
+        this.setData({
           currencies: res.result
         })
-    })
+      })
   },
-  onShow: function(option) {
+  onShow: function (option) {
     var record = app.globalData.tagRecord;
     var region = app.globalData.region;
 
-    if(record) {
-      if(!this.data.tag1) {
+    if (record) {
+      if (!this.data.tag1) {
         this.setData({
           tag1: record
         })
-      } else if(!this.data.tag2) {
+      } else if (!this.data.tag2) {
         this.setData({
           tag2: record
         })
-      } else if(!this.data.tag3) {
+      } else if (!this.data.tag3) {
         this.setData({
           tag3: record
         })
       }
-      
-      if(this.data.tag1 && this.data.tag1.tag_id == record.prev_tag) {
+
+      if (this.data.tag1 && this.data.tag1.tag_id == record.prev_tag) {
         this.setData({
           tag1: record
         })
-      } else if(this.data.tag2 && this.data.tag2.tag_id == record.prev_tag) {
+      } else if (this.data.tag2 && this.data.tag2.tag_id == record.prev_tag) {
         this.setData({
           tag2: record
         })
-      } else if(this.data.tag3 && this.data.tag3.tag_id == record.prev_tag){
+      } else if (this.data.tag3 && this.data.tag3.tag_id == record.prev_tag) {
         this.setData({
           tag3: record
         })
-      } 
+      }
     }
 
-    if(region) {
+    if (region) {
       var merchant = this.data.merchant;
       this.data.countryCode = region.country_code;
-      this.data.cityCode = region.city_code;     
+      this.data.cityCode = region.city_code;
       merchant.region = region.country + "/" + region.name;
       this.setData({
         merchant: merchant
       })
     }
   },
-   /**
+  /**
    * 监听时间picker选择器
    */
-  listenerStartTimePickerSelected: function(e) {
+  listenerStartTimePickerSelected: function (e) {
     this.setData({
-        startTime: e.detail.value
+      startTime: e.detail.value
     });
   },
 
-  listenerEndTimePickerSelected: function(e) {
+  listenerEndTimePickerSelected: function (e) {
     this.setData({
-        endTime: e.detail.value
+      endTime: e.detail.value
     });
   },
-  announce: function(e) {
+  announce: function (e) {
     this.setData({
       hiddenModal: false
     })
   },
-  listenerConfirm: function(e) {
+  listenerConfirm: function (e) {
     this.setData({
       hiddenModal: true,
       announcement: this.tempAnnouncementContent
     })
   },
-  listenerCancel: function() {
+  listenerCancel: function () {
     this.tempAnnouncementContent = null;
     this.setData({
       hiddenModal: true,
     })
   },
-  announceContent: function(e) {
+  announceContent: function (e) {
     var inputVal = e.detail.value;
     this.tempAnnouncementContent = inputVal;
   },
-  storeNameListener: function(e) {
+  storeNameListener: function (e) {
     var inputVal = e.detail.value;
     this.data.merchant.store_name = inputVal;
     this.setData({
       merchant: this.data.merchant
     });
   },
-  addressListener: function(e) {
+  addressListener: function (e) {
     var inputVal = e.detail.value;
     this.data.merchant.address = inputVal;
     this.setData({
       merchant: this.data.merchant
     });
   },
-  mobileListener: function(e) {
+  mobileListener: function (e) {
     var inputVal = e.detail.value;
     this.data.merchant.mobile = inputVal;
     this.setData({
       merchant: this.data.merchant
     });
   },
-  currencySelectListener: function(e) {
+  currencySelectListener: function (e) {
     this.setData({
       currencyIndex: e.detail.value
     })
   },
-  selectTag: function(e) {
+  selectTag: function (e) {
     var tagId = e.currentTarget.dataset.tag;
     var tags = [];
-    if(this.data.tag1 != null) {
+    if (this.data.tag1 != null) {
       tags.push(this.data.tag1.tag_id);
-    } 
-    if(this.data.tag2 != null) {
+    }
+    if (this.data.tag2 != null) {
       tags.push(this.data.tag2.tag_id);
-    } 
-    if(this.data.tag3 != null) {
+    }
+    if (this.data.tag3 != null) {
       tags.push(this.data.tag3.tag_id);
-    } 
+    }
     var otherTags = [];
-    tags.forEach(function(id) {
-      if(tagId != id) {
+    tags.forEach(function (id) {
+      if (tagId != id) {
         otherTags.push(id);
       }
     })
 
     wx.navigateTo({
-      url: '../list/list?tag=' + tagId + '&tag2=' + otherTags[0] + '&tag3=' + otherTags[1] 
+      url: '../list/list?tag=' + tagId + '&tag2=' + otherTags[0] + '&tag3=' + otherTags[1]
     })
   },
-  updateMerchant: function(e) {
-      var tags = [];
-      if(this.data.tag1) {
-        tags.push(this.data.tag1.tag_id);
-      }
-      if(this.data.tag2) {
-        tags.push(this.data.tag2.tag_id);
-      }
-      if(this.data.tag3) {
-        tags.push(this.data.tag3.tag_id);
-      }
+  updateMerchant: function (e) {
+    var tags = [];
+    if (this.data.tag1) {
+      tags.push(this.data.tag1.tag_id);
+    }
+    if (this.data.tag2) {
+      tags.push(this.data.tag2.tag_id);
+    }
+    if (this.data.tag3) {
+      tags.push(this.data.tag3.tag_id);
+    }
 
-      var form = {
-        store_name: this.data.merchant.store_name,
-        start: this.data.startTime,
-        end: this.data.endTime,
-        tags: tags,
-        mobile: this.data.merchant.mobile,
-        announcement: this.data.announcement,  
-        address: this.data.merchant.address,    
-        city_code: this.data.cityCode,
-        country_code: this.data.countryCode,
-        currency_id: this.getCurrencyId()
+    var form = {
+      store_name: this.data.merchant.store_name,
+      start: this.data.startTime,
+      end: this.data.endTime,
+      tags: tags,
+      mobile: this.data.merchant.mobile,
+      announcement: this.data.announcement,
+      address: this.data.merchant.address,
+      city_code: this.data.cityCode,
+      country_code: this.data.countryCode,
+      currency_id: this.getCurrencyId()
+    }
+
+    if (!this.isValid(form)) {
+      return false;
+    };
+
+    app.http.post('/site/merchant/update', form, function (res) {
+      if (res.result_code === 10000) {
+        wx.navigateBack(1);
       }
-
-      if(!this.isValid(form)) {
-        return false;
-      };
-
-      app.http.post('/site/merchant/update', form, function(res) {
-        if(res.result_code === 10000) {
-          wx.navigateBack(1);
+    });
+    var url = this.data.merchant.image_url;
+    if (this.pictureTaken) {
+      wx.getStorage({
+        key: 'token',
+        success: function (res) {
+          var accessToken = res.data;
+          wx.uploadFile({
+            url: app.http.domain + '/site/merchant/upload-profile',
+            filePath: url,
+            name: 'file',
+            header: {
+              'access-token': accessToken
+            },
+            formData: {},
+          })
+        },
+        fail: function (res) {
+          console.log(res);
         }
       });
-      var url = this.data.merchant.image_url;
-      if(this.pictureTaken) {
-        wx.getStorage({
-          key: 'token', 
-          success: function(res){
-            var accessToken = res.data;
-            wx.uploadFile({
-              url: app.http.domain + '/site/merchant/upload-profile',
-              filePath: url,
-              name: 'file',
-              header: {'access-token': accessToken},  
-              formData: {},
-            })          
-          },
-          fail: function(res){
-            console.log(res);
-          }
-        });
-      }
+    }
   },
-  selectRegion: function(e) {
+  selectRegion: function (e) {
     wx.navigateTo({
       url: '../list/list?mode=regions'
     })
   },
-  chooseImage: function(e) {
+  chooseImage: function (e) {
     this.pictureTaken = true;
     var that = this;
     wx.chooseImage({
@@ -253,27 +261,27 @@ Page({
       }
     })
   },
-  isValid: function(form) {
-      if(form.store_name === "") {
-        app.toast('店面不能为空');
-        return false;
-      }
-      if(form.city_code === "") {
-        app.toast('请选择地区');
-        return false;
-      }
-      if(form.store_name.length > 20) {
-        app.toast('店名过长');
-        return false;
-      }
-      if(form.announcement && form.announcement.length > 25) {
-        app.toast('公告过长，请控制在25个字以内');
-        return false;
-      }
+  isValid: function (form) {
+    if (form.store_name === "") {
+      app.toast('店面不能为空');
+      return false;
+    }
+    if (form.city_code === "") {
+      app.toast('请选择地区');
+      return false;
+    }
+    if (form.store_name.length > 20) {
+      app.toast('店名过长');
+      return false;
+    }
+    if (form.announcement && form.announcement.length > 25) {
+      app.toast('公告过长，请控制在25个字以内');
+      return false;
+    }
 
-      return true;
+    return true;
   },
-  getCurrencyId: function() {
+  getCurrencyId: function () {
     return this.data.currencies[this.data.currencyIndex].id;
   }
 })

@@ -15,13 +15,12 @@ Page({
     filterCountries: [],
   },
   onLoad: function () {
-    var that = this;
     app.http.promiseGet('/site/user/tel-codes', {})
       .then(res => {
         res.result.map(country => {
           country.name = country.name + ' (+' + country.tel_code + ')';
         })
-        that.setData({
+        this.setData({
           codes: res.result
         });
       })
@@ -56,8 +55,10 @@ Page({
         return app.http.promisePost('/site/user/login', data);
       })
       .then(res => {
-        var that = this;
-        app.globalData.user = that.data.user;
+        app.globalData.user = this.data.user;
+        if(this.data.user.currentRole == app.merchantRole) {
+          app.globalData.user.merchantInfo.id = res.result.merchant_id;
+        }
         var token = res.result.access_token;
         wx.setStorage({ key: 'token', data: token })
         wx.switchTab({
