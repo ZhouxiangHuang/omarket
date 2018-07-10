@@ -1,3 +1,6 @@
+.margin-space-top {
+  margin-top: 30rpx;
+}
 .underline {
   border-bottom: solid 1px #D1D1D1;
 }
@@ -46,9 +49,9 @@
 }
 .form .row .icon {
   float: left;
-  width: 50rpx;
-  height: 50rpx;
-  margin-top: 30rpx;
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 25rpx;
   margin-right: 20rpx;
 }
 .form .row label {
@@ -229,11 +232,11 @@
   width: 100%;
   height: 100%;
 }
-.product-list-main .merchant-profile {
+.product-list-main .merchant-info {
   width: 100%;
-  min-height: 200rpx;
+  min-height: 220rpx;
 }
-.product-list-main .merchant-profile .merchant-logo {
+.product-list-main .merchant-info__logo {
   margin-left: 15rpx;
   float: left;
   width: 220rpx;
@@ -241,34 +244,34 @@
   display: flex;
   justify-content: center;
 }
-.product-list-main .merchant-profile .merchant-profile {
+.product-list-main .merchant-info__profile {
   margin-top: 23rpx;
   float: right;
   width: 500rpx;
   margin-right: 10rpx;
   height: 100%;
 }
-.product-list-main .merchant-profile .merchant-profile #merchant-name {
+.product-list-main .merchant-info__name {
   font-size: 35rpx;
 }
-.product-list-main .merchant-profile .merchant-profile #merchant-hours {
-  margin-top: 5rpx;
-  font-size: 23rpx;
-  color: #979797;
-}
-.product-list-main .merchant-profile .merchant-profile #merchant-address {
+.product-list-main .merchant-info__address {
   margin-top: 10rpx;
   font-size: 23rpx;
   color: #979797;
 }
-.product-list-main .merchant-profile .merchant-profile #merchant-address .highlight {
+.product-list-main .merchant-info__address .highlight {
   background-color: #FFA32C;
 }
-.product-list-main .merchant-profile .merchant-profile #merchant-address text {
+.product-list-main .merchant-info__address text {
   margin-left: 10rpx;
   color: #FFA32C;
 }
-.product-list-main .merchant-profile .merchant-profile #merchant-announcement {
+.product-list-main .merchant-info__hours {
+  margin-top: 5rpx;
+  font-size: 23rpx;
+  color: #979797;
+}
+.product-list-main .merchant-info__announcement {
   margin-top: 10rpx;
   width: 450rpx;
   font-size: 23rpx;
@@ -276,80 +279,44 @@
   display: flex;
   word-wrap: break-word;
 }
-.product-list-main .merchant-profile .merchant-profile #merchant-announcement .highlight {
+.product-list-main .merchant-info__announcement .highlight {
   background-color: #FF4343;
 }
-.product-list-main .merchant-profile .merchant-profile #merchant-announcement text {
+.product-list-main .merchant-info__announcement text {
   color: #FF4343;
   margin-left: 10rpx;
   font-size: 24rpx;
   width: 350rpx;
 }
-.product-list-main .merchant-profile .merchant-profile .tags {
-  margin-top: 10rpx;
-}
-.product-list-main .merchant-profile .merchant-profile .tags .tag {
-  margin-right: 10rpx;
-  float: left;
-  border: 1px solid #FFA32C;
-  text-align: center;
-  border-radius: 3px;
-  height: 30rpx;
-  line-height: 30rpx;
-  width: 110rpx;
-  font-size: 24rpx;
-}
-.product-list-main .merchant-profile .merchant-profile .tags .tag text {
-  color: #FFA32C;
-}
-.product-list-main .merchant-profile .merchant-profile .edit-profile-btn {
-  width: 100rpx;
-  height: 50rpx;
-  color: #FF4343;
-  font-size: 25rpx;
-  position: absolute;
-  top: 20rpx;
+.product-list-main .merchant-info__edit-profile-button,
+.product-list-main .merchant-info__call-merchant-button {
   right: 0;
+  top: 20rpx;
+  position: absolute;
+  height: 50rpx;
+  font-size: 25rpx;
 }
-.product-list-main .merchant-profile .merchant-profile .edit-profile-btn image {
+.product-list-main .merchant-info__edit-profile-button {
+  width: 100rpx;
+  color: #FF4343;
+}
+.product-list-main .merchant-info__edit-profile-button image {
   margin-left: 5rpx;
   margin-top: 5rpx;
   width: 30rpx;
   height: 30rpx;
 }
-.product-list-main .merchant-profile .merchant-profile .call-merchant-btn {
+.product-list-main .merchant-info__call-merchant-button {
   width: 150rpx;
-  height: 50rpx;
   line-height: 50rpx;
   float: right;
-  position: absolute;
-  top: 20rpx;
-  right: 0;
-  font-size: 25rpx;
 }
-.product-list-main .merchant-profile .merchant-profile .call-merchant-btn image {
+.product-list-main .merchant-info__call-merchant-button image {
   margin-left: 5rpx;
   margin-top: 10rpx;
   width: 30rpx;
   height: 30rpx;
   position: absolute;
-}
-.product-list-main .empty-product-list {
-  position: absolute;
-  height: 265rpx;
-  width: 144rpx;
-  margin-left: 390rpx;
-  margin-top: 200rpx;
-}
-.product-list-main .empty-product-hint {
-  position: absolute;
-  height: 265rpx;
-  width: 570rpx;
-  margin-left: 180rpx;
-  margin-top: 490rpx;
-  color: #999999;
-  text-align: center;
-  font-size: 25rpx;
 }
 .product-list-main .products {
   height: 890rpx;
@@ -370,71 +337,17 @@
   line-height: 125rpx;
   width: 100%;
 }
-.product-list-main .products .categories .category .fire {
+.product-list-main .products .categories .category--icon-style {
   width: 20%;
   height: 30%;
   float: left;
   margin-top: 40rpx;
   margin-left: 20rpx;
 }
-.product-list-main .products .categories .category .hot-text {
+.product-list-main .products .categories .category--text-style {
   margin-left: -30rpx;
 }
-.product-list-main .products .categories .category #add-text {
-  margin-left: -20rpx;
-}
-.product-list-main .products .product {
-  margin-top: 20rpx;
-  float: right;
-  height: 180rpx;
-  width: 73%;
-}
-.product-list-main .products .product .product-img {
-  float: left;
-  width: 180rpx;
-  height: 180rpx;
-}
-.product-list-main .products .product .product-detail {
-  width: 60%;
-  float: right;
-  margin-right: 20rpx;
-}
-.product-list-main .products .product .product-detail .name {
-  font-size: 35rpx;
-}
-.product-list-main .products .product .product-detail .production-intro {
-  height: 70rpx;
-  margin-top: 5rpx;
-  color: #888888;
-  font-size: 24rpx;
-  text-overflow: ellipsis;
-  overflow: hidden;
-}
-.product-list-main .products .product .product-detail .price {
-  margin-top: 10rpx;
-  color: #FF4343;
-  font-size: 35rpx;
-  font-weight: 500;
-}
-.product-list-main .products .add-product-btn {
-  border-radius: 50%;
-  width: 100rpx;
-  height: 100rpx;
-  background: #FF4343;
-  position: fixed;
-  right: 0;
-  bottom: 0;
-  margin-right: 50rpx;
-  margin-bottom: 50rpx;
-}
-.product-list-main .products .add-product-btn image {
-  height: 100%;
-  width: 100%;
-}
-.product-list-main .products #add-category {
-  color: #FF4343;
-}
-.circle {
+.product-list-main .products .categories .category--button-style {
   border-radius: 50%;
   background-color: #FF4343;
   height: 50rpx;
@@ -445,10 +358,79 @@
   float: left;
   margin-left: 20rpx;
 }
-.circle image {
+.product-list-main .products .categories .category--button-style image {
   height: 40%;
   width: 40%;
   margin-left: 30%;
+}
+.product-list-main .products .categories .category--button-text {
+  margin-left: -20rpx;
+  color: #FF4343;
+}
+.product-list-main .products__empty-icon {
+  position: absolute;
+  height: 265rpx;
+  width: 144rpx;
+  margin-left: 390rpx;
+  margin-top: 200rpx;
+}
+.product-list-main .products__empty-hint {
+  position: absolute;
+  height: 265rpx;
+  width: 570rpx;
+  margin-left: 180rpx;
+  margin-top: 490rpx;
+  color: #999999;
+  text-align: center;
+  font-size: 25rpx;
+}
+.product-list-main .products .product {
+  margin-top: 20rpx;
+  float: right;
+  height: 180rpx;
+  width: 73%;
+}
+.product-list-main .products .product__image {
+  float: left;
+  width: 180rpx;
+  height: 180rpx;
+}
+.product-list-main .products .product__detail {
+  width: 60%;
+  float: right;
+  margin-right: 20rpx;
+}
+.product-list-main .products .product__name {
+  font-size: 35rpx;
+}
+.product-list-main .products .product__intro {
+  height: 70rpx;
+  margin-top: 5rpx;
+  color: #888888;
+  font-size: 24rpx;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.product-list-main .products .product__price {
+  margin-top: 10rpx;
+  color: #FF4343;
+  font-size: 35rpx;
+  font-weight: 500;
+}
+.product-list-main .products__add-button {
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  background: #FF4343;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin-right: 50rpx;
+  margin-bottom: 50rpx;
+}
+.product-list-main .products__add-button image {
+  height: 100%;
+  width: 100%;
 }
 .highlight {
   width: 75rpx;

@@ -1,10 +1,9 @@
 @import "../../utils/common.less";
-
 .product-list-main {
-    .merchant-profile{ 
+    .merchant-info {
         width: 100%;
-        min-height: 200rpx;
-        .merchant-logo { 
+        min-height: 220rpx;
+        &__logo {
             margin-left: 15rpx;
             float: left;
             width: @std-height;
@@ -12,117 +11,81 @@
             display: flex;
             justify-content: center;
         }
-        .merchant-profile {
+        &__profile {
             margin-top: 23rpx;
             float: right;
-            width: 500rpx; 
+            width: 500rpx;
             margin-right: 10rpx;
             height: 100%;
-            #merchant-name {
-                font-size: 35rpx;
+        }
+        &__name {
+            font-size: 35rpx;
+        }
+        &__address {
+            margin-top: 10rpx;
+            font-size: 23rpx;
+            color: #979797;
+            .highlight {
+                background-color: #FFA32C;
             }
-            #merchant-hours {
-                margin-top: 5rpx;
-                font-size: 23rpx;
-                color: #979797;
-            }
-            #merchant-address {
-                margin-top: 10rpx;
-                font-size: 23rpx;
-                color: #979797;
-                .highlight {
-                    background-color: #FFA32C;
-                }
-                text {
-                    margin-left: 10rpx;
-                    color: #FFA32C;
-                }
-            }
-            #merchant-announcement {
-                margin-top: 10rpx; 
-                width: 450rpx;
-                font-size: 23rpx;
-                color: #979797;
-                display: flex;
-                word-wrap:break-word;
-                .highlight {
-                    background-color: @theme-color;
-                }
-                text {
-                    margin-left: 10rpx;
-                    color: @theme-color;
-                    margin-left: 10rpx;
-                    font-size: 24rpx;
-                    width: 350rpx;
-                }
-            }
-            .tags {
-                margin-top: 10rpx;
-                .tag {
-                    margin-right: 10rpx;
-                    float: left;
-                    border: 1px solid #FFA32C;
-                    text-align: center;
-                    border-radius: 3px;
-                    height: 30rpx;
-                    line-height: 30rpx;
-                    width: 110rpx;
-                    font-size: 24rpx;
-                    text {
-                        color: #FFA32C;
-                    }
-                }
-            }
-            .edit-profile-btn {
-                width: 100rpx;
-                height: 50rpx;
-                color: @theme-color;
-                font-size: 25rpx;
-                position: absolute;
-                top: 20rpx;
-                right: 0;
-                    image {
-                        margin-left: 5rpx;
-                        margin-top: 5rpx;
-                        width: 30rpx;
-                        height: 30rpx;
-                    }
-            }
-            .call-merchant-btn {
-                width: 150rpx;
-                height: 50rpx;
-                line-height: 50rpx;
-                float: right;
-                position: absolute;
-                top: 20rpx;
-                right: 0;
-                font-size: 25rpx;
-                    image {
-                        margin-left: 5rpx;
-                        margin-top: 10rpx;
-                        width: 30rpx;
-                        height: 30rpx;
-                        position: absolute;
-                    }
+            text {
+                margin-left: 10rpx;
+                color: #FFA32C;
             }
         }
-    }
-    .empty-product-list {
-        position:absolute;
-        height:265rpx;
-        width:144rpx;
-        margin-left:390rpx;
-        margin-top:200rpx;
-    }
-    .empty-product-hint {
-        position:absolute;
-        height:265rpx;
-        width: 570rpx;
-        margin-left:180rpx;
-        margin-top:490rpx;
-        color: #999999;
-        text-align: center;
-        font-size: 25rpx;
+        &__hours {
+            margin-top: 5rpx;
+            font-size: 23rpx;
+            color: #979797;
+        }
+        &__announcement {
+            margin-top: 10rpx;
+            width: 450rpx;
+            font-size: 23rpx;
+            color: #979797;
+            display: flex;
+            word-wrap: break-word;
+            .highlight {
+                background-color: @theme-color;
+            }
+            text {
+                margin-left: 10rpx;
+                color: @theme-color;
+                margin-left: 10rpx;
+                font-size: 24rpx;
+                width: 350rpx;
+            }
+        }
+        &__edit-profile-button,
+        &__call-merchant-button {
+            right: 0;
+            top: 20rpx;
+            position: absolute;
+            height: 50rpx;
+            font-size: 25rpx;
+        }
+        &__edit-profile-button {
+            width: 100rpx;
+            color: @theme-color;
+            image {
+                margin-left: 5rpx;
+                margin-top: 5rpx;
+                width: 30rpx;
+                height: 30rpx;
+            }
+        }
+        &__call-merchant-button {
+            width: 150rpx;
+            line-height: 50rpx;
+            float: right;
+            image {
+                margin-left: 5rpx;
+                margin-top: 10rpx;
+                width: 30rpx;
+                height: 30rpx;
+                position: absolute;
+            }
+        }
     }
     .products {
         height: 890rpx;
@@ -138,57 +101,91 @@
             position: fixed;
             .category {
                 height: 125rpx;
-                line-height: 125rpx;  
+                line-height: 125rpx;
                 width: 100%;
-                .fire {
-                    width:20%;
+                &--icon-style {
+                    width: 20%;
                     height: 30%;
                     float: left;
-                    margin-top:40rpx;
-                    margin-left:20rpx;
+                    margin-top: 40rpx;
+                    margin-left: 20rpx;
                 }
-                .hot-text{
+                &--text-style {
                     margin-left: -30rpx;
                 }
-                #add-text {
+                &--button-style {
+                    border-radius: 50%;
+                    background-color: @theme-color;
+                    height: 50rpx;
+                    width: 50rpx;
+                    margin-top: 36.5rpx;
+                    display: flex;
+                    align-items: center;
+                    float: left;
+                    margin-left: 20rpx;
+                    image {
+                        height: 40%;
+                        width: 40%;
+                        margin-left: 30%;
+                    }
+                }
+                &--button-text {
                     margin-left: -20rpx;
-                } 
+                    color: @theme-color
+                }
             }
+        }
+        &__empty-icon {
+            position: absolute;
+            height: 265rpx;
+            width: 144rpx;
+            margin-left: 390rpx;
+            margin-top: 200rpx;
+        }
+        &__empty-hint {
+            position: absolute;
+            height: 265rpx;
+            width: 570rpx;
+            margin-left: 180rpx;
+            margin-top: 490rpx;
+            color: #999999;
+            text-align: center;
+            font-size: 25rpx;
         }
         .product {
             margin-top: 20rpx;
             float: right;
             height: 180rpx;
             width: 73%;
-            .product-img {
+            &__image {
                 float: left;
                 width: 180rpx;
                 height: 180rpx;
             }
-            .product-detail {
+            &__detail {
                 width: 60%;
                 float: right;
-                margin-right: 20rpx; 
-                .name {
-                    font-size: 35rpx;
-                }
-                .production-intro {
-                    height: 70rpx;
-                    margin-top: 5rpx;
-                    color: #888888;
-                    font-size: 24rpx;
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                }
-                .price {
-                    margin-top: 10rpx;
-                    color: @theme-color;
-                    font-size: 35rpx;
-                    font-weight: 500;
-                } 
+                margin-right: 20rpx;
             }
-        } 
-        .add-product-btn {
+            &__name {
+                font-size: 35rpx;
+            }
+            &__intro {
+                height: 70rpx;
+                margin-top: 5rpx;
+                color: #888888;
+                font-size: 24rpx;
+                text-overflow: ellipsis;
+                overflow: hidden;
+            }
+            &__price {
+                margin-top: 10rpx;
+                color: @theme-color;
+                font-size: 35rpx;
+                font-weight: 500;
+            }
+        }
+        &__add-button {
             border-radius: 50%;
             width: 100rpx;
             height: 100rpx;
@@ -197,32 +194,12 @@
             right: 0;
             bottom: 0;
             margin-right: 50rpx;
-            margin-bottom: 50rpx;   
+            margin-bottom: 50rpx;
             image {
                 height: 100%;
                 width: 100%;
-            }         
+            }
         }
-        #add-category {
-            color: @theme-color
-        }
-    }
-}
-
-.circle {
-    border-radius: 50%;
-    background-color: @theme-color;
-    height: 50rpx;
-    width: 50rpx;
-    margin-top: 36.5rpx;
-    display: flex;
-    align-items: center;
-    float: left;
-    margin-left: 20rpx;
-    image {
-        height: 40%;
-        width: 40%;
-        margin-left: 30%;     
     }
 }
 

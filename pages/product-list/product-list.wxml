@@ -1,6 +1,6 @@
 <view class="container product-list-main">
-    <view class="merchant-profile underline-light-gray">
-        <view class="merchant-logo">
+    <view class="merchant-info underline-light-gray">
+        <view class="merchant-info__logo">
             <block wx:if="{{merchant.image_url}}">
                 <image class="logo" src="{{merchant.image_url}}" />
             </block>
@@ -8,25 +8,25 @@
                 <image class="logo" src="/images/no-store.png" />            
             </block>
         </view>
-        <view class="merchant-profile">
-            <view id="merchant-name">{{merchant.store_name}}</view>
-            <view id="merchant-hours">营业时间: {{merchant.open_at}} - {{merchant.closed_at}}</view>                 
-            <view id="merchant-address">
+        <view class="merchant-info__profile">
+            <view class="merchant-info__name">{{merchant.store_name}}</view>
+            <view class="merchant-info__hours">营业时间: {{merchant.open_at}} - {{merchant.closed_at}}</view>                 
+            <view class="merchant-info__address">
                 <view class="highlight">地址</view>
                 <text>{{merchant.address}}</text>
             </view>   
-            <view id="merchant-announcement">
+            <view class="merchant-info__announcement">
                 <view class="highlight">公告</view>
                 <text>{{merchant.announcement}}</text>
             </view>  
             <block wx:if="{{isOwner && user.currentRole === 1}}">
-                <view class="edit-profile-btn" bindtap="editMerchant">
+                <view class="merchant-info__edit-profile-button" bindtap="editMerchant">
                     <text>编辑</text>
                     <image src="/images/edit.png"/>
                 </view>
             </block>
             <block wx:else>
-                <view class="call-merchant-btn" bindtap="callMerchant" data-tel="{{merchant.mobile}}">
+                <view class="merchant-info__call-merchant-button" bindtap="callMerchant" data-tel="{{merchant.mobile}}">
                     <text>联系商家</text>
                     <image src="/images/phone.png"/>
                 </view>
@@ -51,44 +51,44 @@
         <view class="categories">
             <view class="category underline-light-gray" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-category="{{item.id}}" style="background-color: {{item.color}}">
                 <block wx:if="{{item.is_hot}}">
-                    <image class="fire" src="/images/hot.png"/>
-                    <text class="hot-text">{{item.name}}</text>                
+                    <image class="category--icon-style" src="/images/hot.png"/>
+                    <text class="category--text-style">{{item.name}}</text>                
                 </block>
                 <block wx:else>
                     <text>{{item.name}}</text>
                 </block>
             </view>
-            <view wx:if="{{isOwner && user.currentRole === 1}}" class="category underline" id="add-category" bindtap="editCatogory">
-                <view class="circle">
+            <view wx:if="{{isOwner && user.currentRole === 1}}" class="category underline" bindtap="editCatogory">
+                <view class="category--button-style">
                     <image src="/images/add.png" mode="center"/>
                 </view>
-                <text id="add-text">添加</text>
+                <text class="category--button-text">添加</text>
             </view>
         </view>
         <block wx:if="{{!productList.length}}">
-            <image class="empty-product-list" src="/images/empty.png" />
+            <image class="products__empty-icon" src="/images/empty.png" />
             <block wx:if="{{isOwner}}">
-                <view class="empty-product-hint">赶快去添加产品吧</view>
+                <view class="products__empty-hint">赶快去添加产品吧</view>
             </block>
             <block wx:else>
-                <view class="empty-product-hint">产品还没上架哦</view>
+                <view class="products__empty-hint">产品还没上架哦</view>
             </block>
         </block>
         <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
             <block wx:if="{{item.images[0].url}}">
-                <image class="product-img" src="{{item.images[0].url}}" />   
+                <image class="product__image" src="{{item.images[0].url}}" />   
             </block>
             <block wx:else>
-                <image class="product-img" src="/images/no-image-sm.png"/>         
+                <image class="product__image" src="/images/no-image-sm.png"/>         
             </block>
 
-            <view class="product-detail">
-                <view class="name">{{item.name}}</view>
-                <view class="production-intro">{{item.description || '暂无产品描述'}}</view>
-                <view wx:if="{{item.price}}" class="price">{{merchant.currency}} {{item.price}}</view>
+            <view class="product__detail">
+                <view class="product__name">{{item.name}}</view>
+                <view class="product__intro">{{item.description || '暂无产品描述'}}</view>
+                <view wx:if="{{item.price}}" class="product__price">{{merchant.currency}} {{item.price}}</view>
             </view>   
         </view>
-        <view wx:if="{{isOwner && user.currentRole === 1}}" class="add-product-btn" bindtap="editProducts">
+        <view wx:if="{{isOwner && user.currentRole === 1}}" class="products__add-button" bindtap="editProducts">
             <image src="/images/add.png" mode="center"/>
         </view>
     </view>
