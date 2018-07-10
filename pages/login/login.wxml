@@ -1,10 +1,10 @@
 <!-- index.wxml -->
 <view class="container">
-    <view class="login-option-nav">
-        <view id='user' bindtap="changeRole" style="background-color:{{userColor}}; color:{{userFont}}">
+    <view class="login-nav">
+        <view class='login-nav__user' bindtap="changeRole" style="background-color:{{userColor}}; color:{{userFont}}">
             用户
         </view>
-        <view id='merchant' bindtap="changeRole" style="background-color:{{merchantColor}}; color:{{merchantFont}}">
+        <view class='login-nav__merchant' bindtap="changeRole" style="background-color:{{merchantColor}}; color:{{merchantFont}}">
             商户
         </view>
     </view>

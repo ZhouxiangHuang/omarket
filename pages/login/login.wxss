@@ -242,7 +242,7 @@
   height: 90rpx;
   line-height: 90rpx;
 }
-.login-option-nav {
+.login-nav {
   border: 1px solid #FF4343;
   width: 500rpx;
   height: 60rpx;
@@ -251,25 +251,21 @@
   text-align: center;
   margin-top: 90rpx;
 }
-.login-option-nav #user {
+.login-nav__user,
+.login-nav__merchant {
   height: 100%;
   line-height: 60rpx;
+  width: 50%;
+}
+.login-nav__user {
   border-top-left-radius: 9px;
   border-bottom-left-radius: 9px;
   float: left;
-  width: 50%;
 }
-.login-option-nav #merchant {
-  height: 100%;
-  line-height: 60rpx;
+.login-nav__merchant {
   border-top-right-radius: 9px;
   border-bottom-right-radius: 9px;
-  text-align: center;
   float: right;
-  width: 50%;
-}
-#register-form {
-  margin-top: 30rpx;
 }
 .form {
   margin-top: 30rpx;
@@ -298,15 +294,4 @@
 }
 .form .row .mobile {
   width: 250rpx;
-}
-.button-register {
-  width: 100%;
-  margin-top: 30rpx;
-}
-.button-register .bind-user {
-  background-color: #FF4343;
-  color: white;
-  width: 90%;
-  height: 90rpx;
-  line-height: 90rpx;
 }

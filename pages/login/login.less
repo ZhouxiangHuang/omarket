@@ -1,7 +1,7 @@
 @import "../../utils/common.less";
 @import "../../utils/buttons.less";
 @margin-space: 30rpx;
-.login-option-nav { 
+.login-nav { 
     border: 1px solid @theme-color;
     width: 500rpx;
     height: @nav-height;
@@ -9,27 +9,21 @@
     color: @font-color;
     text-align: center;
     margin-top: 90rpx;
-    #user {
+    &__user, &__merchant{
         height: 100%;
         line-height: @nav-height;
+        width: 50%;
+    }
+    &__user {
         border-top-left-radius: 9px;
         border-bottom-left-radius: 9px;
         float: left;
-        width: 50%;
     }
-    #merchant {
-        height: 100%;
-        line-height: @nav-height;
+    &__merchant {
         border-top-right-radius: 9px;
         border-bottom-right-radius: 9px;
-        text-align: center;
         float: right;
-        width: 50%;
     }
-}
-
-#register-form {
-    margin-top: @margin-space;
 }
 
 .form {
@@ -60,17 +54,5 @@
         .mobile {
             width: 250rpx;
         }
-    }
-}
-
-.button-register {
-    width: 100%;
-    margin-top: @margin-space;
-    .bind-user {
-        background-color: @theme-color;
-        color: white;
-        width: 90%;
-        height: 90rpx;
-        line-height: 90rpx;
     }
 }
