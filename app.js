@@ -19,7 +19,8 @@ App({
   },
   wxApi: {
     getAccessToken: wxApi.getAccessToken,
-    wxLogin: wxApi.wxLogin
+    wxLogin: wxApi.wxLogin,
+    wxDownloadFile: wxApi.wxDownloadFile
   },
   http: {
     post: http.post,

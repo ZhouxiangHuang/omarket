@@ -5,11 +5,10 @@ const app = getApp()
 Page({
   config: {},
   tempFile: null,
-  posterId : 1,
-  data: {
-  },
+  posterId: 1,
+  data: {},
   //事件处理函数
-  bindViewTap: function() {
+  bindViewTap: function () {
     wx.navigateTo({
       url: '../logs/logs'
     })
@@ -17,69 +16,66 @@ Page({
   onLoad: function () {
     this.getNewPoster();
   },
-  getUserInfo: function(e) {
+  getUserInfo: function (e) {
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
   },
-  getNewPoster: function() {
-    var data = {id: this.posterId};
-    var that = this;
-    app.http.get('/site/merchant/share', data, function(res) {
-      if(res.result_code == 10000) {
-        that.config = that.formatConfig(res.result);
-        that.generate(that.config);
-        that.posterId = res.result.next_poster_id;
-      } else {
+  getNewPoster: function () {
+    var data = {
+      id: this.posterId
+    };
+    app.http.promiseGet('/site/merchant/share', data)
+      .then(res => {
+        this.config = this.formatConfig(res.result);
+        this.generate(this.config);
+        this.posterId = res.result.next_poster_id;
+      })
+      .catch(error => {
         app.toast('系统错误，请尝试联系客服');
-      }
-    });
+      })
   },
-  generate: function(config) {
-    var that = this;
-    wx.showLoading({title: '正在为您制作海报...',mask: true});
-    wx.downloadFile({
-      url: config.image.url,
-      success: function (sres) {
-        wx.downloadFile({
-          url: config.qrCode.url,
-          success: function (res) {
-            var context = wx.createCanvasContext('firstCanvas');
-            context.scale(config.image.scaleX, config.image.scaleY); 
-            context.drawImage(sres.tempFilePath, config.image.posX, config.image.posY);
-            context.scale(config.qrCode.scaleX, config.qrCode.scaleY); 
-            context.drawImage(res.tempFilePath, config.qrCode.posX, config.qrCode.posY);
-            context.draw();
-            wx.hideLoading();
-          },fail:function(res){
-            console.log(res);
-            wx.hideLoading();
-          }
-        })
-      },fail:function(fres){
-        wx.hideLoading();
-        console.log(fres);
-      }
-    });
+  generate: function (config) {
+    // wx.showLoading({
+    //   title: '正在为您制作海报...',
+    //   mask: true
+    // });
 
+    var tempFilePath = null;
+    app.wxApi.wxDownloadFile(config.image.url)
+      .then(res => {
+        tempFilePath = res.tempFilePath
+        return app.wxApi.wxDownloadFile(config.qrCode.url);
+      })
+      .then(res => {
+        let context = wx.createCanvasContext('firstCanvas');
+        context.scale(config.image.scaleX, config.image.scaleY);
+        context.drawImage(tempFilePath, config.image.posX, config.image.posY);
+        context.scale(config.qrCode.scaleX, config.qrCode.scaleY);
+        context.drawImage(res.tempFilePath, config.qrCode.posX, config.qrCode.posY);
+        context.draw();
+        wx.hideLoading();
+      })
+      .catch(error => {
+        console.error(error);
+      })
   },
-  saveToAlbum: function() {
-    var that = this;
+  saveToAlbum: function () {
     wx.canvasToTempFilePath({
       canvasId: 'firstCanvas',
-      success: function (res) {
+      success: res => {
         var tempFilePath = res.tempFilePath;
-        that.tempFile = tempFilePath;
-        that.save();
+        this.tempFile = tempFilePath;
+        this.save();
       },
       fail: function (res) {
-          console.log(res);
+        console.log(res);
       }
     })
-  }, 
-  save: function() {
+  },
+  save: function () {
     var that = this;
     wx.getSetting({
       success(res) {
@@ -87,36 +83,36 @@ Page({
           wx.authorize({
             scope: 'scope.writePhotosAlbum',
             success() {
-                console.log('授权成功');
-                wx.saveImageToPhotosAlbum({
-                  filePath: this.tempFile,
-                  success: function(res) {
-                    app.toast('已保存到您的相册');
-                  },
-                  fail: function(res) {
-                    console.log(res);
-                  }
-                })
+              console.log('授权成功');
+              wx.saveImageToPhotosAlbum({
+                filePath: this.tempFile,
+                success: function (res) {
+                  app.toast('已保存到您的相册');
+                },
+                fail: function (res) {
+                  console.log(res);
+                }
+              })
             },
             fail() {
-                console.log('授权失败');
+              console.log('授权失败');
             }
           })
         } else {
-            wx.saveImageToPhotosAlbum({
-              filePath: that.tempFile,
-              success: function(res) {
-                app.toast('已保存到您的相册');
-              },
-              fail: function(res) {
-                console.log(res);
-              }
-            })
+          wx.saveImageToPhotosAlbum({
+            filePath: that.tempFile,
+            success: function (res) {
+              app.toast('已保存到您的相册');
+            },
+            fail: function (res) {
+              console.log(res);
+            }
+          })
         }
       }
     })
   },
-  formatConfig: function(data) {
+  formatConfig: function (data) {
     var config = {};
     config.image = {};
     config.image.url = data.image_url;

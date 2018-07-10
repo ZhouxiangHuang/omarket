@@ -56,13 +56,16 @@ Page({
       })
       .then(res => {
         app.globalData.user = this.data.user;
-        if(this.data.user.currentRole == app.merchantRole) {
+        if (this.data.user.currentRole == app.merchantRole) {
           app.globalData.user.merchantInfo.id = res.result.merchant_id;
         }
         var token = res.result.access_token;
-        wx.setStorage({ key: 'token', data: token })
+        wx.setStorage({
+          key: 'token',
+          data: token
+        })
         wx.switchTab({
-          url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
+          url: '../merchant-list/merchant-list', //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
         })
       })
       .catch(error => {
@@ -142,4 +145,3 @@ Page({
     }
   }
 })
-

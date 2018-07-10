@@ -28,6 +28,22 @@ const wxLogin = () => {
     return wxPromisify(wx.login)
 }
 
+const wxDownloadFile = (url) => {
+    let promise = new Promise((resolve, reject) => {
+        wx.downloadFile({
+            url: url,
+            success: res => {
+                resolve(res);
+            },
+            fail: res => {
+                reject(res);
+            }
+          })
+    })
+
+    return promise;
+}
+
 const wxUploadFile = (accessToken, fileName, url, data, path) => {
     let promise = new Promise((resolve, reject) => {
         wx.uploadFile({
@@ -76,5 +92,6 @@ const getAccessToken = () => {
 module.exports = {
     getAccessToken: getAccessToken,
     wxLogin: wxLogin,
-    wxUploadFile: wxUploadFile
+    wxUploadFile: wxUploadFile,
+    wxDownloadFile: wxDownloadFile
 }

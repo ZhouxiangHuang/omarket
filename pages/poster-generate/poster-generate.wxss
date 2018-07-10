@@ -229,6 +229,11 @@
   width: 100%;
   height: 100%;
 }
+.poster button {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 100rpx;
+}
 .poster .change {
   color: #FF4343;
   background-color: white;

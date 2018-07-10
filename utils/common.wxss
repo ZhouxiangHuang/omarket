@@ -1,3 +1,6 @@
+.margin-space-top {
+  margin-top: 30rpx;
+}
 .underline {
   border-bottom: solid 1px #D1D1D1;
 }
