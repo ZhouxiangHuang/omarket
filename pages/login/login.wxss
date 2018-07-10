@@ -267,9 +267,6 @@
   border-bottom-right-radius: 9px;
   float: right;
 }
-.form {
-  margin-top: 30rpx;
-}
 .form #code {
   height: 114rpx;
   text-align: right;

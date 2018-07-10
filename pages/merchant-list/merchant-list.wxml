@@ -1,52 +1,48 @@
-
 <view class="merchant-list-main container">
-    <swiper class="banner" indicator-dots="false" autoplay="true" interval="5000" duration="500">   
-        <block wx:for="{{banners}}" wx:for-index="index">  
-            <swiper-item>  
-                <image src="{{item}}" mode="scaleToFill"/>  
-            </swiper-item>  
-        </block> 
-
-    </swiper> 
-
+    <swiper class="banner" indicator-dots="false" autoplay="true" interval="5000" duration="500">
+        <block wx:for="{{banners}}" wx:for-index="index">
+            <swiper-item>
+                <image src="{{item}}" mode="scaleToFill" />
+            </swiper-item>
+        </block>
+    </swiper>
     <view class="filter underline-light-gray" style="{{filterStyle}}">
-        <picker class="selection border-right" range = "{{filterCountries}}" range-key="name" bindchange="filterCountry">
+        <picker class="selection border-right" range="{{filterCountries}}" range-key="name" bindchange="filterCountry">
             <text>{{filterCountries[countryIndex].name || '选择国家'}}</text>
-            <image class="selector" src="/images/triangle.png"/>
+            <image class="selector" src="/images/triangle.png" />
         </picker>
-         <picker class="selection" range = "{{filterCategories}}" range-key="name" range-key="name_with_count"  bindchange="filterCategory">
+        <picker class="selection" range="{{filterCategories}}" range-key="name" range-key="name_with_count" bindchange="filterCategory">
             <text>{{filterCategories[categoryIndex].name || '选择种类'}}</text>
-            <image class="selector" src="/images/triangle.png"/>
-        </picker>          
+            <image class="selector" src="/images/triangle.png" />
+        </picker>
     </view>
-
     <view class="merchant-list">
-        <view class="merchant" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant"  bindtap="selectStore" data-merchant = "{{merchant.id}}" hover="true" hover-class="selected-hover" hover-start-time="0" hover-stay-time="500">
+        <view class="merchant" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant" bindtap="selectStore" data-merchant="{{merchant.id}}" hover="true" hover-class="selected-hover" hover-start-time="0" hover-stay-time="500">
             <view class="merchant-info">
-                <view class="merchant-logo">
-                    <image wx:if="{{merchant.imageUrl}}" class="logo" src="{{merchant.imageUrl}}" />
-                    <image wx:if="{{!merchant.imageUrl}}" class="logo" src="/images/no-store.png" />                
+                <view class="merchant-info__logo">
+                    <image wx:if="{{merchant.imageUrl}}" class="merchant-info__logo--style" src="{{merchant.imageUrl}}" />
+                    <image wx:if="{{!merchant.imageUrl}}" class="merchant-info__logo--style" src="/images/no-store.png" />
                 </view>
-                <view class="merchant-profile" data-merchant="{{merchant.id}}">
-                    <view class="merchant-name">{{merchant.name}}</view>
-                    <view class="merchant-address"> {{merchant.country}} {{merchant.city || ''}}</view>  
-                    <view class="enter">进店</view>                  
-                    <view class="merchant-announcement">
+                <view class="merchant-info__profile" data-merchant="{{merchant.id}}">
+                    <view class="merchant-info__name">{{merchant.name}}</view>
+                    <view class="merchant-info__address">
+                        {{merchant.country}} {{merchant.city || ''}}
+                    </view>
+                    <view class="merchant-info__button">进店</view>
+                    <view class="merchant-info__announcement">
                         <view class="announcement-icon">公告</view>
-                        <text class="announcement-content">{{merchant.announcement}}</text> 
-                    </view>           
-                    <view class="tags"> 
-                        <view class="tag" wx:for="{{merchant.tags}}" wx:key="{{tags}}">
-                            <text>{{item.name}}</text>        
-                        </view>           
+                        <text class="announcement-content">{{merchant.announcement}}</text>
+                    </view>
+                    <view class="merchant-info__tags">
+                        <view class="merchant-info__tags--style" wx:for="{{merchant.tags}}" wx:key="{{tags}}">
+                            <text>{{item.name}}</text>
+                        </view>
                     </view>
                 </view>
             </view>
-              
             <view class="merchant-products">
-                <image wx:if="{{image.url}}" class="product-image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}" wx:key="{{key}}"/> 
-            </view>        
+                <image wx:if="{{image.url}}" class="merchant-products__image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}" wx:key="{{key}}" />
+            </view>
         </view>
     </view>
-    
 </view>
