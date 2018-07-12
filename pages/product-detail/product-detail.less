@@ -1,8 +1,7 @@
 @import "../../utils/common.less";
-
 .product-detail-main {
     .img {
-        min-width: 750rpx;        
+        min-width: 750rpx;
         height: 800rpx;
         white-space: nowrap;
         display: flex;
@@ -11,11 +10,16 @@
             height: 800rpx;
             width: 100%;
         }
-    } 
+    }
     .product-info {
         width: 90%;
-        .top {
+        &__top,
+        &__share-icon-image,
+        &__share,
+        &__description {
             margin-top: 10rpx;
+        }
+        &__top {
             width: 100%;
             height: 80rpx;
             line-height: 80rpx;
@@ -27,88 +31,67 @@
             .right {
                 float: right;
             }
-            #share {
-                height: 60rpx;
-                margin-top: 10rpx;
-                line-height: 60rpx;
-                width: 120rpx;
-                font-size: 30rpx;
-                background-color: transparent;
-                border: none;
-            }
-            #share::after{
-                border: none;
-            }
-            #share-image {
-                right: 0;
-                margin-top: 10rpx;
-                margin-right: 10rpx;
-                position: absolute;
-                height: 57rpx;
-                width: 161rpx;
-            }
         }
-        .low {
+        &__share-icon-image {
+            right: 0;
+            margin-right: 10rpx;
+            position: absolute;
+            height: 57rpx;
+            width: 161rpx;
+        }
+        &__share {
+            height: 60rpx;
+            line-height: 60rpx;
+            width: 120rpx;
+            font-size: 30rpx;
+            background-color: transparent;
+            border: none;
+        }
+        &__share::after {
+            border: none;
+        }
+        &__bottom {
             width: 100%;
             height: 100rpx;
             .left {
                 float: left;
                 width: 60%;
-                .name {
-                    width: 100%;
-                    font-size: 37rpx;
-                    .fire {
-                        width: 40rpx;
-                        height: 40rpx;
-                        margin-top:5rpx;
-                        float:left;
-                        margin-right:10rpx;
-                    }
-                }
                 .code {
                     font-size: 25rpx;
-                } 
+                }
             }
-            .button {
+        }
+        &__delete-button {
+            float: right;
+            color: @theme-color;
+            text-align: center;
+            width: 25%;
+            height: 70rpx;
+            line-height: 70rpx;
+            .trash {
+                width: 44rpx;
+                height: 40rpx;
+                margin-top: 15rpx;
                 float: right;
-                border: 1px solid @theme-color;
-                border-radius: 3px;
-                color: @theme-color;
-                text-align: center;
-                width: 25%;
-                height: 70rpx;
-                line-height: 70rpx;   
-                .heart {
-                    width: 44rpx;
-                    height: 40rpx;
-                    margin-top:15rpx;
-                    float:left;
-                    margin-left:20rpx;
-                } 
+                margin-left: 20rpx;
             }
-            .button-del {
-                float: right;
-                color: @theme-color; 
-                text-align: center;
-                width: 25%;
-                height: 70rpx;
-                line-height: 70rpx;    
-                .trash {
-                    width: 44rpx;
-                    height: 40rpx;
-                    margin-top:15rpx;
-                    float:right;
-                    margin-left:20rpx;
-                }    
-            } 
-        } 
-        .description { 
-            margin-top: 10rpx;
+        }
+        &__name {
+            width: 100%;
+            font-size: 37rpx;
+            .fire {
+                width: 40rpx;
+                height: 40rpx;
+                margin-top: 5rpx;
+                float: left;
+                margin-right: 10rpx;
+            }
+        }
+        &__description {
             width: 100%;
             height: 35rpx;
             font-size: 25rpx;
             color: #979797;
         }
     }
-   
 }

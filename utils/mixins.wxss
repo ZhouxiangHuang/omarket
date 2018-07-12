@@ -1,0 +1,16 @@
+.tag-highlight {
+  width: 75rpx;
+  float: left;
+  height: 35rpx;
+  line-height: 35rpx;
+  text-align: center;
+  color: white;
+  border-radius: 5rpx;
+  font-size: 20rpx;
+}
+
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

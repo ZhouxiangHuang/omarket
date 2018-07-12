@@ -1,3 +1,6 @@
+.margin-space-top {
+  margin-top: 30rpx;
+}
 .underline {
   border-bottom: solid 1px #D1D1D1;
 }
@@ -46,9 +49,9 @@
 }
 .form .row .icon {
   float: left;
-  width: 50rpx;
-  height: 50rpx;
-  margin-top: 30rpx;
+  width: 60rpx;
+  height: 60rpx;
+  margin-top: 25rpx;
   margin-right: 20rpx;
 }
 .form .row label {
@@ -243,96 +246,81 @@
 .product-detail-main .product-info {
   width: 90%;
 }
-.product-detail-main .product-info .top {
+.product-detail-main .product-info__top,
+.product-detail-main .product-info__share-icon-image,
+.product-detail-main .product-info__share,
+.product-detail-main .product-info__description {
   margin-top: 10rpx;
+}
+.product-detail-main .product-info__top {
   width: 100%;
   height: 80rpx;
   line-height: 80rpx;
 }
-.product-detail-main .product-info .top .left {
+.product-detail-main .product-info__top .left {
   float: left;
   color: #FF4343;
   font-size: 37rpx;
 }
-.product-detail-main .product-info .top .right {
+.product-detail-main .product-info__top .right {
   float: right;
 }
-.product-detail-main .product-info .top #share {
+.product-detail-main .product-info__share-icon-image {
+  right: 0;
+  margin-right: 10rpx;
+  position: absolute;
+  height: 57rpx;
+  width: 161rpx;
+}
+.product-detail-main .product-info__share {
   height: 60rpx;
-  margin-top: 10rpx;
   line-height: 60rpx;
   width: 120rpx;
   font-size: 30rpx;
   background-color: transparent;
   border: none;
 }
-.product-detail-main .product-info .top #share::after {
+.product-detail-main .product-info__share::after {
   border: none;
 }
-.product-detail-main .product-info .top #share-image {
-  right: 0;
-  margin-top: 10rpx;
-  margin-right: 10rpx;
-  position: absolute;
-  height: 57rpx;
-  width: 161rpx;
-}
-.product-detail-main .product-info .low {
+.product-detail-main .product-info__bottom {
   width: 100%;
   height: 100rpx;
 }
-.product-detail-main .product-info .low .left {
+.product-detail-main .product-info__bottom .left {
   float: left;
   width: 60%;
 }
-.product-detail-main .product-info .low .left .name {
+.product-detail-main .product-info__bottom .left .code {
+  font-size: 25rpx;
+}
+.product-detail-main .product-info__delete-button {
+  float: right;
+  color: #FF4343;
+  text-align: center;
+  width: 25%;
+  height: 70rpx;
+  line-height: 70rpx;
+}
+.product-detail-main .product-info__delete-button .trash {
+  width: 44rpx;
+  height: 40rpx;
+  margin-top: 15rpx;
+  float: right;
+  margin-left: 20rpx;
+}
+.product-detail-main .product-info__name {
   width: 100%;
   font-size: 37rpx;
 }
-.product-detail-main .product-info .low .left .name .fire {
+.product-detail-main .product-info__name .fire {
   width: 40rpx;
   height: 40rpx;
   margin-top: 5rpx;
   float: left;
   margin-right: 10rpx;
 }
-.product-detail-main .product-info .low .left .code {
-  font-size: 25rpx;
-}
-.product-detail-main .product-info .low .button {
-  float: right;
-  border: 1px solid #FF4343;
-  border-radius: 3px;
-  color: #FF4343;
-  text-align: center;
-  width: 25%;
-  height: 70rpx;
-  line-height: 70rpx;
-}
-.product-detail-main .product-info .low .button .heart {
-  width: 44rpx;
-  height: 40rpx;
-  margin-top: 15rpx;
-  float: left;
-  margin-left: 20rpx;
-}
-.product-detail-main .product-info .low .button-del {
-  float: right;
-  color: #FF4343;
-  text-align: center;
-  width: 25%;
-  height: 70rpx;
-  line-height: 70rpx;
-}
-.product-detail-main .product-info .low .button-del .trash {
-  width: 44rpx;
-  height: 40rpx;
-  margin-top: 15rpx;
-  float: right;
-  margin-left: 20rpx;
-}
-.product-detail-main .product-info .description {
-  margin-top: 10rpx;
+.product-detail-main .product-info__description {
   width: 100%;
   height: 35rpx;
   font-size: 25rpx;

@@ -1,83 +1,69 @@
 <view class="product-detail-main container">
-
-    <swiper wx:if="{{productImages.length}}" class="img underline" indicator-dots="true" autoplay="true" interval="3000" duration="3000">    
-      <block wx:for="{{productImages}}" wx:for-index="index" wx:key="key">    
-        <swiper-item>    
-          <image wx:if="{{item.url}}" src="{{item.url}}" class="slide-image" mode="aspectFill"/>    
-          <image wx:if="{{!item.url}}" src="/images/no-image-lg.png" class="slide-image" mode="aspectFill"/>    
-        </swiper-item>    
-      </block>    
-    </swiper>       
-    <image class="img underline" wx:if="{{!productImages.length}}" src="/images/no-image-lg.png" mode="aspectFill"/>    
-
+    <swiper wx:if="{{productImages.length}}" class="img underline" indicator-dots="true" autoplay="true" interval="3000" duration="3000">
+        <block wx:for="{{productImages}}" wx:for-index="index" wx:key="key">
+            <swiper-item>
+                <image wx:if="{{item.url}}" src="{{item.url}}" class="slide-image" mode="aspectFill" />
+                <image wx:if="{{!item.url}}" src="/images/no-image-lg.png" class="slide-image" mode="aspectFill" />
+            </swiper-item>
+        </block>
+    </swiper>
+    <image class="img underline" wx:if="{{!productImages.length}}" src="/images/no-image-lg.png" mode="aspectFill" />
     <view class="product-info">
-        <view class="top">
-            <view class="left">
-               {{merchant.currency}} {{productInfo.price}}
-            </view>
-            <image id="share-image" src="/images/share-3d.png" mode="scaleFill"/>
-            <button id="share" open-type='share' class="right">
-            </button>            
+        <view class="product-info__top">
+            <view class="left">{{merchant.currency}} {{productInfo.price}}</view>
+            <image class="product-info__share-icon-image" src="/images/share-3d.png" mode="scaleFill" />
+            <button class="product-info__share right" open-type='share'></button>
         </view>
-        <view class="low">
+        <view class="product-info__bottom">
             <view class="left">
-                <view class="name">  
-                    <image wx:if="{{productInfo.hot_item}}" src="/images/hot.png" class="fire"/>
+                <view class="product-info__name">
+                    <image wx:if="{{productInfo.hot_item}}" src="/images/hot.png" class="fire" />
                     <text>{{productInfo.name}}</text>
                 </view>
-                <view class="code">商品编码: {{productInfo.product_unique_code}}</view>             
-            </view>       
+                <view class="code">商品编码: {{productInfo.product_unique_code}}</view>
+            </view>
             <block wx:if="{{user.currentRole === 1 && isOwner}}">
-                <view class="button-del" bindtap="askDelete">
-                    <image class="trash" mode="aspectFit" src="/images/trash.png"/>                
-                </view>     
+                <view class="product-info__delete-button" bindtap="askDelete">
+                    <image class="trash" mode="aspectFit" src="/images/trash.png" />
+                </view>
             </block>
-          
-        </view>            
-        <view class="description">{{productInfo.description}}</view>   
-    </view>                    
-
+        </view>
+        <view class="product-info__description">{{productInfo.description}}</view>
+    </view>
     <block wx:if="{{isOwner && user.currentRole === 1}}">
         <view class="bottom-row">
-            <view class="btn" bindtap="edit">编辑</view>              
+            <view class="btn" bindtap="edit">编辑</view>
         </view>
     </block>
     <block wx:if="{{!isOwner && user.currentRole === 2}}">
         <view class="bottom-row">
             <view class="btn" bindtap="checkCollections">收藏夹</view>
             <view class="info">已关注{{collectionCount}}款商品</view>
-                <view class="home-button" bindtap="returnHome" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
+            <view class="home-button" bindtap="returnHome" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
                 <block wx:if="{{user.currentRole === 2}}">
                     <view class="top-wrapper">
-                        <image class="star" mode="aspectFit" src="/images/market-pre-select.png"/>
+                        <image class="star" mode="aspectFit" src="/images/market-pre-select.png" />
                     </view>
-                    <view class="buttom-wrapper">
-                        首页
-                    </view>
-                </block>  
+                    <view class="buttom-wrapper">首页</view>
+                </block>
             </view>
             <view class="collect-button" bindtap="collect">
                 <block wx:if="{{user.currentRole === 2}}">
                     <block wx:if="{{!isCollected}}">
                         <view class="top-wrapper">
-                            <image class="star" mode="aspectFit" src="/images/empty-star.png"/>
+                            <image class="star" mode="aspectFit" src="/images/empty-star.png" />
                         </view>
-                        <view class="buttom-wrapper">
-                            收藏
-                        </view>
+                        <view class="buttom-wrapper">收藏</view>
                     </block>
                     <block wx:else>
                         <view class="top-wrapper">
-                            <image class="star" mode="aspectFit" src="/images/star.png"/>
+                            <image class="star" mode="aspectFit" src="/images/star.png" />
                         </view>
-                        <view class="buttom-wrapper" style="color: #FF4343">
-                            已收藏
-                        </view>
+                        <view class="buttom-wrapper" style="color: #FF4343">已收藏</view>
                     </block>
-                </block>  
+                </block>
             </view>
-          
         </view>
     </block>
-    <modal title="确认将产品删除？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="delete" bindcancel="hideModal" ></modal>
+    <modal title="确认将产品删除？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="delete" bindcancel="hideModal"></modal>
 </view>
