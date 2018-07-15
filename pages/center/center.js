@@ -21,10 +21,9 @@ Page({
     console.log(this.data.user);
 
     if(this.data.user.currentRole === app.merchantRole) {
-      var that = this;
       app.http.promiseGet('/site/merchant/detail', {merchant_id: this.data.user.merchantInfo.id})
         .then(res => {
-          that.setData({
+          this.setData({
             merchant: res.result
           });
         })
@@ -50,7 +49,7 @@ Page({
   },
   posterGenerate: function() {
     wx.navigateTo({
-      url: '../poster-generate/poster-generate',
+      url: '../poster-generate/poster-generate?merchant_name=' + this.data.merchant.store_name,
       fail: function(e) {
           console.log(e);
       }

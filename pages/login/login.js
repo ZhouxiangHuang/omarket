@@ -73,7 +73,7 @@ Page({
         app.toast('登录失败, 请稍后再试');
       })
   },
-  changeRole: function () {
+  switchRole: function () {
     var newRole = (this.data.user.currentRole === app.merchantRole) ? app.userRole : app.merchantRole;
     this.data.user.currentRole = newRole;
     this.setData({
@@ -112,7 +112,7 @@ Page({
       return true;
     }
 
-    if (data.store_name === null) {
+    if (!data.store_name) {
       app.toast("请输入店名");
       return false;
     }

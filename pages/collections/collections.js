@@ -50,18 +50,17 @@ Page({
   },
   doDelete() {
     var productId = this.toBeDeleted;
-    var that = this;
 
-    app.http.post('/site/product/discard', {
+    app.http.promisePost('/site/product/discard', {
       product_id: productId
-    }, function (res) {
-      that.setData({
+    }).then(res => {
+      this.setData({
         hiddenModal: true
       });
     })
 
     var newArray = [];
-    this.data.display[this.toBeDeletedMerchantName].products.forEach(function (product) {
+    this.data.display[this.toBeDeletedMerchantName].products.forEach(product => {
       if (product.id !== productId) {
         newArray.push(product);
       }
@@ -90,24 +89,24 @@ Page({
     });
   },
   getCollections() {
-    var that = this;
-    app.http.get('/site/user/collections', {}, res => {
-      res.result.forEach(merchant => {
-        this.data.hide[merchant.merchant_name] = {
-          'currency': merchant.currency,
-          'merchant_id': merchant.merchant_id,
-          'merchant_name': merchant.merchant_name,
-          'products': []
-        };
-        merchant.dropTriangle = true;
-        this.data.display[merchant.merchant_name] = merchant;
-      });
+    app.http.promiseGet('/site/user/collections', {})
+      .then(res => {
+        res.result.forEach(merchant => {
+          this.data.hide[merchant.merchant_name] = {
+            'currency': merchant.currency,
+            'merchant_id': merchant.merchant_id,
+            'merchant_name': merchant.merchant_name,
+            'products': []
+          };
+          merchant.dropTriangle = true;
+          this.data.display[merchant.merchant_name] = merchant;
+        });
 
-      that.setData({
-        display: this.data.display,
-        hide: this.data.hide,
-        collections: res.result
+        this.setData({
+          display: this.data.display,
+          hide: this.data.hide,
+          collections: res.result
+        })
       })
-    })
   }
 })

@@ -6,6 +6,7 @@ Page({
   config: {},
   tempFile: null,
   posterId: 1,
+  merchantName: null,
   data: {},
   //事件处理函数
   bindViewTap: function () {
@@ -13,7 +14,8 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad: function (option) {
+    this.merchantName = option.merchant_name;
     this.getNewPoster();
   },
   getUserInfo: function (e) {
@@ -38,10 +40,10 @@ Page({
       })
   },
   generate: function (config) {
-    // wx.showLoading({
-    //   title: '正在为您制作海报...',
-    //   mask: true
-    // });
+    wx.showLoading({
+      title: '正在为您制作海报...',
+      mask: true
+    });
 
     var tempFilePath = null;
     app.wxApi.wxDownloadFile(config.image.url)
@@ -55,6 +57,9 @@ Page({
         context.drawImage(tempFilePath, config.image.posX, config.image.posY);
         context.scale(config.qrCode.scaleX, config.qrCode.scaleY);
         context.drawImage(res.tempFilePath, config.qrCode.posX, config.qrCode.posY);
+        context.setFontSize(config.fontSize);
+        context.setFillStyle(config.fontColor);
+        context.fillText(this.merchantName, config.fontX, config.fontY);
         context.draw();
         wx.hideLoading();
       })
@@ -126,6 +131,10 @@ Page({
     config.qrCode.scaleY = data.qr_scale_y;
     config.qrCode.posX = data.qr_pos_x;
     config.qrCode.posY = data.qr_pos_y;
+    config.fontColor = data.font_color;
+    config.fontSize = data.font_size;
+    config.fontX = data.font_x;
+    config.fontY = data.font_y;
     return config;
   }
 })

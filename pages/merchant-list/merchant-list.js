@@ -44,7 +44,6 @@ Page({
         });
       })
       .catch(error => {
-
         app.toast(error);
       })
   },
