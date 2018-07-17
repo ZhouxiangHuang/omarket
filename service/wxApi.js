@@ -10,13 +10,17 @@ Promise.prototype.finally = function (callback) {
 
 function wxPromisify(fn) {
     let promise = new Promise((resolve, reject) => {
+        wx.showLoading({
+            title: '加载中',
+            mask: true
+        });
         let obj = {}
         obj.success = function (res) {
-            //成功
+            wx.hideLoading();
             resolve(res)
         }
         obj.fail = function (res) {
-            //失败
+            wx.hideLoading();
             reject(res)
         }
         fn(obj)
@@ -25,7 +29,33 @@ function wxPromisify(fn) {
 }
 
 const wxLogin = () => {
-    return wxPromisify(wx.login)
+    return wxPromisify(wx.login);
+}
+
+const wxGetUserInfo = () => {
+    return wxPromisify(wx.getUserInfo);
+}
+
+const wxSetStorage = (key, data) => {
+    let promise = new Promise((resolve, reject) => {
+        wx.showLoading({
+            title: '加载中',
+            mask: true
+        });
+        wx.setStorage({
+            key: key,
+            data: data,
+            success: res => {
+                wx.hideLoading();
+                resolve(res);
+            },
+            fail: res => {
+                wx.hideLoading();
+                reject(res);
+            }
+        })
+    })
+    return promise;
 }
 
 const wxDownloadFile = (url) => {
@@ -38,7 +68,7 @@ const wxDownloadFile = (url) => {
             fail: res => {
                 reject(res);
             }
-          })
+        })
     })
 
     return promise;
@@ -93,5 +123,7 @@ module.exports = {
     getAccessToken: getAccessToken,
     wxLogin: wxLogin,
     wxUploadFile: wxUploadFile,
-    wxDownloadFile: wxDownloadFile
+    wxDownloadFile: wxDownloadFile,
+    wxSetStorage: wxSetStorage,
+    wxGetUserInfo: wxGetUserInfo,
 }

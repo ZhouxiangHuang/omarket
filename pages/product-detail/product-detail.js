@@ -5,6 +5,7 @@ const app = getApp()
 Page({
   curIndex: 0,
   scroll: 0,
+  productId: null,
   data: {
     user: {},
     merchant: {},
@@ -17,31 +18,38 @@ Page({
     hiddenModal: true
   },
   onLoad: function (options) {
-    var productId = options.product_id;
-    var that = this;
-
-    app.http.promiseGet('/site/product/detail',{product_id: productId})
+    this.productId = options.product_id;
+  },
+  onShow: function () {
+    if (!app.globalData.isLoggedIn) {
+      return this.returnHome();
+    }
+    app.http.promiseGet('/site/product/detail', {
+        product_id: this.productId
+      })
       .then(res => {
         var merchantId = res.result.merchant_id;
         var isOwner = app.globalData.user.merchantInfo.id == merchantId;
-        that.setData({
+        this.setData({
           productInfo: res.result,
           productImages: res.result.images,
           isOwner: isOwner
         })
 
-        return app.http.promiseGet('/site/merchant/detail', {merchant_id: merchantId});
+        return app.http.promiseGet('/site/merchant/detail', {
+          merchant_id: merchantId
+        });
       })
       .then(res => {
-        that.setData({
+        this.setData({
           merchant: res.result
         });
       })
       .catch(error => {
-        app.toast(error);
+        console.error(error);
+        app.toast("服务器错误，请稍后重试");
       });
-  },
-  onShow: function () {
+
     this.setData({
       user: app.globalData.user,
       hasUserInfo: true
@@ -61,23 +69,27 @@ Page({
         app.toast(error);
       })
   },
-  collect: function(e) {
+  collect: function (e) {
     var productId = this.data.productInfo.id;
     var that = this;
 
-    if(this.data.isCollected) {
-      app.http.post('/site/product/discard', {product_id: productId}, function(res) {
-        if(res.result_code === 10000) {
+    if (this.data.isCollected) {
+      app.http.post('/site/product/discard', {
+        product_id: productId
+      }, function (res) {
+        if (res.result_code === 10000) {
           that.setData({
             isCollected: false,
-            collectionCount: that.data.collectionCount - 1 
+            collectionCount: that.data.collectionCount - 1
           });
           app.toast('操作成功');
         }
       })
     } else {
-      app.http.post('/site/product/collect', {product_id: productId}, function(res) {
-        if(res.result_code === 10000) {
+      app.http.post('/site/product/collect', {
+        product_id: productId
+      }, function (res) {
+        if (res.result_code === 10000) {
           that.setData({
             isCollected: true,
             collectionCount: that.data.collectionCount + 1
@@ -88,81 +100,79 @@ Page({
     }
 
   },
-  checkCollections: function(e) {
+  checkCollections: function (e) {
     wx.navigateTo({
       url: '../collections/collections'
     })
   },
-  edit: function(e) {
+  edit: function (e) {
     var productId = this.data.productInfo.id;
     wx.navigateTo({
-      url: '../edit-product-info/edit-product-info?product_id=' + productId 
+      url: '../edit-product-info/edit-product-info?product_id=' + productId
     })
   },
-  delete: function(e) {
+  delete: function (e) {
     var productId = this.data.productInfo.id;
-    app.http.post('/site/product/delete', {product_id: productId}, function(res) {
-      if(res.result_code === 10000) {
+    app.http.post('/site/product/delete', {
+      product_id: productId
+    }, function (res) {
+      if (res.result_code === 10000) {
         wx.navigateBack(1);
       } else {
         app.toat('操作失败，请稍后再试')
       }
     })
   },
-  askDelete: function() {
+  askDelete: function () {
     this.setData({
       hiddenModal: false
     })
   },
-  hideModal: function() {
+  hideModal: function () {
     this.setData({
       hiddenModal: true
     })
   },
   onShareAppMessage: function () {
     return {
-        title: this.data.merchant.store_name,
-        desc: this.data.productInfo.product_unique_code,
-        path: '/pages/product-detail/product-detail?product_id=' + this.data.productInfo.id,
-        imageUrl: this.data.productInfo.images[0].url,
-        success: function (res) {
+      title: this.data.merchant.store_name,
+      desc: this.data.productInfo.product_unique_code,
+      path: '/pages/product-detail/product-detail?product_id=' + this.data.productInfo.id,
+      imageUrl: this.data.productInfo.images[0].url,
+      success: function (res) {
 
-        }
+      }
     };
   },
-  itemExists: function(productList, item) {
+  itemExists: function (productList, item) {
     var result = false;
-    productList.forEach(function(product) {
-      if(product.id == item.id) {
+    productList.forEach(function (product) {
+      if (product.id == item.id) {
         result = true;
       }
     });
 
     return result;
   },
-  countCollectedProducts: function(collections) {
+  countCollectedProducts: function (collections) {
     var count = 0;
-    collections.forEach(function(collection) {
+    collections.forEach(function (collection) {
       count += collection.products.length;
     })
 
     return count;
   },
-  getProductList: function(collections) {
+  getProductList: function (collections) {
     var products = [];
-    collections.forEach(function(collection) {
+    collections.forEach(function (collection) {
       products = products.concat(collection.products);
     })
 
     return products;
   },
-  returnHome: function() {
-    // wx.switchTab({
-    //   url: '../merchant-list/merchant-list',  //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
-    // })
-
-      wx.redirectTo({
-        url: '../login/login', 
-      })
+  returnHome: function () {
+    wx.navigateTo({
+      url: '../login/login?redirect=1&logout=0',
+    })
   }
 })

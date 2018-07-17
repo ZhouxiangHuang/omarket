@@ -31,7 +31,7 @@ Page({
   },
   logout: function() {
       wx.redirectTo({
-        url: '../login/login'
+        url: '../login/login?redirect=1&logout=1'
       })
   },
   getCollections: function() {
