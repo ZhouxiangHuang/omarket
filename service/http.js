@@ -32,6 +32,7 @@ function promisePost(url, data) {
         resolve(res);
       })
       .catch(error => {
+        wx.hideLoading();
         reject(error);
       })
   })
@@ -116,6 +117,9 @@ function promiseGet(url, data) {
     wxApi.getAccessToken()
       .then(accessToken => {
         return httpGet(accessToken, url, data);
+      })
+      .catch(error => {
+        return httpGet('', url, data);
       })
       .then(res => {
         resolve(res);

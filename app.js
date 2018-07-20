@@ -7,7 +7,9 @@ App({
     console.log('app runing');
   },
   globalData: {
-    user: {},
+    user: {
+      merchantInfo: {}
+    },
     hasUserInfo: false,
     isLoggedIn: false
   },
@@ -82,53 +84,6 @@ App({
     })
 
     return promise;
-  },
-  getUserInfo: function (cb) {
-    wx.showLoading({
-      title: '加载中',
-      mask: true
-    });
-    var user = {};
-    wxApi.wxLogin()
-      .then(res => {
-        let code = res.code;
-        wx.hideLoading();
-        wx.getUserInfo({
-          success: function (res) {
-            user.nickName = res.userInfo.nickName;
-            user.avatarUrl = res.userInfo.avatarUrl;
-          }
-        })
-
-        return http.promisePost('/site/user/validate', {
-          code: code
-        });
-      })
-      .then(res => {
-        this.globalData.hasUserInfo = true;
-        this.globalData.isLoggedIn = true;
-        user.currentRole = res.result.last_login_role;
-        user.isMerchant = res.result.has_merchant_id;
-        user.merchantInfo = {};
-        user.merchantInfo.storeName = res.result.store_name;
-        user.merchantInfo.profileUrl = res.result.profile;
-        user.merchantInfo.id = (user.isMerchant && user.currentRole === 1) ? res.result.merchant_id : -1;
-        user.isOwner = false;
-        this.globalData.user = user;
-        var token = res.result.access_token;
-        wx.setStorage({
-          key: 'token',
-          data: token
-        });
-        if (cb) {
-          cb();
-        }
-      })
-      .catch(error => {
-        console.error(error);
-        wx.hideLoading();
-        this.toast('系统错误, 请稍后重试');
-      })
   },
   merchantRole: 1,
   userRole: 2,

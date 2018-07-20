@@ -22,7 +22,8 @@ Page({
   },
   onShow: function () {
     if (!app.globalData.isLoggedIn) {
-      return this.returnHome();
+      app.toast("请先授权登录");
+      return this.returnLogin();
     }
     app.http.promiseGet('/site/product/detail', {
         product_id: this.productId
@@ -170,9 +171,14 @@ Page({
 
     return products;
   },
-  returnHome: function () {
+  returnLogin: function () {
     wx.navigateTo({
       url: '../login/login?redirect=1&logout=0',
+    })
+  },
+  returnHome: function () {
+    wx.switchTab({
+      url: '../merchant-list/merchant-list', //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
     })
   }
 })

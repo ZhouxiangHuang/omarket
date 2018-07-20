@@ -11,13 +11,23 @@ Page({
   data: {
     user: {},
     isOwner: false,
-    timeRange: [
-      {'name': '从新到旧', 'code': 'newest'},
-      {'name': '从旧到新', 'code': 'oldest'}
+    timeRange: [{
+        'name': '从新到旧',
+        'code': 'newest'
+      },
+      {
+        'name': '从旧到新',
+        'code': 'oldest'
+      }
     ],
-    priceRange: [
-      {'name': '从高到低', 'code': 'highest'},
-      {'name': '从低到高', 'code': 'lowest'}
+    priceRange: [{
+        'name': '从高到低',
+        'code': 'highest'
+      },
+      {
+        'name': '从低到高',
+        'code': 'lowest'
+      }
     ],
     timeIndex: null,
     priceIndex: null,
@@ -29,40 +39,31 @@ Page({
     })
   },
   onLoad: function (option) {
-    if(!app.globalData.hasUserInfo) {
-      app.getUserInfo(() => {
-        this.setData({
-          user: app.globalData.user,
-          hasUserInfo: true
-        });
-      });
-    } else {
-      this.setData({
-        user: app.globalData.user,
-        hasUserInfo: true
-      });
-    }
-
-    this.ownerId = option.merchantId; 
-    var isOwner = app.globalData.user.merchantInfo.id.toString() == option.merchantId;
-    this.setData({
-      isOwner: isOwner,
-      user: this.data.user
-    });
+    this.ownerId = option.merchantId;
   },
   onShow: function () {
+    if (!app.globalData.isLoggedIn) {
+      app.toast("请先授权登录");
+      return this.returnLogin();
+    }
+    var isOwner = app.globalData.user.merchantInfo.id.toString() == this.ownerId;
     this.setData({
+      isOwner: isOwner,
       user: app.globalData.user
     })
 
-    app.http.promiseGet('/site/merchant/detail', {merchant_id: this.ownerId})
+    app.http.promiseGet('/site/merchant/detail', {
+        merchant_id: this.ownerId
+      })
       .then(res => {
         this.setData({
           merchant: res.result
         });
       })
 
-    app.http.promiseGet('/site/product/products', {merchant_id: this.ownerId})
+    app.http.promiseGet('/site/product/products', {
+        merchant_id: this.ownerId
+      })
       .then(res => {
         this.categories = res.result;
         var categoryId = this.getReviewHistory().categoryId;
@@ -79,64 +80,64 @@ Page({
     this.updateReviewHistory(categoryId);
     this.displayCategory(categoryId);
   },
-  checkProductDetal: function(event) {
+  checkProductDetal: function (event) {
     var id = event.currentTarget.dataset.no.id;
     wx.navigateTo({
       url: '../product-detail/product-detail?product_id=' + id,
-      fail: function(e) {
-          console.log(e);
+      fail: function (e) {
+        console.log(e);
       }
     })
   },
-  editMerchant: function() {
+  editMerchant: function () {
     wx.navigateTo({
       url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + this.data.user.merchantInfo.id,
-      fail: function(e) {
-          console.log(e);
+      fail: function (e) {
+        console.log(e);
       }
     })
   },
-  editCatogory: function() {
+  editCatogory: function () {
     wx.navigateTo({
       url: '../edit-categories/edit-categories',
-      fail: function(e) {
-          console.log(e);
+      fail: function (e) {
+        console.log(e);
       }
     })
-  }, 
-  editProducts: function() {  
-    if(this.data.categories.length === 1) {
+  },
+  editProducts: function () {
+    if (this.data.categories.length === 1) {
       app.toast('请先添加产品类别');
       return false;
     }
     var path = '../edit-product-info/edit-product-info';
-    if(this.selectedCategoryId) {
-      path = path + '?category_id=' +  this.selectedCategoryId;
+    if (this.selectedCategoryId) {
+      path = path + '?category_id=' + this.selectedCategoryId;
     }
-    
+
     wx.navigateTo({
       url: path,
-      fail: function(e) {
-          console.log(e);
+      fail: function (e) {
+        console.log(e);
       }
     })
   },
-  callMerchant: function(e) {
-    wx.makePhoneCall({  
+  callMerchant: function (e) {
+    wx.makePhoneCall({
       phoneNumber: e.currentTarget.dataset.tel, //此号码并非真实电话号码，仅用于测试  
-      success:function(){  
-        console.log("拨打电话成功！")  
-      },  
-      fail:function(){  
-        console.log("拨打电话失败！")  
-      }  
-    })  
+      success: function () {
+        console.log("拨打电话成功！")
+      },
+      fail: function () {
+        console.log("拨打电话失败！")
+      }
+    })
   },
-  orderByTime: function(e) {
-    var index = e.detail.value;    
+  orderByTime: function (e) {
+    var index = e.detail.value;
     var order = this.data.timeRange[index];
-    var newList = this.data.productList.sort(function(a, b) {
-      if(order.code === "oldest") {
+    var newList = this.data.productList.sort(function (a, b) {
+      if (order.code === "oldest") {
         return a.timestamp > b.timestamp
       } else {
         return a.timestamp < b.timestamp
@@ -148,11 +149,11 @@ Page({
       productList: newList
     })
   },
-  orderByPrice: function(e) {
-    var index = e.detail.value;    
+  orderByPrice: function (e) {
+    var index = e.detail.value;
     var order = this.data.priceRange[index];
-    var newList = this.data.productList.sort(function(a, b) {
-      if(order.code === "lowest") {
+    var newList = this.data.productList.sort(function (a, b) {
+      if (order.code === "lowest") {
         return a.price > b.price
       } else {
         return a.price < b.price
@@ -164,15 +165,15 @@ Page({
       productList: newList
     })
   },
-  displayCategory: function(categoryId) {
+  displayCategory: function (categoryId) {
     var displayProducts = [];
-    this.categories.map(function(category) {
-        if(categoryId === category.id) {
-          category.color = COLOR_SELECTED;
-          displayProducts = category.products;
-        } else {
-          category.color = COLOR_DEFAULT;
-        }
+    this.categories.map(function (category) {
+      if (categoryId === category.id) {
+        category.color = COLOR_SELECTED;
+        displayProducts = category.products;
+      } else {
+        category.color = COLOR_DEFAULT;
+      }
     })
 
     this.setData({
@@ -180,13 +181,13 @@ Page({
       productList: displayProducts
     })
   },
-  updateReviewHistory: function(categoryId) {
+  updateReviewHistory: function (categoryId) {
     app.globalData.lastViewedCategory = categoryId;
     app.globalData.lastViewedMerchant = this.ownerId;
   },
-  getReviewHistory: function() {
+  getReviewHistory: function () {
     var id = 0;
-    if(app.globalData.lastViewedMerchant == this.ownerId) {
+    if (app.globalData.lastViewedMerchant == this.ownerId) {
       id = app.globalData.lastViewedCategory || 0;
     }
 

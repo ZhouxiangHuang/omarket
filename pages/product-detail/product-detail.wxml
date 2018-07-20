@@ -10,7 +10,7 @@
     <image class="img underline" wx:if="{{!productImages.length}}" src="/images/no-image-lg.png" mode="aspectFill" />
     <view class="product-info">
         <view class="product-info__top">
-            <view class="left">{{merchant.currency}} {{productInfo.price}}</view>
+            <view class="left">{{merchant.currency || ''}} {{productInfo.price || ''}}</view>
             <image class="product-info__share-icon-image" src="/images/share-3d.png" mode="scaleFill" />
             <button class="product-info__share right" open-type='share'></button>
         </view>

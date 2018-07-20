@@ -57,9 +57,9 @@ Page({
         context.drawImage(tempFilePath, config.image.posX, config.image.posY);
         context.scale(config.qrCode.scaleX, config.qrCode.scaleY);
         context.drawImage(res.tempFilePath, config.qrCode.posX, config.qrCode.posY);
-        context.setFontSize(config.fontSize);
-        context.setFillStyle(config.fontColor);
-        context.fillText(this.merchantName, config.fontX, config.fontY);
+        // context.setFontSize(config.fontSize);
+        // context.setFillStyle(config.fontColor);
+        // context.fillText(this.merchantName, config.fontX, config.fontY);
         context.draw();
         wx.hideLoading();
       })

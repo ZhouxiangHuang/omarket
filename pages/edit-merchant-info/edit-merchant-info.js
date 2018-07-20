@@ -5,6 +5,7 @@ const app = getApp()
 Page({
   tempAnnouncementContent: null,
   pictureTaken: false,
+  isNew: false,
   data: {
     user: {},
     hasUserInfo: false,
@@ -28,6 +29,7 @@ Page({
   },
   onLoad: function (option) {
     var merchantId = option.merchant_id;
+    this.isNew = option.is_new == 1;
     app.http.promiseGet('/site/merchant/detail', {
         merchant_id: merchantId
       })
@@ -43,7 +45,7 @@ Page({
           announcement: res.result.announcement
         });
       })
-    
+
     app.http.promiseGet('/site/merchant/currencies', {})
       .then(res => {
         res.result.map(currency => {
@@ -54,7 +56,7 @@ Page({
         })
       })
   },
-  onShow: function (option) {
+  onShow: function () {
     var record = app.globalData.tagRecord;
     var region = app.globalData.region;
 
@@ -211,11 +213,17 @@ Page({
       return false;
     };
 
-    app.http.post('/site/merchant/update', form, function (res) {
-      if (res.result_code === 10000) {
-        wx.navigateBack(1);
-      }
-    });
+    app.http.promisePost('/site/merchant/update', form)
+      .then(res => {
+        if (this.isNew) {
+          wx.switchTab({
+            url: '../merchant-list/merchant-list', //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
+          })
+        } else {
+          wx.navigateBack(1);
+        }
+      })
+
     var url = this.data.merchant.image_url;
     if (this.pictureTaken) {
       wx.getStorage({

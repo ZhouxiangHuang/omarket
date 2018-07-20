@@ -20,18 +20,18 @@
         <view class="merchant" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant" bindtap="selectStore" data-merchant="{{merchant.id}}" hover="true" hover-class="selected-hover" hover-start-time="0" hover-stay-time="500">
             <view class="merchant-info">
                 <view class="merchant-info__logo">
-                    <image wx:if="{{merchant.imageUrl}}" class="merchant-info__logo--style" src="{{merchant.imageUrl}}" />
+                    <image wx:if="{{merchant.imageUrl}}" class="merchant-info__logo--style" src="{{merchant.imageUrl}}" mode="aspectFit"/>
                     <image wx:if="{{!merchant.imageUrl}}" class="merchant-info__logo--style" src="/images/no-store.png" />
                 </view>
                 <view class="merchant-info__profile" data-merchant="{{merchant.id}}">
                     <view class="merchant-info__name">{{merchant.name}}</view>
                     <view class="merchant-info__address">
-                        {{merchant.country}} {{merchant.city || ''}}
+                        {{merchant.country || ''}} {{merchant.city || ''}}
                     </view>
                     <view class="merchant-info__button">进店</view>
                     <view class="merchant-info__announcement">
                         <view class="announcement-icon">公告</view>
-                        <text class="announcement-content">{{merchant.announcement}}</text>
+                        <text class="announcement-content">{{merchant.announcement || "暂无公告"}}</text>
                     </view>
                     <view class="merchant-info__tags">
                         <view class="merchant-info__tags--style" wx:for="{{merchant.tags}}" wx:key="{{tags}}">

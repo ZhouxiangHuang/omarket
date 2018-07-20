@@ -45,11 +45,20 @@ Page({
   },
   save: function (e) {
     var form = {};
+
+    let isValid = true;
     this.data.categories.forEach(category => {
+      if (!this.isValid(category.name)) {
+        isValid = false;
+      }
       if (category.name) {
         form[category.id] = category.name;
       }
     })
+
+    if (!isValid) {
+      return false;
+    }
 
     app.http.promisePost('/site/product/update-merchant-category', {
         form: form
@@ -69,5 +78,13 @@ Page({
     this.setData({
       categories: newCategories
     });
+  },
+  isValid: function (name) {
+    if (name.length > 5) {
+      app.toast('类别名称最多5个字哦');
+      return false;
+    }
+
+    return true;
   }
 })

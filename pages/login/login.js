@@ -5,6 +5,7 @@ const app = getApp();
 Page({
   isRedirect: false,
   isLoggedOut: false,
+  newMerchantRegister: false,
   data: {
     hasUserInfo: false,
     user: {},
@@ -27,7 +28,6 @@ Page({
           return app.initUserInfo();
         })
         .then(user => {
-          console.log('current role', app.globalData.user)
           wx.switchTab({
             url: '../merchant-list/merchant-list',
           })
@@ -77,6 +77,10 @@ Page({
       .then(user => {
         if (this.isRedirect && !this.isLoggedOut) {
           wx.navigateBack(1);
+        } else if (this.newMerchantRegister) {
+          wx.navigateTo({
+            url: '../edit-merchant-info/edit-merchant-info?merchant_id=' + user.merchantInfo.id + '&is_new=1',
+          })
         } else {
           wx.switchTab({
             url: '../merchant-list/merchant-list', //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
@@ -140,6 +144,7 @@ Page({
       return false;
     }
 
+    this.newMerchantRegister = true;
     return true;
   },
   setColors: function (role) {
