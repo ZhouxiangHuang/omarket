@@ -10,8 +10,9 @@
     </view>
     <view class="userinfo margin-space-top">
         <block wx:if="{{user.currentRole === 2}}">
-            <image bindtap="bindViewTap" class="userinfo-avatar" src="{{user.avatarUrl}}" background-size="cover"></image>
-            <text class="userinfo-nickname">{{user.nickName}}</text>
+            <image wx:if="{{user.avatarUrl}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{user.avatarUrl}}" background-size="cover"></image>
+            <image wx:if="{{!user.avatarUrl}}" bindtap="bindViewTap" class="userinfo-avatar" src="/images/user.png" background-size="cover"></image>                    
+            <text class="userinfo-nickname">{{user.nickName || "用户名"}}</text>
         </block>
         <block wx:else>
             <block wx:if="{{user.merchantInfo.profileUrl}}">

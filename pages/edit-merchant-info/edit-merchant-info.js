@@ -6,6 +6,7 @@ Page({
   tempAnnouncementContent: null,
   pictureTaken: false,
   isNew: false,
+  selectedCurrency: null,
   data: {
     user: {},
     hasUserInfo: false,
@@ -42,17 +43,25 @@ Page({
           tag1: res.result.tags[0] || null,
           tag2: res.result.tags[1] || null,
           tag3: res.result.tags[2] || null,
-          announcement: res.result.announcement
+          announcement: res.result.announcement,
+          startTime: res.result.open_at || '06:00',
+          endTime: res.result.closed_at || '18:00'
         });
-      })
 
-    app.http.promiseGet('/site/merchant/currencies', {})
+        this.selectedCurrency = res.result.currency;
+        return app.http.promiseGet('/site/merchant/currencies', {});
+      })
       .then(res => {
-        res.result.map(currency => {
+        let selectedIndex = 0;
+        res.result.map( (currency, index) => {
+          if (currency.symbol == this.selectedCurrency) {
+            selectedIndex = index;
+          }
           currency.symbol = currency.abbreviation + " (" + currency.symbol + ")";
         })
         this.setData({
-          currencies: res.result
+          currencies: res.result,
+          currencyIndex: selectedIndex
         })
       })
   },

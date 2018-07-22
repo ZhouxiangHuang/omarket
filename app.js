@@ -67,19 +67,23 @@ App({
             user.merchantInfo.profileUrl = res.result.profile;
             user.merchantInfo.id = (user.isMerchant && user.currentRole === 1) ? res.result.merchant_id : -1;
             user.isOwner = false;
-            return wxApi.wxGetUserInfo();
+            wxApi.wxGetUserInfo()
+              .then(res => {
+                user.nickName = res.userInfo.nickName;
+                user.avatarUrl = res.userInfo.avatarUrl;
+                this.globalData.user = user;
+                resolve(user);
+              })
+              .catch(error => {
+                this.globalData.user = user;
+                resolve(user);
+              })
           } else {
             reject(res);
           }
         })
-        .then(res => {
-          user.nickName = res.userInfo.nickName;
-          user.avatarUrl = res.userInfo.avatarUrl;
-          this.globalData.user = user;
-          resolve(user);
-        })
         .catch(error => {
-          reject(error);
+          console.error(error);
         })
     })
 

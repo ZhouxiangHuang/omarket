@@ -28,6 +28,10 @@ Page({
           return app.initUserInfo();
         })
         .then(user => {
+          this.setData({
+            user: user,
+            hasUserInfo: app.globalData.hasUserInfo
+          });
           wx.switchTab({
             url: '../merchant-list/merchant-list',
           })
@@ -42,8 +46,17 @@ Page({
       hasUserInfo: app.globalData.hasUserInfo
     });
 
+    // app.wxApi.wxGetUserInfo()
+    //   .then(res => {
+    //     app.globalData.user.nickName = res.userInfo.nickName;
+    //     app.globalData.user.avatarUrl = res.userInfo.avatarUrl;
+    //   })
+
     if (!this.data.hasUserInfo) {
       this.data.user.currentRole = app.userRole; //给第一次登陆的用户
+      this.setData({
+        user: this.data.user
+      })
       this.setColors(app.userRole);
     } else {
       this.setColors(app.globalData.user.currentRole);

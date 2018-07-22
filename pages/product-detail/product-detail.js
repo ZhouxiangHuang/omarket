@@ -180,5 +180,16 @@ Page({
     wx.switchTab({
       url: '../merchant-list/merchant-list', //注意switchTab只能跳转到带有tab的页面，不能跳转到不带tab的页面
     })
+  },
+  previewImage: function (e) {
+    let currentUrl = e.currentTarget.dataset.url;
+    let urls = this.data.productImages.map(image => {
+      return image.url;
+    })
+
+    wx.previewImage({
+      current: currentUrl,
+      urls: urls
+    })
   }
 })

@@ -1,8 +1,8 @@
 'use strict'
 
 // var rootDocment = 'http://eu.localhost.com/index.php';// develpment
-var rootDocment = 'http://47.98.237.13/index.php';// testing
-// var rootDocment = 'https://www.omart.online/index.php'; //production
+// var rootDocment = 'http://47.98.237.13/index.php';// testing
+var rootDocment = 'https://www.omart.online/index.php'; //production
 
 var wxApi = require('wxApi.js');
 
@@ -109,11 +109,11 @@ function get(url, data, cb) {
 }
 
 function promiseGet(url, data) {
-  wx.showLoading({
-    title: '加载中',
-    mask: true
-  });
   let promise = new Promise((resolve, reject) => {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    });
     wxApi.getAccessToken()
       .then(accessToken => {
         return httpGet(accessToken, url, data);

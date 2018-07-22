@@ -122,16 +122,17 @@ Page({
       }
     });
 
-    var form = {
-      'code': this.data.productCode,
-      'price': this.data.productPrice,
-      'name': this.data.productName,
-      'merchant_category_id': categoryId,
-      'hot': this.data.isHot ? 1 : 0,
-      'delete_list': JSON.stringify(this.deleteList),
-      'product_id': this.productId,
-      'description': this.data.productDescription,
-    };
+    var form = {};
+    form.code = this.data.productCode;
+    if (form.price) {
+      form.price = this.data.productPrice;
+    }
+    form.name = this.data.productName;
+    form.merchant_category_id = categoryId;
+    form.hot = this.data.isHot ? 1 : 0;
+    form.delete_list = JSON.stringify(this.deleteList);
+    form.product_id = this.productId;
+    form.description = this.data.productDescription;
 
     if (!this.isValid(form)) {
       return false;

@@ -34,7 +34,7 @@
         </view>
          <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>价格</label>
-            <input type="number" bindinput="bindPrice" placeholder="请输入产品价格" value="{{productPrice}}"/>
+            <input type="digit" bindinput="bindPrice" placeholder="请输入产品价格" value="{{productPrice}}"/>
         </view>
         <view class='row'>
             <label>热销</label>

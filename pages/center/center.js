@@ -9,16 +9,23 @@ Page({
     merchant: {}
   },
   onShow: function () {
-    if(app.globalData.hasUserInfo) {
-      this.setData({
-        user: app.globalData.user,
-        hasUserInfo: true
+    app.wxApi.wxGetUserInfo()
+      .then(res => {
+        app.globalData.user.nickName = res.userInfo.nickName;
+        app.globalData.user.avatarUrl = res.userInfo.avatarUrl;
+        this.setData({
+          user: app.globalData.user,
+          hasUserInfo: true
+        })
+        console.log(this.data.user);
       })
-    } else {
-      app.toast('获取用户信息失败');
-    }
-
-    console.log(this.data.user);
+      .catch(error => {
+        this.setData({
+          user: app.globalData.user,
+          hasUserInfo: true
+        })
+        console.error('获取用户信息失败');
+      })
 
     if(this.data.user.currentRole === app.merchantRole) {
       app.http.promiseGet('/site/merchant/detail', {merchant_id: this.data.user.merchantInfo.id})

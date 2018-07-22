@@ -41,7 +41,7 @@
                 </view>
             </view>
             <view class="merchant-products">
-                <image wx:if="{{image.url}}" class="merchant-products__image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}" wx:key="{{key}}" />
+                <image wx:if="{{image.url}}" class="merchant-products__image" src="{{image.url}}" wx:for-item="image" wx:for="{{merchant.productImages}}" wx:key="{{key}}" mode="aspectFit"/>
             </view>
         </view>
     </view>
