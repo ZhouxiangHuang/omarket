@@ -124,7 +124,8 @@ Page({
 
     var form = {};
     form.code = this.data.productCode;
-    if (form.price) {
+    console.log(this.data.productPrice);
+    if (this.data.productPrice) {
       form.price = this.data.productPrice;
     }
     form.name = this.data.productName;

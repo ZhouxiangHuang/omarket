@@ -13,11 +13,11 @@
             <view class="merchant-info__hours">营业时间: {{merchant.open_at}} - {{merchant.closed_at}}</view>                 
             <view class="merchant-info__address">
                 <view class="highlight">地址</view>
-                <text>{{merchant.address}}</text>
+                <text>{{merchant.address || '未公布地址'}}</text>
             </view>   
             <view class="merchant-info__announcement">
                 <view class="highlight">公告</view>
-                <text>{{merchant.announcement}}</text>
+                <text>{{merchant.announcement || '暂无公告'}}</text>
             </view>  
             <block wx:if="{{isOwner && user.currentRole === 1}}">
                 <view class="merchant-info__edit-profile-button" bindtap="editMerchant">

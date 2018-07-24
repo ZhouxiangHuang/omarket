@@ -6,9 +6,13 @@ Page({
   isRedirect: false,
   isLoggedOut: false,
   newMerchantRegister: false,
+  countryCode: null,
+  cityCode: null,
   data: {
     hasUserInfo: false,
-    user: {},
+    user: {
+      merchantInfo: {}
+    },
     userColor: 'white',
     userFont: '#FF4343',
     merchantColor: '#FF4343',
@@ -16,6 +20,7 @@ Page({
     codes: [],
     telCodeIndex: 6,
     filterCountries: [],
+    selectedRegion: null,
   },
   onLoad: function (option) {
     //进入页面场景：未注册用户从其他页面跳转，未注册用户直接打开，注册用户直接打开，注册用户退出登录
@@ -41,44 +46,64 @@ Page({
     this.renderTelCode();
   },
   onShow: function () {
+    app.wxApi.wxGetStorage('storeName')
+      .then(res => {
+        this.data.user.merchantInfo.storeName = res;
+        this.setData({
+          user: this.data.user,
+        });
+      })
+      .catch(error => {
+        console.error(error);
+      })
+
     this.setData({
       user: app.globalData.user,
       hasUserInfo: app.globalData.hasUserInfo
     });
 
-    // app.wxApi.wxGetUserInfo()
-    //   .then(res => {
-    //     app.globalData.user.nickName = res.userInfo.nickName;
-    //     app.globalData.user.avatarUrl = res.userInfo.avatarUrl;
-    //   })
-
     if (!this.data.hasUserInfo) {
       this.data.user.currentRole = app.userRole; //给第一次登陆的用户
       this.setData({
         user: this.data.user
-      })
+      })  
       this.setColors(app.userRole);
     } else {
       this.setColors(app.globalData.user.currentRole);
     }
+
+    let region = app.globalData.region;
+    if (region) {
+      this.data.user.currentRole = app.merchantRole;
+      this.countryCode = region.country_code;
+      this.cityCode = region.city_code;
+      this.setColors(app.merchantRole);
+      this.setData({
+        selectedRegion: region.country + "/" + region.name,
+        user: this.data.user
+      });
+    }
   },
   login: function (e) {
+    var data = {};
+    if (this.data.user.currentRole == app.merchantRole) {
+      data.store_name = this.data.user.merchantInfo.storeName;
+      data.country_code = this.countryCode;
+      data.city_code = this.cityCode;
+      data.mobile = '+' + this.data.codes[this.data.telCodeIndex].tel_code + this.data.user.merchantInfo.mobile;
+      if (!this.isValid(data)) {
+        return false;
+      }
+    }
+
     app.wxApi.wxLogin()
       .then(res => {
-        var data = {};
         data.code = res.code;
         data.role = this.data.user.currentRole;
-        if (this.data.user.currentRole == app.merchantRole) {
-          data.store_name = this.data.user.merchantInfo.storeName;
-          data.address = this.data.user.merchantInfo.address;
-          data.mobile = '+' + this.data.codes[this.data.telCodeIndex].tel_code + this.data.user.merchantInfo.mobile;
-          if (!this.isValid(data)) {
-            return false;
-          }
-        }
         return app.http.promisePost('/site/user/login', data);
       })
       .then(res => {
+        console.log(res);
         app.globalData.user = this.data.user;
         app.globalData.isLoggedIn = true;
         var token = res.result.access_token;
@@ -113,7 +138,8 @@ Page({
       merchantColor: this.data.userColor,
       userFont: this.data.merchantFont,
       merchantFont: this.data.userFont,
-      user: this.data.user
+      user: this.data.user,
+      selectRegion: null,
     })
   },
   bindStoreName: function (e) {
@@ -128,10 +154,10 @@ Page({
       user: this.data.user
     })
   },
-  bindAddress: function (e) {
-    this.data.user.merchantInfo.address = e.detail.value;
-    this.setData({
-      user: this.data.user
+  selectRegion: function (e) {
+    app.wxApi.wxSetStorage('storeName', this.data.user.merchantInfo.storeName);
+    wx.navigateTo({
+      url: '../list/list?mode=regions'
     })
   },
   selectCodes: function (e) {
@@ -145,11 +171,12 @@ Page({
     }
 
     if (!data.store_name) {
+      console.log('runnn');
       app.toast("请输入店名");
       return false;
     }
-    if (!data.address) {
-      app.toast("请输入地址");
+    if (!data.country_code) {
+      app.toast("请选择你所在的地区");
       return false;
     }
     if (data.mobile.includes('undefined')) {

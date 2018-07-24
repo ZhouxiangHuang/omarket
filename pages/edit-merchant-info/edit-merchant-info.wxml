@@ -15,7 +15,7 @@
         </view>
         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>国家/地区</label>
-            <input type="string" bindtap="selectRegion" value="{{merchant.region}}" placeholder="请选择地区"/>
+            <input type="string" bindtap="selectRegion" value="{{merchant.region}}" placeholder="点击选择地区"/>
         </view>
          <view class='row underline currency' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>使用货币</label>

@@ -18,7 +18,8 @@ App({
     wxLogin: wxApi.wxLogin,
     wxDownloadFile: wxApi.wxDownloadFile,
     wxSetStorage: wxApi.wxSetStorage,
-    wxGetUserInfo: wxApi.wxGetUserInfo
+    wxGetUserInfo: wxApi.wxGetUserInfo,
+    wxGetStorage: wxApi.wxGetStorage
   },
   http: {
     post: http.post,

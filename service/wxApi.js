@@ -38,23 +38,33 @@ const wxGetUserInfo = () => {
 
 const wxSetStorage = (key, data) => {
     let promise = new Promise((resolve, reject) => {
-        wx.showLoading({
-            title: '加载中',
-            mask: true
-        });
         wx.setStorage({
             key: key,
             data: data,
             success: res => {
-                wx.hideLoading();
                 resolve(res);
             },
             fail: res => {
-                wx.hideLoading();
                 reject(res);
             }
         })
     })
+    return promise;
+}
+
+const wxGetStorage = key => {
+    let promise = new Promise((resolve, reject) => {
+        wx.getStorage({
+            key: key,
+            success: res => {
+                resolve(res.data);
+            },
+            fail: res => {
+                reject('获取本地信息失败');
+            }
+        });
+    })
+
     return promise;
 }
 
@@ -126,4 +136,5 @@ module.exports = {
     wxDownloadFile: wxDownloadFile,
     wxSetStorage: wxSetStorage,
     wxGetUserInfo: wxGetUserInfo,
+    wxGetStorage: wxGetStorage
 }

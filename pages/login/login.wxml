@@ -2,16 +2,16 @@
 <view class="container">
     <view class="login-nav">
         <view class='login-nav__user' bindtap="switchRole" style="background-color:{{userColor}}; color:{{userFont}}">
-            用户
+            买家
         </view>
         <view class='login-nav__merchant' bindtap="switchRole" style="background-color:{{merchantColor}}; color:{{merchantFont}}">
-            商户
+            卖家
         </view>
     </view>
     <view class="userinfo margin-space-top">
-        <block wx:if="{{user.currentRole === 2}}">
+        <block wx:if="{{user.currentRole == 2}}">
             <image wx:if="{{user.avatarUrl}}" bindtap="bindViewTap" class="userinfo-avatar" src="{{user.avatarUrl}}" background-size="cover"></image>
-            <image wx:if="{{!user.avatarUrl}}" bindtap="bindViewTap" class="userinfo-avatar" src="/images/user.png" background-size="cover"></image>                    
+            <image wx:if="{{!user.avatarUrl}}" bindtap="bindViewTap" class="userinfo-avatar" src="/images/user.png" background-size="cover"></image>
             <text class="userinfo-nickname">{{user.nickName || "用户名"}}</text>
         </block>
         <block wx:else>
@@ -32,11 +32,11 @@
     <view class="form margin-space-top" wx:if="{{user.currentRole === 1 && !user.isMerchant}}">
         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>商铺名称</label>
-            <input type="text" bindinput="bindStoreName" placeholder="请输入商铺名称" maxlength="7"/>
+            <input type="text" bindinput="bindStoreName" value="{{user.merchantInfo.storeName}}" placeholder="请输入商铺名称" maxlength="7" />
         </view>
         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
-            <label>地址</label>
-            <input style="width: 450rpx;" type="text" bindinput="bindAddress" placeholder="请输入地址" maxlength="20" />
+            <label>国家/地区</label>
+            <input type="string" bindtap="selectRegion" value="{{selectedRegion}}" placeholder="点击选择地区" />
         </view>
         <view class='row' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>联系电话</label>
