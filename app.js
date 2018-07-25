@@ -19,7 +19,11 @@ App({
     wxDownloadFile: wxApi.wxDownloadFile,
     wxSetStorage: wxApi.wxSetStorage,
     wxGetUserInfo: wxApi.wxGetUserInfo,
-    wxGetStorage: wxApi.wxGetStorage
+    wxGetStorage: wxApi.wxGetStorage,
+    wxCanvasToTempFilePath: wxApi.wxCanvasToTempFilePath,
+    wxGetSetting: wxApi.wxGetSetting,
+    wxAuthorize: wxApi.wxAuthorize,
+    wxSaveImageToPhotosAlbum: wxApi.wxSaveImageToPhotosAlbum
   },
   http: {
     post: http.post,

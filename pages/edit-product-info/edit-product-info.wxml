@@ -38,8 +38,8 @@
         </view>
         <view class='row'>
             <label>热销</label>
-            <image wx:if="{{!isHot}}" class="select-icon" bindtap="selectHot" src="/images/pre-select.png"/>
-            <image wx:if="{{isHot}}" class="select-icon" bindtap="selectHot" src="/images/selected.png"/>            
+            <image wx:if="{{!isHot}}" class="dot-icon" bindtap="selectHot" src="/images/pre-select.png"/>
+            <image wx:if="{{isHot}}" class="dot-icon" bindtap="selectHot" src="/images/selected.png"/>            
         </view>
     </form>
 

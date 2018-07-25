@@ -17,50 +17,53 @@ Page({
           user: app.globalData.user,
           hasUserInfo: true
         })
-        console.log(this.data.user);
+
+        if (this.data.user.currentRole == app.merchantRole) {
+          app.http.promiseGet('/site/merchant/detail', {
+              merchant_id: this.data.user.merchantInfo.id
+            })
+            .then(res => {
+              this.setData({
+                merchant: res.result
+              });
+            })
+        }
+
       })
       .catch(error => {
         this.setData({
           user: app.globalData.user,
           hasUserInfo: true
         })
-        console.error('获取用户信息失败');
+        console.error(error);
       })
 
-    if(this.data.user.currentRole === app.merchantRole) {
-      app.http.promiseGet('/site/merchant/detail', {merchant_id: this.data.user.merchantInfo.id})
-        .then(res => {
-          this.setData({
-            merchant: res.result
-          });
-        })
-    }
   },
-  logout: function() {
-      wx.redirectTo({
-        url: '../login/login?redirect=1&logout=1'
-      })
+  logout: function () {
+    wx.redirectTo({
+      url: '../login/login?redirect=1&logout=1'
+    })
   },
-  getCollections: function() {
+  getCollections: function () {
     wx.navigateTo({
       url: '../collections/collections'
     })
   },
-  myStore: function() {
+  myStore: function () {
     wx.navigateTo({
       url: '../product-list/product-list?merchantId=' + this.data.user.merchantInfo.id,
-      fail: function(e) {
-          console.log(e);
+      fail: function (e) {
+        console.log(e);
       }
     })
   },
-  posterGenerate: function() {
+  posterGenerate: function () {
     wx.navigateTo({
-      url: '../poster-generate/poster-generate?merchant_name=' + this.data.merchant.store_name,
-      fail: function(e) {
-          console.log(e);
+      url: '../poster-generate/poster-generate?merchant_id=' + this.data.user.merchantInfo.id,
+      fail: function (e) {
+        console.log(e);
       }
     })
   }
- 
+
 })

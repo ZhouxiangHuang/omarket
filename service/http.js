@@ -1,8 +1,8 @@
 'use strict'
 
 // var rootDocment = 'http://eu.localhost.com/index.php';// develpment
-// var rootDocment = 'http://47.98.237.13/index.php';// testing
-var rootDocment = 'https://www.omart.online/index.php'; //production
+var rootDocment = 'http://47.98.237.13/index.php';// testing
+// var rootDocment = 'https://www.omart.online/index.php'; //production
 
 var wxApi = require('wxApi.js');
 
@@ -25,6 +25,7 @@ function promisePost(url, data) {
         return httpPost(accessToken, url, data);
       })
       .catch(error => {
+        console.log(error);
         return httpPost('', url, data);
       })
       .then(res => {

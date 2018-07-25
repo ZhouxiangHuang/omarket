@@ -21,7 +21,7 @@
             <view class="merchant-info">
                 <view class="merchant-info__logo">
                     <image wx:if="{{merchant.imageUrl}}" class="merchant-info__logo--style" src="{{merchant.imageUrl}}" mode="aspectFit"/>
-                    <image wx:if="{{!merchant.imageUrl}}" class="merchant-info__logo--style" src="/images/no-store.png" />
+                    <image wx:if="{{!merchant.imageUrl}}" class="merchant-info__logo--style" src="/images/default-store.png" />
                 </view>
                 <view class="merchant-info__profile" data-merchant="{{merchant.id}}">
                     <view class="merchant-info__name">{{merchant.name}}</view>

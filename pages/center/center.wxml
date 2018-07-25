@@ -4,7 +4,7 @@
         <view class="merchant-profile">
             <view class="merchant-logo">
                 <image wx:if="{{user.merchantInfo.profileUrl}}" class="logo" src="{{user.merchantInfo.profileUrl}}" />
-                <image wx:if="{{!user.merchantInfo.profileUrl}}" class="logo" src="/images/no-store.png" />            
+                <image wx:if="{{!user.merchantInfo.profileUrl}}" class="logo" src="/images/default-store.png" />            
             </view>
             <view class="merchant-profile">
                 <view id="merchant-name">{{merchant.store_name}}</view>

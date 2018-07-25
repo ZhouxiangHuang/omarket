@@ -19,7 +19,7 @@
                 <image bindtap="bindViewTap" class="merchant-avatar" src="{{user.merchantInfo.profileUrl}}" background-size="cover"></image>
             </block>
             <block wx:else>
-                <image bindtap="bindViewTap" class="merchant-avatar" src="/images/no-store.png" background-size="cover"></image>
+                <image bindtap="bindViewTap" class="merchant-avatar" src="/images/default-store.png" background-size="cover"></image>
             </block>
             <block wx:if="{{user.merchantInfo.storeName}}">
                 <text class="userinfo-nickname">{{user.merchantInfo.storeName}}</text>

@@ -36,6 +36,62 @@ const wxGetUserInfo = () => {
     return wxPromisify(wx.getUserInfo);
 }
 
+const wxGetSetting = () => {
+    return wxPromisify(wx.getSetting);
+}
+
+const wxAuthorize = scope => {
+    let promise = new Promise((resolve, reject) => {
+        wx.authorize({
+            scope: scope,
+            success() {
+                console.log('授权成功');
+                resolve();
+            },
+            fail() {
+                console.log('授权失败');
+                reject();
+            }
+        })
+    })
+
+    return pomise;
+}
+
+const wxSaveImageToPhotosAlbum = filePath => {
+    let promise = new Promise((resolve, reject) => {
+        wx.saveImageToPhotosAlbum({
+            filePath: filePath,
+            success: res => {
+                resolve(res);
+            },
+            fail: res => {
+                reject(res);
+            }
+          })
+    })
+
+    return promise;
+}
+
+const wxCanvasToTempFilePath = (canvasId) => {
+    let promise = new Promise((resolve, reject) => {
+        wx.canvasToTempFilePath({
+            canvasId: canvasId,
+            success: res => {
+                resolve(res);
+            },
+            fail: function (res) {
+                reject(res);
+            }
+        })
+    });
+
+    return promise;
+}
+
+
+
 const wxSetStorage = (key, data) => {
     let promise = new Promise((resolve, reject) => {
         wx.setStorage({
@@ -136,5 +192,9 @@ module.exports = {
     wxDownloadFile: wxDownloadFile,
     wxSetStorage: wxSetStorage,
     wxGetUserInfo: wxGetUserInfo,
-    wxGetStorage: wxGetStorage
+    wxGetStorage: wxGetStorage,
+    wxCanvasToTempFilePath: wxCanvasToTempFilePath,
+    wxGetSetting: wxGetSetting,
+    wxAuthorize: wxAuthorize,
+    wxSaveImageToPhotosAlbum: wxSaveImageToPhotosAlbum
 }

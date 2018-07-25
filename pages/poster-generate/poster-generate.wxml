@@ -1,6 +1,7 @@
-<!--index.wxml-->
-<view class="container poster">
-  <canvas style="width: 350px; height: 500px;" canvas-id="firstCanvas"/>
-  <button class="change" bindtap="getNewPoster"> 更换 </button>
-  <button class="save" bindtap="saveToAlbum"> 保存 </button>
+<!-- index.wxml -->
+<view class="poster container">
+  <canvas id="canvas" canvas-id="firstCanvas" />
+  <view class='std-button' id="save-button">
+    <button bindtap="saveToAlbum" class='bind-user'>保存到相册</button>
+  </view>
 </view>
