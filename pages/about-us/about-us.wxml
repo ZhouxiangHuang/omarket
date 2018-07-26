@@ -1,0 +1,16 @@
+<view class="container">
+    <image class="logo-poster" src="/images/logo.png" mode="aspectFill" />
+    <text>欧贸平台Omart 版本号 1.0.6</text>
+    <view class="form">
+        <view class='row underline'>
+            <label>微信公众号</label>
+            <button class="copy" id="sub" bindtap="copy" data-content="欧贸平台Omart">复制</button>
+            <text class="text-content" id="contact">欧贸平台Omart</text>
+        </view>
+         <view class='row'>
+            <label>客服微信号</label>
+            <button class="copy" id="kf" bindtap="copy" data-content="omartkf">复制</button>
+            <text class="text-content">omartkf</text>
+        </view>
+    </view>
+</view>

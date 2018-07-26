@@ -50,6 +50,6 @@
         </view>
     </view>
     <view class='button-wrapper margin-space-top'>
-        <button open-type="getUserInfo" bindtap="login" class='button'>授权绑定微信</button>
+        <button open-type="getUserInfo" bindtap="login" class='button'>登录</button>
     </view>
 </view>

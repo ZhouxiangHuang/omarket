@@ -1,6 +1,7 @@
 {
   "pages":[
     "pages/login/login", 
+    "pages/about-us/about-us",
     "pages/merchant-list/merchant-list",        
     "pages/product-list/product-list",                   
     "pages/product-detail/product-detail",    

@@ -194,5 +194,10 @@ Page({
     return {
       'categoryId': id
     }
-  }
+  },
+  returnLogin: function () {
+    wx.navigateTo({
+      url: '../login/login?redirect=1&logout=0',
+    })
+  },
 })

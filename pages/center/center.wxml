@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="center-main container">
-    <block wx:if="{{user.currentRole === 1}}">
+    <block wx:if="{{user.currentRole == 1}}">
         <view class="merchant-profile">
             <view class="merchant-logo">
                 <image wx:if="{{user.merchantInfo.profileUrl}}" class="logo" src="{{user.merchantInfo.profileUrl}}" />
@@ -25,9 +25,14 @@
             </view>    
         </view>
         <view class="mine form">
-            <view class='row' bindtap="posterGenerate">
+            <view class='row underline' bindtap="posterGenerate">
                 <image class="icon" src="/images/qr-code.png" />
-                <label>二维码名片</label>
+                <label>分享我的商铺</label>
+                <image class="select-icon" src="/images/selector.png" />
+            </view>
+            <view class='row' bindtap="aboutUs">
+                <image class="icon" src="/images/info.png" />
+                <label>联系Omart</label>
                 <image class="select-icon" src="/images/selector.png" />
             </view>
         </view>    
@@ -38,9 +43,14 @@
                 <text class="userinfo-nickname">{{user.nickName}}</text>
         </view>
         <view class="mine form">
-            <view class='row' bindtap="getCollections">
+            <view class='row underline' bindtap="getCollections">
                 <image class="icon" src="/images/star.png" />
                 <label>我的收藏</label>
+                <image class="select-icon" src="/images/selector.png" />
+            </view>
+            <view class='row' bindtap="aboutUs">
+                <image class="icon" src="/images/info.png" />
+                <label>联系Omart</label>
                 <image class="select-icon" src="/images/selector.png" />
             </view>
         </view>

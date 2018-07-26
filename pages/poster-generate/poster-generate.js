@@ -39,9 +39,9 @@ Page({
         let hedearFileTempPath = res.tempFilePath
         context.drawImage('/images/invitation.jpeg', 0, 0, 315, 400);
         context.drawImage(hedearFileTempPath, 110, 20, 100, 100);
-        context.drawImage(qrCodeUrl, 100, 225, 115, 125);
+        context.drawImage(qrCodeUrl, 100, 220, 115, 125);
 
-        let fontSize = 22;
+        let fontSize = 26;
         let text = merchant.store_name;
         let windowWidth = 320;
         context.setFontSize(fontSize);
@@ -69,12 +69,12 @@ Page({
             .then(res => {
               return app.wxApi.wxSaveImageToPhotosAlbum(this.tempFile);
             })
+            .catch(error => {
+              console.error(error);
+            })
         } else {
           return app.wxApi.wxSaveImageToPhotosAlbum(this.tempFile);
         }
-      })
-      .then(res => {
-        app.toast('已经保存到您的相册');
       })
   }
 })

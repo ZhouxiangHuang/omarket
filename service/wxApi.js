@@ -48,14 +48,15 @@ const wxAuthorize = scope => {
                 console.log('授权成功');
                 resolve();
             },
-            fail() {
+            fail(error) {
+                console.error(error);
                 console.log('授权失败');
                 reject();
             }
         })
-    })
+    });
 
-    return pomise;
+    return promise;
 }
 
 const wxSaveImageToPhotosAlbum = filePath => {
@@ -63,6 +64,11 @@ const wxSaveImageToPhotosAlbum = filePath => {
         wx.saveImageToPhotosAlbum({
             filePath: filePath,
             success: res => {
+                wx.showToast({
+                    title: '已经保存到您的相册',
+                    duration: 2500,
+                    icon: 'none'
+                  });
                 resolve(res);
             },
             fail: res => {

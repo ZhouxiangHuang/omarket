@@ -17,18 +17,6 @@ Page({
           user: app.globalData.user,
           hasUserInfo: true
         })
-
-        if (this.data.user.currentRole == app.merchantRole) {
-          app.http.promiseGet('/site/merchant/detail', {
-              merchant_id: this.data.user.merchantInfo.id
-            })
-            .then(res => {
-              this.setData({
-                merchant: res.result
-              });
-            })
-        }
-
       })
       .catch(error => {
         this.setData({
@@ -38,6 +26,16 @@ Page({
         console.error(error);
       })
 
+    if (this.data.user.currentRole == app.merchantRole) {
+      app.http.promiseGet('/site/merchant/detail', {
+          merchant_id: this.data.user.merchantInfo.id
+        })
+        .then(res => {
+          this.setData({
+            merchant: res.result
+          });
+        })
+    }
   },
   logout: function () {
     wx.redirectTo({
@@ -60,6 +58,14 @@ Page({
   posterGenerate: function () {
     wx.navigateTo({
       url: '../poster-generate/poster-generate?merchant_id=' + this.data.user.merchantInfo.id,
+      fail: function (e) {
+        console.log(e);
+      }
+    })
+  },
+  aboutUs: function () {
+    wx.navigateTo({
+      url: '../about-us/about-us',
       fail: function (e) {
         console.log(e);
       }

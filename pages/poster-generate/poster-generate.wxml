@@ -1,5 +1,6 @@
 <!-- index.wxml -->
 <view class="poster container">
+  <view id="instruction">*将图片存入相册后，就可以将店铺分享到朋友圈啦！</view>
   <canvas id="canvas" canvas-id="firstCanvas" />
   <view class='std-button' id="save-button">
     <button bindtap="saveToAlbum" class='bind-user'>保存到相册</button>
