@@ -80,6 +80,13 @@
   margin-right: 5%;
   float: right;
 }
+.form .row .dot-icon {
+  width: 50rpx;
+  height: 50rpx;
+  margin-top: 32rpx;
+  margin-right: 5%;
+  float: right;
+}
 .form .row .categoy-picker {
   height: 114rpx;
   line-height: 114rpx;
@@ -336,13 +343,18 @@
   width: 150rpx;
   line-height: 50rpx;
   float: right;
+  border: 1px solid black;
+  text-indent: 10rpx;
+  right: 15rpx;
+  border-radius: 5px;
 }
 .product-list-main .merchant-info__call-merchant-button image {
-  margin-left: 5rpx;
   margin-top: 10rpx;
   width: 30rpx;
   height: 30rpx;
-  position: absolute;
+  position: 20rpx;
+  float: right;
+  margin-right: 10rpx;
 }
 .product-list-main .products {
   height: 890rpx;

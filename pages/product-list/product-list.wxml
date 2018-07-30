@@ -5,54 +5,56 @@
                 <image class="logo" src="{{merchant.image_url}}" />
             </block>
             <block wx:else>
-                <image class="logo" src="/images/default-store.png" />            
+                <image class="logo" src="/images/default-store.png" />
             </block>
         </view>
         <view class="merchant-info__profile">
             <view class="merchant-info__name">{{merchant.store_name}}</view>
-            <view class="merchant-info__hours">营业时间: {{merchant.open_at}} - {{merchant.closed_at}}</view>                 
+            <view class="merchant-info__hours">
+                营业时间: {{merchant.open_at}} - {{merchant.closed_at}}
+            </view>
             <view class="merchant-info__address">
                 <view class="highlight">地址</view>
                 <text>{{merchant.address || '未公布地址'}}</text>
-            </view>   
+            </view>
             <view class="merchant-info__announcement">
                 <view class="highlight">公告</view>
                 <text>{{merchant.announcement || '暂无公告'}}</text>
-            </view>  
+            </view>
             <block wx:if="{{isOwner && user.currentRole === 1}}">
                 <view class="merchant-info__edit-profile-button" bindtap="editMerchant">
                     <text>编辑</text>
-                    <image src="/images/edit.png"/>
+                    <image src="/images/edit.png" />
                 </view>
             </block>
             <block wx:else>
-                <view class="merchant-info__call-merchant-button" bindtap="callMerchant" data-tel="{{merchant.mobile}}">
-                    <text>联系商家</text>
-                    <image src="/images/phone.png"/>
+                <view class="merchant-info__call-merchant-button" bindtap="showCodeInput" data-tel="{{merchant.mobile}}">
+                    <text>授权验证</text>
+                    <image src="/images/locked.png" />
                 </view>
             </block>
-        </view>        
+        </view>
     </view>
     <view class="filter underline-light-gray">
-      <picker class="selection border-right" bindchange="orderByTime" range = "{{timeRange}}" range-key="name">
+        <picker class="selection border-right" bindchange="orderByTime" range="{{timeRange}}" range-key="name">
             <view>
                 <text>{{timeRange[timeIndex].name || '时间排序'}}</text>
-                <image class="selector" src="/images/triangle.png"/>
+                <image class="selector" src="/images/triangle.png" />
             </view>
         </picker>
-        <picker class="selection" bindchange="orderByPrice" range = "{{priceRange}}" range-key="name">
+        <picker class="selection" bindchange="orderByPrice" range="{{priceRange}}" range-key="name">
             <view>
                 <text>{{priceRange[priceIndex].name || '价格排序'}}</text>
-                <image class="selector" src="/images/triangle.png"/>
+                <image class="selector" src="/images/triangle.png" />
             </view>
-        </picker>    
+        </picker>
     </view>
     <view class="products">
         <view class="categories">
             <view class="category underline-light-gray" wx:for="{{categories}}" wx:key="{{categories}}" bindtap="selectCategory" data-category="{{item.id}}" style="background-color: {{item.color}}">
                 <block wx:if="{{item.is_hot}}">
-                    <image class="category--icon-style" src="/images/hot.png"/>
-                    <text class="category--text-style">{{item.name}}</text>                
+                    <image class="category--icon-style" src="/images/hot.png" />
+                    <text class="category--text-style">{{item.name}}</text>
                 </block>
                 <block wx:else>
                     <text>{{item.name}}</text>
@@ -60,7 +62,7 @@
             </view>
             <view wx:if="{{isOwner && user.currentRole === 1}}" class="category underline" bindtap="editCatogory">
                 <view class="category--button-style">
-                    <image src="/images/add.png" mode="center"/>
+                    <image src="/images/add.png" mode="center" />
                 </view>
                 <text class="category--button-text">添加</text>
             </view>
@@ -76,20 +78,31 @@
         </block>
         <view class="product" wx:for="{{productList}}" wx:key="{{productList}}" bindtap="checkProductDetal" data-no="{{item}}" hover="true" hover-class="selected-hover" hover-start-time="50" hover-stay-time="1000">
             <block wx:if="{{item.images[0].url}}">
-                <image class="product__image" src="{{item.images[0].url}}" />   
+                <image class="product__image" src="{{item.images[0].url}}" />
             </block>
             <block wx:else>
-                <image class="product__image" src="/images/no-image-sm.png"/>         
+                <image class="product__image" src="/images/no-image-sm.png" />
             </block>
-
             <view class="product__detail">
                 <view class="product__name">{{item.name}}</view>
                 <view class="product__intro">{{item.description || '暂无产品描述'}}</view>
-                <view wx:if="{{item.price}}" class="product__price">{{merchant.currency}} {{item.price}}</view>
-            </view>   
+                <view wx:if="{{item.price}}" class="product__price">
+                    {{merchant.currency}} {{item.price}}
+                </view>
+            </view>
         </view>
-        <view wx:if="{{isOwner && user.currentRole === 1}}" class="products__add-button" bindtap="editProducts">
-            <image src="/images/add.png" mode="center"/>
-        </view>
+        <block wx:if="{{isOwner && user.currentRole === 1}}">
+            <view class="products__add-button" bindtap="editProducts">
+                <image src="/images/add.png" mode="center" />
+            </view>
+        </block>
+        <block wx:else>
+            <view class="products__add-button" bindtap="callMerchant">
+                <image src="/images/phone.png" mode="center" />
+            </view>
+        </block>
     </view>
+    <modal title="商户授权验证" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="verifyCode" bindcancel="hideCodeInput">
+        <input type='number' placeholder="请输入密码" maxlength="6" bindinput="bindCode" auto-focus />
+    </modal>
 </view>

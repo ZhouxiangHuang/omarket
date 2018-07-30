@@ -26,9 +26,9 @@ Page({
         console.error(error);
       })
 
-    if (this.data.user.currentRole == app.merchantRole) {
+    if (app.globalData.user.currentRole == app.merchantRole) {
       app.http.promiseGet('/site/merchant/detail', {
-          merchant_id: this.data.user.merchantInfo.id
+          merchant_id: app.globalData.user.merchantInfo.id
         })
         .then(res => {
           this.setData({
@@ -58,6 +58,14 @@ Page({
   posterGenerate: function () {
     wx.navigateTo({
       url: '../poster-generate/poster-generate?merchant_id=' + this.data.user.merchantInfo.id,
+      fail: function (e) {
+        console.log(e);
+      }
+    })
+  },
+  codeGenerate: function () {
+    wx.navigateTo({
+      url: '../code/code',
       fail: function (e) {
         console.log(e);
       }

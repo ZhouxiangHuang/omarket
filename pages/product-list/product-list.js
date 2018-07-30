@@ -8,9 +8,11 @@ Page({
   selectedCategoryId: null,
   categories: [],
   ownerId: null,
+  code: null,
   data: {
     user: {},
     isOwner: false,
+    hiddenModal: true,
     timeRange: [{
         'name': '从新到旧',
         'code': 'newest'
@@ -194,6 +196,28 @@ Page({
     return {
       'categoryId': id
     }
+  },
+  showCodeInput: function () {
+    this.setData({
+      hiddenModal: false,
+    })
+  },
+  hideCodeInput: function () {
+    this.setData({
+      hiddenModal: true,
+    })
+  },
+  bindCode: function (e) {
+    this.code = e.detail.value;
+  },
+  verifyCode: function () {
+    app.http.promisePost('/site/merchant/verify-code', {
+        merchant_id: this.ownerId,
+        code: this.code
+      })
+      .then(res => {
+        app.toast("验证成功");
+      })
   },
   returnLogin: function () {
     wx.navigateTo({

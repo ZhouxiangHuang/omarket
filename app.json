@@ -1,6 +1,8 @@
 {
   "pages":[
     "pages/login/login", 
+    "pages/code/code", 
+    "pages/edit-product-info/edit-product-info",                                
     "pages/about-us/about-us",
     "pages/merchant-list/merchant-list",        
     "pages/product-list/product-list",                   
@@ -9,7 +11,6 @@
     "pages/collections/collections", 
     "pages/edit-merchant-info/edit-merchant-info",                    
     "pages/edit-categories/edit-categories",
-    "pages/edit-product-info/edit-product-info",                                
     "pages/home/home",        
     "pages/list/list",            
     "pages/index/index",              

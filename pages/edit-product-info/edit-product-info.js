@@ -16,6 +16,7 @@ Page({
     categoryIndex: 0,
     categoryId: null,
     isHot: false,
+    isEncoded: false,
     isEdit: false,
     hideDelete: true,
     productDescription: ''
@@ -23,7 +24,6 @@ Page({
   onLoad: function (option) {
     var categoryId = option.category_id;
     var productId = option.product_id;
-    var that = this;
 
     if (categoryId) {
       this.setData({
@@ -38,7 +38,8 @@ Page({
       });
 
       app.http.promiseGet('/site/product/detail', {
-          product_id: productId
+          product_id: productId,
+          for_edit: 1
         })
         .then(res => {
           var images = res.result.images;
@@ -48,7 +49,8 @@ Page({
             productCode: res.result.product_unique_code,
             productName: res.result.name,
             productPrice: res.result.price,
-            isHot: res.result.hot_item === 1,
+            isHot: res.result.hot_item == 1,
+            isEncoded: res.result.encoded == 1,
             categoryId: res.result.merchant_category_id,
             productDescription: res.result.description
           })
@@ -124,13 +126,13 @@ Page({
 
     var form = {};
     form.code = this.data.productCode;
-    console.log(this.data.productPrice);
     if (this.data.productPrice) {
       form.price = this.data.productPrice;
     }
     form.name = this.data.productName;
     form.merchant_category_id = categoryId;
     form.hot = this.data.isHot ? 1 : 0;
+    form.encoded = this.data.isEncoded ? 1 : 0;
     form.delete_list = JSON.stringify(this.deleteList);
     form.product_id = this.productId;
     form.description = this.data.productDescription;
@@ -210,6 +212,11 @@ Page({
   selectHot: function (e) {
     this.setData({
       isHot: !this.data.isHot
+    })
+  },
+  selectEncode: function (e) {
+    this.setData({
+      isEncoded: !this.data.isEncoded
     })
   },
   delete: function () {

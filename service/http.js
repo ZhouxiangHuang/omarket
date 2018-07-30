@@ -1,7 +1,7 @@
 'use strict'
 
-// var rootDocment = 'http://eu.localhost.com/index.php';// develpment
-var rootDocment = 'http://47.98.237.13/index.php';// testing
+var rootDocment = 'http://eu.localhost.com/index.php';// develpment
+// var rootDocment = 'http://47.98.237.13/index.php';// testing
 // var rootDocment = 'https://www.omart.online/index.php'; //production
 
 var wxApi = require('wxApi.js');
