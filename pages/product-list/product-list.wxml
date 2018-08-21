@@ -21,17 +21,25 @@
                 <view class="highlight">公告</view>
                 <text>{{merchant.announcement || '暂无公告'}}</text>
             </view>
-            <block wx:if="{{isOwner && user.currentRole === 1}}">
+            <block wx:if="{{isOwner && user.currentRole == 1}}">
                 <view class="merchant-info__edit-profile-button" bindtap="editMerchant">
                     <text>编辑</text>
                     <image src="/images/edit.png" />
                 </view>
             </block>
             <block wx:else>
-                <view class="merchant-info__call-merchant-button" bindtap="showCodeInput" data-tel="{{merchant.mobile}}">
-                    <text>授权验证</text>
-                    <image src="/images/locked.png" />
-                </view>
+                <block wx:if="{{authorized}}">
+                    <view class="merchant-info__call-merchant-button" id="merchant-info__authorized" bindtap="showCodeInput">
+                        <text>已授权</text>
+                        <image src="/images/checked.png" />
+                    </view>
+                </block>
+                <block wx:else>
+                    <view class="merchant-info__call-merchant-button" bindtap="showCodeInput" data-tel="{{merchant.mobile}}">
+                        <text>授权验证</text>
+                        <image src="/images/locked.png" />
+                    </view>
+                </block>
             </block>
         </view>
     </view>
@@ -97,12 +105,12 @@
             </view>
         </block>
         <block wx:else>
-            <view class="products__add-button" bindtap="callMerchant">
-                <image src="/images/phone.png" mode="center" />
+            <view class="products__call-button" bindtap="contactMerchant" data-tel="{{merchant.mobile}}">
+                <image src="/images/wechat_and_phone.jpeg" mode="aspectFill" />
             </view>
         </block>
     </view>
     <modal title="商户授权验证" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="verifyCode" bindcancel="hideCodeInput">
-        <input type='number' placeholder="请输入密码" maxlength="6" bindinput="bindCode" auto-focus />
+        <input type='number' placeholder="请输入密码" maxlength="6" bindinput="bindCode" />
     </modal>
 </view>

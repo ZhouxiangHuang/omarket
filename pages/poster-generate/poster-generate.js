@@ -13,9 +13,7 @@ Page({
     })
   },
   onLoad: function (option) {
-    app.http.promiseGet('/site/merchant/detail', {
-        merchant_id: option.merchant_id
-      })
+    app.merchant.getDetail(option.merchant_id)
       .then(res => {
         this.generate(res.result);
       });

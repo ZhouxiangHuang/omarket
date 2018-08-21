@@ -1,19 +1,19 @@
-<!--index.wxml-->
+<!-- index.wxml -->
 <view class="container collections-main">
-  <image wx:if="{{collections.length === 0}}" class="no-collection" src="/images/no-collections.png" mode="scaleToFill"></image>
-  <view class="product-list" wx:for="{{display}}" wx:for-item="collection" wx:key="key"> 
-         <view class='title underline-light-gray'>
+    <image wx:if="{{collections.length === 0}}" class="no-collection" src="/images/no-collections.png" mode="scaleToFill"></image>
+    <view class="product-list" wx:for="{{collections}}" wx:for-item="collection" wx:key="key">
+        <view class='title underline-light-gray'>
             <view class="btn" bindtap="selectStore" data-merchant="{{collection.merchant_id}}">
                 <image class="market-icon" src="/images/market-selected.png" />
                 <text>进店</text>
             </view>
-            <view class="name">{{collection.merchant_name}}</view>   
-            <view class="selector-wrapper" bindtap="productListSwitch" data-merchant="{{collection.merchant_name}}">
+            <view class="name">{{collection.merchant_name}}</view>
+            <view class="selector-wrapper" bindtap="productListSwitch" data-merchant="{{collection.merchant_id}}">
                 <block wx:if="{{collection.dropTriangle}}">
-                    <image class="selector" src="/images/triangle.png"/>
+                    <image class="selector" src="/images/triangle.png" />
                 </block>
                 <block wx:else>
-                    <image class="selector-left" src="/images/triangle-left.png"/>
+                    <image class="selector-left" src="/images/triangle-left.png" />
                 </block>
             </view>
         </view>
@@ -25,11 +25,13 @@
                 <view class="name">{{product.name}}</view>
                 <view class="price">{{collection.currency}} {{product.price}}</view>
                 <view class="code">商品编号: {{product.product_unique_code}}</view>
-                <view wx:if="{{product.description}}" class="description">介绍：{{product.description}}</view>    
-                <view wx:else class="description">暂无介绍</view>    
-                <image class="trash" src="/images/trash.png" bindtap="delete" data-productid="{{product.id}}" data-merchant="{{collection.merchant_name}}" />            
+                <view wx:if="{{product.description}}" class="description">
+                    介绍：{{product.description}}
+                </view>
+                <view wx:else class="description">暂无介绍</view>
+                <image class="trash" src="/images/trash.png" bindtap="delete" data-productid="{{product.id}}" data-merchant="{{collection.merchant_id}}" />
             </view>
         </view>
-  </view>
-  <modal title="确认将产品移出收藏夹？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="doDelete" bindcancel="hideModal" ></modal>
+    </view>
+    <modal title="确认将产品移出收藏夹？" hidden="{{hiddenModal}}" confirm-text="确认" cancel-text="取消" bindconfirm="doDelete" bindcancel="hideModal"></modal>
 </view>

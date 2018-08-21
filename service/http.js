@@ -1,7 +1,7 @@
 'use strict'
 
-var rootDocment = 'http://eu.localhost.com/index.php';// develpment
-// var rootDocment = 'http://47.98.237.13/index.php';// testing
+// var rootDocment = 'http://eu.localhost.com/index.php';// develpment
+var rootDocment = 'http://47.98.237.13/index.php'; // testing
 // var rootDocment = 'https://www.omart.online/index.php'; //production
 
 var wxApi = require('wxApi.js');
@@ -52,15 +52,13 @@ function httpPost(accessToken, url, data) {
         'access-token': accessToken
       },
       success: function (res) {
-        if (res.data.result_code === 10000) {
-          resolve(res.data)
-        } else {
+        resolve(res.data)
+        if (res.data.result_code != 10000) {
           console.error(res);
-          reject('服务器正在维护，请稍后再试');
         }
       },
-      fail: function () {
-        cb(false)
+      fail: function (error) {
+        reject(error)
       }
     })
   })

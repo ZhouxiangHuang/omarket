@@ -37,9 +37,7 @@ Page({
           isOwner: isOwner
         })
 
-        return app.http.promiseGet('/site/merchant/detail', {
-          merchant_id: merchantId
-        });
+        return app.merchant.getDetail(merchantId);
       })
       .then(res => {
         this.setData({

@@ -1,6 +1,6 @@
 <view class="container">
     <image class="logo-poster" src="/images/logo.png" mode="aspectFill" />
-    <text>欧贸平台Omart 版本号 1.0.6</text>
+    <text>欧贸平台Omart 版本号 1.1.0</text>
     <view class="form">
         <view class='row underline'>
             <label>微信公众号</label>

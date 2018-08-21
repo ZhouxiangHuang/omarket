@@ -41,6 +41,10 @@
             <label>联系电话</label>
             <input type="string" bindinput="mobileListener" value="{{merchant.mobile}}" placeholder="请输入联系电话"/>
         </view>
+         <view class='row underline' hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
+            <label>微信号</label>
+            <input type="string" bindinput="wechatListener" value="{{merchant.wx_account}}" placeholder="请输入您的微信号"/>
+        </view>
         <view class='row underline' bindtap="announce" hover="true" hover-class="selected-hover" hover-start-time="10" hover-stay-time="200">
             <label>公告</label>
             <text class="text-content" wx:if="{{!announcement}}">请输入公告</text>

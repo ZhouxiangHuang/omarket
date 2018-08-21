@@ -24,7 +24,10 @@ Page({
     this.getMerchantList();
     app.http.promiseGet('/site/merchant/registered-countries', {})
       .then(res => {
-        res.result.push({ 'name': '全部', 'code': 'all' });
+        res.result.push({
+          'name': '全部',
+          'code': 'all'
+        });
         this.setData({
           filterCountries: res.result
         })
@@ -38,7 +41,10 @@ Page({
         res.result.map(category => {
           category.name_with_count = category.name + ' (' + category.merchant_count + ')';
         })
-        res.result.push({ 'name_with_count': '全部', 'id': 'all' });
+        res.result.push({
+          'name_with_count': '全部',
+          'id': 'all'
+        });
         this.setData({
           filterCategories: res.result
         });
@@ -65,7 +71,14 @@ Page({
     }
   },
   selectStore: function (e) {
-    var merchantId = e.currentTarget.dataset.merchant;
+    let merchantId = e.currentTarget.dataset.merchant;
+
+    app.http.promisePost('/site/merchant/add-viewer', {
+      merchant_id: merchantId
+    }).then(res => {
+      console.log(res);
+    })
+
     wx.navigateTo({
       url: '../product-list/product-list?merchantId=' + merchantId,
       fail: function (e) {

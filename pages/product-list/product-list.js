@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp();
+import regeneratorRuntime from '../../libs/runtime';
 const COLOR_SELECTED = 'white';
 const COLOR_DEFAULT = 'F8F8F8';
 
@@ -11,6 +12,7 @@ Page({
   code: null,
   data: {
     user: {},
+    authorized: false,
     isOwner: false,
     hiddenModal: true,
     timeRange: [{
@@ -40,6 +42,13 @@ Page({
       url: '../logs/logs'
     })
   },
+  async getMerchantDetail() {
+    let res = await app.merchant.getDetail(this.ownerId);
+    this.setData({
+      merchant: res.result,
+      authorized: res.result.authorized
+    });
+  },
   onLoad: function (option) {
     this.ownerId = option.merchantId;
   },
@@ -54,15 +63,10 @@ Page({
       user: app.globalData.user
     })
 
-    app.http.promiseGet('/site/merchant/detail', {
-        merchant_id: this.ownerId
-      })
-      .then(res => {
-        this.setData({
-          merchant: res.result
-        });
-      })
-
+    this.getMerchantDetail();
+    this.getProducts();
+  },
+  getProducts: function () {
     app.http.promiseGet('/site/product/products', {
         merchant_id: this.ownerId
       })
@@ -74,7 +78,6 @@ Page({
       .catch(error => {
         app.toast(error);
       })
-
   },
   selectCategory: function (event) {
     var categoryId = event.currentTarget.dataset.category;
@@ -124,9 +127,33 @@ Page({
       }
     })
   },
-  callMerchant: function (e) {
+  contactMerchant: function (e) {
+    wx.showActionSheet({
+      itemList: ['获取微信号', '拨打手机'],
+      success: res => {
+        if (res.tapIndex == 1) {
+          let number = e.currentTarget.dataset.tel;
+          if (number.length < 5) return app.toast('商户尚未添加联系电话');
+          this.call(number);
+        } else {
+          let wxAccount = this.data.merchant.wx_account;
+          if (!wxAccount) return app.toast('商户尚未添加微信');
+          wx.setClipboardData({
+            data: wxAccount,
+            success: res => {
+              app.toast('已复制商家微信号', true);
+            }
+          })
+        }
+      },
+      fail: res => {
+        console.log(res.errMsg)
+      }
+    })
+  },
+  call: function (number) {
     wx.makePhoneCall({
-      phoneNumber: e.currentTarget.dataset.tel, //此号码并非真实电话号码，仅用于测试  
+      phoneNumber: number, //此号码并非真实电话号码，仅用于测试  
       success: function () {
         console.log("拨打电话成功！")
       },
@@ -216,7 +243,16 @@ Page({
         code: this.code
       })
       .then(res => {
-        app.toast("验证成功");
+        if (res.result_code != 10000) {
+          app.toast("验证失败")
+        } else {
+          app.toast("验证成功");
+          this.hideCodeInput();
+          this.getProducts();
+          this.setData({
+            authorized: true
+          })
+        }
       })
   },
   returnLogin: function () {

@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+import regeneratorRuntime from '../../libs/runtime';
 
 Page({
   data: {
@@ -8,33 +9,25 @@ Page({
     user: {},
     merchant: {}
   },
+  async getUserInfo() {
+    let result = await app.wxApi.wxGetUserInfo();
+    app.globalData.user.nickName = result.userInfo.nickName;
+    app.globalData.user.avatarUrl = result.userInfo.avatarUrl;
+    this.setData({
+      user: app.globalData.user,
+      hasUserInfo: true
+    })
+  },
+  async getMerchantDetail() {
+    let res = await app.merchant.getDetail(app.globalData.user.merchantInfo.id);
+    this.setData({
+      merchant: res.result
+    });
+  },
   onShow: function () {
-    app.wxApi.wxGetUserInfo()
-      .then(res => {
-        app.globalData.user.nickName = res.userInfo.nickName;
-        app.globalData.user.avatarUrl = res.userInfo.avatarUrl;
-        this.setData({
-          user: app.globalData.user,
-          hasUserInfo: true
-        })
-      })
-      .catch(error => {
-        this.setData({
-          user: app.globalData.user,
-          hasUserInfo: true
-        })
-        console.error(error);
-      })
-
+    this.getUserInfo();
     if (app.globalData.user.currentRole == app.merchantRole) {
-      app.http.promiseGet('/site/merchant/detail', {
-          merchant_id: app.globalData.user.merchantInfo.id
-        })
-        .then(res => {
-          this.setData({
-            merchant: res.result
-          });
-        })
+      this.getMerchantDetail();
     }
   },
   logout: function () {
@@ -79,5 +72,4 @@ Page({
       }
     })
   }
-
 })

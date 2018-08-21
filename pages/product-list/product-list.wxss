@@ -261,6 +261,11 @@
   display: flex;
   justify-content: center;
 }
+.product-list-main .merchant-info #merchant-info__authorized {
+  border-color: #78C46D;
+  color: #78C46D;
+  width: 130rpx;
+}
 .product-list-main .merchant-info__profile {
   margin-top: 23rpx;
   float: right;
@@ -326,7 +331,7 @@
   right: 0;
   top: 20rpx;
   position: absolute;
-  height: 50rpx;
+  height: 45rpx;
   font-size: 25rpx;
 }
 .product-list-main .merchant-info__edit-profile-button {
@@ -341,15 +346,16 @@
 }
 .product-list-main .merchant-info__call-merchant-button {
   width: 150rpx;
-  line-height: 50rpx;
+  line-height: 45rpx;
   float: right;
-  border: 1px solid black;
+  border: 1px solid #4A4A4A;
+  color: #4A4A4A;
   text-indent: 10rpx;
   right: 15rpx;
   border-radius: 5px;
 }
 .product-list-main .merchant-info__call-merchant-button image {
-  margin-top: 10rpx;
+  margin-top: 7.5rpx;
   width: 30rpx;
   height: 30rpx;
   position: 20rpx;
@@ -470,4 +476,19 @@
 .product-list-main .products__add-button image {
   height: 100%;
   width: 100%;
+}
+.product-list-main .products__call-button {
+  border-radius: 50%;
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  margin-right: 50rpx;
+  margin-bottom: 50rpx;
+}
+.product-list-main .products__call-button image {
+  height: 100%;
+  width: 100%;
+  opacity: 0.7;
 }

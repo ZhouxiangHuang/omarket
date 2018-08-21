@@ -19,9 +19,11 @@
     <view class="merchant-list">
         <view class="merchant" wx:for="{{merchants}}" wx:key="{{key}}" wx:for-item="merchant" bindtap="selectStore" data-merchant="{{merchant.id}}" hover="true" hover-class="selected-hover" hover-start-time="0" hover-stay-time="500">
             <view class="merchant-info">
+                <image class="merchant-info__popularity-tag" src="/images/tag.png"/>
+                <view class="merchant-info__popularity-tag">人气值 {{merchant.popularity}}</view>
                 <view class="merchant-info__logo">
                     <image wx:if="{{merchant.imageUrl}}" class="merchant-info__logo--style" src="{{merchant.imageUrl}}" mode="aspectFit"/>
-                    <image wx:if="{{!merchant.imageUrl}}" class="merchant-info__logo--style" src="/images/default-store.png" />
+                    <image wx:if="{{!merchant.imageUrl}}" class="merchant-info__logo--style" src="/images/default-store.png" mode="aspectFit"/>
                 </view>
                 <view class="merchant-info__profile" data-merchant="{{merchant.id}}">
                     <view class="merchant-info__name">{{merchant.name}}</view>

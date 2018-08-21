@@ -1,4 +1,5 @@
 <!-- index.wxml -->
 <view class="container">
     <view class="code">{{code}}</view>
+    <text>*密码有效期为15分钟</text>
 </view>

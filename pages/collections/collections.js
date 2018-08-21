@@ -1,10 +1,11 @@
 //index.js
 //获取应用实例
 const app = getApp()
+import regeneratorRuntime from '../../libs/runtime';
 
 Page({
   toBeDeleted: null,
-  toBeDeletedMerchantName: null,
+  toBeDeletedMerchantId: null,
   data: {
     collections: [],
     hiddenCollections: [],
@@ -13,72 +14,76 @@ Page({
     hiddenModal: true
   },
   //事件处理函数
-  bindViewTap: function () {
+  bindViewTap() {
     wx.navigateTo({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
+  onLoad() {
     this.getCollections();
   },
-  selectStore: function (e) {
-    var merchantId = e.currentTarget.dataset.merchant;
+  selectStore(e) {
+    let merchantId = e.currentTarget.dataset.merchant;
     wx.navigateTo({
       url: '../product-list/product-list?merchantId=' + merchantId
     })
   },
   productListSwitch(e) {
-    var merchantName = e.currentTarget.dataset.merchant;
+    let merchantId = e.currentTarget.dataset.merchant;
 
-    if (this.data.display[merchantName].products.length > 0) {
-      var tempProducts = this.data.display[merchantName].products;
-      this.data.display[merchantName].products = [];
-      this.data.hide[merchantName].products = tempProducts;
-      this.data.display[merchantName].dropTriangle = false;
-    } else {
-      var tempProducts = this.data.hide[merchantName].products;
-      this.data.hide[merchantName].products = [];
-      this.data.display[merchantName].products = tempProducts;
-      this.data.display[merchantName].dropTriangle = true;
-    }
+    let collections = this.data.collections
+      .map(collection => {
+        let collectionCp = Object.assign({}, collection);
+        if (collection.merchant_id == merchantId) {
+          if (!collection.products.length) {
+            this.data.merchants.forEach(merchant => {
+              if (merchant.merchant_id == merchantId) collectionCp.products = merchant.products;
+            });
+          } else {
+            collectionCp.products = [];
+          }
+        }
+
+        return collectionCp;
+      })
+      .map(collection => {
+        if (collection.merchant_id == merchantId) {
+          let collectionCp = Object.assign({}, collection);
+          collectionCp.dropTriangle = !collectionCp.dropTriangle;
+          return collectionCp;
+        }
+      })
 
     this.setData({
-      display: this.data.display,
-      hide: this.data.hide
+      collections: collections
+    });
+  },
+  async doDelete() {
+    let productId = this.toBeDeleted;
+
+    await app.http.promisePost('/site/product/discard', {
+      product_id: productId
+    })
+    this.setData({
+      hiddenModal: true
     });
 
-  },
-  doDelete() {
-    var productId = this.toBeDeleted;
-
-    app.http.promisePost('/site/product/discard', {
-      product_id: productId
-    }).then(res => {
-      this.setData({
-        hiddenModal: true
-      });
+    let collections = this.data.merchants.map(merchant => {
+      let products = merchant.products.filter(product => {
+        return product.id != productId
+      })
+      let merchantCp = Object.assign({}, merchant);
+      merchantCp.products = products;
+      return merchantCp;
     })
-
-    var newArray = [];
-    this.data.display[this.toBeDeletedMerchantName].products.forEach(product => {
-      if (product.id !== productId) {
-        newArray.push(product);
-      }
-    })
-
-    if (newArray.length == 0) {
-      this.data.display[this.toBeDeletedMerchantName] = undefined;
-    } else {
-      this.data.display[this.toBeDeletedMerchantName].products = newArray;
-    }
 
     this.setData({
-      display: this.data.display
+      collections: collections
     })
   },
   delete(e) {
     this.toBeDeleted = e.currentTarget.dataset.productid;
-    this.toBeDeletedMerchantName = e.currentTarget.dataset.merchant;
+    this.toBeDeletedMerchantId = e.currentTarget.dataset.merchant;
     this.setData({
       hiddenModal: false
     });
@@ -88,25 +93,19 @@ Page({
       hiddenModal: true
     });
   },
-  getCollections() {
-    app.http.promiseGet('/site/user/collections', {})
-      .then(res => {
-        res.result.forEach(merchant => {
-          this.data.hide[merchant.merchant_name] = {
-            'currency': merchant.currency,
-            'merchant_id': merchant.merchant_id,
-            'merchant_name': merchant.merchant_name,
-            'products': []
-          };
-          merchant.dropTriangle = true;
-          this.data.display[merchant.merchant_name] = merchant;
-        });
+  async getCollections() {
+    let res = await app.http.promiseGet('/site/user/collections', {});
 
-        this.setData({
-          display: this.data.display,
-          hide: this.data.hide,
-          collections: res.result
-        })
-      })
+    let merchants = res.result.map(merchant => {
+      let modifiedMerch = Object.assign({
+        dropTriangle: true
+      }, merchant);
+      return modifiedMerch;
+    })
+
+    this.setData({
+      collections: merchants,
+      merchants: merchants
+    })
   }
 })

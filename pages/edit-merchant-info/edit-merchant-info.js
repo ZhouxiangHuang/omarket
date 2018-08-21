@@ -31,9 +31,8 @@ Page({
   onLoad: function (option) {
     var merchantId = option.merchant_id;
     this.isNew = option.is_new == 1;
-    app.http.promiseGet('/site/merchant/detail', {
-        merchant_id: merchantId
-      })
+
+    app.merchant.getDetail(merchantId)
       .then(res => {
         this.data.countryCode = res.result.country_code;
         this.data.cityCode = res.result.city_code;
@@ -151,6 +150,13 @@ Page({
       merchant: this.data.merchant
     });
   },
+  wechatListener: function (e) {
+    var inputVal = e.detail.value;
+    this.data.merchant.wx_account = inputVal;
+    this.setData({
+      merchant: this.data.merchant
+    });
+  },
   addressListener: function (e) {
     var inputVal = e.detail.value;
     this.data.merchant.address = inputVal;
@@ -215,7 +221,8 @@ Page({
       address: this.data.merchant.address,
       city_code: this.data.cityCode,
       country_code: this.data.countryCode,
-      currency_id: this.getCurrencyId()
+      currency_id: this.getCurrencyId(),
+      wx_account: this.data.merchant.wx_account
     }
 
     if (!this.isValid(form)) {

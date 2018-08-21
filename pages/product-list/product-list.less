@@ -12,6 +12,11 @@
             display: flex;
             justify-content: center;
         }
+        #merchant-info__authorized {
+            border-color: #78C46D;
+            color: #78C46D;
+            width: 130rpx;
+        }
         &__profile {
             margin-top: 23rpx;
             float: right;
@@ -64,7 +69,7 @@
             right: 0;
             top: 20rpx;
             position: absolute;
-            height: 50rpx;
+            height: 45rpx;
             font-size: 25rpx;
         }
         &__edit-profile-button {
@@ -79,14 +84,15 @@
         }
         &__call-merchant-button {
             width: 150rpx;
-            line-height: 50rpx;
+            line-height: 45rpx;
             float: right;
-            border: 1px solid black;
+            border: 1px solid #4A4A4A;
+            color: #4A4A4A;
             text-indent: 10rpx;
             right: 15rpx;
             border-radius: 5px;
             image {
-                margin-top: 10rpx;
+                margin-top: 7.5rpx;
                 width: 30rpx;
                 height: 30rpx;
                 position: 20rpx;
@@ -207,6 +213,21 @@
             image {
                 height: 100%;
                 width: 100%;
+            }
+        }
+        &__call-button {
+            border-radius: 50%;
+            width: 100rpx;
+            height: 100rpx;
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            margin-right: 50rpx;
+            margin-bottom: 50rpx;
+            image {
+                height: 100%;
+                width: 100%;
+                opacity: 0.7;
             }
         }
     }

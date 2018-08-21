@@ -1,6 +1,7 @@
 //app.js
 var http = require('service/http.js');
 var wxApi = require('service/wxApi.js');
+var merchant = require('service/merchant.js');
 
 App({
   onLaunch: function () {
@@ -33,6 +34,9 @@ App({
     promiseGet: http.promiseGet,
     promisePost: http.promisePost,
     promiseUploadFiles: http.promiseUploadFiles
+  },
+  merchant: {
+    getDetail: merchant.getDetail
   },
   validate: function () {
     let promise = new Promise((resolve, reject) => {
@@ -96,11 +100,12 @@ App({
   },
   merchantRole: 1,
   userRole: 2,
-  toast: text => {
+  toast: (text, showSuccess) => {
+    let icon = showSuccess ? 'success' : 'none';
     wx.showToast({
       title: text,
       duration: 2500,
-      icon: 'none'
+      icon: icon
     });
   }
 })
